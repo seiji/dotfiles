@@ -1,0 +1,18 @@
+# rsync text
+
+#base
+.inputrc
+
+# bash
+.bash_profile
+.bashrc
+
+# screen
+.screenrc
+
+# vim
+.vimrc
+
+# emacs
+.emacs.el
+
