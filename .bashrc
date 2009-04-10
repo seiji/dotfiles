@@ -25,7 +25,7 @@ export PATH=$HOME/local/flex_sdk_3/bin:$PATH
 
 alias ll='ls -la'
 alias ls='ls -1'
-alias grep='grep -n'
+alias grep='grep -in --color'
 alias firefox="open -a Firefox"
 alias safari="open -a Safari"
 alias prev="open -a Preview"
