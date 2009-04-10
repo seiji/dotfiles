@@ -15,4 +15,4 @@
 
 # emacs
 .emacs.el
-
+.emacs.d
