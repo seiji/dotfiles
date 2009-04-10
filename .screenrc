@@ -1,0 +1,22 @@
+escape ^Tt
+
+term xterm-color
+vbell off
+startup_message off
+autodetach on
+hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+defscrollback 10000
+
+screen -t home 0
+chdir "/Users/toyamaseiji/workspace"
+screen -t work 1 
+chdir "/home/edge-dev"
+screen -t edge-dev 2
+chdir "/usr/local/apache22"
+screen -t apache22 3 tail -f /usr/local/apache22/logs/error_log
+chdir "/usr/local/modperl"
+screen -t modperl 4 tail -f /usr/local/modperl/logs/modperl_error_log
+screen -t ldl 5 ssh ldl
+
+select 1
+
