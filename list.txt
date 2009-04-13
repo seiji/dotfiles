@@ -14,5 +14,5 @@
 .vimrc
 
 # emacs
-.emacs.el
+.emacs
 .emacs.d
