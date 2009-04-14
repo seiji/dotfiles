@@ -30,8 +30,8 @@ alias firefox="open -a Firefox"
 alias safari="open -a Safari"
 alias prev="open -a Preview"
 alias fcd="source /Users/toyamaseiji/bin/fcd.sh"
-#alias screen='/usr/local/screen/bin/screen'
 alias sc='screen -U -D -RR'
-alias cot='open -a CotEditor'
+alias em='emacs'
+alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
 export PS1="$ "

@@ -7,10 +7,10 @@
 ;===================================
 
 ;; basic setup
-(set-language-environment "Japanese")
-(set-default-coding-systems 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
+;(set-language-environment "Japanese")
+;(set-default-coding-systems 'utf-8)
+;(set-keyboard-coding-system 'utf-8)
+;(set-terminal-coding-system 'utf-8)
 
 (setq inhibit-startup-message t)        ; don't show the startup message
 (setq kill-whole-line t)                ; C-k deletes the end of line
@@ -26,7 +26,7 @@
 (transient-mark-mode t)
 
 (menu-bar-mode -1)				        ; don't show menu bar
-
+(setq kill-whole-line t)				; kill whole line  
 ;===================================
 ;; color setting
 ;===================================
@@ -35,6 +35,7 @@
 
 (set-face-foreground 'region "white")
 (set-face-background 'region "royal blue")
+(set-face-foreground 'minibuffer-prompt "cyan1")
 
 ;===================================
 ;; load path
@@ -61,7 +62,9 @@
 (add-hook 'cperl-mode-hook
           (lambda ()
             (set-face-bold-p 'cperl-array-face nil)
+			(set-face-foreground 'cperl-array-face "DodgerBlue3")
             (set-face-background 'cperl-array-face "black")
+			(set-face-foreground 'cperl-hash-face "DodgerBlue3")
             (set-face-bold-p 'cperl-hash-face nil)
             (set-face-italic-p 'cperl-hash-face nil)
             (set-face-background 'cperl-hash-face "black")
@@ -69,6 +72,12 @@
 				  (concat "perl " (buffer-file-name)))
 			(cperl-define-key "\C-c\C-c" 'compile)
 ))
+
+;;====================================
+;; PHP
+;====================================
+(load-library "php-mode")
+(require 'php-mode)
 
 ;;; emacs.el ends here.
 
