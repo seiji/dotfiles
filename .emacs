@@ -23,6 +23,8 @@
 (setq c-basic-offset 4)
 
 (global-set-key "\C-h" 'backward-delete-char)
+(global-set-key "\C-w" 'backward-kill-word)
+(define-key minibuffer-local-completion-map "\C-w" 'backward-kill-word)
 (transient-mark-mode t)
 
 (menu-bar-mode -1)				        ; don't show menu bar
@@ -38,6 +40,17 @@
 (set-face-foreground 'minibuffer-prompt "cyan1")
 
 ;===================================
+;; shell stuff
+;===================================
+;; set maximum-buffer size for shell-mode
+(setq comint-buffer-maximum-size 10240)
+;; don't allow shell prompt to be erased
+(setq comint-prompt-read-only "y")
+(copy-face 'default 'comint-highlight-prompt)
+(set-face-foreground 'comint-highlight-prompt "firebrick1")
+(set-face-background 'comint-highlight-prompt "black")
+
+;===================================
 ;; load path
 ;===================================
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
@@ -46,7 +59,6 @@
 ;===================================
 ;; install-elisp
 ;===================================
-
 
 ;;====================================
 ;; Perl
@@ -73,11 +85,44 @@
 			(cperl-define-key "\C-c\C-c" 'compile)
 ))
 
+
 ;;====================================
 ;; PHP
 ;====================================
 (load-library "php-mode")
 (require 'php-mode)
 
-;;; emacs.el ends here.
+;;====================================
+;; emacs w3m
+;====================================
+(load "w3m")
+(setq w3m-use-cookies t)
+(setq w3m-favicon-cache-expire-wait nil)
+; タブを移動する
+(define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer 1)))
+(define-key w3m-mode-map "h" '(lambda () (interactive) (w3m-next-buffer -1)))
+; タブを閉じる
+(define-key w3m-mode-map "o" 'w3m-delete-buffer)
+; 次のリンクに飛ぶ
+(define-key w3m-mode-map "i" 'w3m-next-anchor)
+; リンクを新しいタブで開く
+(define-key w3m-mode-map ";" 'w3m-view-this-url-new-session)
+; リンクを普通に開く
+(define-key w3m-mode-map "'" 'w3m-view-this-url)
+; カーソル下にある画像を表示
+(define-key w3m-mode-map "n" 'w3m-toggle-inline-image)
+; ブックマークを表示
+(define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
 
+;;====================================
+;; shell-mode
+;====================================
+;;; shell-mode でエスケープを綺麗に表示
+(autoload 'ansi-color-for-comint-mode-on "ansi-color"
+     "Set `ansi-color-for-comint-mode' to t." t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;;; shell-modeで上下でヒストリ補完
+(add-hook 'shell-mode-hook
+		     (function (lambda ()
+						       (define-key shell-mode-map [up] 'comint-previous-input)
+							         (define-key shell-mode-map [down] 'comint-next-input))))
