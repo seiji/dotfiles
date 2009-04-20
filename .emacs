@@ -22,13 +22,19 @@
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
 
+;
+; key binding
+;
+
 (global-set-key "\C-h" 'backward-delete-char)
 (global-set-key "\C-w" 'backward-kill-word)
 (define-key minibuffer-local-completion-map "\C-w" 'backward-kill-word)
 (transient-mark-mode t)
+(define-key ctl-x-map "p" (lambda () (interactive) (other-window -1)))
 
 (menu-bar-mode -1)				        ; don't show menu bar
 (setq kill-whole-line t)				; kill whole line  
+
 ;===================================
 ;; color setting
 ;===================================
@@ -115,14 +121,19 @@
 (define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
 
 ;;====================================
+;; psvn
+;====================================
+(require 'psvn)
+
+;;====================================
 ;; shell-mode
 ;====================================
 ;;; shell-mode でエスケープを綺麗に表示
-(autoload 'ansi-color-for-comint-mode-on "ansi-color"
-     "Set `ansi-color-for-comint-mode' to t." t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;(autoload 'ansi-color-for-comint-mode-on "ansi-color"
+;     "Set `ansi-color-for-comint-mode' to t." t)
+;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 ;;; shell-modeで上下でヒストリ補完
-(add-hook 'shell-mode-hook
-		     (function (lambda ()
-						       (define-key shell-mode-map [up] 'comint-previous-input)
-							         (define-key shell-mode-map [down] 'comint-next-input))))
+;(add-hook 'shell-mode-hook
+;		     (function (lambda ()
+;						       (define-key shell-mode-map [up] 'comint-previous-input)
+;							         (define-key shell-mode-map [down] 'comint-next-input))))
