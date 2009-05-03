@@ -57,11 +57,86 @@
 (set-face-background 'comint-highlight-prompt "black")
 
 ;===================================
+;; file binding
+;===================================
+(setq auto-mode-alist
+      (cons '("\\.m$" . objc-mode) auto-mode-alist))
+(setq auto-mode-alist
+      (cons '("\\.mm$" . objc-mode) auto-mode-alist))
+
+;===================================
 ;; load path
 ;===================================
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 
+;===================================
+;; Object-c header file
+;===================================
+(defun bh-choose-header-mode ()
+  (interactive)
+  (if (string-equal (substring (buffer-file-name) -2) ".h")
+      (progn
+        ;; OK, we got a .h file, if a .m file exists we'll assume it's
+        ; an objective c file. Otherwise, we'll look for a .cpp file.
+        (let ((dot-m-file (concat (substring (buffer-file-name) 0 -1) "m"))
+              (dot-cpp-file (concat (substring (buffer-file-name) 0 -1) "cpp")))
+          (if (file-exists-p dot-m-file)
+              (progn
+                (objc-mode)
+                )
+            (if (file-exists-p dot-cpp-file)
+                (c++-mode)
+              )
+            )
+          )
+        )
+    )
+  )
+(add-hook 'find-file-hook 'bh-choose-header-mode)
 
+;; compile
+(defun bh-compile-simu ()
+  (interactive)
+  (let ((df (directory-files "."))
+        (has-proj-file nil)
+        )
+    (while (and df (not has-proj-file))
+      (let ((fn (car df)))
+        (if (> (length fn) 10)
+            (if (string-equal (substring fn -10) ".xcodeproj")
+                (setq has-proj-file t)
+              )
+          )
+        )
+      (setq df (cdr df))
+      )
+    (if has-proj-file
+        (compile "xcodebuild -configuration Debug -sdk iphonesimulator3.0") ;iphonesimulator 3.0
+      (compile "make")
+      )
+    )
+)
+(defun bh-compile ()
+  (interactive)
+  (let ((df (directory-files "."))
+        (has-proj-file nil)
+        )
+    (while (and df (not has-proj-file))
+      (let ((fn (car df)))
+        (if (> (length fn) 10)
+            (if (string-equal (substring fn -10) ".xcodeproj")
+                (setq has-proj-file t)
+              )
+          )
+        )
+      (setq df (cdr df))
+      )
+    (if has-proj-file
+        (compile "xcodebuild -configuration Debug -sdk iphone3.0") ;iphone 3.0
+      (compile "make")
+      )
+    )
+)
 ;===================================
 ;; C
 ;===================================
@@ -71,7 +146,8 @@
 			 (c-toggle-auto-hungry-state 1)
 			 ;; RET キーで自動改行+インデント
 			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
-			 ))
+		    )
+)
 ;;====================================
 ;; Perl
 ;====================================
@@ -95,7 +171,8 @@
 			(setq compile-command
 				  (concat "perl " (buffer-file-name)))
 			(cperl-define-key "\C-c\C-c" 'compile)
-))
+		  )
+)
 
 
 ;;====================================
@@ -143,3 +220,5 @@
 ;		     (function (lambda ()
 ;						       (define-key shell-mode-map [up] 'comint-previous-input)
 ;							         (define-key shell-mode-map [down] 'comint-next-input))))
+
+(autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
