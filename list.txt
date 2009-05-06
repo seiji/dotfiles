@@ -16,3 +16,8 @@
 # emacs
 .emacs
 .emacs.d
+
+# wanderlust
+.wl
+.folders
+

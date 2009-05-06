@@ -1,3 +1,4 @@
+
 ;;; emacs.el
 ;;
 ;;
@@ -7,7 +8,7 @@
 ;===================================
 
 ;; basic setup
-;(set-language-environment "Japanese")
+(set-language-environment "Japanese")
 ;(set-default-coding-systems 'utf-8)
 ;(set-keyboard-coding-system 'utf-8)
 ;(set-terminal-coding-system 'utf-8)
@@ -17,33 +18,53 @@
 (setq make-backup-files nil)            ; don't make *~
 (setq auto-save-list-file-prefix nil)   ; don't make ~/.saves-PID-hostname
 (setq auto-save-default nil)            ; disable auto-saving
+
 (column-number-mode 1)
+(menu-bar-mode -1)				        ; don't show menu bar
+(setq kill-whole-line t)				; kill whole line  
 
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
 
+;===================================
+;; load path
+;===================================
+(add-to-list 'exec-path "/opt/local/bin")
+(setq load-path (cons "~/.emacs.d/elisp" load-path))
+
 ;
 ; key binding
 ;
-
 (global-set-key "\C-h" 'backward-delete-char)
 (global-set-key "\C-w" 'backward-kill-word)
 (define-key minibuffer-local-completion-map "\C-w" 'backward-kill-word)
 (transient-mark-mode t)
 (define-key ctl-x-map "p" (lambda () (interactive) (other-window -1)))
 
-(menu-bar-mode -1)				        ; don't show menu bar
-(setq kill-whole-line t)				; kill whole line  
-
+;; Dired
+(setq dired-load-hook '(lambda () (load "dired-x"))) 
+(setq dired-guess-shell-alist-user
+      '(("\\.png" "qlmanage -p")
+        ("\\.jpg" "qlmanage -p")
+        ("\\.pdf" "qlmanage -p")
+		)
+)
 ;===================================
 ;; color setting
 ;===================================
 (global-font-lock-mode t)  ; always turn on syntax highlighting
 (require 'font-lock) ; Without this line, emacs throws an error on OS X.
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-dark-laptop)
 
-(set-face-foreground 'region "white")
+(global-hl-line-mode)
+;(set-face-background 'hl-line "#330")
+(set-face-background 'hl-line "SlateBlue4")
+
 (set-face-background 'region "royal blue")
 (set-face-foreground 'minibuffer-prompt "cyan1")
+
 
 ;===================================
 ;; shell stuff
@@ -63,11 +84,6 @@
       (cons '("\\.m$" . objc-mode) auto-mode-alist))
 (setq auto-mode-alist
       (cons '("\\.mm$" . objc-mode) auto-mode-alist))
-
-;===================================
-;; load path
-;===================================
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
 
 ;===================================
 ;; Object-c header file
@@ -95,7 +111,7 @@
 (add-hook 'find-file-hook 'bh-choose-header-mode)
 
 ;; compile
-(defun bh-compile-simu ()
+(defun iphone-build-simu ()
   (interactive)
   (let ((df (directory-files "."))
         (has-proj-file nil)
@@ -116,7 +132,7 @@
       )
     )
 )
-(defun bh-compile ()
+(defun iphone-build ()
   (interactive)
   (let ((df (directory-files "."))
         (has-proj-file nil)
@@ -132,7 +148,7 @@
       (setq df (cdr df))
       )
     (if has-proj-file
-        (compile "xcodebuild -configuration Debug -sdk iphone3.0") ;iphone 3.0
+        (compile "xcodebuild -configuration Debug -sdk iphoneos3.0") ;iphoneos 3.0
       (compile "make")
       )
     )
@@ -184,18 +200,26 @@
 ;;====================================
 ;; emacs w3m
 ;====================================
+(add-to-list 'exec-path "/home/ramprasad/bin")
+
 (load "w3m")
 (setq w3m-use-cookies t)
 (setq w3m-favicon-cache-expire-wait nil)
+(setq w3m-search-default-engine "google")
+;(setq w3m-display-inline-image nil)
+
+;; 初期起動時に表示する画面
+;(setq w3m-home-page "~/.emacs.d/.w3m/bookmark.html")
+
 ; タブを移動する
-(define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer 1)))
-(define-key w3m-mode-map "h" '(lambda () (interactive) (w3m-next-buffer -1)))
+(define-key w3m-mode-map "r" '(lambda () (interactive) (w3m-next-buffer 1)))
+(define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer -1)))
 ; タブを閉じる
-(define-key w3m-mode-map "o" 'w3m-delete-buffer)
+(define-key w3m-mode-map "w" 'w3m-delete-buffer)
 ; 次のリンクに飛ぶ
 (define-key w3m-mode-map "i" 'w3m-next-anchor)
 ; リンクを新しいタブで開く
-(define-key w3m-mode-map ";" 'w3m-view-this-url-new-session)
+(define-key w3m-mode-map "t" 'w3m-view-this-url-new-session)
 ; リンクを普通に開く
 (define-key w3m-mode-map "'" 'w3m-view-this-url)
 ; カーソル下にある画像を表示
@@ -203,22 +227,61 @@
 ; ブックマークを表示
 (define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
 
+
 ;;====================================
 ;; psvn
 ;====================================
 (require 'psvn)
 
 ;;====================================
-;; shell-mode
+;; navi2ch
 ;====================================
-;;; shell-mode でエスケープを綺麗に表示
-;(autoload 'ansi-color-for-comint-mode-on "ansi-color"
-;     "Set `ansi-color-for-comint-mode' to t." t)
-;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-;;; shell-modeで上下でヒストリ補完
-;(add-hook 'shell-mode-hook
-;		     (function (lambda ()
-;						       (define-key shell-mode-map [up] 'comint-previous-input)
-;							         (define-key shell-mode-map [down] 'comint-next-input))))
 
 (autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
+;; 終了時に訪ねない
+(setq navi2ch-ask-when-exit nil)
+;; スレのデフォルト名を使う
+(setq navi2ch-message-user-name "")
+;; あぼーんがあったたき元のファイルは保存しない
+(setq navi2ch-net-save-old-file-when-aborn nil)
+;; 送信時に訪ねない
+(setq navi2ch-message-ask-before-send nil)
+;; kill するときに訪ねない
+(setq navi2ch-message-ask-before-kill nil)
+;; バッファは 5 つまで
+(setq navi2ch-article-max-buffers 5)
+;; navi2ch-article-max-buffers を超えたら古いバッファは消す
+(setq navi2ch-article-auto-expunge t)
+;; Board モードのレス数欄にレスの増加数を表示する。
+(setq navi2ch-board-insert-subject-with-diff t)
+;; Board モードのレス数欄にレスの未読数を表示する。
+(setq navi2ch-board-insert-subject-with-unread t)
+;; 既読スレはすべて表示
+(setq navi2ch-article-exist-message-range '(1 . 1000))
+;; 未読スレもすべて表示
+(setq navi2ch-article-new-message-range '(1000 . 1))
+;; 3 ペインモードでみる
+(setq navi2ch-list-stay-list-window t)
+;; C-c 2 で起動
+(global-set-key "\C-c2" 'navi2ch)
+
+;; newstciker
+(setq newsticker-url-list
+      '(("Linux World.com" "http://www.linuxworld.com/rss/linux-news.xml")
+        ("Linux.com" "http://www.linux.com/feature?theme=rss")))
+(autoload 'w3m-region "w3m"
+  "Render region in current buffer and replace with result." t)
+(setq newsticker-html-renderer 'w3m-region)
+;; ブラウザは, emacs-w3m.
+(setq browse-url-browser-function 'w3m-browse-url)
+
+
+;;====================================
+;; Wanderlust
+;====================================
+(load "mime-setup")
+(setq ssl-certificate-verification-policy 1) 
+(autoload 'wl "wl" "Wanderlust" t)
+(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+(autoload 'wl-draft "wl" "Write draft with Wanderlust." t)
+

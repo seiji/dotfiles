@@ -1,0 +1,19 @@
+Gmail {
+	  %inbox:sebraincom/clear@imap.gmail.com:993! "- Inbox"
+ 	  %[Gmail]/All Mail:sebraincom/clear@imap.gmail.com:993! "- All"
+	  %[Gmail]/Sent Mail:sebraincom/clear@imap.gmail.com:993! "- Sent"
+	  %[Gmail]/Trash:sebraincom/clear@imap.gmail.com:993! "- Trash"
+	  %[Gmail]/Starred:sebraincom/clear@imap.gmail.com:993! "- Starred☆"
+	  %[Gmail]/Spam:sebraincom/clear@imap.gmail.com:993! "- Spam"
+}
+
+seijit@me.com{
+		%inbox:seijit/clear@mail.mac.com:993!					"- Inbox" 
+		%Sent Messages:seijit/clear@mail.mac.com:993!			"- Sent" 
+		%Marked:seijit/clear@mail.mac.com:993!					"- Marked"
+}
+iPhone {
+       %inbox:seijit/clear@imap.softbank.jp:143 "- Inbox"
+       %Sent Messages:seijit/clear@imap.softbank.jp:143 "- Sent"
+}
+}
