@@ -1,7 +1,7 @@
 
 ;;; emacs.el
 ;;
-;;
+;
 
 ;===================================
 ;; basic setup
@@ -40,6 +40,11 @@
 (define-key minibuffer-local-completion-map "\C-w" 'backward-kill-word)
 (transient-mark-mode t)
 (define-key ctl-x-map "p" (lambda () (interactive) (other-window -1)))
+
+; browser
+(setq browse-url-browser-function 'browse-url-generic)
+(setq browse-url-generic-program "open")
+(global-set-key "\C-xc" 'browse-url-at-point)
 
 ;; Dired
 (setq dired-load-hook '(lambda () (load "dired-x"))) 
@@ -206,7 +211,6 @@
 (setq w3m-use-cookies t)
 (setq w3m-favicon-cache-expire-wait nil)
 (setq w3m-search-default-engine "google")
-;(setq w3m-display-inline-image nil)
 
 ;; 初期起動時に表示する画面
 ;(setq w3m-home-page "~/.emacs.d/.w3m/bookmark.html")
@@ -265,21 +269,12 @@
 ;; C-c 2 で起動
 (global-set-key "\C-c2" 'navi2ch)
 
-;; newstciker
-(setq newsticker-url-list
-      '(("Linux World.com" "http://www.linuxworld.com/rss/linux-news.xml")
-        ("Linux.com" "http://www.linux.com/feature?theme=rss")))
-(autoload 'w3m-region "w3m"
-  "Render region in current buffer and replace with result." t)
-(setq newsticker-html-renderer 'w3m-region)
-;; ブラウザは, emacs-w3m.
-(setq browse-url-browser-function 'w3m-browse-url)
-
 
 ;;====================================
 ;; Wanderlust
 ;====================================
 (load "mime-setup")
+
 (setq ssl-certificate-verification-policy 1) 
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
