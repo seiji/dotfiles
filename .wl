@@ -1,3 +1,8 @@
+
+;;; .wl
+;;
+;
+
 ; 日本語フォルダ対策
 (setq elmo-imap4-use-modified-utf7 t)
 
@@ -20,14 +25,12 @@
          ("From" . "seijit@me.com")
          (body-file . "~/.signature")
 		)
-
 ;;         ("report"
 ;;          (template . "default")                 
 ;;          ("To" . "jousi@example.com")
 ;;          ("Subject" . "報告")
 ;;          (body-file . "~/work/report.txt")
 ;;          )
-
        )
 )
 
@@ -72,6 +75,7 @@
 ;; (define-key wl-summary-mode-map "!" 'st-wl-summary-refile-spam)
 ;; (define-key wl-summary-mode-map "\M-u" 'wl-summary-mark-as-unread)
 
+
 (setq wl-folder-check-async t) ; 非同期でチェックするように
 
 (setq wl-dispose-folder-alist
@@ -94,38 +98,38 @@
 
 ;;;------------------------------------------
 ;; summary-mode ですべての header を一旦除去
-(setq mime-view-ignored-field-list '("^.*"))
+;; (setq mime-view-ignored-field-list '("^.*"))
 
-;; 表示するヘッダ。
-(setq wl-message-visible-field-list
-      (append mime-view-visible-field-list
-        '("^Subject:" "^From:" "^To:" "^Cc:" 
-          "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
-          "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:"
-          )))
+;; ;; 表示するヘッダ。
+;; (setq wl-message-visible-field-list
+;;       (append mime-view-visible-field-list
+;;         '("^Subject:" "^From:" "^To:" "^Cc:" 
+;;           "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
+;;           "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:" "^Mailing-List:"
+;;           )))
 
-;; 隠すメールヘッダを指定。
-(setq wl-message-ignored-field-list
-      (append mime-view-ignored-field-list
-      '(".*Received:" ".*Path:" ".*Id:" "^References:"
-        "^Replied:" "^Errors-To:"
-        "^Lines:" "^Sender:" ".*Host:" "^Xref:"
-        "^Content-Type:" "^Content-Transfer-Encoding:"
-        "^Precedence:"
-        "^Status:" "^X-VM-.*:"
-        "^X-Info:" "^X-PGP" "^X-Face-Version:"
-        "^X-UIDL:" "^X-Dispatcher:"
-        "^MIME-Version:" "^X-ML" "^Message-I.:"
-        "^Delivered-To:" "^Mailing-List:"
-        "^ML-Name:" "^Reply-To:" "Date:"
-        "^X-Loop" "^X-List-Help:"
-        "^X-Trace:" "^X-Complaints-To:"
-        "^Received-SPF:" "^Message-ID:"
-        "^MIME-Version:" "^Content-Transfer-Encoding:"
-        "^Authentication-Results:"
-        "^X-Priority:" "^X-MSMail-Priority:"
-        "^X-Mailer:" "^X-MimeOLE:"
-        )))
+;; ;; 隠すメールヘッダを指定。
+;; (setq wl-message-ignored-field-list
+;;       (append mime-view-ignored-field-list
+;;       '(".*Received:" ".*Path:" ".*Id:" "^References:"
+;;         "^Replied:" "^Errors-To:"
+;;         "^Lines:" "^Sender:" ".*Host:" "^Xref:"
+;;         "^Content-Type:" "^Content-Transfer-Encoding:"
+;;         "^Precedence:"
+;;         "^Status:" "^X-VM-.*:"
+;;         "^X-Info:" "^X-PGP" "^X-Face-Version:"
+;;         "^X-UIDL:" "^X-Dispatcher:"
+;;         "^MIME-Version:" "^X-ML" "^Message-I.:"
+;;         "^Delivered-To:" "^Mailing-List:"
+;;         "^ML-Name:" "^Reply-To:" "Date:"
+;;         "^X-Loop" "^X-List-Help:"
+;;         "^X-Trace:" "^X-Complaints-To:"
+;;         "^Received-SPF:" "^Message-ID:"
+;;         "^MIME-Version:" "^Content-Transfer-Encoding:"
+;;         "^Authentication-Results:"
+;;         "^X-Priority:" "^X-MSMail-Priority:"
+;;         "^X-Mailer:" "^X-MimeOLE:"
+;;         )))
 
 (setq wl-summary-width nil)
 (setq wl-subject-length-limit nil)
@@ -137,3 +141,35 @@
 
 (setq wl-prefetch-threshold 1000000)
 (setq elmo-message-fetch-threshold 1000000)
+
+;===================================
+;; custom function
+;===================================
+;; display file size of a mail. (summary-mode)
+
+(setq elmo-msgdb-extra-fields
+	        '("newsgroups"
+			  "list-id" "x-ml-name" "mailing-list"
+			  "x-mail-count" "x-ml-count" "x-sequence"
+			  "x-sent-to"))
+
+(defun wl-summary-file-size () (interactive)
+  (message "File Size (bytes): %d"
+    (elmo-msgdb-overview-entity-get-size
+      (elmo-message-entity wl-summary-buffer-elmo-folder (wl-summary-message-number))
+    )
+  )
+)
+(defun wl-summary-ldclip () (interactive)
+  (setq field
+;    (elmo-message-entity-field
+    ( elmo-msgdb-overview-entity-get-extra-field 
+      (elmo-message-entity wl-summary-buffer-elmo-folder (wl-summary-message-number))
+      "x-sent-to"
+    )
+  )
+  (message "hogehoge %s" field)
+)
+
+
+(define-key wl-summary-mode-map "!" 'wl-summary-ldclip)
