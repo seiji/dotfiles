@@ -1,4 +1,3 @@
-
 ;;; emacs.el
 ;;
 ;
@@ -6,8 +5,6 @@
 ;===================================
 ;; basic setup
 ;===================================
-
-;; basic setup
 (set-language-environment "Japanese")
 ;(set-default-coding-systems 'utf-8)
 ;(set-keyboard-coding-system 'utf-8)
@@ -26,22 +23,33 @@
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
 
+(transient-mark-mode t)
+
 ;===================================
 ;; load path
 ;===================================
 (add-to-list 'exec-path "/opt/local/bin")
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 
-;
-; key binding
-;
+;===================================
+;; key binding
+;===================================
 (global-set-key "\C-h" 'backward-delete-char)
-(global-set-key "\C-w" 'backward-kill-word)
-(define-key minibuffer-local-completion-map "\C-w" 'backward-kill-word)
-(transient-mark-mode t)
+
+;; \C-w 
+(defun kill-region-or-backward-kill-word (arg)
+  (interactive "p")
+  (if mark-active
+	  (let ((start (mark))
+			(end (point)))
+		(kill-region start end))
+	(backward-kill-word arg)))
+(global-set-key "\C-w" 'kill-region-or-backward-kill-word)
+
+;; 
 (define-key ctl-x-map "p" (lambda () (interactive) (other-window -1)))
 
-; browser
+; browser (w3m)
 (setq browse-url-browser-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 (global-set-key "\C-xc" 'browse-url-at-point)
@@ -58,15 +66,13 @@
 ;; color setting
 ;===================================
 (global-font-lock-mode t)  ; always turn on syntax highlighting
-(require 'font-lock) ; Without this line, emacs throws an error on OS X.
+(require 'font-lock)       ; Without this line, emacs throws an error on OS X.
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-dark-laptop)
 
 (global-hl-line-mode)
-;(set-face-background 'hl-line "#330")
 (set-face-background 'hl-line "SlateBlue4")
-
 (set-face-background 'region "royal blue")
 (set-face-foreground 'minibuffer-prompt "cyan1")
 
@@ -74,8 +80,7 @@
 ;===================================
 ;; shell stuff
 ;===================================
-;; set maximum-buffer size for shell-mode
-(setq comint-buffer-maximum-size 10240)
+(setq comint-buffer-maximum-size 10240) ; set maximum-buffer size for shell-mode
 ;; don't allow shell prompt to be erased
 (setq comint-prompt-read-only "y")
 (copy-face 'default 'comint-highlight-prompt)
@@ -86,9 +91,16 @@
 ;; file binding
 ;===================================
 (setq auto-mode-alist
-      (cons '("\\.m$" . objc-mode) auto-mode-alist))
-(setq auto-mode-alist
-      (cons '("\\.mm$" . objc-mode) auto-mode-alist))
+	  (append '(
+				("\\.m$" . objc-mode)
+				("\\.mm$" . objc-mode)
+				("\\.xhtml$" . html-mode)
+				("\\.inc$" . html-mode)
+				("\\.wl$" . emacs-lisp-mode)
+		;;		("\\.perl$\\|\\.p[hlm]$\\|/perl/" . perl-mode)
+			   )
+	  auto-mode-alist)
+)
 
 ;===================================
 ;; Object-c header file
@@ -195,7 +207,6 @@
 		  )
 )
 
-
 ;;====================================
 ;; PHP
 ;====================================
@@ -242,33 +253,20 @@
 ;====================================
 
 (autoload 'navi2ch "navi2ch" "Navigator for 2ch for Emacs" t)
-;; 終了時に訪ねない
-(setq navi2ch-ask-when-exit nil)
-;; スレのデフォルト名を使う
-(setq navi2ch-message-user-name "")
-;; あぼーんがあったたき元のファイルは保存しない
-(setq navi2ch-net-save-old-file-when-aborn nil)
-;; 送信時に訪ねない
-(setq navi2ch-message-ask-before-send nil)
-;; kill するときに訪ねない
-(setq navi2ch-message-ask-before-kill nil)
-;; バッファは 5 つまで
-(setq navi2ch-article-max-buffers 5)
-;; navi2ch-article-max-buffers を超えたら古いバッファは消す
-(setq navi2ch-article-auto-expunge t)
-;; Board モードのレス数欄にレスの増加数を表示する。
-(setq navi2ch-board-insert-subject-with-diff t)
-;; Board モードのレス数欄にレスの未読数を表示する。
-(setq navi2ch-board-insert-subject-with-unread t)
-;; 既読スレはすべて表示
-(setq navi2ch-article-exist-message-range '(1 . 1000))
-;; 未読スレもすべて表示
-(setq navi2ch-article-new-message-range '(1000 . 1))
-;; 3 ペインモードでみる
-(setq navi2ch-list-stay-list-window t)
-;; C-c 2 で起動
-(global-set-key "\C-c2" 'navi2ch)
 
+(setq navi2ch-ask-when-exit nil)
+(setq navi2ch-message-user-name "")
+(setq navi2ch-net-save-old-file-when-aborn nil)
+(setq navi2ch-message-ask-before-send nil)
+(setq navi2ch-message-ask-before-kill nil)
+(setq navi2ch-article-max-buffers 5)
+(setq navi2ch-article-auto-expunge t)
+(setq navi2ch-board-insert-subject-with-diff t)
+(setq navi2ch-board-insert-subject-with-unread t)
+(setq navi2ch-article-exist-message-range '(1 . 1000))
+(setq navi2ch-article-new-message-range '(1000 . 1))
+(setq navi2ch-list-stay-list-window t)
+(global-set-key "\C-c2" 'navi2ch)
 
 ;;====================================
 ;; Wanderlust
