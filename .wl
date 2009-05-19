@@ -1,4 +1,3 @@
-
 ;;; .wl
 ;;
 ;
@@ -147,11 +146,23 @@
 ;===================================
 ;; display file size of a mail. (summary-mode)
 
+;; (setq elmo-msgdb-extra-fields
+;; 	        '("newsgroups"
+;; 			  "list-id" "x-ml-name" "mailing-list"
+;; 			  "x-mail-count" "x-ml-count" "x-sequence"
+;; 			  "x-sent-to" "x-mailman-version"))
 (setq elmo-msgdb-extra-fields
-	        '("newsgroups"
-			  "list-id" "x-ml-name" "mailing-list"
-			  "x-mail-count" "x-ml-count" "x-sequence"
-			  "x-sent-to"))
+      '(
+		"x-link"
+;; 		"reply-to"
+;;         "x-ml-name"
+;;         "mailing-llist"
+;;         "x-mailing-list"
+;;         "sender"
+;; 		"original-recipient"
+;;         "newsgroups"
+		)
+)
 
 (defun wl-summary-file-size () (interactive)
   (message "File Size (bytes): %d"
@@ -163,13 +174,16 @@
 (defun wl-summary-ldclip () (interactive)
   (setq field
 ;    (elmo-message-entity-field
-    ( elmo-msgdb-overview-entity-get-extra-field 
+   ( elmo-msgdb-overview-entity-get-extra-field 
       (elmo-message-entity wl-summary-buffer-elmo-folder (wl-summary-message-number))
-      "x-sent-to"
-    )
+      "x-link"
+   )
   )
-  (message "hogehoge %s" field)
+  (defvar LDC_PL "~/.emacs.d/ldc.pl"
+	"*The command to clip to LDClip")
+  (call-process
+   LDC_PL nil 0 nil field )
+  (message "%s" field)
 )
-
 
 (define-key wl-summary-mode-map "!" 'wl-summary-ldclip)
