@@ -6,9 +6,12 @@
 ;; basic setup
 ;===================================
 (set-language-environment "Japanese")
-;(set-default-coding-systems 'utf-8)
-;(set-keyboard-coding-system 'utf-8)
-;(set-terminal-coding-system 'utf-8)
+(prefer-coding-system 'utf-8-unix)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(setq default-buffer-file-coding-systems 'utf-8)
 
 (setq inhibit-startup-message t)        ; don't show the startup message
 (setq kill-whole-line t)                ; C-k deletes the end of line
@@ -20,7 +23,7 @@
 (menu-bar-mode -1)				        ; don't show menu bar
 (setq kill-whole-line t)				; kill whole line  
 
-(setq-default tab-width 4)
+(setq-default tab-width 4 indent-tabs-mode nil)
 (setq c-basic-offset 4)
 
 (transient-mark-mode t)

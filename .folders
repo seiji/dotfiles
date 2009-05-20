@@ -1,23 +1,23 @@
 Gmail {
-	  %inbox:sebraincom/clear@imap.gmail.com:993! "- Inbox"
- 	  %[Gmail]/All Mail:sebraincom/clear@imap.gmail.com:993! "- All"
-	  %[Gmail]/Sent Mail:sebraincom/clear@imap.gmail.com:993! "- Sent"
-	  %[Gmail]/Trash:sebraincom/clear@imap.gmail.com:993! "- Trash"
-	  %[Gmail]/Starred:sebraincom/clear@imap.gmail.com:993! "- Starred☆"
-	  %[Gmail]/Spam:sebraincom/clear@imap.gmail.com:993! "- Spam"
+      %inbox:sebraincom/clear@imap.gmail.com:993! "- Inbox"
+      %[Gmail]/All Mail:sebraincom/clear@imap.gmail.com:993! "- All"
+      %[Gmail]/Sent Mail:sebraincom/clear@imap.gmail.com:993! "- Sent"
+      %[Gmail]/Trash:sebraincom/clear@imap.gmail.com:993! "- Trash"
+      %[Gmail]/Starred:sebraincom/clear@imap.gmail.com:993! "- Starred☆"
+      %[Gmail]/Spam:sebraincom/clear@imap.gmail.com:993! "- Spam"
 }
 seijit@me.com{
-		%inbox:seijit/clear@mail.mac.com:993!					"- Inbox" 
-		%Sent Messages:seijit/clear@mail.mac.com:993!			"- Sent" 
-		%Marked:seijit/clear@mail.mac.com:993!					"- Marked"
+        %inbox:seijit/clear@mail.mac.com:993!                   "- Inbox" 
+        %Sent Messages:seijit/clear@mail.mac.com:993!           "- Sent" 
+        %Marked:seijit/clear@mail.mac.com:993!                  "- Marked"
 }
 iPhone {
-       %inbox:seijit/clear@imap.softbank.jp:143					"- Inbox"
-       %Sent Messages:seijit/clear@imap.softbank.jp:143 		"- Sent"
+       %inbox:seijit/clear@imap.softbank.jp:143                 "- Inbox"
+       %Sent Messages:seijit/clear@imap.softbank.jp:143         "- Sent"
 }
 CoreServer {
-		%inbox:feeds@seiji.me/clear@s88.coreserver.jp:993!		"- Inbox" 
-		%inbox.Sent:feeds@seiji.me/clear@s88.coreserver.jp:993!		"- Sent" 
-		%inbox.Marked:feeds@seiji.me/clear@s88.coreserver.jp:993!		"- Marked"
-		%inbox.RSS.Blog.Ido:feeds@seiji.me/clear@s88.coreserver.jp:993!		"- Blog/I"
+        %inbox:"feeds@seiji.me"/clear@s88.coreserver.jp:993!        "- Inbox" 
+        %inbox.Sent:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Sent" 
+        %inbox.Marked:"feeds@seiji.me"/clear@s88.coreserver.jp:993!       "- Marked"
+        %inbox.RSS.Blog.Ido:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Blog/I"
 }

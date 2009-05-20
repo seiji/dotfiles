@@ -1,7 +1,9 @@
 ;;; .wl
 ;;
 ;
-
+;(setq ssl-program-name "openssl")
+;; SSL/TLS 用証明書ストアのパス
+;(setq ssl-certificate-directory "/Users/toyamaseiji/.w3/certs")
 ; 日本語フォルダ対策
 (setq elmo-imap4-use-modified-utf7 t)
 
