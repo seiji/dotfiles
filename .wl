@@ -26,6 +26,10 @@
          ("From" . "seijit@me.com")
          (body-file . "~/.signature")
 		)
+		("iphone"
+         ("From" . "seijit@i.softbank.jp")
+         (body-file . "~/.signature")
+		)
 ;;         ("report"
 ;;          (template . "default")                 
 ;;          ("To" . "jousi@example.com")
@@ -40,6 +44,7 @@
       '(
 	  ("^From: .*seijit@i.softbank.jp"
          (wl-smtp-connection-type . nil)
+         (wl-smtp-posting-port . 587)  
          (wl-envelope-from . "seijit@i.softbank.jp")
          (wl-from . "seijit@i.softbank.jp <seijit@i.softbank.jp>")
          (wl-smtp-posting-user . "seijit")
@@ -66,8 +71,18 @@
 		 (wl-local-domain . "me.com")
 		 (wl-envelope-from . "seijit@me.com")
 	  )		 
-))
 
+))
+(setq wl-draft-config-alist
+      '((reply                   ; 返信元のバッファを見る
+         "From: .*seijit@i.softbank.jp"     ; ヘッダの条件一致
+         (template . "iphone")   ; テンプレート選択
+         wl-draft-yank-original) ; 元メッセージの引用
+;;          (reply
+;;          "To: .*nii¥¥.ac¥¥.jp"
+;;          (template . "default")
+;;          wl-draft-yank-original)
+))
 ;; key binding
 ;; (defun st-wl-summary-refile-spam ()
 ;;   (interactive)
@@ -99,38 +114,39 @@
 
 ;;;------------------------------------------
 ;; summary-mode ですべての header を一旦除去
-;; (setq mime-view-ignored-field-list '("^.*"))
+ (setq mime-view-ignored-field-list '("^.*"))
 
 ;; ;; 表示するヘッダ。
-;; (setq wl-message-visible-field-list
-;;       (append mime-view-visible-field-list
-;;         '("^Subject:" "^From:" "^To:" "^Cc:" 
-;;           "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
-;;           "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:" "^Mailing-List:"
-;;           )))
+ (setq wl-message-visible-field-list
+       (append mime-view-visible-field-list
+        '("^Subject:" "^From:" "^To:" "^Cc:" 
+          "^X-Link:" "^User-Agent:" "^Message-ID:"
+;;          "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
+;;          "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:" "^Mailing-List:"
+          )))
 
 ;; ;; 隠すメールヘッダを指定。
-;; (setq wl-message-ignored-field-list
-;;       (append mime-view-ignored-field-list
-;;       '(".*Received:" ".*Path:" ".*Id:" "^References:"
-;;         "^Replied:" "^Errors-To:"
-;;         "^Lines:" "^Sender:" ".*Host:" "^Xref:"
-;;         "^Content-Type:" "^Content-Transfer-Encoding:"
-;;         "^Precedence:"
-;;         "^Status:" "^X-VM-.*:"
-;;         "^X-Info:" "^X-PGP" "^X-Face-Version:"
-;;         "^X-UIDL:" "^X-Dispatcher:"
-;;         "^MIME-Version:" "^X-ML" "^Message-I.:"
-;;         "^Delivered-To:" "^Mailing-List:"
-;;         "^ML-Name:" "^Reply-To:" "Date:"
-;;         "^X-Loop" "^X-List-Help:"
-;;         "^X-Trace:" "^X-Complaints-To:"
-;;         "^Received-SPF:" "^Message-ID:"
-;;         "^MIME-Version:" "^Content-Transfer-Encoding:"
-;;         "^Authentication-Results:"
-;;         "^X-Priority:" "^X-MSMail-Priority:"
-;;         "^X-Mailer:" "^X-MimeOLE:"
-;;         )))
+(setq wl-message-ignored-field-list
+      (append mime-view-ignored-field-list
+      '(".*Received:" ".*Path:" ".*Id:" "^References:"
+        "^Replied:" "^Errors-To:"
+        "^Lines:" "^Sender:" ".*Host:" "^Xref:"
+        "^Content-Type:" "^Content-Transfer-Encoding:"
+        "^Precedence:"
+        "^Status:" "^X-VM-.*:"
+        "^X-Info:" "^X-PGP" "^X-Face-Version:"
+        "^X-UIDL:" "^X-Dispatcher:"
+        "^MIME-Version:" "^X-ML" "^Message-I.:"
+        "^Delivered-To:" "^Mailing-List:"
+        "^ML-Name:" "^Reply-To:" "Date:"
+        "^X-Loop" "^X-List-Help:"
+        "^X-Trace:" "^X-Complaints-To:"
+        "^Received-SPF:" ;"^Message-ID:"
+        "^MIME-Version:" "^Content-Transfer-Encoding:"
+        "^Authentication-Results:"
+        "^X-Priority:" "^X-MSMail-Priority:"
+        "^X-Mailer:" "^X-MimeOLE:"
+        )))
 
 (setq wl-summary-width nil)
 (setq wl-subject-length-limit nil)

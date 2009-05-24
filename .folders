@@ -15,9 +15,15 @@ iPhone {
        %inbox:seijit/clear@imap.softbank.jp:143                 "- Inbox"
        %Sent Messages:seijit/clear@imap.softbank.jp:143         "- Sent"
 }
+feed@seiji.me {
+       %inbox:feed/clear@72.14.181.137:143                 "- Inbox"
+       %Sent Messages:feed/clear@72.14.181.137:143         "- Sent"
+}
+
 CoreServer {
-        %inbox:"feeds@seiji.me"/clear@s88.coreserver.jp:993!        "- Inbox" 
-        %inbox.Sent:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Sent" 
+      %inbox:"feeds@seiji.me"/clear@s88.coreserver.jp:993!        "- Inbox" 
+      %inbox.Sent:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Sent" 
         %inbox.Marked:"feeds@seiji.me"/clear@s88.coreserver.jp:993!       "- Marked"
         %inbox.RSS.Blog.Ido:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Blog/I"
 }
+
