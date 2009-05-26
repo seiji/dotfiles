@@ -19,6 +19,23 @@
 ;; (setq wl-local-domain "gmail.com")
 ;; (setq wl-from "Seiji Toyama <sebraincom@gmail.com>")
 
+;; mime decode
+;(mime-set-field-decoder
+;  'From nil 'eword-decode-and-unfold-unstructured-field-body)
+;; (mime-set-field-decoder
+;;   'To nil 'eword-decode-and-unfold-unstructured-field-body)
+;; (eval-after-load "eword-decode"
+;;     '(mime-set-field-decoder
+;;           'From nil 'eword-decode-and-unfold-unstructured-field-body))
+
+(eval-after-load "eword-decode"
+  '(mime-set-field-decoder
+    'From
+    'plain#'eword-decode-unstructured-field-body
+    'wide#'eword-decode-unstructured-field-body
+    'summary#'eword-decode-and-unfold-unstructured-field-body
+    'nov#'eword-decode-unfolded-unstructured-field-body)) 
+
 ;; template
 (setq wl-template-alist
       '(
@@ -120,7 +137,7 @@
  (setq wl-message-visible-field-list
        (append mime-view-visible-field-list
         '("^Subject:" "^From:" "^To:" "^Cc:" 
-          "^X-Link:" "^User-Agent:" "^Message-ID:"
+          "^X-Link:" "^User-Agent:"
 ;;          "^X-Mailer:" "^X-Newsreader:" "^User-Agent:"
 ;;          "^X-Face:" "^X-Mail-Count:" "^X-ML-COUNT:" "^Mailing-List:"
           )))
@@ -141,7 +158,7 @@
         "^ML-Name:" "^Reply-To:" "Date:"
         "^X-Loop" "^X-List-Help:"
         "^X-Trace:" "^X-Complaints-To:"
-        "^Received-SPF:" ;"^Message-ID:"
+        "^Received-SPF:" "^Message-ID:"
         "^MIME-Version:" "^Content-Transfer-Encoding:"
         "^Authentication-Results:"
         "^X-Priority:" "^X-MSMail-Priority:"
@@ -191,7 +208,6 @@
 )
 (defun wl-summary-ldclip () (interactive)
   (setq field
-;    (elmo-message-entity-field
    ( elmo-msgdb-overview-entity-get-extra-field 
       (elmo-message-entity wl-summary-buffer-elmo-folder (wl-summary-message-number))
       "x-link"
@@ -203,5 +219,17 @@
    LDC_PL nil 0 nil field )
   (message "%s" field)
 )
+(defun wl-summary-open () (interactive)
+  (setq field
+   ( elmo-msgdb-overview-entity-get-extra-field 
+      (elmo-message-entity wl-summary-buffer-elmo-folder (wl-summary-message-number))
+      "x-link"
+   )
+  )
+  (call-process
+   "/usr/bin/open" nil 0 nil field )
+  (message "%s" field)
+)
 
 (define-key wl-summary-mode-map "!" 'wl-summary-ldclip)
+(define-key wl-summary-mode-map "O" 'wl-summary-open)

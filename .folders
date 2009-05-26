@@ -16,14 +16,22 @@ iPhone {
        %Sent Messages:seijit/clear@imap.softbank.jp:143         "- Sent"
 }
 feed@seiji.me {
-       %inbox:feed/clear@72.14.181.137:143                 "- Inbox"
-       %Sent Messages:feed/clear@72.14.181.137:143         "- Sent"
+       %inbox:feed/clear@seiji.me:143                 "- Inbox"
+       %inbox.Blog:feed/clear@seiji.me:143            "-  Blog"
+       %inbox.Design:feed/clear@seiji.me:143          "-  Design"
+       %inbox.Economy:feed/clear@seiji.me:143         "-  Economy"
+       %inbox.English:feed/clear@seiji.me:143         "-  English"
+       %inbox.Event:feed/clear@seiji.me:143           "-  Event"
+       %inbox.iPhone:feed/clear@seiji.me:143          "-  iPhone"
+       %inbox.LifeHack:feed/clear@seiji.me:143        "-  LifeHack"
+       %inbox.Mac:feed/clear@seiji.me:143             "-  Mac"
+       %inbox.Mobile:feed/clear@seiji.me:143          "-  Mobile"
+       %inbox.MySQL:feed/clear@seiji.me:143           "-  MySQL"
+       %inbox.News:feed/clear@seiji.me:143            "-  News"
+       %inbox.Other:feed/clear@seiji.me:143           "-  Other"
+       %inbox.Perl:feed/clear@seiji.me:143            "-  Perl"
+       %inbox.Tutorial:feed/clear@seiji.me:143        "-  Tutorial"
+       %Sent Messages:feed/clear@seiji.me:143         "- Sent"
 }
 
-CoreServer {
-      %inbox:"feeds@seiji.me"/clear@s88.coreserver.jp:993!        "- Inbox" 
-      %inbox.Sent:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Sent" 
-        %inbox.Marked:"feeds@seiji.me"/clear@s88.coreserver.jp:993!       "- Marked"
-        %inbox.RSS.Blog.Ido:"feeds@seiji.me"/clear@s88.coreserver.jp:993!     "- Blog/I"
-}
 
