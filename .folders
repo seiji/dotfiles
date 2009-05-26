@@ -18,6 +18,7 @@ iPhone {
 feed@seiji.me {
        %inbox:feed/clear@seiji.me:143                 "- Inbox"
        %inbox.Blog:feed/clear@seiji.me:143            "-  Blog"
+       %inbox.Bookmark:feed/clear@seiji.me:143        "-  Bookmark"
        %inbox.Design:feed/clear@seiji.me:143          "-  Design"
        %inbox.Economy:feed/clear@seiji.me:143         "-  Economy"
        %inbox.English:feed/clear@seiji.me:143         "-  English"
