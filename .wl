@@ -173,6 +173,12 @@
 (append wl-summary-line-format-spec-alist
   '((?@ (wl-summary-line-attached)))))
 
+;; プリフェッチの設定
+; プリフェッチを有効にするフォルダ
+(setq wl-message-buffer-prefetch-folder-type-list t)
+; プリフェッチのサイズ制限. nil なら無限大
+(setq wl-message-buffer-prefetch-threshold nil)
+
 (setq wl-prefetch-threshold 1000000)
 (setq elmo-message-fetch-threshold 1000000)
 

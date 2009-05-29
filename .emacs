@@ -28,11 +28,22 @@
 
 (transient-mark-mode t)
 
+
+
 ;===================================
 ;; load path
 ;===================================
 (add-to-list 'exec-path "/opt/local/bin")
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
+
+
+;; mode
+;; tt
+(add-hook 'html-helper-load-hook '(lambda () (require 'html-font)))
+(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
+(require 'html-tt)
+(add-hook 'html-helper-mode-hook 'html-tt-load-hook)
+
 
 ;===================================
 ;; key binding
@@ -97,9 +108,11 @@
 	  (append '(
 				("\\.m$" . objc-mode)
 				("\\.mm$" . objc-mode)
-				("\\.xhtml$" . html-mode)
-				("\\.inc$" . html-mode)
+				("\\.html$" . html-helper-mode)
+				("\\.xhtml$" . html-helper-mode)
+				("\\.inc$" . html-helper-mode)
 				("\\.wl$" . emacs-lisp-mode)
+
 		;;		("\\.perl$\\|\\.p[hlm]$\\|/perl/" . perl-mode)
 			   )
 	  auto-mode-alist)
@@ -178,9 +191,7 @@
 ;===================================
 (add-hook 'c-mode-common-hook
 		  '(lambda ()
-			 ;; センテンスの終了である ';' を入力したら、自動改行+インデント
 			 (c-toggle-auto-hungry-state 1)
-			 ;; RET キーで自動改行+インデント
 			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
 		    )
 )
@@ -213,36 +224,26 @@
 ;;====================================
 ;; PHP
 ;====================================
-(load-library "php-mode")
-(require 'php-mode)
+;(load-library "php-mode")
+;(require 'php-mode)
 
 ;;====================================
 ;; emacs w3m
 ;====================================
-(add-to-list 'exec-path "/home/ramprasad/bin")
-
 (load "w3m")
 (setq w3m-use-cookies t)
 (setq w3m-favicon-cache-expire-wait nil)
 (setq w3m-search-default-engine "google")
 
-;; 初期起動時に表示する画面
 ;(setq w3m-home-page "~/.emacs.d/.w3m/bookmark.html")
 
-; タブを移動する
 (define-key w3m-mode-map "r" '(lambda () (interactive) (w3m-next-buffer 1)))
 (define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer -1)))
-; タブを閉じる
 (define-key w3m-mode-map "w" 'w3m-delete-buffer)
-; 次のリンクに飛ぶ
 (define-key w3m-mode-map "i" 'w3m-next-anchor)
-; リンクを新しいタブで開く
 (define-key w3m-mode-map "t" 'w3m-view-this-url-new-session)
-; リンクを普通に開く
 (define-key w3m-mode-map "'" 'w3m-view-this-url)
-; カーソル下にある画像を表示
 (define-key w3m-mode-map "n" 'w3m-toggle-inline-image)
-; ブックマークを表示
 (define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
 
 
