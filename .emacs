@@ -112,15 +112,23 @@
 				("\\.xhtml$" . html-helper-mode)
 				("\\.inc$" . html-helper-mode)
 				("\\.wl$" . emacs-lisp-mode)
-
-		;;		("\\.perl$\\|\\.p[hlm]$\\|/perl/" . perl-mode)
 			   )
 	  auto-mode-alist)
 )
-
 ;===================================
-;; Object-c header file
+;; C
 ;===================================
+(setq c-hanging-semi&comma-criteria nil)
+(add-hook 'c-mode-common-hook
+		  '(lambda ()
+			 (c-toggle-auto-hungry-state 1)
+			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+		    )
+)
+;===================================
+;; Object-c
+;===================================
+(require 'flymake-objc)
 (defun bh-choose-header-mode ()
   (interactive)
   (if (string-equal (substring (buffer-file-name) -2) ".h")
@@ -160,20 +168,22 @@
       (setq df (cdr df))
       )
     (if has-proj-file
-        (compile "xcodebuild -configuration Debug -sdk iphonesimulator3.0") ;iphonesimulator 3.0
+        (compile "xcodebuild clean install -configuration Debug -sdk iphonesimulator2.2.1")
       (compile "make")
       )
     )
 )
 (defun iphone-build ()
   (interactive)
-  (let ((df (directory-files "."))
+  (let (
+        (df (directory-files "."))
         (has-proj-file nil)
         )
     (while (and df (not has-proj-file))
       (let ((fn (car df)))
         (if (> (length fn) 10)
-            (if (string-equal (substring fn -10) ".xcodeproj")
+            (if 
+                (string-equal (substring fn -10) ".xcodeproj")
                 (setq has-proj-file t)
               )
           )
@@ -181,20 +191,44 @@
       (setq df (cdr df))
       )
     (if has-proj-file
-        (compile "xcodebuild -configuration Debug -sdk iphoneos3.0") ;iphoneos 3.0
+        (compile "xcodebuild clean install -configuration Debug -sdk iphoneos2.2.1")
       (compile "make")
       )
     )
+  )
+
+(add-hook 'objc-mode-hook
+    (lambda ()
+      (setq compile-command
+            (set-compile-command-for-objc))
+      (define-key objc-mode-map "\C-c\C-c" 'compile)
+      )
 )
-;===================================
-;; C
-;===================================
-(add-hook 'c-mode-common-hook
-		  '(lambda ()
-			 (c-toggle-auto-hungry-state 1)
-			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
-		    )
-)
+(defun set-compile-command-for-objc ()
+  (interactive)
+  (let* ((filename (file-name-nondirectory buffer-file-name))
+         (index (string-match "\\.m$" filename))
+         (filename-no-suffix (substring filename 0 index)))
+    (cond
+     ;; make用のファイルがあれば "make -k"
+     ((or (file-exists-p "Makefile")
+          (file-exists-p "makefile"))
+      (setq compile-command "make -k"))
+     ;; ヘッダファイルがあれば、オブジェクトファイルをつくる
+     ((file-exists-p (concat filename-no-suffix ".h"))
+      (setq compile-command
+            (concat "gcc -ansi -Wall -Os -g -c " filename)))
+     ;; Other
+     (t
+      (setq compile-command
+            (concat "gcc -ansi -Wall -Os -g -framework Foundation -o "
+                    filename-no-suffix " " filename 
+                    "; ./" filename-no-suffix )) ;Run
+      )
+     )
+    )
+  )
+
 ;;====================================
 ;; Perl
 ;====================================
