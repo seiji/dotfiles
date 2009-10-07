@@ -1,0 +1,3 @@
+;; -*- mode: emacs-lisp -*-
+;; History entries used for anything adaptive display.
+(setq anything-c-adaptive-history (quote (("Manual Pages" ("Image::Magick" ("Image::Ma" . 2)) ("URI" ("URI" . 1)) ("Moose::Cookbook" ("Moo" . 1) ("Moose" . 1)) ("Moose" ("Moose" . 1))) (bookmark ("karame" ("" . 1))) (buffer ("*scratch*" ("" . 2)) ("test" ("" . 1))))))

@@ -31,8 +31,7 @@ feed@seiji.me {
        %inbox.News:feed/clear@seiji.me:143            "-  News"
        %inbox.Other:feed/clear@seiji.me:143           "-  Other"
        %inbox.Perl:feed/clear@seiji.me:143            "-  Perl"
+       %inbox.Private:feed/clear@seiji.me:143         "-  Private"
        %inbox.Tutorial:feed/clear@seiji.me:143        "-  Tutorial"
        %Sent Messages:feed/clear@seiji.me:143         "- Sent"
 }
-
-

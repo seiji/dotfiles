@@ -2,7 +2,7 @@
 
 LIST=list.txt
 SRC=~/
-DEST=~/env/
+DEST=~/dotfiles/
 RSYNC=/opt/local/bin/rsync
 
 for x in `cat $LIST|grep -v "^#"`

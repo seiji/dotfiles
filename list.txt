@@ -23,3 +23,4 @@
 
 # vimperator
 .vimperatorrc
+.vimperator

@@ -34,6 +34,7 @@ set guioptions=Trb
 " =====================
 "ロケーションバーにフォーカス
 map <C-l> <A-d>
+map g <esc>:open g 
 
 "各種バー表示をトグル
 noremap <C-1> :set guioptions=""
@@ -56,11 +57,14 @@ map l <A-Right>
 map <M-n> <A-Right>
 map <M-p> <A-Left>
 
+
 " H/L や ← → でタブ移動
 map H gT
 map L gt
-map <Left>  gT
-map <Right> gt
+"map <Left>  gT
+"map <Right> gt
+
+map <C-V> <C-F>
 
 " Shift + ← → で現在のタブの位置変更
 map <S-Right> :tabmove! +1<CR>

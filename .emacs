@@ -1,3 +1,4 @@
+
 ;;; emacs.el
 ;;
 ;
@@ -27,8 +28,6 @@
 (setq c-basic-offset 4)
 
 (transient-mark-mode t)
-
-
 
 ;===================================
 ;; load path
@@ -76,6 +75,32 @@
         ("\\.pdf" "qlmanage -p")
 		)
 )
+
+;; grep-find using ack
+(add-hook 'dired-load-hook
+          '(lambda ()
+             (load-library "ls-lisp")
+             (setq ls-lisp-dirs-first t)
+             (setq dired-listing-switches "-AFl")
+             (setq find-ls-option '("-exec ls -AFGl {} \;" . "-AFGl"))
+             (setq grep-find-command "ack --nocolor --nogroup ")
+             (require 'wdired)
+             ))
+
+;; anything
+(require 'anything-config)
+(setq anything-sources (list anything-c-source-buffers
+                             anything-c-source-bookmarks
+                             anything-c-source-recentf
+                             anything-c-source-recentf
+                             anything-c-source-man-pages
+                             anything-c-source-locate))
+(define-key anything-map (kbd "C-p") 'anything-previous-line)
+(define-key anything-map (kbd "C-n") 'anything-next-line)
+(define-key anything-map (kbd "C-v") 'anything-next-source)
+(define-key anything-map (kbd "M-v") 'anything-previous-source)
+(global-set-key (kbd "\C-c;") 'anything)
+
 ;===================================
 ;; color setting
 ;===================================
@@ -111,6 +136,8 @@
 				("\\.html$" . html-helper-mode)
 				("\\.xhtml$" . html-helper-mode)
 				("\\.inc$" . html-helper-mode)
+				("\\.tt$" . html-helper-mode)
+				("\\.tt2$" . html-helper-mode)
 				("\\.wl$" . emacs-lisp-mode)
 			   )
 	  auto-mode-alist)
@@ -123,8 +150,12 @@
 		  '(lambda ()
 			 (c-toggle-auto-hungry-state 1)
 			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+             ( c-set-style "stroustrup" )
+             ( setq c-basic-offset 4 )
+             (flyspell-prog-mode)
 		    )
 )
+(define-key mode-specific-map "c" 'compile)
 ;===================================
 ;; Object-c
 ;===================================
