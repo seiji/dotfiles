@@ -17,6 +17,7 @@ iPhone {
 }
 feed@seiji.me {
        %inbox:feed/clear@seiji.me:143                 "- Inbox"
+       %inbox.Arduino:feed/clear@seiji.me:143         "-  Arduino"
        %inbox.Blog:feed/clear@seiji.me:143            "-  Blog"
        %inbox.Bookmark:feed/clear@seiji.me:143        "-  Bookmark"
        %inbox.Design:feed/clear@seiji.me:143          "-  Design"
@@ -32,6 +33,9 @@ feed@seiji.me {
        %inbox.Other:feed/clear@seiji.me:143           "-  Other"
        %inbox.Perl:feed/clear@seiji.me:143            "-  Perl"
        %inbox.Private:feed/clear@seiji.me:143         "-  Private"
+       %inbox.System:feed/clear@seiji.me:143          "-  System"
        %inbox.Tutorial:feed/clear@seiji.me:143        "-  Tutorial"
        %Sent Messages:feed/clear@seiji.me:143         "- Sent"
 }
+
+
