@@ -134,8 +134,6 @@
 ;===================================
 (setq auto-mode-alist
 	  (append '(
-				("\\.psgi$" . cperl-mode)
-				("\\.go$" . c-mode)
 				("\\.m$" . objc-mode)
 				("\\.mm$" . objc-mode)
 				("\\.html$" . html-helper-mode)
