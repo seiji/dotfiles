@@ -24,6 +24,8 @@
 (menu-bar-mode -1)				        ; don't show menu bar
 (setq kill-whole-line t)				; kill whole line  
 
+(setq truncate-partial-width-windows nil) ; 
+
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq c-basic-offset 4)
 
@@ -33,8 +35,9 @@
 ;; load path
 ;===================================
 (add-to-list 'exec-path "/opt/local/bin")
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
-
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'load-path "~/.emacs.d/elisp/org-mode")
+(add-to-list 'load-path "~/.emacs.d/elisp/remember")
 
 ;; mode
 ;; tt
@@ -346,4 +349,20 @@
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl" "Write draft with Wanderlust." t)
+
+;;====================================
+;; Org-Mode
+;====================================
+(require 'org-install)
+(setq org-startup-truncated nil)
+(setq org-return-follows-link t)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(org-remember-insinuate)
+(setq org-directory "~/memo/")
+(setq org-default-notes-file (concat org-directory "agenda.org"))
+(setq org-remember-templates
+      '(("Todo" ?t "** TODO %?\n   %i\n   %a\n   %t" nil "Inbox")
+        ("Bug" ?b "** TODO %?   :bug:\n   %i\n   %a\n   %t" nil "Inbox")
+        ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")
+        ))
 
