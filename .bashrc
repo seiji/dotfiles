@@ -20,6 +20,13 @@ export LSCOLORS=gxxxxxxxxxxxxxxxxxxxxx
 # CVS 
 export CVSROOT=:pserver:seiji@cvs.data-hotel.net:/usr/local/share/CVS
 
+# Go
+export GOROOT=$HOME/go
+export GOOS=darwin
+export GOARCH=amd64
+export GOBIN=$GOROOT/bin
+export PATH=$GOBIN:$PATH
+
 # Flex3
 export PATH=$HOME/local/flex_sdk_3/bin:$PATH
 
