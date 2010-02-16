@@ -45,7 +45,6 @@
 		)
 		("iphone"
          ("From" . "seijit@i.softbank.jp")
-         (body-file . "~/.signature")
 		)
 ;;         ("report"
 ;;          (template . "default")                 
@@ -59,7 +58,7 @@
 ;; config
 (setq wl-draft-config-alist
       '(
-	  ("^From: .*seijit@i.softbank.jp"
+	  ("^From:\\(.*\n[ \t]+\\)*.*seijit@i.softbank.jp"
          (wl-smtp-connection-type . nil)
          (wl-smtp-posting-port . 587)  
          (wl-envelope-from . "seijit@i.softbank.jp")
@@ -239,3 +238,23 @@
 
 (define-key wl-summary-mode-map "!" 'wl-summary-ldclip)
 (define-key wl-summary-mode-map "O" 'wl-summary-open)
+
+;; 
+(setq mime-edit-split-message nil)
+
+;;; ファイル名が日本語の添付ファイルをデコードする [semi-gnus-ja: 4332]
+(eval-after-load "mime"
+  '(defadvice mime-entity-filename
+     (after eword-decode-for-broken-MUA activate)
+     "Decode eworded file name for *BROKEN* MUA."
+     (when (stringp ad-return-value)
+       (setq ad-return-value (eword-decode-string ad-return-value t)))))
+
+;;; ファイル名が日本語の添付ファイルをエンコードする [semi-gnus-ja: 6046]
+(eval-after-load "std11"
+  '(defadvice std11-wrap-as-quoted-string (before encode-string activate)
+     "Encode a string."
+     (require 'eword-encode)
+     (ad-set-arg 0 (eword-encode-string (ad-get-arg 0)))))
+
+(setq wl-folder-check-async t) 
