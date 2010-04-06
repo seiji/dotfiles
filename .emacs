@@ -1,4 +1,5 @@
 
+
 ;;; emacs.el
 ;;
 ;
@@ -31,6 +32,9 @@
 
 (transient-mark-mode t)
 
+;; mojibake
+(setq auto-coding-functions nil)
+
 ;===================================
 ;; load path
 ;===================================
@@ -38,6 +42,9 @@
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (add-to-list 'load-path "~/.emacs.d/elisp/org-mode")
 (add-to-list 'load-path "~/.emacs.d/elisp/remember")
+(add-to-list 'load-path "~/.emacs.d/elisp/tramp")
+(add-to-list 'load-path "~/.emacs.d/elisp/go")
+(add-to-list 'load-path "~/.emacs.d/elisp/wp")
 
 ;; mode
 ;; tt
@@ -136,6 +143,8 @@
 	  (append '(
 				("\\.m$" . objc-mode)
 				("\\.mm$" . objc-mode)
+				("\\.psgi$" . cperl-mode)
+				("\\.t$" . cperl-mode)
 				("\\.html$" . html-helper-mode)
 				("\\.xhtml$" . html-helper-mode)
 				("\\.inc$" . html-helper-mode)
@@ -314,7 +323,6 @@
 (define-key w3m-mode-map "n" 'w3m-toggle-inline-image)
 (define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
 
-
 ;;====================================
 ;; psvn
 ;====================================
@@ -366,3 +374,32 @@
         ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")
         ))
 
+;;====================================
+;; Go lang
+;====================================
+(require 'go-mode-load)
+
+;;====================================
+;; Tramp
+;====================================
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
+;(setf tramp-shell-prompt-pattern "^[^#$>n]*[#$%>] *(0-9;]*[a-zA-Z] *)*")
+(setq tramp-debug-buffer t)
+(setq tramp-shell-prompt-pattern "^.*[#\$%>] *")
+(setq tramp-verbose 10)
+(setq vc-handled-backends nil)
+
+(setq ls-lisp-use-insert-directory-program t)
+;;(setq dired-use-ls-dired nil)
+
+;;(setq tramp-completion-without-shell-p t)
+;;(setq tramp-encoding-shell "tcsh")
+;;(setq tramp-encoding-command-switch "-c")
+;;(setq tramp-completion-without-shell-p t)
+;;(setq tramp-shell-prompt-pattern "^[ $]+")
+;;====================================
+;; wp-emacs
+;====================================
+(require 'weblogger)
