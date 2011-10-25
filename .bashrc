@@ -1,48 +1,84 @@
-# Lang
-#export LANG=ja_JP.UTF-8
-#export LC_CTYPE=ja_JP.UTF-8
+# Please save this file
+# View .inputrc .bashrc
+TERM=linux
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+#editor
+export EDITOR=emacs
 
-# MacPorts
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/man:$MANPATH
+#env
+#export LANG="ja_JP.UTF-8"
 
-# libGD
-export PATH=/usr/local/libgd/bin:$PATH
-
-# Terminal
+#color
 export CLICOLOR=1
 export TERM=xterm-color
-#export LSCOLORS=gxxxxxxxbxxxxxxxxxxxxx
-export LSCOLORS=gxxxxxxxxxxxxxxxxxxxxx
+export LSCOLORS=Gxfxcxdxhxegedahagacgx
+#export PATH=/opt/local/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
-# CVS 
-export CVSROOT=:pserver:seiji@cvs.data-hotel.net:/usr/local/share/CVS
+export MANPATH=/opt/local/man:$MANPATH
 
-# Go
-export GOROOT=$HOME/go
-export GOOS=darwin
-export GOARCH=amd64
-export GOBIN=$GOROOT/bin
-export PATH=$GOBIN:$PATH
+export PATH=/opt/subversion/bin:$PATH
 
-# Flex3
-export PATH=$HOME/local/flex_sdk_3/bin:$PATH
+# HomeBrew
+export NODE_PATH=/usr/local/lib/node
 
-alias ll='ls -la'
-alias ls='ls -1'
-alias grep='grep -in --color'
+# JAVA
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
+export PATH=$JAVA_HOME/bin:$PATH
+export MAVEN_HOME=/usr/local/maven
+export PATH=$MAVEN_HOME/bin:$PATH
+export ANT_OPTS=-Dfile.encoding=UTF8
+
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$HADOOP_HOME/bin:$PATH
+export MAHOUT_HOME=/usr/local/mahout
+export PATH=$MAHOUT_HOME/bin:$PATH
+
+# Android
+export PATH=$PATH:/Applications/android-sdk-mac_x86/tools
+export PATH=$PATH:/Applications/android-sdk-mac_x86/platform-tools
+
+# MySQL
+export MYSQL_HOME=/opt/local/lib/mysql5
+export PATH=$PATH:$MYSQL_HOME/bin
+
+#grep $today /usr/share/calendar/calendar.music
+#grep $today /usr/share/calendar/calendar.history
+#grep $today /usr/share/calendar/calendar.computer
+#grep $today /usr/share/calendar/calendar.birthday
+
+
+#base
+alias ls="ls -1G"
+alias ll="ls -la"
+alias grep="grep -in --color"
+
+#
+#alias emacs="open -a Emacs"
 alias firefox="open -a Firefox"
 alias safari="open -a Safari"
 alias prev="open -a Preview"
-alias fcd="source /Users/toyamaseiji/bin/fcd.sh"
+alias qlook="qlmanage -p"
+
+alias fcd='source ~/bin/fcd.sh'
 alias sc='screen -U -D -RR'
 alias em='emacs'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
-export PS1="$ "
 
+#if [ -z "$STY" ]; then
+#    exec screen -U -D -RR
+#fi
+case "${TERM}" in
+dumb | emacs)
+    PROMPT="%n@%~%(!.#.$)"
+    RPROMPT=""
+    unsetopt zle
+    ;;
+esac
+
+export PS1="$ "
 function pgrep() {
     if [ $# != 0 ]; then
         ps auxw | head -n 1
@@ -52,3 +88,4 @@ function pgrep() {
     fi
 }
 
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)

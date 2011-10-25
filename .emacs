@@ -1,5 +1,3 @@
-
-
 ;;; emacs.el
 ;;
 ;
@@ -8,12 +6,12 @@
 ;; basic setup
 ;===================================
 (set-language-environment "Japanese")
-(prefer-coding-system 'utf-8-unix)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(setq default-buffer-file-coding-systems 'utf-8)
+;(prefer-coding-system 'utf-8-unix)
+;(set-terminal-coding-system 'utf-8)
+;(set-keyboard-coding-system 'utf-8)
+;(set-buffer-file-coding-system 'utf-8)
+;(set-default-coding-systems 'utf-8)
+;(setq default-buffer-file-coding-systems 'utf-8)
 
 (setq inhibit-startup-message t)        ; don't show the startup message
 (setq kill-whole-line t)                ; C-k deletes the end of line
@@ -34,17 +32,18 @@
 
 ;; mojibake
 (setq auto-coding-functions nil)
-
 ;===================================
 ;; load path
 ;===================================
-(add-to-list 'exec-path "/opt/local/bin")
+;(add-to-list 'exec-path "/opt/local/bin")
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (add-to-list 'load-path "~/.emacs.d/elisp/org-mode")
-(add-to-list 'load-path "~/.emacs.d/elisp/remember")
+;(add-to-list 'load-path "~/.emacs.d/elisp/remember")
 (add-to-list 'load-path "~/.emacs.d/elisp/tramp")
-(add-to-list 'load-path "~/.emacs.d/elisp/go")
-(add-to-list 'load-path "~/.emacs.d/elisp/wp")
+(add-to-list 'load-path "~/.emacs.d/elisp/wp-emacs")
+;(add-to-list 'load-path "~/.emacs.d/elisp/go-mode")
+(add-to-list 'load-path "~/.emacs.d/elisp/slime")
+(add-to-list 'load-path "~/.emacs.d/elisp/auto-complete")
 
 ;; mode
 ;; tt
@@ -52,8 +51,6 @@
 (autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
 (require 'html-tt)
 (add-hook 'html-helper-mode-hook 'html-tt-load-hook)
-
-
 ;===================================
 ;; key binding
 ;===================================
@@ -111,6 +108,18 @@
 (define-key anything-map (kbd "M-v") 'anything-previous-source)
 (global-set-key (kbd "\C-c;") 'anything)
 
+;; controll chrome 
+(defun chrome-scroll-next ()
+    (interactive)
+      (shell-command "/usr/bin/osascript /Users/seiji/bin/chrome_scroll.scpt next"))
+
+(defun chrome-scroll-previous ()
+    (interactive)
+      (shell-command "/usr/bin/osascript /Users/seiji/bin/chrome_scroll.scpt prev"))
+
+(global-set-key (kbd "C-M-v") 'chrome-scroll-next)
+(global-set-key (kbd "M-V") 'chrome-scroll-previous)
+
 ;===================================
 ;; color setting
 ;===================================
@@ -118,13 +127,18 @@
 (require 'font-lock)       ; Without this line, emacs throws an error on OS X.
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-dark-laptop)
+;(color-theme-pok-wob)
 
 (global-hl-line-mode)
+
+(set-face-foreground 'hl-line "white")
 (set-face-background 'hl-line "SlateBlue4")
 (set-face-background 'region "royal blue")
-(set-face-foreground 'minibuffer-prompt "cyan1")
 
+;; モードライン
+;;(set-face-foreground 'modeline "LawnGreen"  )
+;(set-face-background 'modeline "SlateBlue4")
+;;(set-face-background  'modeline "black")
 
 ;===================================
 ;; shell stuff
@@ -143,8 +157,6 @@
 	  (append '(
 				("\\.m$" . objc-mode)
 				("\\.mm$" . objc-mode)
-				("\\.psgi$" . cperl-mode)
-				("\\.t$" . cperl-mode)
 				("\\.html$" . html-helper-mode)
 				("\\.xhtml$" . html-helper-mode)
 				("\\.inc$" . html-helper-mode)
@@ -155,122 +167,190 @@
 	  auto-mode-alist)
 )
 ;===================================
+;; slime
+;===================================
+;; (require 'slime)
+;; (slime-setup '(slime-repl slime-fancy slime-banner slime-js))
+
+;; (global-set-key [f5] 'slime-js-reload)
+;; (add-hook 'js2-mode-hook
+;;                     (lambda ()
+;;                                   (slime-js-minor-mode 1)))
+
+
+;===================================
+;; auto-complete
+;===================================
+;(require 'auto-complete)
+(require 'auto-complete-config)
+(require 'auto-complete-clang)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/auto-complete/dict")
+
+(setq ac-auto-start nil)
+(setq ac-quick-help-delay 0.5)
+(define-key ac-mode-map  [(control tab)] 'auto-complete)
+
+(defun my-ac-cc-mode-setup ()
+  ;; 読み込むプリコンパイル済みヘッダ
+  (setq ac-clang-prefix-header "~/.emacs.d/elisp/auto-complete/stdafx.pch")
+  ;; 補完を自動で開始しない
+  (setq ac-clang-flags '("-w" "-ferror-limit" "1"))
+  (setq ac-sources (append '(ac-source-clang
+                             ac-source-yasnippet
+                             ac-source-gtags)
+                           ac-sources))
+  )
+(defun my-ac-objc-mode-setup ()
+  ;; 読み込むプリコンパイル済みヘッダ
+  (setq ac-clang-prefix-header nil)
+;;  (setq ac-clang-flags '("-Wall" "-Wextra" "-ObjC" "-std=c99" "-isysroot" "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk" "-I."  "-D__IPHONE_OS_VERSION_MIN_tREQUIR;;ED=30200"))
+  (setq ac-clang-flags '("-Wall" "-Wextra" "-std=c99" "-isysroot" "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk" "-I."  "-D__IPHONE_OS_VERSION_MIN_tREQUIR;;ED=30200"))
+  (setq ac-sources (append '(ac-source-clang
+                             ac-source-yasnippet
+                             ac-source-gtags)
+                           ac-sources))
+  )
+
+(defun my-ac-config ()
+  (global-set-key "\M-/" 'ac-start)
+  ;; C-n/C-p で候補を選択
+  (define-key ac-complete-mode-map "\C-n" 'ac-next)
+  (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+  (add-hook 'objc-mode-hook 'my-ac-objc-mode-setup )
+  (global-auto-complete-mode t)
+  )
+
+(add-to-list 'ac-modes 'objc-mode) ;
+(my-ac-config)
+
+;===================================
+;; template
+;===================================
+;; テンプレートの保存先
+;; テンプレート挿入時に尋ねない
+;; デフォルトは 'function
+
+;===================================
 ;; C
 ;===================================
-(setq c-hanging-semi&comma-criteria nil)
-(add-hook 'c-mode-common-hook
-		  '(lambda ()
-			 (c-toggle-auto-hungry-state 1)
-			 (define-key c-mode-base-map "\C-m" 'newline-and-indent)
-             ( c-set-style "stroustrup" )
-             ( setq c-basic-offset 4 )
-             (flyspell-prog-mode)
-		    )
-)
-(define-key mode-specific-map "c" 'compile)
+;===================================
+;; C#
+;===================================
+
+(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+(setq auto-mode-alist (cons '("\\.cs$" . csharp-mode) auto-mode-alist))
+
+;; Patterns for finding Microsoft C# compiler error messages:
+(require 'compile)
+(push '("^\\(.*\\)(\\([0-9]+\\),\\([0-9]+\\)): error" 1 2 3 2) compilation-error-regexp-alist)
+(push '("^\\(.*\\)(\\([0-9]+\\),\\([0-9]+\\)): warning" 1 2 3 1) compilation-error-regexp-alist)
+
+;; Patterns for defining blocks to hide/show:
+(push '(csharp-mode
+        "\\(^\\s *#\\s *region\\b\\)\\|{"
+        "\\(^\\s *#\\s *endregion\\b\\)\\|}"
+        "/[*/]"
+        nil
+        hs-c-like-adjust-block-beginning)
+            hs-special-modes-alist)
+;===================================
+;; JavaScript
+;===================================
+;;; js2-mode
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+; fixing indentation
+; refer to http://mihai.bazon.net/projects/editing-javascript-with-emacs-js2-mode
+(autoload 'espresso-mode "espresso")
+(defun my-js2-indent-function ()
+  (interactive)
+  (save-restriction
+    (widen)
+    (let* ((inhibit-point-motion-hooks t)
+           (parse-status (save-excursion (syntax-ppss (point-at-bol))))
+           (offset (- (current-column) (current-indentation)))
+           (indentation (espresso--proper-indentation parse-status))
+           node)
+      (save-excursion
+        ;; I like to indent case and labels to half of the tab width
+        (back-to-indentation)
+        (if (looking-at "case\\s-")
+            (setq indentation (+ indentation (/ espresso-indent-level 2))))
+        
+        ;; consecutive declarations in a var statement are nice if
+        ;; properly aligned, i.e:
+        ;;
+        ;; var foo = "bar",
+        ;;     bar = "foo";
+        (setq node (js2-node-at-point))
+        (when (and node
+                   (= js2-NAME (js2-node-type node))
+                   (= js2-VAR (js2-node-type (js2-node-parent node))))
+          (setq indentation (+ 4 indentation))))
+      (indent-line-to indentation)
+      (when (> offset 0) (forward-char offset)))))
+
+(defun my-indent-sexp ()
+  (interactive)
+  (save-restriction
+    (save-excursion
+      (widen)
+      (let* ((inhibit-point-motion-hooks t)
+             (parse-status (syntax-ppss (point)))
+             (beg (nth 1 parse-status))
+             (end-marker (make-marker))
+             (end (progn (goto-char beg) (forward-list) (point)))
+             (ovl (make-overlay beg end)))
+        (set-marker end-marker end)
+        (overlay-put ovl 'face 'highlight)
+        (goto-char beg)
+        (while (< (point) (marker-position end-marker))
+          ;; don't reindent blank lines so we don't set the "buffer
+          ;; modified" property for nothing
+          (beginning-of-line)
+          (unless (looking-at "\\s-*$")
+            (indent-according-to-mode))
+          (forward-line))
+        (run-with-timer 0.5 nil '(lambda(ovl)
+                                   (delete-overlay ovl)) ovl)))))
+(defun my-js2-mode-hook ()
+  (require 'espresso)
+  (setq espresso-indent-level 4
+        indent-tabs-mode nil
+        c-basic-offset 4)
+  (c-toggle-auto-state 0)
+  (c-toggle-hungry-state 1)
+  (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+                                        ; (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+  (define-key js2-mode-map "\C-\M-\\"
+    '(lambda()
+       (interactive)
+       (insert "/* -----[ ")
+       (save-excursion
+         (insert " ]----- */"))
+       ))
+  (define-key js2-mode-map "\C-m" 'newline-and-indent)
+                                        ; (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+                                        ; (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js2-mode-map "\C-\M-q" 'my-indent-sexp)
+  (if (featurep 'js2-highlight-vars)
+      (js2-highlight-vars-mode))
+  (message "My JS2 hook"))
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+;===================================
+;; UnityJS
+;===================================
+;; UnityJS mode for emacs
+;;(autoload 'unityjs-mode "unityjs-mode" "Major mode for editing Unity Javascript code." t)
+;;(require 'unityjs-mode)
+
 ;===================================
 ;; Object-c
 ;===================================
-(require 'flymake-objc)
-(defun bh-choose-header-mode ()
-  (interactive)
-  (if (string-equal (substring (buffer-file-name) -2) ".h")
-      (progn
-        ;; OK, we got a .h file, if a .m file exists we'll assume it's
-        ; an objective c file. Otherwise, we'll look for a .cpp file.
-        (let ((dot-m-file (concat (substring (buffer-file-name) 0 -1) "m"))
-              (dot-cpp-file (concat (substring (buffer-file-name) 0 -1) "cpp")))
-          (if (file-exists-p dot-m-file)
-              (progn
-                (objc-mode)
-                )
-            (if (file-exists-p dot-cpp-file)
-                (c++-mode)
-              )
-            )
-          )
-        )
-    )
-  )
-(add-hook 'find-file-hook 'bh-choose-header-mode)
-
-;; compile
-(defun iphone-build-simu ()
-  (interactive)
-  (let ((df (directory-files "."))
-        (has-proj-file nil)
-        )
-    (while (and df (not has-proj-file))
-      (let ((fn (car df)))
-        (if (> (length fn) 10)
-            (if (string-equal (substring fn -10) ".xcodeproj")
-                (setq has-proj-file t)
-              )
-          )
-        )
-      (setq df (cdr df))
-      )
-    (if has-proj-file
-        (compile "xcodebuild clean install -configuration Debug -sdk iphonesimulator2.2.1")
-      (compile "make")
-      )
-    )
-)
-(defun iphone-build ()
-  (interactive)
-  (let (
-        (df (directory-files "."))
-        (has-proj-file nil)
-        )
-    (while (and df (not has-proj-file))
-      (let ((fn (car df)))
-        (if (> (length fn) 10)
-            (if 
-                (string-equal (substring fn -10) ".xcodeproj")
-                (setq has-proj-file t)
-              )
-          )
-        )
-      (setq df (cdr df))
-      )
-    (if has-proj-file
-        (compile "xcodebuild clean install -configuration Debug -sdk iphoneos2.2.1")
-      (compile "make")
-      )
-    )
-  )
-
-(add-hook 'objc-mode-hook
-    (lambda ()
-      (setq compile-command
-            (set-compile-command-for-objc))
-      (define-key objc-mode-map "\C-c\C-c" 'compile)
-      )
-)
-(defun set-compile-command-for-objc ()
-  (interactive)
-  (let* ((filename (file-name-nondirectory buffer-file-name))
-         (index (string-match "\\.m$" filename))
-         (filename-no-suffix (substring filename 0 index)))
-    (cond
-     ;; make用のファイルがあれば "make -k"
-     ((or (file-exists-p "Makefile")
-          (file-exists-p "makefile"))
-      (setq compile-command "make -k"))
-     ;; ヘッダファイルがあれば、オブジェクトファイルをつくる
-     ((file-exists-p (concat filename-no-suffix ".h"))
-      (setq compile-command
-            (concat "gcc -ansi -Wall -Os -g -c " filename)))
-     ;; Other
-     (t
-      (setq compile-command
-            (concat "gcc -ansi -Wall -Os -g -framework Foundation -o "
-                    filename-no-suffix " " filename 
-                    "; ./" filename-no-suffix )) ;Run
-      )
-     )
-    )
-  )
 
 ;;====================================
 ;; Perl
@@ -299,6 +379,26 @@
 )
 
 ;;====================================
+;; Ruby
+;====================================
+(require 'rvm)
+(rvm-use-default)
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            ;; (set-face-bold-p 'cperl-array-face nil)
+			;; (set-face-foreground 'cperl-array-face "DodgerBlue3")
+            ;; (set-face-background 'cperl-array-face "black")
+			;; (set-face-foreground 'cperl-hash-face "DodgerBlue3")
+            ;; (set-face-bold-p 'cperl-hash-face nil)
+            ;; (set-face-italic-p 'cperl-hash-face nil)
+            ;; (set-face-background 'cperl-hash-face "black")
+			(setq compile-command
+				  (concat "ruby " (buffer-file-name)))
+			(define-key ruby-mode-map (kbd "\C-c\C-c") 'compile)
+		  )
+)
+
+;;====================================
 ;; PHP
 ;====================================
 ;(load-library "php-mode")
@@ -307,27 +407,34 @@
 ;;====================================
 ;; emacs w3m
 ;====================================
-(load "w3m")
-(setq w3m-use-cookies t)
-(setq w3m-favicon-cache-expire-wait nil)
-(setq w3m-search-default-engine "google")
+;; (load "w3m")
+;; (setq w3m-use-cookies t)
+;; (setq w3m-favicon-cache-expire-wait nil)
+;; (setq w3m-search-default-engine "google")
 
-;(setq w3m-home-page "~/.emacs.d/.w3m/bookmark.html")
+;; ;(setq w3m-home-page "~/.emacs.d/.w3m/bookmark.html")
 
-(define-key w3m-mode-map "r" '(lambda () (interactive) (w3m-next-buffer 1)))
-(define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer -1)))
-(define-key w3m-mode-map "w" 'w3m-delete-buffer)
-(define-key w3m-mode-map "i" 'w3m-next-anchor)
-(define-key w3m-mode-map "t" 'w3m-view-this-url-new-session)
-(define-key w3m-mode-map "'" 'w3m-view-this-url)
-(define-key w3m-mode-map "n" 'w3m-toggle-inline-image)
-(define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
+;; (define-key w3m-mode-map "r" '(lambda () (interactive) (w3m-next-buffer 1)))
+;; (define-key w3m-mode-map "l" '(lambda () (interactive) (w3m-next-buffer -1)))
+;; (define-key w3m-mode-map "w" 'w3m-delete-buffer)
+;; (define-key w3m-mode-map "i" 'w3m-next-anchor)
+;; (define-key w3m-mode-map "t" 'w3m-view-this-url-new-session)
+;; (define-key w3m-mode-map "'" 'w3m-view-this-url)
+;; (define-key w3m-mode-map "n" 'w3m-toggle-inline-image)
+;; (define-key w3m-mode-map "m" 'w3m-bookmark-view-new-session)
+
 
 ;;====================================
 ;; psvn
 ;====================================
 (require 'psvn)
 
+;;====================================
+;; twittering mode
+;====================================
+(require 'twittering-mode)
+(setq twittering-username "seijit")
+(setq twittering-password "sunset")
 ;;====================================
 ;; navi2ch
 ;====================================
@@ -346,7 +453,6 @@
 (setq navi2ch-article-exist-message-range '(1 . 1000))
 (setq navi2ch-article-new-message-range '(1000 . 1))
 (setq navi2ch-list-stay-list-window t)
-(global-set-key "\C-c2" 'navi2ch)
 
 ;;====================================
 ;; Wanderlust
@@ -357,6 +463,8 @@
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl" "Write draft with Wanderlust." t)
+
+;;(require 'elmo-search-est)
 
 ;;====================================
 ;; Org-Mode
@@ -373,33 +481,132 @@
         ("Bug" ?b "** TODO %?   :bug:\n   %i\n   %a\n   %t" nil "Inbox")
         ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")
         ))
-
-;;====================================
-;; Go lang
-;====================================
-(require 'go-mode-load)
-
+(require 'org-html5presentation)
 ;;====================================
 ;; Tramp
 ;====================================
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
+(add-to-list 'tramp-default-proxies-alist '("dev-mobile.livedoor.com" nil "/ssh:root@ldg:"))
+(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
+
+;; NG incase BSD
+;; PC
+(add-to-list 'tramp-default-proxies-alist '("dev01.news-ng" nil "/ssh:root@ldg:"))
+
+;; mobile
+; ldg -> dev-mobile
+(add-to-list 'tramp-default-proxies-alist '("10.0.214.158" nil "/ssh:root@ldg:"))
+; ldg -> dev-mobile2
+(add-to-list 'tramp-default-proxies-alist '("10.0.213.47" nil "/ssh:root@ldg:"))
+; ldg -> m_admin batch
+(add-to-list 'tramp-default-proxies-alist '("10.0.207.235" nil "/ssh:root@ldg:"))
+;; top
+; ldg -> top.dev
+(add-to-list 'tramp-default-proxies-alist '("10.0.213.114" nil "/ssh:root@ldg:"))
+;; news
+; ldg -> dev01.news-ng
+(add-to-list 'tramp-default-proxies-alist '("10.0.205.48" nil "/ssh:root@ldg:"))
+; ldg -> dev101.news-ng
+(add-to-list 'tramp-default-proxies-alist '("10.130.61.53" nil "/ssh:root@ldg:"))
+
+; ldg -> www115.news.xen
+(add-to-list 'tramp-default-proxies-alist '("10.130.72.65" nil "/ssh:root@ldg:"))
+
+; ldg -> music.dev
+(add-to-list 'tramp-default-proxies-alist '("10.0.204.124" nil "/ssh:root@ldg:"))
+
+; ldg -> dev17 movie-enter maverick.dev
+(add-to-list 'tramp-default-proxies-alist '("10.0.210.189" nil "/ssh:root@ldg:"))
+; ldg -> dev19 anigema
+(add-to-list 'tramp-default-proxies-alist '("10.0.208.69" nil "/ssh:root@ldg:"))
+
+; ldg -> dev-pcpf 10.0.212.91
+(add-to-list 'tramp-default-proxies-alist '("10.0.212.91" nil "/ssh:root@ldg:"))
+; ldg -> dev-karame
+(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
+; ldg -> dev-karame
+(add-to-list 'tramp-default-proxies-alist '("10.130.61.61" nil "/ssh:root@ldg:"))
+
+
+; ldg -> dcmee
+(add-to-list 'tramp-default-proxies-alist '("10.0.212.50" nil "/ssh:root@ldg:"))
+
+; ldg -> ugo
+(add-to-list 'tramp-default-proxies-alist '("10.0.204.54" nil "/ssh:root@ldg:"))
+
+
+; ldl -> phoenix
+(add-to-list 'tramp-default-proxies-alist '("adt" nil "/ssh:seiji@ldl:"))
+; ldl -> decoking
+(add-to-list 'tramp-default-proxies-alist '("deco" "toyama" "/ssh:seiji@ldl:"))
+
+; picto -> dev
+;(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/sudo:picto:"))
+(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/ssh:root@picto:"))
+
+; ldl -> picto
+;(add-to-list 'tramp-default-proxies-alist '("picto" "root" "/ssh:toyama@picto:"))
+(add-to-list 'tramp-default-proxies-alist '("picto" nil "/ssh:root@ldg:"))
+
+; ldg
+(add-to-list 'tramp-default-proxies-alist '("ldg" nil "/sudo:ldl:"))
+
+; ldl
+(add-to-list 'tramp-default-proxies-alist '("ldl" "root" "/ssh:seiji@ldl:"))
+
 ;(setf tramp-shell-prompt-pattern "^[^#$>n]*[#$%>] *(0-9;]*[a-zA-Z] *)*")
+;(setq shell-prompt-pattern "^[ $%]+")
+;(setq tramp-shell-prompt-pattern "^.*[#$%>] *")
 (setq tramp-debug-buffer t)
-(setq tramp-shell-prompt-pattern "^.*[#\$%>] *")
+(setq tramp-shell-prompt-pattern "^.*[#＼$%>] *")
 (setq tramp-verbose 10)
 (setq vc-handled-backends nil)
-
-(setq ls-lisp-use-insert-directory-program t)
-;;(setq dired-use-ls-dired nil)
-
-;;(setq tramp-completion-without-shell-p t)
-;;(setq tramp-encoding-shell "tcsh")
-;;(setq tramp-encoding-command-switch "-c")
-;;(setq tramp-completion-without-shell-p t)
-;;(setq tramp-shell-prompt-pattern "^[ $]+")
-;;====================================
-;; wp-emacs
+(setq ls-lisp-use-insert-directory-program t)     
+;
+;====================================;
+; wp-emacs
 ;====================================
 (require 'weblogger)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(weblogger-config-alist (quote (("default" ("user" . "seiji") ("pass" . "sunset" ) ("server-url" . "http://blog.seiji.me/xmlrpc.php") ("weblog" . "1"))))))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(global-set-key "\C-c\C-w" 'weblogger-start-entry)  ; weblogger起動（C-c C-w）
+
+(defun my-weblogger-send-entry (&optional arg)
+  (interactive)
+  (save-buffer)
+  (set-buffer-modified-p t)
+  (weblogger-save-entry nil arg)
+  (my-weblogger-quit))
+
+(defun my-weblogger-quit ()
+  (interactive)
+  (when (y-or-n-p "Do you want to quit weblogger-entry? ")
+    (bury-buffer)))
+
+(add-hook 'weblogger-start-edit-entry-hook
+          '(lambda ()
+            (insert-file "~/.emacs.d/template/template.html")
+             (define-key weblogger-entry-mode-map (kbd "C-x C-s") nil)
+             (define-key weblogger-entry-mode-map (kbd "C-c n")   'weblogger-next-entry)
+             (define-key weblogger-entry-mode-map (kbd "C-c p")   'weblogger-prev-entry)
+             (define-key weblogger-entry-mode-map (kbd "C-c c")   'weblogger-start-entry)
+             (define-key weblogger-entry-mode-map (kbd "C-c C-c") 'my-weblogger-send-entry)
+             (define-key weblogger-entry-mode-map (kbd "C-c C-k") 'my-weblogger-quit)
+             (zencoding-mode t)                     ; zencoding-mode
+             (yas/minor-mode t)                     ; YASnippet マイナーモードを有効
+             (auto-fill-mode -1)))                  ; 自動改行をOFF
+
+;; Go mode(require 'go-mode-load)

@@ -6,15 +6,13 @@ Gmail {
       %[Gmail]/Starred:sebraincom/clear@imap.gmail.com:993! "- Starred☆"
       %[Gmail]/Spam:sebraincom/clear@imap.gmail.com:993! "- Spam"
 }
+
 seijit@me.com{
-        %inbox:seijit/clear@mail.mac.com:993!                   "- Inbox" 
-        %Sent Messages:seijit/clear@mail.mac.com:993!           "- Sent" 
-        %Marked:seijit/clear@mail.mac.com:993!                  "- Marked"
+        %inbox:seijit/clear@mail.me.com:143                   "- Inbox" 
+        %Sent Messages:seijit/clear@mail.me.com:143           "- Sent" 
+        %Marked:seijit/clear@mail.me.com:143                  "- Marked"
 }
-iPhone {
-       %inbox:seijit/clear@imap.softbank.jp:143                 "- Inbox"
-       %Sent Messages:seijit/clear@imap.softbank.jp:143         "- Sent"
-}
+
 feed@seiji.me {
        %inbox:feed/clear@seiji.me:143                 "- Inbox"
        %inbox.Arduino:feed/clear@seiji.me:143         "-  Arduino"
@@ -37,5 +35,4 @@ feed@seiji.me {
        %inbox.Tutorial:feed/clear@seiji.me:143        "-  Tutorial"
        %Sent Messages:feed/clear@seiji.me:143         "- Sent"
 }
-
 

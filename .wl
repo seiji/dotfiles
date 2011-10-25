@@ -7,7 +7,7 @@
 ; 日本語フォルダ対策
 (setq elmo-imap4-use-modified-utf7 t)
 
-(require 'mime-w3m)
+;;(require 'mime-w3m)
 ;;(setq mime-w3m-display-inline-images t)
 
 ; SMTPサーバー
@@ -232,7 +232,8 @@
    )
   )
   (call-process
-   "/usr/bin/open" nil 0 nil field )
+;;   "/usr/bin/open" nil 0 nil field )
+   "/usr/bin/osascript" nil 0 nil "/Users/seiji/bin/open_url.scpt" field)
   (message "%s" field)
 )
 

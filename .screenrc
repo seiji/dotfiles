@@ -12,9 +12,7 @@ screen -t home 0
 chdir "/Users/seiji/workspace"
 screen -t work 1 
 
-screen -t 2ch 2 /opt/local/bin/emacs -f navi2ch
-screen -t w3m 3 /opt/local/bin/emacs -f w3m
-screen -t wl 4 /opt/local/bin/emacs -f wl
+screen -t wl  4 /usr/local/bin/emacs -f wl
 
 select 1
 
