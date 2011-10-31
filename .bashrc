@@ -53,6 +53,7 @@ export PATH=$PATH:$MYSQL_HOME/bin
 alias ls="ls -1G"
 alias ll="ls -la"
 alias grep="grep -in --color"
+alias screen='screen -U -D -RR'
 
 #
 #alias emacs="open -a Emacs"
@@ -89,3 +90,4 @@ function pgrep() {
 }
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+source $HOME/perl5/perlbrew/etc/bashrc
