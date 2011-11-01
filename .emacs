@@ -37,14 +37,11 @@
 ;===================================
 ;(add-to-list 'exec-path "/opt/local/bin")
 (add-to-list 'load-path "~/.emacs.d/elisp")
-(add-to-list 'load-path "~/.emacs.d/elisp/org-mode")
 ;(add-to-list 'load-path "~/.emacs.d/elisp/remember")
 (add-to-list 'load-path "~/.emacs.d/elisp/tramp")
 (add-to-list 'load-path "~/.emacs.d/elisp/wp-emacs")
 ;(add-to-list 'load-path "~/.emacs.d/elisp/go-mode")
-(add-to-list 'load-path "~/.emacs.d/elisp/slime")
-(add-to-list 'load-path "~/.emacs.d/elisp/auto-complete")
-
+(add-to-list 'load-path "~/.emacs.d/elisp/org-mode")
 ;; mode
 ;; tt
 (add-hook 'html-helper-load-hook '(lambda () (require 'html-font)))
@@ -174,64 +171,6 @@
 
 
 ;===================================
-;; slime
-;===================================
-;; (require 'slime)
-;; (slime-setup '(slime-repl slime-fancy slime-banner slime-js))
-
-;; (global-set-key [f5] 'slime-js-reload)
-;; (add-hook 'js2-mode-hook
-;;                     (lambda ()
-;;                                   (slime-js-minor-mode 1)))
-
-
-;===================================
-;; auto-complete
-;===================================
-;(require 'auto-complete)
-(require 'auto-complete-config)
-(require 'auto-complete-clang)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/auto-complete/dict")
-
-(setq ac-auto-start nil)
-(setq ac-quick-help-delay 0.5)
-(define-key ac-mode-map  [(control tab)] 'auto-complete)
-
-(defun my-ac-cc-mode-setup ()
-  ;; 読み込むプリコンパイル済みヘッダ
-  (setq ac-clang-prefix-header "~/.emacs.d/elisp/auto-complete/stdafx.pch")
-  ;; 補完を自動で開始しない
-  (setq ac-clang-flags '("-w" "-ferror-limit" "1"))
-  (setq ac-sources (append '(ac-source-clang
-                             ac-source-yasnippet
-                             ac-source-gtags)
-                           ac-sources))
-  )
-(defun my-ac-objc-mode-setup ()
-  ;; 読み込むプリコンパイル済みヘッダ
-  (setq ac-clang-prefix-header nil)
-;;  (setq ac-clang-flags '("-Wall" "-Wextra" "-ObjC" "-std=c99" "-isysroot" "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk" "-I."  "-D__IPHONE_OS_VERSION_MIN_tREQUIR;;ED=30200"))
-  (setq ac-clang-flags '("-Wall" "-Wextra" "-std=c99" "-isysroot" "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk" "-I."  "-D__IPHONE_OS_VERSION_MIN_tREQUIR;;ED=30200"))
-  (setq ac-sources (append '(ac-source-clang
-                             ac-source-yasnippet
-                             ac-source-gtags)
-                           ac-sources))
-  )
-
-(defun my-ac-config ()
-  (global-set-key "\M-/" 'ac-start)
-  ;; C-n/C-p で候補を選択
-  (define-key ac-complete-mode-map "\C-n" 'ac-next)
-  (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-  (add-hook 'objc-mode-hook 'my-ac-objc-mode-setup )
-  (global-auto-complete-mode t)
-  )
-
-(add-to-list 'ac-modes 'objc-mode) ;
-(my-ac-config)
 
 ;===================================
 ;; template
@@ -437,12 +376,6 @@
 (require 'psvn)
 
 ;;====================================
-;; twittering mode
-;====================================
-(require 'twittering-mode)
-(setq twittering-username "seijit")
-(setq twittering-password "sunset")
-;;====================================
 ;; navi2ch
 ;====================================
 
@@ -464,156 +397,29 @@
 ;;====================================
 ;; Wanderlust
 ;====================================
-(load "mime-setup")
+;; (load "mime-setup")
 
-(setq ssl-certificate-verification-policy 1) 
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl" "Write draft with Wanderlust." t)
+;; (setq ssl-certificate-verification-policy 1) 
+;; (autoload 'wl "wl" "Wanderlust" t)
+;; (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+;; (autoload 'wl-draft "wl" "Write draft with Wanderlust." t)
 
-;;(require 'elmo-search-est)
 
-;;====================================
-;; Org-Mode
-;====================================
-(require 'org-install)
-(setq org-startup-truncated nil)
-(setq org-return-follows-link t)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(org-remember-insinuate)
-(setq org-directory "~/memo/")
-(setq org-default-notes-file (concat org-directory "agenda.org"))
-(setq org-remember-templates
-      '(("Todo" ?t "** TODO %?\n   %i\n   %a\n   %t" nil "Inbox")
-        ("Bug" ?b "** TODO %?   :bug:\n   %i\n   %a\n   %t" nil "Inbox")
-        ("Idea" ?i "** %?\n   %i\n   %a\n   %t" nil "New Ideas")
-        ))
-(require 'org-html5presentation)
 ;;====================================
 ;; Tramp
 ;====================================
-(require 'tramp)
-(setq tramp-default-method "ssh")
+;(require 'tramp)
+;(setq tramp-default-method "ssh")
 
-(add-to-list 'tramp-default-proxies-alist '("dev-mobile.livedoor.com" nil "/ssh:root@ldg:"))
-(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
-
-;; NG incase BSD
-;; PC
-(add-to-list 'tramp-default-proxies-alist '("dev01.news-ng" nil "/ssh:root@ldg:"))
-
-;; mobile
-; ldg -> dev-mobile
-(add-to-list 'tramp-default-proxies-alist '("10.0.214.158" nil "/ssh:root@ldg:"))
-; ldg -> dev-mobile2
-(add-to-list 'tramp-default-proxies-alist '("10.0.213.47" nil "/ssh:root@ldg:"))
-; ldg -> m_admin batch
-(add-to-list 'tramp-default-proxies-alist '("10.0.207.235" nil "/ssh:root@ldg:"))
-;; top
-; ldg -> top.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.213.114" nil "/ssh:root@ldg:"))
-;; news
-; ldg -> dev01.news-ng
-(add-to-list 'tramp-default-proxies-alist '("10.0.205.48" nil "/ssh:root@ldg:"))
-; ldg -> dev101.news-ng
-(add-to-list 'tramp-default-proxies-alist '("10.130.61.53" nil "/ssh:root@ldg:"))
-
-; ldg -> www115.news.xen
-(add-to-list 'tramp-default-proxies-alist '("10.130.72.65" nil "/ssh:root@ldg:"))
-
-; ldg -> music.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.204.124" nil "/ssh:root@ldg:"))
-
-; ldg -> dev17 movie-enter maverick.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.210.189" nil "/ssh:root@ldg:"))
-; ldg -> dev19 anigema
-(add-to-list 'tramp-default-proxies-alist '("10.0.208.69" nil "/ssh:root@ldg:"))
-
-; ldg -> dev-pcpf 10.0.212.91
-(add-to-list 'tramp-default-proxies-alist '("10.0.212.91" nil "/ssh:root@ldg:"))
-; ldg -> dev-karame
-(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
-; ldg -> dev-karame
-(add-to-list 'tramp-default-proxies-alist '("10.130.61.61" nil "/ssh:root@ldg:"))
-
-
-; ldg -> dcmee
-(add-to-list 'tramp-default-proxies-alist '("10.0.212.50" nil "/ssh:root@ldg:"))
-
-; ldg -> ugo
-(add-to-list 'tramp-default-proxies-alist '("10.0.204.54" nil "/ssh:root@ldg:"))
-
-
-; ldl -> phoenix
-(add-to-list 'tramp-default-proxies-alist '("adt" nil "/ssh:seiji@ldl:"))
-; ldl -> decoking
-(add-to-list 'tramp-default-proxies-alist '("deco" "toyama" "/ssh:seiji@ldl:"))
-
-; picto -> dev
-;(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/sudo:picto:"))
-(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/ssh:root@picto:"))
-
-; ldl -> picto
-;(add-to-list 'tramp-default-proxies-alist '("picto" "root" "/ssh:toyama@picto:"))
-(add-to-list 'tramp-default-proxies-alist '("picto" nil "/ssh:root@ldg:"))
-
+;(add-to-list 'tramp-default-proxies-alist '("picto" nil "/ssh:root@ldg:"))
 ; ldg
-(add-to-list 'tramp-default-proxies-alist '("ldg" nil "/sudo:ldl:"))
-
+;(add-to-list 'tramp-default-proxies-alist '("ldg" nil "/sudo:ldl:"))
 ; ldl
-(add-to-list 'tramp-default-proxies-alist '("ldl" "root" "/ssh:seiji@ldl:"))
+;(add-to-list 'tramp-default-proxies-alist '("ldl" "root" "/ssh:seiji@ldl:"))
 
-;(setf tramp-shell-prompt-pattern "^[^#$>n]*[#$%>] *(0-9;]*[a-zA-Z] *)*")
-;(setq shell-prompt-pattern "^[ $%]+")
-;(setq tramp-shell-prompt-pattern "^.*[#$%>] *")
-(setq tramp-debug-buffer t)
-(setq tramp-shell-prompt-pattern "^.*[#＼$%>] *")
-(setq tramp-verbose 10)
-(setq vc-handled-backends nil)
-(setq ls-lisp-use-insert-directory-program t)     
+;(setq tramp-debug-buffer t)
+;(setq tramp-shell-prompt-pattern "^.*[#＼$%>] *")
+;(setq tramp-verbose 10)
+;(setq vc-handled-backends nil)
+;(setq ls-lisp-use-insert-directory-program t)     
 ;
-;====================================;
-; wp-emacs
-;====================================
-(require 'weblogger)
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(weblogger-config-alist (quote (("default" ("user" . "seiji") ("pass" . "sunset" ) ("server-url" . "http://blog.seiji.me/xmlrpc.php") ("weblog" . "1"))))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-(global-set-key "\C-c\C-w" 'weblogger-start-entry)  ; weblogger起動（C-c C-w）
-
-(defun my-weblogger-send-entry (&optional arg)
-  (interactive)
-  (save-buffer)
-  (set-buffer-modified-p t)
-  (weblogger-save-entry nil arg)
-  (my-weblogger-quit))
-
-(defun my-weblogger-quit ()
-  (interactive)
-  (when (y-or-n-p "Do you want to quit weblogger-entry? ")
-    (bury-buffer)))
-
-(add-hook 'weblogger-start-edit-entry-hook
-          '(lambda ()
-            (insert-file "~/.emacs.d/template/template.html")
-             (define-key weblogger-entry-mode-map (kbd "C-x C-s") nil)
-             (define-key weblogger-entry-mode-map (kbd "C-c n")   'weblogger-next-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c p")   'weblogger-prev-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c c")   'weblogger-start-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c C-c") 'my-weblogger-send-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c C-k") 'my-weblogger-quit)
-             (zencoding-mode t)                     ; zencoding-mode
-             (yas/minor-mode t)                     ; YASnippet マイナーモードを有効
-             (auto-fill-mode -1)))                  ; 自動改行をOFF
-
-;; Go mode(require 'go-mode-load)
