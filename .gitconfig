@@ -3,3 +3,5 @@
 	email = seijit@me.com
 [color]
 	ui = auto
+[mergetool]
+	keepBackup = true
