@@ -1,0 +1,5 @@
+SESSION=`tmux ls 2>/dev/null | awk -F: '/attached/ {print $1}' | head -1`
+if [ ! -z $SESSION ]; then
+  tmux attach -t $SESSION
+fi
+ 

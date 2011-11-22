@@ -91,3 +91,6 @@ function pgrep() {
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 source $HOME/perl5/perlbrew/etc/bashrc
+
+# tmux
+test -f ~/.tmux-load && . ~/.tmux-load
