@@ -5,3 +5,5 @@
 	ui = auto
 [mergetool]
 	keepBackup = true
+[core]
+	editor = vi
