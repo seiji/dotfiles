@@ -52,6 +52,7 @@ export PATH=$PATH:$MYSQL_HOME/bin
 #base
 alias ls="ls -1G"
 alias ll="ls -la"
+alias vi="/usr/bin/vim"
 alias grep="grep -in --color"
 alias screen='screen -U -D -RR'
 
