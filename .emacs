@@ -464,12 +464,6 @@
 (require 'psvn)
 
 ;;====================================
-;; twittering mode
-;====================================
-(require 'twittering-mode)
-(setq twittering-username "seijit")
-(setq twittering-password "sunset")
-;;====================================
 ;; navi2ch
 ;====================================
 
