@@ -464,12 +464,6 @@
 (require 'psvn)
 
 ;;====================================
-;; twittering mode
-;====================================
-(require 'twittering-mode)
-(setq twittering-username "seijit")
-(setq twittering-password "sunset")
-;;====================================
 ;; navi2ch
 ;====================================
 
@@ -522,74 +516,6 @@
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
-(add-to-list 'tramp-default-proxies-alist '("dev-mobile.livedoor.com" nil "/ssh:root@ldg:"))
-(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
-
-;; NG incase BSD
-;; PC
-(add-to-list 'tramp-default-proxies-alist '("dev01.news-ng" nil "/ssh:root@ldg:"))
-
-;; mobile
-; ldg -> dev-mobile
-(add-to-list 'tramp-default-proxies-alist '("10.0.214.158" nil "/ssh:root@ldg:"))
-; ldg -> dev-mobile2
-(add-to-list 'tramp-default-proxies-alist '("10.0.213.47" nil "/ssh:root@ldg:"))
-; ldg -> m_admin batch
-(add-to-list 'tramp-default-proxies-alist '("10.0.207.235" nil "/ssh:root@ldg:"))
-;; top
-; ldg -> top.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.213.114" nil "/ssh:root@ldg:"))
-;; news
-; ldg -> dev01.news-ng
-(add-to-list 'tramp-default-proxies-alist '("10.0.205.48" nil "/ssh:root@ldg:"))
-; ldg -> dev101.news-ng
-(add-to-list 'tramp-default-proxies-alist '("10.130.61.53" nil "/ssh:root@ldg:"))
-
-; ldg -> www115.news.xen
-(add-to-list 'tramp-default-proxies-alist '("10.130.72.65" nil "/ssh:root@ldg:"))
-
-; ldg -> music.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.204.124" nil "/ssh:root@ldg:"))
-
-; ldg -> dev17 movie-enter maverick.dev
-(add-to-list 'tramp-default-proxies-alist '("10.0.210.189" nil "/ssh:root@ldg:"))
-; ldg -> dev19 anigema
-(add-to-list 'tramp-default-proxies-alist '("10.0.208.69" nil "/ssh:root@ldg:"))
-
-; ldg -> dev-pcpf 10.0.212.91
-(add-to-list 'tramp-default-proxies-alist '("10.0.212.91" nil "/ssh:root@ldg:"))
-; ldg -> dev-karame
-(add-to-list 'tramp-default-proxies-alist '("10.0.211.220" nil "/ssh:root@ldg:"))
-; ldg -> dev-karame
-(add-to-list 'tramp-default-proxies-alist '("10.130.61.61" nil "/ssh:root@ldg:"))
-
-
-; ldg -> dcmee
-(add-to-list 'tramp-default-proxies-alist '("10.0.212.50" nil "/ssh:root@ldg:"))
-
-; ldg -> ugo
-(add-to-list 'tramp-default-proxies-alist '("10.0.204.54" nil "/ssh:root@ldg:"))
-
-
-; ldl -> phoenix
-(add-to-list 'tramp-default-proxies-alist '("adt" nil "/ssh:seiji@ldl:"))
-; ldl -> decoking
-(add-to-list 'tramp-default-proxies-alist '("deco" "toyama" "/ssh:seiji@ldl:"))
-
-; picto -> dev
-;(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/sudo:picto:"))
-(add-to-list 'tramp-default-proxies-alist '("192.168.20.232" nil "/ssh:root@picto:"))
-
-; ldl -> picto
-;(add-to-list 'tramp-default-proxies-alist '("picto" "root" "/ssh:toyama@picto:"))
-(add-to-list 'tramp-default-proxies-alist '("picto" nil "/ssh:root@ldg:"))
-
-; ldg
-(add-to-list 'tramp-default-proxies-alist '("ldg" nil "/sudo:ldl:"))
-
-; ldl
-(add-to-list 'tramp-default-proxies-alist '("ldl" "root" "/ssh:seiji@ldl:"))
-
 ;(setf tramp-shell-prompt-pattern "^[^#$>n]*[#$%>] *(0-9;]*[a-zA-Z] *)*")
 ;(setq shell-prompt-pattern "^[ $%]+")
 ;(setq tramp-shell-prompt-pattern "^.*[#$%>] *")
@@ -599,50 +525,6 @@
 (setq vc-handled-backends nil)
 (setq ls-lisp-use-insert-directory-program t)     
 ;
-;====================================;
-; wp-emacs
-;====================================
-(require 'weblogger)
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(weblogger-config-alist (quote (("default" ("user" . "seiji") ("pass" . "sunset" ) ("server-url" . "http://blog.seiji.me/xmlrpc.php") ("weblog" . "1"))))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-(global-set-key "\C-c\C-w" 'weblogger-start-entry)  ; weblogger起動（C-c C-w）
-
-(defun my-weblogger-send-entry (&optional arg)
-  (interactive)
-  (save-buffer)
-  (set-buffer-modified-p t)
-  (weblogger-save-entry nil arg)
-  (my-weblogger-quit))
-
-(defun my-weblogger-quit ()
-  (interactive)
-  (when (y-or-n-p "Do you want to quit weblogger-entry? ")
-    (bury-buffer)))
-
-(add-hook 'weblogger-start-edit-entry-hook
-          '(lambda ()
-            (insert-file "~/.emacs.d/template/template.html")
-             (define-key weblogger-entry-mode-map (kbd "C-x C-s") nil)
-             (define-key weblogger-entry-mode-map (kbd "C-c n")   'weblogger-next-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c p")   'weblogger-prev-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c c")   'weblogger-start-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c C-c") 'my-weblogger-send-entry)
-             (define-key weblogger-entry-mode-map (kbd "C-c C-k") 'my-weblogger-quit)
-             (zencoding-mode t)                     ; zencoding-mode
-             (yas/minor-mode t)                     ; YASnippet マイナーモードを有効
-             (auto-fill-mode -1)))                  ; 自動改行をOFF
-
 ;; Go mode(require 'go-mode-load)
 
 
