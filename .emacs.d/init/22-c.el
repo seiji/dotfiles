@@ -10,8 +10,18 @@
 
 (add-hook 'c-mode-hook
           '(lambda ()
+             (define-key c-mode-map "\C-c\C-c" 'quickrun)
              (define-key c-mode-map "\C-cb" 'c-begin-comment-box)
              (define-key c-mode-map "\C-ce" 'c-end-comment-box)))
+
+
+
+
+
+
+
+
+
 
 
 

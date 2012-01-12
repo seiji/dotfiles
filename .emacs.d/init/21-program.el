@@ -41,3 +41,50 @@
   (add-hook 'css-mode-hook '(lambda ()
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
+
+;auto-complete.el --- settings for auto-complete
+;Code:
+(eval-when-compile
+  (require 'cl))
+
+(require 'auto-complete-config)
+(require 'auto-complete+)
+(ac-config-default)
+(setq ac-modes (append ac-modes '(lua-mode cmake-mode csharp-mode)))
+
+										; After do this, isearch any string, M-: (match-data) always
+										; return the list whose elements is integer
+(global-auto-complete-mode 1)
+
+(setq help-xref-following nil)
+										; (bind-keys '(("RET" . ac-complete)
+										;            ; ("RET" nil)
+										;            ; ("M-j" nil)
+										;          ) ac-complete-mode-map)
+
+(add-to-list 'ac-dictionary-directories (expand-file-name "ac-dict" "~/.emacs.d/dict"))
+
+(setq ac-auto-show-menu t
+	  ac-auto-start t
+	  ac-dwim t
+	  ac-candidate-limit ac-menu-height
+	  ac-quick-help-delay .5
+	  ac-disable-faces nil)
+
+(set-default 'ac-sources
+			 '(ac-source-semantic-raw
+			   ac-source-yasnippet
+			   ac-source-dictionary
+			   ac-source-abbrev
+			   ac-source-words-in-buffer
+			   ac-source-words-in-same-mode-buffers
+			   ac-source-imenu
+			   ac-source-files-in-current-dir
+			   ac-source-filename))
+
+;auto-complete.el ends here
+
+
+
+
+

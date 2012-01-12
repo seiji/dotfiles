@@ -1,5 +1,3 @@
-(require 'sticky)
-(use-sticky-key ";" sticky-alist:en)
 ;===================================
 ;; key binding
 ;===================================
@@ -7,6 +5,8 @@
 (global-set-key "\C-h" 'delete-backward-char)
 
 (setq next-line-add-newlines t)
+
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; \C-w
 (defun kill-region-or-backward-kill-word (arg)
@@ -40,5 +40,10 @@
       (interactive)
             (shell-command "/usr/bin/osascript /Users/seiji/bin/chrome_scroll.scpt prev"))
 
-(global-set-key (kbd "C-M-v") 'chrome-scroll-next)
-(global-set-key (kbd "M-V") 'chrome-scroll-previous)
+;(global-set-key (kbd "C-V") 'chrome-scroll-next)
+;(global-set-key (kbd "M-V") 'chrome-scroll-previous)
+
+
+
+
+

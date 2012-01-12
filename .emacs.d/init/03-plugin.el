@@ -1,3 +1,6 @@
-(setq recentf-max-sved-item 5000)       
-(setq recentf-exclide '("TAGS$" "/var/tmp/"))
-(require 'recentf-ext)
+;;; 03-plugin.el --- 
+
+;; Copyright (C) 2012  Seiji
+
+;; Author: Seiji <seiji@sma.local>
+;; Keywords: 
