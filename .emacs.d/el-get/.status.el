@@ -1,1 +1,1 @@
-(:sticky "installed" :init-loader "installed" :recentf-ext "installed" :twittering-mode "installed" :gist "installed" :fold-dwim "installed" :anything "installed" :quickrun "installed" :emacs-w3m "installed" :httpcode "installed" :csharp-mode "installed")
+(:sticky "installed" :init-loader "installed" :recentf-ext "removed" :twittering-mode "installed" :gist "installed" :fold-dwim "installed" :anything "installed" :quickrun "installed" :emacs-w3m "removed" :httpcode "removed" :csharp-mode "removed" :auto-complete "installed" :auto-complete-plus "installed")
