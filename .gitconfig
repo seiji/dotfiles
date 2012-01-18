@@ -1,9 +1,0 @@
-[user]
-	name = Seiji Toyama
-	email = seijit@me.com
-[color]
-	ui = auto
-[mergetool]
-	keepBackup = true
-[core]
-	editor = vi

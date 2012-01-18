@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <11/12/26 18:52:55 /Users/seiji/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <12/01/13 11:37:02 /Users/seiji/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -24,4 +24,6 @@
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
   ("inline-compress" "gzip")
-  ("inline-decompress" "gzip -d")))
+  ("inline-decompress" "gzip -d")
+  ("uid-integer" 500)
+  ("trash" nil)))

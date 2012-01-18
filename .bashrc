@@ -14,6 +14,7 @@ export TERM=xterm-color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
 #export PATH=/opt/local/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
 export MANPATH=/opt/local/man:$MANPATH
@@ -94,4 +95,4 @@ eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 source $HOME/perl5/perlbrew/etc/bashrc
 
 # tmux
-test -f ~/.tmuxrc && . ~/.tmuxrc
+#test -f ~/.tmuxrc && . ~/.tmuxrc

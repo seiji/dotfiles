@@ -35,6 +35,10 @@
               :features "recentf-ext")
        (:name gist :type elpa)
        (:name twittering-mode :type elpa)
+	   (:name google
+			  :type http
+			  :url "http://www.bookshelf.jp/elc/google.el"
+			  :load "google.el")
        (:name fold-dwim
               :type git
               :url "https://github.com/emacsmirror/fold-dwim.git"
@@ -48,12 +52,6 @@
               :type git
               :url "https://github.com/rspivak/httpcode.el.git"
               :load "httpcode.el")
-       (:name ruby-mode
-              :type elpa
-              :load "ruby-mode.el")
-       (:name inf-ruby  :type elpa)
-       (:name ruby-compilation :type elpa)
-       (:name css-mode :type elpa)
        (:name textmate
               :type git
               :url "git://github.com/defunkt/textmate.el"
@@ -68,12 +66,22 @@
               :type git
               :url "https://github.com/eschulte/rhtml.git"
               :features rhtml-mode)
+	   ;; lang-mode
+       (:name ruby-mode
+              :type elpa
+              :load "ruby-mode.el")
+       (:name inf-ruby  :type elpa)
+       (:name ruby-compilation :type elpa)
+       (:name css-mode :type elpa)
        (:name yaml-mode
               :type git
               :url "http://github.com/yoshiki/yaml-mode.git"
               :features yaml-mode)
-       )
-)
+	   (:name markdown-mode
+			  :type git
+			  :url "git://jblevins.org/git/markdown-mode.git"
+			  :features markdown-mode)
+))
 (el-get 'sync)
 
 (require 'init-loader)

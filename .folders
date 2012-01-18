@@ -14,17 +14,17 @@ seijit@me.com{
 }
 
 feed@seiji.me {
-       %inbox:feed/clear@seiji.me:143                 "- Inbox"
-       %inbox.Arduino:feed/clear@seiji.me:143         "-  Arduino"
-       %inbox.Blog:feed/clear@seiji.me:143            "-  Blog"
-       %inbox.Bookmark:feed/clear@seiji.me:143        "-  Bookmark"
-       %inbox.Event:feed/clear@seiji.me:143           "-  Event"
-       %inbox.iPhone:feed/clear@seiji.me:143          "-  iPhone"
-       %inbox.Mac:feed/clear@seiji.me:143             "-  Mac"
-       %inbox.MySQL:feed/clear@seiji.me:143           "-  MySQL"
-       %inbox.News:feed/clear@seiji.me:143            "-  News"
-       %inbox.Perl:feed/clear@seiji.me:143            "-  Perl"
-       %inbox.System:feed/clear@seiji.me:143          "-  System"
-       %Sent Messages:feed/clear@seiji.me:143         "- Sent"
+       %inbox:feed/clear@mail.seiji.me:143                 "- Inbox"
+       %inbox.Arduino:feed/clear@mail.seiji.me:143         "-  Arduino"
+       %inbox.Blog:feed/clear@mail.seiji.me:143            "-  Blog"
+       %inbox.Bookmark:feed/clear@mail.seiji.me:143        "-  Bookmark"
+       %inbox.Event:feed/clear@mail.seiji.me:143           "-  Event"
+       %inbox.iPhone:feed/clear@mail.seiji.me:143          "-  iPhone"
+       %inbox.Mac:feed/clear@mail.seiji.me:143             "-  Mac"
+       %inbox.MySQL:feed/clear@mail.seiji.me:143           "-  MySQL"
+       %inbox.News:feed/clear@mail.seiji.me:143            "-  News"
+       %inbox.Perl:feed/clear@mail.seiji.me:143            "-  Perl"
+       %inbox.System:feed/clear@mail.seiji.me:143          "-  System"
+       %Sent Messages:feed/clear@mail.seiji.me:143         "- Sent"
 }
 

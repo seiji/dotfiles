@@ -2,4 +2,4 @@
 .emacs.d/history
 .emacs.d/tramp
 .emacs.d/ac-comphist.dat
-
+.gitconfig

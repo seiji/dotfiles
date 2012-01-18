@@ -42,6 +42,23 @@
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
 
+(add-hook 'markdown-mode-hook
+          '(lambda ()
+             (define-key markdown-mode-map "\C-c\C-h1" 'markdown-insert-header-1)
+             (define-key markdown-mode-map "\C-c\C-h2" 'markdown-insert-header-2)
+             (define-key markdown-mode-map "\C-c\C-h3" 'markdown-insert-header-3)
+             (define-key markdown-mode-map "\C-c\C-h4" 'markdown-insert-header-4)
+             (define-key markdown-mode-map "\C-c\C-h5" 'markdown-insert-header-5)
+             (define-key markdown-mode-map "\C-c\C-h6" 'markdown-insert-header-6)
+             (define-key markdown-mode-map "\C-c\C-hs" 'markdown-insert-section)
+             (define-key markdown-mode-map "\C-c\C-ht" 'markdown-insert-title)
+			 ))
+
+(setq auto-mode-alist (cons '("\\.txt" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.md"  . gfm-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.markdown"  . gfm-mode)      auto-mode-alist))
+
+
 ;auto-complete.el --- settings for auto-complete
 ;Code:
 (eval-when-compile
