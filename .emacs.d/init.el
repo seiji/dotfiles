@@ -9,6 +9,7 @@
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(add-to-list 'load-path "~/.emacs.d/riece/share/emacs/site-lisp/riece")
 
 (require 'el-get)
 
@@ -43,7 +44,18 @@
               :type git
               :url "https://github.com/emacsmirror/fold-dwim.git"
               :load "fold-dwim.el")
-       (:name anything :type elpa)
+       (:name anything
+              :type git
+              :url "https://github.com/emacsmirror/anything.git"
+              :load "anything.el")
+       (:name anything-exuberant-ctags
+              :type git
+              :url "https://github.com/k1LoW/anything-exuberant-ctags.git"
+              :load "anything-exuberant-ctags.el")
+       (:name anything-rdefs
+              :type git
+              :url "https://github.com/wakaran/anything-rdefs.git"
+              :load "anything-rdefs.el")
        (:name quickrun
               :type git
               :url "https://github.com/syohex/emacs-quickrun.git"
@@ -52,10 +64,10 @@
               :type git
               :url "https://github.com/rspivak/httpcode.el.git"
               :load "httpcode.el")
-       (:name textmate
-              :type git
-              :url "git://github.com/defunkt/textmate.el"
-              :load "textmate.el")
+       (:name coffee-mode
+             :type git
+              :url "https://github.com/defunkt/coffee-mode.git"
+              :load "coffee-mode.el")
        (:name rvm
              :type git
               :url "http://github.com/djwhitt/rvm.el.git"

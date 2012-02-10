@@ -1,15 +1,17 @@
 ;; twittering-mode
 ;(setq twittering-status-format "%C{%Y/%m/%d %H:%M:%S} %s > %t // from %f%L")
-(setq twittering-status-format "%s %FILL{  %T  } %R \n ---------- ")
+(setq twittering-status-format "%s %R %FILL{  %T  } \n ---------- ")
 (setq twittering-timer-interval 36000000)
 (setq twittering-use-master-password t)
 
 (setq twittering-initial-timeline-spec-string
 	  '(":home"
-;		":mentions"
+		":mentions"
+		":replies"
+        "seijit/reading"
 		))
 (setq twittering-toggle-activate-buffer nil)
-(setq twittering-scroll-mode nil)
+(setq twittering-scroll-mode t)
 (defun twittering-mode-hook-func ()
   (set-face-bold-p 'twittering-username-face t)
   (set-face-foreground 'twittering-username-face "DeepSkyBlue3")

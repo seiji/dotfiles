@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <12/01/13 11:37:02 /Users/seiji/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <12/02/09 12:02:08 /Users/seiji/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -26,4 +26,6 @@
   ("inline-compress" "gzip")
   ("inline-decompress" "gzip -d")
   ("uid-integer" 500)
-  ("trash" nil)))
+  ("trash" nil))
+ (["ssh" nil "qr_9489SJC.rb" nil]
+  nil))

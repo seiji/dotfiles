@@ -54,8 +54,13 @@ export PATH=$PATH:$MYSQL_HOME/bin
 alias ls="ls -1G"
 alias ll="ls -la"
 alias vi="/usr/bin/vim"
-alias grep="grep -in --color"
+alias grep="grep -i --color"
 alias screen='screen -U -D -RR'
+
+alias ql='qlmanage -p "$@" >& /dev/null'
+alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
+alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
+alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 
 #
 #alias emacs="open -a Emacs"
