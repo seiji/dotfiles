@@ -2,6 +2,7 @@
 (setq auto-insert-directory "~/.emacs.d/template/")
 (define-auto-insert "\\.c$" "skel.c")
 (define-auto-insert "\\.rb$" "skel.rb")
+(define-auto-insert "\\.ru$" "skel.ru")
 (define-auto-insert "\\.thor$" "skel.thor")
 
 (which-func-mode 1)
@@ -15,8 +16,10 @@
 
 (setq auto-mode-alist (cons '("\\.mm"  . c++-mode)      auto-mode-alist))
 
-(setq auto-mode-alist (cons '("\\.thor"  . ruby-mode)      auto-mode-alist))
-(setq auto-mode-alist (cons '("Capfile"  . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.thor"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("config\\.ru" . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Gemfile"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Capfile"     . ruby-mode)      auto-mode-alist))
 
 ;======================================================================
 ;; Auto Complete
@@ -61,6 +64,7 @@
 			   ac-source-filename))
 
 ;auto-complete.el ends here
+
 
 ;======================================================================
 ;; C Lang
@@ -154,14 +158,15 @@
                                (require 'ruby-compilation))))
 (add-hook 'ruby-mode-hook
           '(lambda ()
+             (define-key ruby-mode-map "\C-m" 'newline-and-indent)
              (define-key ruby-mode-map "\C-c\C-c" 'quickrun)
 ;;             (define-key ruby-mode-map (kbd "C-@") 'anything-rdef)
              ))
 
-
 ;======================================================================
 ;; Other
 ;======================================================================
+
 (defun coffee-mode-hook ()
   (autoload 'coffee-mode "coffee-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))

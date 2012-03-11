@@ -71,8 +71,10 @@ alias qlook="qlmanage -p"
 
 alias fcd='source ~/bin/fcd.sh'
 alias sc='screen -U -D -RR'
-alias em='emacs'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
+
+alias E='emacsclient -t'
+alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 
 #if [ -z "$STY" ]; then
@@ -101,3 +103,5 @@ source $HOME/perl5/perlbrew/etc/bashrc
 
 # tmux
 #test -f ~/.tmuxrc && . ~/.tmuxrc
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

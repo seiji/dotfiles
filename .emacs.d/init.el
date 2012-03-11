@@ -2,17 +2,35 @@
 (push "/usr/local/bin" exec-path)
 
 ;===================================
-;; el-o 24>
+;; elpa 24>
 ;===================================
-(require 'package)
-(setq package-archives (cons '("tromey" . "http://tromey.com/elpa/") package-archives))
-(package-initialize)
+(when  (require 'package nil t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  (package-initialize))
+ 
+;; (require 'package)
+;; (setq package-archives (cons '("tromey" . "http://tromey.com/elpa/") package-archives))
+;; (package-initialize)
 
+;;; load-path
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(defun add-to-load-path (&rest paths)
+  (let (path)
+    (dolist (path paths paths)
+      (let ((default-directory
+              (expand-file-name (concat user-emacs-directory path))))
+        (add-to-list 'load-path default-directory)
+        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path))))))
+(add-to-load-path "elisp")
+;;
+
 (add-to-list 'load-path "~/.emacs.d/riece/share/emacs/site-lisp/riece")
 
 (require 'el-get)
 
+;; recipes
 (setq el-get-sources
      '(
 	   (:name auto-complete
@@ -44,10 +62,21 @@
               :type git
               :url "https://github.com/emacsmirror/fold-dwim.git"
               :load "fold-dwim.el")
-       (:name anything
+       (:name anything-config
               :type git
-              :url "https://github.com/emacsmirror/anything.git"
-              :load "anything.el")
+              :url "git://repo.or.cz/anything-config.git"
+              :load "anything-config.el")
+       (:name descbinds-anything
+              :type git
+              :url "https://github.com/emacsmirror/descbinds-anything.git"
+              :load "descbinds-anything.el")
+       (:name color-moccur
+              :type emacswiki)
+       (:name moccur-edit
+              :type emacswiki)
+       (:name anything-c-moccur
+              :type svn
+              :url "http://svn.coderepos.org/share/lang/elisp/anything-c-moccur/trunk")
        (:name anything-exuberant-ctags
               :type git
               :url "https://github.com/k1LoW/anything-exuberant-ctags.git"
@@ -56,6 +85,8 @@
               :type git
               :url "https://github.com/wakaran/anything-rdefs.git"
               :load "anything-rdefs.el")
+       (:name wdired
+              :type emacswiki)
        (:name quickrun
               :type git
               :url "https://github.com/syohex/emacs-quickrun.git"
@@ -79,6 +110,10 @@
               :url "https://github.com/eschulte/rhtml.git"
               :features rhtml-mode)
 	   ;; lang-mode
+       (:name csv-mode
+              :type git
+              :url "https://github.com/emacsmirror/csv-mode.git"
+              :features csv-mode)  
        (:name ruby-mode
               :type elpa
               :load "ruby-mode.el")
@@ -98,5 +133,3 @@
 
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/init")
-
-

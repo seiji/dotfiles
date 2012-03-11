@@ -1,8 +1,9 @@
+# ~/.gitignore
 .emacs.d/ac-comphist.dat
+.emacs.d/eshell
 .emacs.d/el-get
 .emacs.d/history
 .emacs.d/init/15-riece.el
 .emacs.d/riece
 .emacs.d/tramp
 .gitconfig
-
