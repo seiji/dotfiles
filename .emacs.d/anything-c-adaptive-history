@@ -1,3 +1,0 @@
-;; -*- mode: emacs-lisp -*-
-;; History entries used for anything adaptive display.
-(setq anything-c-adaptive-history (quote (("Manual Pages" ("Net::DNS::Header5.10" ("DN" . 1)) ("Net::DNS::RR::AAAA" ("aaaa" . 1))) (buffer (".emacs" ("" . 3)) ("WallTest.cs" ("" . 4)) ("Wall.cs" ("" . 3)) ("*Messages*" ("" . 1))) ("Minibuffer History" ("~/workspace/Perl/LWP/" ("" . 1)) ("/ssh:glgl.in:/home/glgl/apps/glgl/lib/Glgl/" ("" . 1))))))
