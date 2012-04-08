@@ -14,10 +14,10 @@
 ;; (setq wl-smtp-connection-type 'starttls)
 ;; (setq wl-smtp-posting-port 587)
 ;; (setq wl-smtp-authenticate-type "plain")
-;; (setq wl-smtp-posting-user "sebraincom")
+;; (setq wl-smtp-posting-user "toyama.seiji")
 ;; (setq wl-smtp-posting-server "smtp.gmail.com")
 ;; (setq wl-local-domain "gmail.com")
-;; (setq wl-from "Seiji Toyama <sebraincom@gmail.com>")
+;; (setq wl-from "Seiji Toyama <toyama.seiji@gmail.com>")
 
 ;; mime decode
 ;(mime-set-field-decoder
@@ -69,14 +69,14 @@
          (wl-fcc . "%Sent Messages")
          (wl-fcc-force-as-read . t)
 	  )
-	  ("^From: .*sebraincom@gmail.com"
+	  ("^From: .*toyama.seiji@gmail.com"
 		 (wl-smtp-connection-type . 'starttls)
 		 (wl-smtp-posting-port . 587)
 		 (wl-smtp-authenticate-type . "plain")
-		 (wl-smtp-posting-user . "sebraincom@gmail.com")
+		 (wl-smtp-posting-user . "toyama.seiji@gmail.com")
 	     (wl-smtp-posting-server . "smtp.gmail.com")
 		 (wl-local-domain . "gmail.com")
-		 (wl-envelope-from . "sebraincom@gmail.com")
+		 (wl-envelope-from . "toyama.seiji@gmail.com")
 	  )		 
 	  ("^From: .*seijit@me.com"
 		 (wl-smtp-connection-type . 'starttls)

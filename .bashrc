@@ -7,6 +7,7 @@ export EDITOR=emacs
 
 #env
 #export LANG="ja_JP.UTF-8"
+export HISTTIMEFORMAT="%d/%m/%y %T "
 
 #color
 export CLICOLOR=1
@@ -74,6 +75,7 @@ alias sc='screen -U -D -RR'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
 alias E='emacsclient -t'
+alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 
@@ -104,4 +106,12 @@ source $HOME/perl5/perlbrew/etc/bashrc
 # tmux
 #test -f ~/.tmuxrc && . ~/.tmuxrc
 
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+
+# Android
+PATH=$PATH:/Applications/android-sdk-macosx/tools
+PATH=$PATH:/Applications/android-sdk-macosx/platform-tools
