@@ -19,6 +19,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(put 'set-goal-column 'disabled nil)
+
 ;; Filename Japanese
 (when (eq system-type 'darwin)
   (require  'ucs-normalize)
@@ -63,6 +65,8 @@
 (setq gc-cons-threshold (* 10 gc-cons-threshold)) 
 
 (ffap-bindings)
+;;Remove Buffer $buffer still has clients; kill it?
+(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
 ;; clipboard
 (defun copy-from-osx ()
@@ -80,8 +84,6 @@
 (defun insert-datetime ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M:%SZ" nil "Z")))
-
-
 
 
 

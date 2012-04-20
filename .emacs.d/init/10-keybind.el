@@ -60,3 +60,17 @@
 ;(global-set-key (kbd "C-V") 'chrome-scroll-next)
 ;(global-set-key (kbd "M-V") 'chrome-scroll-previous)
 
+(defun my-open-at-point ()
+  "Ask /usr/bin/open to open the thing at or before point."
+  (interactive)
+  (require 'ffap)
+  (let ((file (or (ffap-url-at-point)
+                  (ffap-file-at-point))))
+    (unless (stringp file)
+      (error "No file or URL found"))
+    (when (file-exists-p (expand-file-name file))
+      (setq file (expand-file-name file)))
+    (message "Open: %s" file)
+    (start-process "open_ps" nil "open" file)))
+
+(global-set-key "\C-co" 'my-open-at-point)

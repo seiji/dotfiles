@@ -91,14 +91,14 @@ dumb | emacs)
 esac
 
 export PS1="$ "
-function pgrep() {
-    if [ $# != 0 ]; then
-        ps auxw | head -n 1
-        ps auxw | grep $* | grep -v grep | grep -v "ps auxw"
-    else
-        echo "Usage: psgrep PATTERN"
-    fi
-}
+# function pgrep() {
+#     if [ $# != 0 ]; then
+#         ps auxw | head -n 1
+#         ps auxw | grep $* | grep -v grep | grep -v "ps auxw"
+#     else
+#         echo "Usage: psgrep PATTERN"
+#     fi
+# }
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 source $HOME/perl5/perlbrew/etc/bashrc
@@ -109,9 +109,11 @@ source $HOME/perl5/perlbrew/etc/bashrc
 if [ -f /usr/local/etc/bash_completion ]; then
   . /usr/local/etc/bash_completion
 fi
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+ENV=$HOME/.bashenv
 
 # Android
 PATH=$PATH:/Applications/android-sdk-macosx/tools
 PATH=$PATH:/Applications/android-sdk-macosx/platform-tools
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

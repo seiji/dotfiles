@@ -33,14 +33,14 @@
 ;; recipes
 (setq el-get-sources
      '(
-	   (:name auto-complete
-			  :type git
-			  :url "https://github.com/m2ym/auto-complete.git"
-			  :load "auto-complete.el")
-	   (:name auto-complete-plus
-			  :type http
-			  :url "https://raw.github.com/serenade/Serenade_System_Config/2bbb0cab7a9f2a392c1381abc9408dbb8482477a/emacs/home/Plugin/auto-complete+.el"
-			  :load "auto-complete+.el")
+       (:name auto-complete
+	      :type git
+	      :url "https://github.com/m2ym/auto-complete.git"
+	      :load "auto-complete.el")
+       (:name auto-complete-plus
+	      :type http
+	      :url "https://raw.github.com/serenade/Serenade_System_Config/2bbb0cab7a9f2a392c1381abc9408dbb8482477a/emacs/home/Plugin/auto-complete+.el"
+	      :load "auto-complete+.el")
        (:name init-loader
               :type http
               :url "http://coderepos.org/share/export/39089/lang/elisp/init-loader/init-loader.el"
@@ -54,14 +54,16 @@
               :features "recentf-ext")
        (:name gist :type elpa)
        (:name twittering-mode :type elpa)
-	   (:name google
-			  :type http
-			  :url "http://www.bookshelf.jp/elc/google.el"
-			  :load "google.el")
+       (:name google
+	      :type http
+	      :url "http://www.bookshelf.jp/elc/google.el"
+	      :load "google.el")
        (:name fold-dwim
               :type git
               :url "https://github.com/emacsmirror/fold-dwim.git"
               :load "fold-dwim.el")
+       (:name anything
+              :type emacswiki)
        (:name anything-config
               :type git
               :url "git://repo.or.cz/anything-config.git"
@@ -81,6 +83,8 @@
               :type git
               :url "https://github.com/k1LoW/anything-exuberant-ctags.git"
               :load "anything-exuberant-ctags.el")
+       (:name anything-gtags
+              :type emacswiki)
        (:name anything-rdefs
               :type git
               :url "https://github.com/wakaran/anything-rdefs.git"

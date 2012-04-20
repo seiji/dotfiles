@@ -4,6 +4,8 @@
 (define-auto-insert "\\.rb$" "skel.rb")
 (define-auto-insert "\\.ru$" "skel.ru")
 (define-auto-insert "\\.thor$" "skel.thor")
+(define-auto-insert "\\.md$" "skel.md")
+(define-auto-insert "\\.markdown$" "skel.md")
 
 (which-func-mode 1)
 (setq which-func-modes t)
@@ -113,6 +115,14 @@
 		hs-c-like-adjust-block-beginning)
 	  hs-special-modes-alist)
 ;======================================================================
+;; Python
+;======================================================================
+(add-hook 'python-mode-hook
+          (function (lambda ()
+                      (define-key python-mode-map "\C-c\C-c" 'quickrun)
+                      (setq indent-tabs-mode nil))))
+
+;======================================================================
 ;; Perl
 ;======================================================================
 (defalias 'perl-mode 'cperl-mode)
@@ -141,6 +151,13 @@
 ;======================================================================
 ;; Ruby
 ;======================================================================
+(defun search-gem-path (name)
+    (shell-command-to-string
+         (format "gem which %s | ruby -n -e 'if /lib/; print $_[0, $_.rindex(%%[lib])]; end'" name)))
+(defun find-ruby-gem (name)
+    (interactive "sRuby gem libraray name: ")
+      (find-file (search-gem-path name)))
+
 (defun ruby-mode-hook ()
   (autoload 'ruby-mode "ruby-mode" nil t)
   (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))

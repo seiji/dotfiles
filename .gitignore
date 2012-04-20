@@ -1,10 +1,16 @@
 # ~/.gitignore
-.*
+*.elc
+.gitconfig
+
 .emacs.d/ac-comphist.dat
+.emacs.d/bin
+.emacs.d/elisp
 .emacs.d/eshell
 .emacs.d/el-get
 .emacs.d/history
 .emacs.d/init/15-riece.el
 .emacs.d/riece
+.emacs.d/share
 .emacs.d/tramp
-.gitconfig
+.emacs.d/url/cookies
+.emacs.d/anything-c-adaptive-history
