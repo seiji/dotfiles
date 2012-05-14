@@ -1,10 +1,10 @@
-Gmail {
-      %inbox:sebraincom/clear@imap.gmail.com:993! "- Inbox"
-      %[Gmail]/All Mail:sebraincom/clear@imap.gmail.com:993! "- All"
-      %[Gmail]/Sent Mail:sebraincom/clear@imap.gmail.com:993! "- Sent"
-      %[Gmail]/Trash:sebraincom/clear@imap.gmail.com:993! "- Trash"
-      %[Gmail]/Starred:sebraincom/clear@imap.gmail.com:993! "- Starred☆"
-      %[Gmail]/Spam:sebraincom/clear@imap.gmail.com:993! "- Spam"
+toyama.seiji@gmail.com {
+      %inbox:toyama.seiji/clear@imap.gmail.com:993! "- Inbox"
+      %[Gmail]/All Mail:toyama.seiji/clear@imap.gmail.com:993! "- All"
+      %[Gmail]/Sent Mail:toyama.seiji/clear@imap.gmail.com:993! "- Sent"
+      %[Gmail]/Trash:toyama.seiji/clear@imap.gmail.com:993! "- Trash"
+      %[Gmail]/Starred:toyama.seiji/clear@imap.gmail.com:993! "- Starred☆"
+      %[Gmail]/Spam:toyama.seiji/clear@imap.gmail.com:993! "- Spam"
 }
 
 seijit@me.com{

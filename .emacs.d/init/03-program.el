@@ -20,8 +20,13 @@
 
 (setq auto-mode-alist (cons '("\\.thor"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("config\\.ru" . ruby-mode)      auto-mode-alist))
-(setq auto-mode-alist (cons '("Gemfile"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Capfile"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Gemfile"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Guardfile"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Rakefile"    . ruby-mode)      auto-mode-alist))
+
+(require 'sws-mode)
+(setq auto-mode-alist (cons '("\\.jade"     . jade-mode)      auto-mode-alist))
 
 ;======================================================================
 ;; Auto Complete
@@ -181,20 +186,30 @@
              ))
 
 ;======================================================================
-;; Other
+;; CoffeeScript
 ;======================================================================
-
 (defun coffee-mode-hook ()
   (autoload 'coffee-mode "coffee-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
   (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
-)
+  )
+(add-hook 'coffee-mode-hook '(lambda ()
+                               (set (make-local-variable 'tab-width) 2))
+                               (define-key coffee-mode-map "\C-c\C-c" 'quickrun)
 
+                               ;; (setq compile-command
+                               ;;       (concat "coffee " (buffer-file-name)))
+                               ;; (define-key coffee-mode-map "\C-c\C-c" 'compile)))
+                               ))
+
+;======================================================================
+;; Other
+;======================================================================
 (defun rhtml-mode-hook ()
   (autoload 'rhtml-mode "rhtml-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
   (add-to-list 'auto-mode-alist '("\\.rjs\\'" . rhtml-mode))
-  (add-hook 'rhtml-mode '(lambda ()
+  (add-hook 'rhtml-mode-hook '(lambda ()
                            (define-key rhtml-mode-map (kbd "M-s") 'save-buffer))))
 
 (defun yaml-mode-hook ()

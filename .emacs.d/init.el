@@ -123,6 +123,10 @@
               :load "ruby-mode.el")
        (:name inf-ruby  :type elpa)
        (:name ruby-compilation :type elpa)
+	   (:name jade-mode
+			  :type git
+			  :url "https://github.com/brianc/jade-mode.git"
+			  :features jade-mode)
        (:name css-mode :type elpa)
        (:name yaml-mode
               :type git
