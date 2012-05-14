@@ -1,6 +1,7 @@
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/template/")
 (define-auto-insert "\\.c$" "skel.c")
+(define-auto-insert "\\.coffee$" "skel.coffee")
 (define-auto-insert "\\.rb$" "skel.rb")
 (define-auto-insert "\\.ru$" "skel.ru")
 (define-auto-insert "\\.thor$" "skel.thor")
@@ -20,9 +21,10 @@
 
 (setq auto-mode-alist (cons '("\\.thor"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("config\\.ru" . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
 (setq auto-mode-alist (cons '("Capfile"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Gemfile"     . ruby-mode)      auto-mode-alist))
-(setq auto-mode-alist (cons '("Guardfile"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("Guardfile"   . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Rakefile"    . ruby-mode)      auto-mode-alist))
 
 (require 'sws-mode)
