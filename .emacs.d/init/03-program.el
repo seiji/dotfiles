@@ -16,6 +16,7 @@
 (setq auto-mode-alist (cons '("\\.txt" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.md"  . gfm-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.markdown"  . gfm-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.haml"  . haml-mode)      auto-mode-alist))
 
 (setq auto-mode-alist (cons '("\\.mm"  . c++-mode)      auto-mode-alist))
 
@@ -235,7 +236,6 @@
              (define-key markdown-mode-map "\C-c\C-hs" 'markdown-insert-section)
              (define-key markdown-mode-map "\C-c\C-ht" 'markdown-insert-title)
 			 ))
-
 
 
 

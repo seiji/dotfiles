@@ -27,7 +27,9 @@
 ;;
 
 (add-to-list 'load-path "~/.emacs.d/riece/share/emacs/site-lisp/riece")
+(add-to-list 'load-path "~/.emacs.d/json/json-pretty-print.el")
 
+(require 'json-pretty-print)
 (require 'el-get)
 
 ;; recipes
@@ -136,6 +138,15 @@
 			  :type git
 			  :url "git://jblevins.org/git/markdown-mode.git"
 			  :features markdown-mode)
+       (:name haml-mode
+			  :type git
+			  :url "https://github.com/nex3/haml-mode.git"
+			  :features nginx-mode)
+       (:name nginx-mode
+			  :type git
+			  :url "https://github.com/ajc/nginx-mode.git"
+			  :features nginx-mode)
+       
 ))
 (el-get 'sync)
 

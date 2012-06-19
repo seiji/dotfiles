@@ -126,3 +126,5 @@ function gem() {
         rbenv rehash
     fi
 }
+#nvm
+. ~/.node/nvm.sh

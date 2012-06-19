@@ -85,5 +85,32 @@
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M:%SZ" nil "Z")))
 
+;; Dired
+;; Reveal in Finder
+(defun my-dired-do-reveal (&optional arg)
+  "Reveal the marked files in Finder.
+If no files are marked or a specific numeric prefix arg is given,
+the next ARG files are used.  Just \\[universal-argument] means the current file."
+  (interactive "P")
+  (let ((files (dired-get-marked-files nil arg))
+        (script
+         (concat
+          "on run argv\n"
+          "    set itemArray to {}\n"
+          "    repeat with i in argv\n"
+          "        set itemArray to itemArray & (i as POSIX file as Unicode text)\n"
+          "    end repeat\n"
+          "    tell application \"Path Finder\"\n"
+                                        ;"    tell application \"Finder\"\n"
+          "        activate\n"
+          "        reveal itemArray\n"
+          "    end tell\n"
+          "end run\n")))
+    (apply 'start-process "osascript-reveal" nil "osascript" "-e" script files)))
 
+(eval-after-load "dired"
+    '(define-key dired-mode-map "\M-r" 'my-dired-do-reveal)) ; move-to-window-line
 
+(defun js-json-reformat (beg end)
+    (interactive "r")
+      (shell-command-on-region beg end "python -m json.tool" nil t))
