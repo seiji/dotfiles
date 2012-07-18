@@ -1,0 +1,35 @@
+alias browse="hub browse"
+
+alias ls="ls -1G"
+alias ll="ls -la"
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias vi="/usr/bin/vim"
+alias grep='grep -i --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias screen='screen -U -D -RR'
+alias ql='qlmanage -p "$@" >& /dev/null'
+alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
+alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
+alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
+
+alias firefox="open -a Firefox"
+alias safari="open -a Safari"
+alias prev="open -a Preview"
+alias qlook="qlmanage -p"
+
+alias fcd='source ~/bin/fcd.sh'
+alias sc='screen -U -D -RR'
+alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
+
+alias E='emacsclient -t'
+alias start-emacs="emacs --daemon"
+alias kill-emacs="emacsclient -e '(kill-emacs)'"
+
+# git
+alias gst='git status -s -b && git stash list' 
+alias gush='git push origin $1'
+alias gull='git pull origin $1'
+alias gfix='git commit --amend'

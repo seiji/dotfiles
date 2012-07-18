@@ -2,6 +2,9 @@
 # View .inputrc .bashrc
 TERM=linux
 
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+export PATH
+
 #editor
 export EDITOR=emacs
 
@@ -25,25 +28,16 @@ export PATH=/opt/subversion/bin:$PATH
 # HomeBrew
 export NODE_PATH=/usr/local/lib/node
 
-# JAVA
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
-export PATH=$JAVA_HOME/bin:$PATH
-export MAVEN_HOME=/usr/local/maven
-export PATH=$MAVEN_HOME/bin:$PATH
-export ANT_OPTS=-Dfile.encoding=UTF8
-
-export HADOOP_HOME=/usr/local/hadoop
-export PATH=$HADOOP_HOME/bin:$PATH
-export MAHOUT_HOME=/usr/local/mahout
-export PATH=$MAHOUT_HOME/bin:$PATH
 
 # Android
 export PATH=$PATH:/Applications/android-sdk-mac_x86/tools
 export PATH=$PATH:/Applications/android-sdk-mac_x86/platform-tools
 
 # MySQL
-export MYSQL_HOME=/opt/local/lib/mysql5
+export MYSQL_HOME=/usr/local/mysql
 export PATH=$PATH:$MYSQL_HOME/bin
+# hadoop
+export PATH=/usr/local/hadoop/bin:$PATH
 
 #grep $today /usr/share/calendar/calendar.music
 #grep $today /usr/share/calendar/calendar.history
@@ -100,7 +94,7 @@ export PS1="$ "
 #     fi
 # }
 
-eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+#eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 source $HOME/perl5/perlbrew/etc/bashrc
 
 # tmux
@@ -111,12 +105,22 @@ if [ -f /usr/local/etc/bash_completion ]; then
 fi
 ENV=$HOME/.bashenv
 
+# Hadoop
+export PATH="${PATH}:/usr/local/hadoop/bin"
+
+# EC2
+export EC2_HOME="/Users/seiji/local/ec2-api-tools"
+export EC2_PRIVATE_KEY="/Users/seiji/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export EC2_CERT="/Users/seiji/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export PATH="${PATH}:${EC2_HOME}/bin"
+
 # Android
 PATH=$PATH:/Applications/android-sdk-macosx/tools
 PATH=$PATH:/Applications/android-sdk-macosx/platform-tools
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+source ~/.rbenv/completions/rbenv.bash
 
 #rbenv
 function gem() {
@@ -126,5 +130,25 @@ function gem() {
         rbenv rehash
     fi
 }
+# Bash completion support for Rake, Ruby Make.
+
+export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
+
+_rakecomplete() {
+    if [ -f Rakefile ]; then
+        recent=`ls -t .rake_tasks~ Rakefile **/*.rake 2> /dev/null | head -n 1`
+        if [[ $recent != '.rake_tasks~' ]]; then
+            rake --silent --tasks | cut -d " " -f 2 > .rake_tasks~
+        fi
+        COMPREPLY=($(compgen -W "`cat .rake_tasks~`" -- ${COMP_WORDS[COMP_CWORD]}))
+        return 0
+    fi
+}
+
+complete -o default -o nospace -F _rakecomplete rake
+
+# RubyMotion
+export RUBYLIB="$HOME/Library/Ruby/lib:$RUBYLIB"
+
 #nvm
-. ~/.node/nvm.sh
+. ~/.nvm/nvm.sh

@@ -1,0 +1,29 @@
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export MANPATH="/usr/local/share/man:/usr/X11/man:/usr/share/man"
+
+export EDITOR=emacs
+export CLICOLOR=1
+export TERM=xterm-color
+export LSCOLORS=Gxfxcxdxhxegedahagacgx
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=$HOME/bin:$PATH
+
+export GITHUB_ROOT="/Users/seiji/github/seiji"
+
+source $HOME/perl5/perlbrew/etc/bashrc
+
+# Hadoop
+export PATH="${PATH}:/usr/local/hadoop/bin"
+
+# EC2
+export EC2_HOME="/Users/seiji/local/ec2-api-tools"
+export EC2_PRIVATE_KEY="/Users/seiji/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export EC2_CERT="/Users/seiji/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export PATH="${PATH}:${EC2_HOME}/bin"
+
+# Android
+PATH=$PATH:/Applications/android-sdk-macosx/tools
+PATH=$PATH:/Applications/android-sdk-macosx/platform-tools
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+#export PATH="$HOME/.rbenv/bin:$PATH"
