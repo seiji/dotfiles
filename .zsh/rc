@@ -19,7 +19,8 @@ setopt inc_append_history
 bindkey -e
 
 
-[[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
+#[[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 source ~/.rbenv/completions/rbenv.zsh
 
 #rbenv
@@ -28,7 +29,12 @@ function gem() {
     if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
     then
         rbenv rehash
+        rehash
     fi
 }
 #nvm
 . ~/.nvm/nvm.sh
+
+#tmux
+test -f ~/.tmuxrc && . ~/.tmuxrc
+[[ -s /Users/seiji/.tmuxinator/scripts/tmuxinator ]] && source /Users/seiji/.tmuxinator/scripts/tmuxinator
