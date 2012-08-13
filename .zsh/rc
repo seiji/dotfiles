@@ -36,5 +36,6 @@ function gem() {
 . ~/.nvm/nvm.sh
 
 #tmux
-test -f ~/.tmuxrc && . ~/.tmuxrc
+#test -f ~/.tmuxrc && . ~/.tmuxrc
 [[ -s /Users/seiji/.tmuxinator/scripts/tmuxinator ]] && source /Users/seiji/.tmuxinator/scripts/tmuxinator
+

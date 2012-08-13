@@ -18,7 +18,7 @@
 (setq auto-mode-alist (cons '("\\.markdown"  . gfm-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.haml"  . haml-mode)      auto-mode-alist))
 
-(setq auto-mode-alist (cons '("\\.mm"  . c++-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.mm"       . c++-mode)      auto-mode-alist))
 
 (setq auto-mode-alist (cons '("\\.thor"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("config\\.ru" . ruby-mode)      auto-mode-alist))
@@ -54,6 +54,9 @@
 										;          ) ac-complete-mode-map)
 
 (add-to-list 'ac-dictionary-directories (expand-file-name "ac-dict" "~/.emacs.d/dict"))
+(global-set-key "\M-/" 'ac-start)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 (setq ac-auto-show-menu t
 	  ac-auto-start t
@@ -74,7 +77,16 @@
 			   ac-source-filename))
 
 ;auto-complete.el ends here
-
+;======================================================================
+;; yasnippet
+;======================================================================
+(add-to-list 'load-path
+             "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(setq yas/snippet-dirs '("~/.emacs.d/yasnippets/rspec-snippets"
+                         "~/.emacs.d/yasnippets"
+                         "~/.emacs.d/plugins/yasnippet/snippets"))
+(yas/global-mode 1)
 
 ;======================================================================
 ;; C Lang
@@ -225,20 +237,4 @@
   (add-hook 'css-mode-hook '(lambda ()
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
-(add-hook 'markdown-mode-hook
-          '(lambda ()
-             (define-key markdown-mode-map "\C-c\C-h1" 'markdown-insert-header-1)
-             (define-key markdown-mode-map "\C-c\C-h2" 'markdown-insert-header-2)
-             (define-key markdown-mode-map "\C-c\C-h3" 'markdown-insert-header-3)
-             (define-key markdown-mode-map "\C-c\C-h4" 'markdown-insert-header-4)
-             (define-key markdown-mode-map "\C-c\C-h5" 'markdown-insert-header-5)
-             (define-key markdown-mode-map "\C-c\C-h6" 'markdown-insert-header-6)
-             (define-key markdown-mode-map "\C-c\C-hs" 'markdown-insert-section)
-             (define-key markdown-mode-map "\C-c\C-ht" 'markdown-insert-title)
-			 ))
-
-
-
-
-
 

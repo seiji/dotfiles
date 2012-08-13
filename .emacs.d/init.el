@@ -1,6 +1,12 @@
 ;; emacs configuration
 (push "/usr/local/bin" exec-path)
 
+;; rbenv
+(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:"
+                       (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
+(setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims")
+                      (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
+
 ;===================================
 ;; elpa 24>
 ;===================================
@@ -26,10 +32,11 @@
 (add-to-load-path "elisp")
 ;;
 
-(add-to-list 'load-path "~/.emacs.d/riece/share/emacs/site-lisp/riece")
-(add-to-list 'load-path "~/.emacs.d/json/json-pretty-print.el")
+(add-to-list 'load-path "~/.emacs.d/elisp/navi2ch-1.8.4")
+;(add-to-list 'load-path "~/.emacs.d/riece/share/emacs/site-lisp/riece")
+;;(add-to-list 'load-path "~/.emacs.d/json/json-pretty-print.el")
 
-(require 'json-pretty-print)
+;(require 'json-pretty-print)
 (require 'el-get)
 
 ;; recipes
@@ -39,6 +46,11 @@
 	      :type git
 	      :url "https://github.com/m2ym/auto-complete.git"
 	      :load "auto-complete.el")
+       (:name popup
+              :type git
+              :url "https://github.com/m2ym/popup-el.git"
+              :load "popup.el")
+
        (:name auto-complete-plus
 	      :type http
 	      :url "https://raw.github.com/serenade/Serenade_System_Config/2bbb0cab7a9f2a392c1381abc9408dbb8482477a/emacs/home/Plugin/auto-complete+.el"
@@ -71,9 +83,7 @@
               :url "git://repo.or.cz/anything-config.git"
               :load "anything-config.el")
        (:name descbinds-anything
-              :type git
-              :url "https://github.com/emacsmirror/descbinds-anything.git"
-              :load "descbinds-anything.el")
+                     :type emacswiki)
        (:name color-moccur
               :type emacswiki)
        (:name moccur-edit
@@ -89,7 +99,7 @@
               :type emacswiki)
        (:name anything-rdefs
               :type git
-              :url "https://github.com/wakaran/anything-rdefs.git"
+              :url "https://github.com/tomykaira/anything-rdefs.git"
               :load "anything-rdefs.el")
        (:name wdired
               :type emacswiki)
@@ -121,10 +131,16 @@
               :url "https://github.com/emacsmirror/csv-mode.git"
               :features csv-mode)  
        (:name ruby-mode
-              :type elpa
-              :load "ruby-mode.el")
+              :type git
+              :url "https://github.com/djwhitt/ruby-mode.git"
+              :feature ruby-mode)
        (:name inf-ruby  :type elpa)
        (:name ruby-compilation :type elpa)
+       ;; cucumber
+       (:name feature-mode
+              :type git
+              :url "https://github.com/michaelklishin/cucumber.el.git"
+              :feature feature-mode)
 	   (:name jade-mode
 			  :type git
 			  :url "https://github.com/brianc/jade-mode.git"

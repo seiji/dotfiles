@@ -9,10 +9,24 @@ hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
 defscrollback 1024
 
 screen -t home 0
-chdir "/Users/seiji/workspace"
-screen -t work 1 
 
-screen -t wl  4 /usr/local/bin/emacs -f wl
+screen -t twitter 1  /usr/local/bin/emacs -f twit
+screen -t irc 2  weechat-curses
+screen -t greader 3  peep
+
+chdir "/Users/seiji/blog"
+screen -t blog 4
+
+chdir "/Users/seiji/github"
+screen -t github 5 
+
+chdir "/Users/seiji/github/pankaku/zombie-restaurant"
+screen -t zombie 6 
+
+chdir "/Users/seiji/workspace"
+screen -t work 47
+
+#screen -t wl  4 /usr/local/bin/emacs -f wl
 
 select 1
 

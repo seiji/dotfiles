@@ -5,6 +5,7 @@
 .emacs.d/ac-comphist.dat
 .emacs.d/bin
 .emacs.d/elisp
+.emacs.d/elpa
 .emacs.d/eshell
 .emacs.d/el-get
 .emacs.d/history

@@ -74,3 +74,7 @@
     (start-process "open_ps" nil "open" file)))
 
 (global-set-key "\C-co" 'my-open-at-point)
+
+;; alias
+(global-set-key (kbd "C-c r") 'query-replace)
+(global-set-key (kbd "C-c C-r") 'query-replace-regexp)

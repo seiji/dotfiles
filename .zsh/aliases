@@ -38,3 +38,5 @@ alias gull='git pull origin $1'
 alias gfix='git commit --amend'
 
 alias peep='~/local/peep/peep'
+
+alias rake='noglob rake'

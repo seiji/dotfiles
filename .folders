@@ -1,16 +1,20 @@
+# toyama.seiji@gmail.com {
+#       %inbox:toyama.seiji/clear@imap.gmail.com:993! "- Inbox"
+#       %[Gmail]/All Mail:toyama.seiji/clear@imap.gmail.com:993! "- All"
+#       %[Gmail]/Sent Mail:toyama.seiji/clear@imap.gmail.com:993! "- Sent"
+#       %[Gmail]/Trash:toyama.seiji/clear@imap.gmail.com:993! "- Trash"
+#       %[Gmail]/Starred:toyama.seiji/clear@imap.gmail.com:993! "- Starred☆"
+#       %[Gmail]/Spam:toyama.seiji/clear@imap.gmail.com:993! "- Spam"
+# }
+
 toyama.seiji@gmail.com {
-      %inbox:toyama.seiji/clear@imap.gmail.com:993! "- Inbox"
-      %[Gmail]/All Mail:toyama.seiji/clear@imap.gmail.com:993! "- All"
-      %[Gmail]/Sent Mail:toyama.seiji/clear@imap.gmail.com:993! "- Sent"
-      %[Gmail]/Trash:toyama.seiji/clear@imap.gmail.com:993! "- Trash"
-      %[Gmail]/Starred:toyama.seiji/clear@imap.gmail.com:993! "- Starred☆"
-      %[Gmail]/Spam:toyama.seiji/clear@imap.gmail.com:993! "- Spam"
+      ./Users/seiji/Maildir "- Inbox"
 }
 
 seijit@me.com{
-        %inbox:seijit/clear@mail.me.com:143                   "- Inbox" 
-        %Sent Messages:seijit/clear@mail.me.com:143           "- Sent" 
-        %Marked:seijit/clear@mail.me.com:143                  "- Marked"
+      %inbox:seijit/clear@imap.mail.me.com:993!                   "- Inbox" 
+#      %Sent Messages:seijit@me.com/clear@imap.mail.me.com:993!           "- Sent" 
+#      %Marked:seijit@me.com/clear@imap.mail.me.com:993!                  "- Marked"
 }
 
 feed@seiji.me {
