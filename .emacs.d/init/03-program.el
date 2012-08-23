@@ -32,6 +32,17 @@
 (setq auto-mode-alist (cons '("\\.jade"     . jade-mode)      auto-mode-alist))
 
 ;======================================================================
+;; Colorize Buffer of compilation
+;======================================================================
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-filter-region (point-min) (point-max))
+  ;(ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+;======================================================================
 ;; Auto Complete
 ;======================================================================
 ;auto-complete.el --- settings for auto-complete
@@ -107,6 +118,21 @@
              (define-key c-mode-map "\C-cb" 'c-begin-comment-box)
              (define-key c-mode-map "\C-ce" 'c-end-comment-box)))
 
+;======================================================================
+;; Obj-C
+;======================================================================
+(defun xcode-compile ()
+  (interactive)
+  (if (directory-files "." nil ".*\.xcodeproj$" nil)
+      (compile "rake xcode:build")      ; use xcodebuild-rb with format
+    (progn
+      (cd "../")
+      (xcode-compile))))
+
+(add-hook 'objc-mode-hook
+          '(lambda ()
+             (define-key objc-mode-map "\C-c\C-c" 'xcode-compile)
+             ))
 
 ;======================================================================
 ;; C Sharp
