@@ -1,0 +1,5 @@
+#name : - NSAutoreleasePool new/release
+# --
+id pool = [NSAutoreleasePool new];
+$0
+[pool release];

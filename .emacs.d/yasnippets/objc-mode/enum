@@ -1,0 +1,7 @@
+#name : while (obj = [it nextObject]) { ... }
+# --
+id ${1:val}, ${2:it} = [${3:arr} ${4:object}Enumerator];
+while (($1 = [$2 nextObject]))
+{
+    $0
+}  

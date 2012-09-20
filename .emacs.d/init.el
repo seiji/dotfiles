@@ -162,6 +162,10 @@
 			  :type git
 			  :url "https://github.com/ajc/nginx-mode.git"
 			  :features nginx-mode)
+       (:name rinari
+			  :type git
+			  :url "https://github.com/eschulte/rinari.git"
+			  :features rinari)
        
 ))
 (el-get 'sync)

@@ -1,0 +1,6 @@
+# name: def initialize... end
+# key: ini
+# --
+def initialize
+  $0
+end

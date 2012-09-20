@@ -1,0 +1,6 @@
+#name : - (void) onAction: ...
+# --
+- (void) on${Action}: (id) sender
+{
+    $0        
+}

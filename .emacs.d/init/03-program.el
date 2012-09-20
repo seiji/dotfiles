@@ -7,6 +7,7 @@
 (define-auto-insert "\\.thor$" "skel.thor")
 (define-auto-insert "\\.md$" "skel.md")
 (define-auto-insert "\\.markdown$" "skel.md")
+(define-auto-insert "Rakefile$" "skel.Rakefile")
 
 (which-func-mode 1)
 (setq which-func-modes t)
@@ -21,12 +22,14 @@
 (setq auto-mode-alist (cons '("\\.mm"       . c++-mode)      auto-mode-alist))
 
 (setq auto-mode-alist (cons '("\\.thor"     . ruby-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.gemspec"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("config\\.ru" . ruby-mode)      auto-mode-alist))
-(setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
 (setq auto-mode-alist (cons '("Capfile"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Gemfile"     . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Guardfile"   . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Rakefile"    . ruby-mode)      auto-mode-alist))
+
+(setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
 
 (require 'sws-mode)
 (setq auto-mode-alist (cons '("\\.jade"     . jade-mode)      auto-mode-alist))
@@ -116,7 +119,18 @@
           '(lambda ()
              (define-key c-mode-map "\C-c\C-c" 'quickrun)
              (define-key c-mode-map "\C-cb" 'c-begin-comment-box)
-             (define-key c-mode-map "\C-ce" 'c-end-comment-box)))
+             (define-key c-mode-map "\C-ce" 'c-end-comment-box)
+             (c-set-style "linux")
+             (setq c-auto-newline t)
+             (setq c-hanging-braces-alist '((brace-list-open)
+                                            (brace-entry-open)
+                                            (substatement-open after)
+                                            (block-close . c-snug-do-while)
+                                            (extern-lang-open after)
+                                            (inexpr-class-open after)
+                                            (inexpr-class-close before)))
+             (setq c-basic-offset 2)
+             ))
 
 ;======================================================================
 ;; Obj-C
@@ -124,7 +138,7 @@
 (defun xcode-compile ()
   (interactive)
   (if (directory-files "." nil ".*\.xcodeproj$" nil)
-      (compile "rake xcode:build")      ; use xcodebuild-rb with format
+      (compile "rake xcode:cleanbuild")      ; use xcodebuild-rb with format
     (progn
       (cd "../")
       (xcode-compile))))

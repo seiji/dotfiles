@@ -1,0 +1,4 @@
+#name : @property (...) ...
+# --
+@property (strong, nonatomic) ${1:id} ${2:value};
+

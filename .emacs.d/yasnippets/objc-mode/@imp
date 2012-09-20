@@ -1,0 +1,5 @@
+#name : @implementation
+# --
+@implementation ${Class} ${(Category)}
+$0
+@end

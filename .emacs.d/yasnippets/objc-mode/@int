@@ -1,0 +1,5 @@
+#name : @interface ...
+# --
+@interface ${Class} ${(Category)}
+$0
+@end

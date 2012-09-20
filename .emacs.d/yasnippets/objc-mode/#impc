@@ -1,0 +1,3 @@
+#name : #import <Cocoa/Cocoa.h>
+# --
+$0#import <Cocoa/Cocoa.h>

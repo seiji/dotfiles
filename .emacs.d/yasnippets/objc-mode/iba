@@ -1,0 +1,3 @@
+#name : IBAction { ... }
+# --
+- (IBAction)${Action}:(id)sender;

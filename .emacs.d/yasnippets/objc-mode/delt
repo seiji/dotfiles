@@ -1,0 +1,19 @@
+#pragma mark - UITableViewDataSource Method Implementations
+
+// Number of rows in each section. One section by default.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+// Table view is requesting a cell
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* identifier = @"identifier";
+    
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
+	}   
+    cell.textLabel.text = @"cell"; 
+    return cell;
+}

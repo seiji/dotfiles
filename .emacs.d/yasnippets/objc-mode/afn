@@ -1,0 +1,6 @@
+#name : awakeFromNib { ... }
+# --
+- (void) awakeFromNib
+{
+    $0
+}

@@ -1,0 +1,6 @@
+# name: lambda { |...| ... }
+# key: lam
+# --
+lambda { |${e}|
+  $0
+}

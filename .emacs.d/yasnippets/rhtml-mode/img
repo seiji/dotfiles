@@ -1,0 +1,4 @@
+# name: <%= image_tag ... %>
+# key: img
+# --
+<%= image_tag "$1", :size => "$2", :alt => "$3" %>

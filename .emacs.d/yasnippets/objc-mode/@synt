@@ -1,0 +1,4 @@
+#name : @syntesize foo;
+# --
+@syntesize ${1:foo};$0
+
