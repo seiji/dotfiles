@@ -36,9 +36,6 @@
 
 (setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
 
-(require 'sws-mode)
-(setq auto-mode-alist (cons '("\\.jade"     . jade-mode)      auto-mode-alist))
-
 ;======================================================================
 ;; Colorize Buffer of compilation
 ;======================================================================

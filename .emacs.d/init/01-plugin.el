@@ -20,21 +20,6 @@
    
 (require 'wgrep nil t)
 
-;; howm
-(setq howm-directory "~/Dropbox/Document/howm")
-(setq howm-menu-lang 'ja)
-(when (require 'howm nil t)
-  (define-key global-map (kbd "C-c h") 'howm-create)
-  (define-key global-map (kbd "C-c ,,") 'howm-menu)
-  )
-(defun howm-save-buffer-and-kill ()
-  (interactive)
-  (when (and (buffer-file-name)
-             (string-match "\\.howm" (buffer-file-name)))
-    (save-buffer)
-    (kill-buffer nil)))
-(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
-
 ;; gtags
 ;; (setq gtags-suggested-key-mapping t)
 ;; (require 'gtags nil t)
