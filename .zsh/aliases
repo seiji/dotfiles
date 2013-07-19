@@ -30,13 +30,12 @@ alias E='emacsclient -t'
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
-alias m='mutt'
 # git
 alias gst='git status -s -b && git stash list' 
 alias gush='git push origin $1'
 alias gull='git pull origin $1'
 alias gfix='git commit --amend'
-
-alias peep='~/local/peep/peep'
+alias gra='git reset HEAD $1'
+alias grcs='git reset --soft HEAD^'
 
 alias rake='noglob rake'

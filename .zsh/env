@@ -9,24 +9,30 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
-export GITHUB_ROOT="/Users/seiji/github/seiji"
+# Ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
 
+# perl
 source $HOME/perl5/perlbrew/etc/bashrc
+ARCHNAME=$(perl -MConfig -e 'print $Config{archname}')
+EXTLIB=./extlib/lib/perl5:./extlib/lib/perl5/$ARCHNAME
+PERL5LIB=./lib:$EXTLIB
+export PERL5LIB=$PERL5LIB
 
 # Hadoop
 export PATH="${PATH}:/usr/local/hadoop/bin"
 
 # EC2
-export EC2_HOME="/Users/seiji/local/ec2-api-tools"
-export EC2_PRIVATE_KEY="/Users/seiji/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
-export EC2_CERT="/Users/seiji/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export EC2_HOME="$HOME/local/ec2-api-tools"
+export EC2_PRIVATE_KEY="$HOME/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
+export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
 export PATH="${PATH}:${EC2_HOME}/bin"
 
 # Android
-PATH=$PATH:/Applications/android-sdk-macosx/tools
-PATH=$PATH:/Applications/android-sdk-macosx/platform-tools
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
+export ANDROID_HOME=/Applications/android-sdk-macosx
+PATH=$PATH:$ANDROID_HOME/tools
+PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Node
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 export NODE_PATH=/usr/local/lib/node_modules
