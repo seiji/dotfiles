@@ -1,11 +1,13 @@
-;; emacs configuration
+; emacs configuration
 (push "/usr/local/bin" exec-path)
 
 ;; rbenv
 (setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:"
-                       (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
-(setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims")
-                      (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
+                       (getenv "HOME") "/.rbenv/bin:"
+                       (getenv "PATH")))
+(setq exec-path       (cons (concat (getenv "HOME") "/.rbenv/shims")
+                      (cons (concat (getenv "HOME") "/.rbenv/bin")
+                            exec-path)))
 
 ;===================================
 ;; elpa 24>
@@ -20,7 +22,7 @@
 ;; (package-initialize)
 
 ;;; load-path
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(add-to-list 'load-path "~/.emacs.d/el-get")
 (defun add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths paths)
@@ -42,15 +44,14 @@
 ;; recipes
 (setq el-get-sources
      '(
+       (:name popup
+	      :type git
+	      :url "https://github.com/auto-complete/popup-el.git"
+	      :load "popup.el")
        (:name auto-complete
 	      :type git
-	      :url "https://github.com/m2ym/auto-complete.git"
+	      :url "https://github.com/auto-complete/auto-complete.git"
 	      :load "auto-complete.el")
-       (:name popup
-              :type git
-              :url "https://github.com/m2ym/popup-el.git"
-              :load "popup.el")
-
        (:name auto-complete-plus
 	      :type http
 	      :url "https://raw.github.com/serenade/Serenade_System_Config/2bbb0cab7a9f2a392c1381abc9408dbb8482477a/emacs/home/Plugin/auto-complete+.el"
@@ -83,7 +84,7 @@
               :url "git://repo.or.cz/anything-config.git"
               :load "anything-config.el")
        (:name descbinds-anything
-                     :type emacswiki)
+              :type emacswiki)
        (:name color-moccur
               :type emacswiki)
        (:name moccur-edit
@@ -136,6 +137,7 @@
               :feature ruby-mode)
        (:name inf-ruby  :type elpa)
        (:name ruby-compilation :type elpa)
+
        ;; cucumber
        (:name feature-mode
               :type git
@@ -157,7 +159,7 @@
        (:name haml-mode
 			  :type git
 			  :url "https://github.com/nex3/haml-mode.git"
-			  :features nginx-mode)
+			  :features haml-mode)
        (:name nginx-mode
 			  :type git
 			  :url "https://github.com/ajc/nginx-mode.git"

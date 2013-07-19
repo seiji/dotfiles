@@ -29,6 +29,11 @@
 (setq auto-mode-alist (cons '("Guardfile"   . ruby-mode)      auto-mode-alist))
 (setq auto-mode-alist (cons '("Rakefile"    . ruby-mode)      auto-mode-alist))
 
+(setq auto-mode-alist (cons '("\\.pl"   . cperl-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.pm"   . cperl-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.psgi" . cperl-mode)      auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.t"    . cperl-mode)      auto-mode-alist))
+
 (setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
 
 (require 'sws-mode)
@@ -97,10 +102,13 @@
 (add-to-list 'load-path
              "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
-(setq yas/snippet-dirs '("~/.emacs.d/yasnippets/rspec-snippets"
-                         "~/.emacs.d/yasnippets"
-                         "~/.emacs.d/plugins/yasnippet/snippets"))
-(yas/global-mode 1)
+(setq yas/snippet-dirs
+      '(
+       "~/.emacs.d/yasnippets/rspec-snippets"
+       "~/.emacs.d/yasnippets"
+       "~/.emacs.d/plugins/yasnippet/snippets"
+       ))
+(yas-global-mode 1)
 
 ;======================================================================
 ;; C Lang
@@ -144,9 +152,9 @@
       (xcode-compile))))
 
 (add-hook 'objc-mode-hook
-          '(lambda ()
-             (define-key objc-mode-map "\C-c\C-c" 'xcode-compile)
-             ))
+          (function (lambda ()
+                      (define-key objc-mode-map "\C-c\C-c" 'quickrun)
+                      (setq indent-tabs-mode nil))))
 
 ;======================================================================
 ;; C Sharp
@@ -185,6 +193,7 @@
 ;======================================================================
 ;; Perl
 ;======================================================================
+
 (defalias 'perl-mode 'cperl-mode)
 (setq cperl-auto-newline t)
 (setq cperl-indent-parens-as-block t)
@@ -202,12 +211,26 @@
             (set-face-bold-p 'cperl-hash-face nil)
             (set-face-italic-p 'cperl-hash-face nil)
             (set-face-background 'cperl-hash-face "black")
-            (setq compile-command
-                  (concat "perl " (buffer-file-name)))
-            (cperl-define-key "\C-c\C-c" 'compile)
+            ;; (setq compile-command
+            ;;       (concat "/Users/toyama.seiji/perl5/perlbrew/perls/perl-5.17.4/bin/perl " (buffer-file-name)))
+            ;; (cperl-define-key "\C-c\C-c" 'compile)
+            (cperl-define-key "\C-c\C-c" 'quickrun) 
+            
             )
 
 )
+; perl tidy
+(defun perltidy-region ()
+  "Run perltidy on the current region."
+  (interactive)
+  (save-excursion
+    (shell-command-on-region (point) (mark) "perltidy -q -pbp" nil t)))
+(defun perltidy-defun ()
+  "Run perltidy on the current defun."
+  (interactive)
+  (save-excursion (mark-defun)
+                  (perltidy-region)))
+
 ;======================================================================
 ;; Ruby
 ;======================================================================
@@ -276,5 +299,6 @@
   (autoload 'css-mode "css-mode" nil t)
   (add-hook 'css-mode-hook '(lambda ()
                               (setq css-indent-level 2)
-                              (setq css-indent-offset 2))))
+                              (setq css-indent-offset 2)
+                              )))
 
