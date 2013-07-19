@@ -1,0 +1,72 @@
+#!/bin/sh
+
+## debug mode
+#DEBUG="yes"
+if [ "$DEBUG" = "yes" ]; then
+    set -x
+fi
+
+if ! type vm_stat > /dev/null 2>&1; then
+    exit 1
+fi
+
+calculate_used_mem() {
+    # vm_stat
+    #  page size of 4096 bytes
+    VM_STAT=$(vm_stat)
+    PAGES_FREE=$(echo "$VM_STAT" | awk '/Pages free/ {print $3}' | tr -d '.')
+    PAGES_ACTIVE=$(echo "$VM_STAT" | awk '/Pages active/ {print $3}' | tr -d '.')
+    PAGES_INACTIVE=$(echo "$VM_STAT" | awk '/Pages inactive/ {print $3}' | tr -d '.')
+    PAGES_SPECULATIVE=$(echo "$VM_STAT" | awk '/Pages speculative/ {print $3}' | tr -d '.')
+    PAGES_WIRED=$(echo "$VM_STAT" | awk '/Pages wired down/ {print $4}' | tr -d '.')
+
+    FREE_MEM=$(($PAGES_FREE + $PAGES_SPECULATIVE))
+
+    USED_MEM=$(($PAGES_ACTIVE + $PAGES_INACTIVE + $PAGES_WIRED))
+
+    TOTAL_MEM=$(($FREE_MEM + $USED_MEM))
+
+
+    USED_MEM_PERCENT=$(echo "$(($USED_MEM * 1000 / $TOTAL_MEM))" | sed -e 's/\(.*\)\([0-9]\)/\1.\2/' -e 's/^\./0./')
+    echo "${USED_MEM_PERCENT}"
+
+    # RET
+    return 0
+}
+
+# Debug
+debug() {
+    if [ "$DEBUG" = "yes" ]; then
+        echo "PAGES_FREE: $PAGES_FREE pages"
+        echo "PAGES_FREE: $(($PAGES_FREE * 4096 / 1024 / 1024 )) MB"
+        echo "PAGES_ACTIVE: $PAGES_ACTIVE pages"
+        echo "PAGES_ACTIVE: $(($PAGES_ACTIVE * 4096 / 1024 / 1024)) MB"
+        echo "PAGES_INACTIVE: $PAGES_INACTIVE pages"
+        echo "PAGES_INACTIVE: $(($PAGES_INACTIVE * 4096 / 1024 / 1024)) MB"
+        echo "PAGES_SPECULATIVE: $PAGES_SPECULATIVE pages"
+        echo "PAGES_SPECULATIVE: $(($PAGES_SPECULATIVE * 4096 / 1024 / 1024 )) MB"
+        echo "PAGES_WIRED: $PAGES_WIRED pages"
+        echo "PAGES_WIRED: $(($PAGES_WIRED * 4096 / 1024 / 1024)) MB"
+        echo "FREE_MEM: $FREE_MEM pages"
+        echo "FREE_MEM: $(($FREE_MEM * 4096 / 1024 / 1024)) MB"
+        echo "USED_MEM: $USED_MEM pages"
+        echo "USED_MEM: $(($USED_MEM * 4096 / 1024 / 1024)) MB"
+        echo "TOTAL_MEM: $TOTAL_MEM pages"
+        echo "TOTAL_MEM: $(($TOTAL_MEM * 4096 / 1024 / 1024)) MB"
+        echo "---------------"
+        echo "TOTAL_MEM: $((8 * 1024)) MB (Theoretical value)"
+        echo "---------------"
+        echo "USED_MEM: $(($USED_MEM * 1000 / $TOTAL_MEM)) %"
+    fi
+}
+
+RET=0
+
+calculate_used_mem
+RET=$?
+
+#DEBUG=yes debug
+
+## exit
+exit $RET
+
