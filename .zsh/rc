@@ -21,7 +21,6 @@ bindkey -e
 
 #[[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
 eval "$(rbenv init -)"
-source ~/.rbenv/completions/rbenv.zsh
 
 #rbenv
 function gem() {
@@ -33,9 +32,8 @@ function gem() {
     fi
 }
 #nvm
-. ~/.nvm/nvm.sh
+[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
 
 #tmux
 #test -f ~/.tmuxrc && . ~/.tmuxrc
-[[ -s /Users/seiji/.tmuxinator/scripts/tmuxinator ]] && source /Users/seiji/.tmuxinator/scripts/tmuxinator
-
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
