@@ -2,8 +2,6 @@ alias browse="hub browse"
 
 alias ls="ls -1G"
 alias ll="ls -la"
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
 
 alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
@@ -38,4 +36,9 @@ alias gfix='git commit --amend'
 alias gra='git reset HEAD $1'
 alias grcs='git reset --soft HEAD^'
 
+# ruby
 alias rake='noglob rake'
+
+# keyboard
+alias keyboardunkink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
+alias keyboardkink='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
