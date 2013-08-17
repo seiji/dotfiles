@@ -1,3 +1,4 @@
+tap 'homebrew/dupes'
 brew 'ack'
 brew 'appledoc'
 brew 'aspell'
