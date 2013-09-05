@@ -1,6 +1,8 @@
 dotfiles
 ========
 
+prerequires [bundler](http://bundler.io/).
+
 Installation
 ------------
 
