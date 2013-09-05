@@ -4,23 +4,28 @@ dotfiles
 Installation
 ------------
 
+### Checkout src  
+
     $ hub clone seiji/dotfiles
+    $ cd dotfiles
     
 ### Install [brewdler](https://github.com/andrew/brewdler)   
 
-    $ gem install brewdler
+    dotfiles $ gem install brewdler
 
-### Install package dependencies (includes [GNU Stow](http://www.gnu.org/software/stow/))
+### Install package dependencies (includes )
 
-    $ cd dotfiles
-    $ brewdle install
+Using [brewdler](https://github.com/andrew/brewdler):
+
+    dotfiles $ brewdle install
     
 ### Link a package
 
-    $ stow -S -t $HOME -v zsh
+Using [GNU Stow](http://www.gnu.org/software/stow/):
 
+    dotfiles $ stow -S -t $HOME -v zsh
 
 Uninstallation
 --------------
 
-    $ stow -D -t $HOME -v zsh
+    dotfiles $ stow -D -t $HOME -v zsh
