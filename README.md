@@ -9,11 +9,11 @@ Installation
     $ hub clone seiji/dotfiles
     $ cd dotfiles
     
-### Install [brewdler](https://github.com/andrew/brewdler)   
+### Install gem dependencies   
 
-    dotfiles $ gem install brewdler
+    dotfiles $ bundle install
 
-### Install package dependencies (includes )
+### Install package dependencies
 
 Using [brewdler](https://github.com/andrew/brewdler):
 
