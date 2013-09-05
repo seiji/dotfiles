@@ -22,7 +22,9 @@
 ;; (package-initialize)
 
 ;;; load-path
+
 (add-to-list 'load-path "~/.emacs.d/el-get")
+        
 (defun add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths paths)
@@ -168,9 +170,21 @@
 			  :type git
 			  :url "https://github.com/eschulte/rinari.git"
 			  :features rinari)
-       
+       (:name scss-mode :after (custom-set-variables '(scss-compile-at-save nil)))
 ))
 (el-get 'sync)
 
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/init")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((encoding . utf-8) (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -35,6 +35,7 @@
 (setq auto-mode-alist (cons '("\\.t"    . cperl-mode)      auto-mode-alist))
 
 (setq auto-mode-alist (cons '("Cakefile"    . coffee-mode)    auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.go"     . go-mode)      auto-mode-alist))
 
 ;======================================================================
 ;; Colorize Buffer of compilation
@@ -56,13 +57,14 @@
 
 (require 'auto-complete-config)
 (require 'auto-complete+)
+(require 'auto-complete-clang)
+
 (ac-config-default)
 (setq ac-modes (append ac-modes '(lua-mode cmake-mode csharp-mode)))
 
 										; After do this, isearch any string, M-: (match-data) always
 										; return the list whose elements is integer
 (global-auto-complete-mode 1)
-
 (setq help-xref-following nil)
 										; (bind-keys '(("RET" . ac-complete)
 										;            ; ("RET" nil)
@@ -93,6 +95,48 @@
 			   ac-source-filename))
 
 ;auto-complete.el ends here
+
+(defvar anything-c-sources-local-gem-file
+  '((name . "rubygems")
+    (candidates-in-buffer)
+    (init . (lambda ()
+              (let ((gemfile-dir (block 'find-gemfile
+                                   (let* ((cur-dir (file-name-directory
+                                                    (expand-file-name (or (buffer-file-name)
+                                                                          default-directory))))
+                                          (cnt 0))
+                                     (while (and (< (setq cnt (+ 1 cnt)) 10)
+                                                 (not (equal cur-dir "/")))
+                                       (when (member "Gemfile" (directory-files cur-dir))
+                                         (return-from 'find-gemfile cur-dir))
+                                       (setq cur-dir (expand-file-name (concat cur-dir "/.."))))
+                                     ))))
+                (anything-attrset 'gem-command
+                                  (if gemfile-dir
+                                      ;; (concat "bundle --gemfile " gemfile-path "/Gemfile exec gem")
+                                      (concat "cd " gemfile-dir "; bundle exec gem")
+                                    "gem"))
+                (message (anything-attr 'gem-command)
+                         (unless (anything-candidate-buffer)
+                           (call-process-shell-command (concat (anything-attr 'gem-command) " list")
+                                                       nil
+                                                       (anything-candidate-buffer 'local)))))))
+    (action . (lambda (gem-name)
+                (let ((path (file-name-directory
+                             (shell-command-to-string
+                              (concat (anything-attr 'gem-command) " which "
+                                      (replace-regexp-in-string "\s+(.+)$" "" gem-name))))))
+                  (if (file-exists-p path)
+                      (find-file path)
+                    (message "no such file or directory:\"%s\"" path)))))))
+
+(defun anything-local-gems ()
+  (interactive)
+  (anything-other-buffer
+   '(anything-c-sources-local-gem-file)
+   "*anything local gems*"
+   ))
+
 ;======================================================================
 ;; yasnippet
 ;======================================================================
@@ -137,9 +181,56 @@
              (setq c-basic-offset 2)
              ))
 
+(add-hook 'go-mode-hook
+          (lambda ()
+            (define-key go-mode-map "\C-c\C-c" 'quickrun)
+            (local-set-key (kbd \"M-.\") 'godef-jump)
+            ))
+
 ;======================================================================
 ;; Obj-C
 ;======================================================================
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
+
+(defvar xcode:sdkver "6.0")
+(defvar xcode:sdkpath "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer")
+(defvar xcode:sdk (concat xcode:sdkpath "/SDKs/iPhoneSimulator" xcode:sdkver ".sdk"))
+
+;; Jump between header and impl
+(setq ff-other-file-alist
+      '(("\\.mm?$" (".h"))
+        ("\\.cc$"  (".hh" ".h"))
+        ("\\.hh$"  (".cc" ".C"))
+        ("\\.c$"   (".h"))
+        ("\\.h$"   (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".m" ".mm"))
+        ("\\.C$"   (".H"  ".hh" ".h"))
+        ("\\.H$"   (".C"  ".CC"))
+        ("\\.CC$"  (".HH" ".H"  ".hh" ".h"))
+        ("\\.HH$"  (".CC"))
+        ("\\.cxx$" (".hh" ".h"))
+        ("\\.cpp$" (".hpp" ".hh" ".h"))
+        ("\\.hpp$" (".cpp" ".c"))))
+(add-hook 'objc-mode-hook
+          (lambda ()
+            (define-key c-mode-base-map (kbd "C-c t") 'ff-find-other-file)
+            ))
+
+;; auto-complete-mode
+(setq ac-modes (append ac-modes '(objc-mode)))
+(setq ac-clang-flags (list "-D__IPHONE_OS_VERSION_MIN_REQUIRED=30200" "-x" "objective-c" "-std=gnu99" "-isysroot" xcode:sdk "-I." "-F.." "-fblocks"))
+;; (setq ac-clang-prefix-header "stdafx.pch")
+;; (setq ac-clang-flags '("-w" "-ferror-limit" "1"))
+;(setq clang-completion-flags (list "-Wall" "-Wextra" "-fsyntax-only" "-ObjC" "-std=c99" "-isysroot" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk" "-I." "-F.." "-D__IPHONE_OS_VERSION_MIN_REQUIRED=30200"))
+
+(add-hook 'objc-mode-hook
+          (function (lambda ()
+;                      (push 'ac-source-clang-complete ac-sources)
+                      (define-key objc-mode-map "\C-c\C-c" 'quickrun)
+                      (setq indent-tabs-mode nil))))
+;;
+
 (defun xcode-compile ()
   (interactive)
   (if (directory-files "." nil ".*\.xcodeproj$" nil)
@@ -208,11 +299,7 @@
             (set-face-bold-p 'cperl-hash-face nil)
             (set-face-italic-p 'cperl-hash-face nil)
             (set-face-background 'cperl-hash-face "black")
-            ;; (setq compile-command
-            ;;       (concat "/Users/toyama.seiji/perl5/perlbrew/perls/perl-5.17.4/bin/perl " (buffer-file-name)))
-            ;; (cperl-define-key "\C-c\C-c" 'compile)
             (cperl-define-key "\C-c\C-c" 'quickrun) 
-            
             )
 
 )
@@ -260,6 +347,7 @@
 ;;             (define-key ruby-mode-map (kbd "C-@") 'anything-rdef)
              ))
 
+
 ;======================================================================
 ;; CoffeeScript
 ;======================================================================
@@ -277,9 +365,11 @@
                                ;; (define-key coffee-mode-map "\C-c\C-c" 'compile)))
                                ))
 
+
 ;======================================================================
-;; Other
+;; other
 ;======================================================================
+
 (defun rhtml-mode-hook ()
   (autoload 'rhtml-mode "rhtml-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))

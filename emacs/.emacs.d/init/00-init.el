@@ -17,6 +17,8 @@
 (setq auto-save-list-file-prefix nil)   ; don't make ~/.saves-PID-hostname
 (setq auto-save-default nil)            ; disable auto-saving
 
+(global-auto-revert-mode 1)
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (put 'set-goal-column 'disabled nil)
