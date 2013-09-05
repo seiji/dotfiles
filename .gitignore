@@ -1,14 +1,14 @@
 # ~/.gitignore
 *.elc
-.emacs.d/ac-comphist.dat
-.emacs.d/bin
-.emacs.d/elisp
-.emacs.d/elpa
-.emacs.d/eshell
-.emacs.d/history
-.emacs.d/riece
-.emacs.d/share
-.emacs.d/tramp
-.emacs.d/url/cookies
-.emacs.d/anything-c-adaptive-history
-.zsh/zsh_history
+emacs/.emacs.d/ac-comphist.dat
+emacs/.emacs.d/bin
+emacs/.emacs.d/elisp
+emacs/.emacs.d/elpa
+emacs/.emacs.d/eshell
+emacs/.emacs.d/history
+emacs/.emacs.d/riece
+emacs/.emacs.d/share
+emacs/.emacs.d/tramp
+emacs/.emacs.d/url/cookies
+emacs/.emacs.d/anything-c-adaptive-history
+zsh/.zsh/zsh_history
