@@ -82,9 +82,9 @@
        (:name anything
               :type emacswiki)
        (:name anything-config
-              :type git
-              :url "git://repo.or.cz/anything-config.git"
-              :load "anything-config.el")
+              :type emacswiki)
+       (:name anything-match-plugin
+              :type emacswiki)
        (:name descbinds-anything
               :type emacswiki)
        (:name color-moccur
