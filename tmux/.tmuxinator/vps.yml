@@ -1,0 +1,13 @@
+# ~/.tmuxinator/vps.yml
+
+name: vps
+root: ~/
+pre_window: rbenv shell 2.0.0-p0
+
+windows:
+  - linode1: mosh linode1
+  - E;linode1: emacs .
+  - linode2: mosh linode2
+  - E;linode2: emacs .
+  - data: mosh data
+  - E;data: emacs .

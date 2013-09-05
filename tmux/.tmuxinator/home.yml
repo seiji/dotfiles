@@ -1,0 +1,12 @@
+# ~/.tmuxinator/home.yml
+
+name: home
+root: ~/
+pre_window: rbenv shell 2.0.0-p0
+
+windows:
+  - home: cd ~/
+  - irc: weechat-curses
+  - blank: cd ~/
+  - github: cd github
+  - github: cd github; emacs .
