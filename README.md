@@ -13,6 +13,8 @@ Installation
     
 ### Install gem dependencies   
 
+Using [Bundler](http://bundler.io/):
+
     dotfiles $ bundle install
 
 ### Install package dependencies
