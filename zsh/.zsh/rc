@@ -41,4 +41,7 @@ function gem() {
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 #z.sh - brew install z
-. `brew --prefix`/etc/profile.d/z.sh
+_Z_CMD=j
+if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
+  . `brew --prefix`/etc/profile.d/z.sh
+fi
