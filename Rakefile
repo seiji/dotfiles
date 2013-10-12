@@ -1,4 +1,4 @@
-COMPONENTS = %w(emacs tmux zsh)
+COMPONENTS = %w(emacs tmux zsh git)
 home = ENV['HOME'] 
 
 task :default => [:install]
