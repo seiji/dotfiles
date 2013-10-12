@@ -11,17 +11,24 @@
 [core]
   editor = /usr/local/bin/emacs
 
+[branch]
+  autosetuprebase = always
+
+[pull]
+  rebase = true
+
 [branch "master"]
   rebase = true
   mergeoptions = --no-ff
 
 [alias]
+
+  # Reset
+  rsh = reset --soft HEAD  
+  rhh = reset --hard HEAD
   nffmerge = merge --no-ff
 
-  ignore = !"f() { local s=$1; shift; \
-    while [ $# -gt 0 ]; do s="$s,$1"; shift; done;\
-    curl "http://gitignore.io/api/$s"; }; f"
-
+  # Log         
   log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 
   log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
@@ -33,4 +40,10 @@
   sgraph = !"git log --oneline --graph"
 
   graph = !"git log1"
+
+  # Other
+  ignore = !"f() { local s=$1; shift; \
+    while [ $# -gt 0 ]; do s="$s,$1"; shift; done;\
+    curl "http://gitignore.io/api/$s"; }; f"
+
 
