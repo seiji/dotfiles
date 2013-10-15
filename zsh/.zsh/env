@@ -29,7 +29,7 @@ export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC
 export PATH="${PATH}:${EC2_HOME}/bin"
 
 # Android
-export ANDROID_HOME=/Applications/android-sdk-macosx
+export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 PATH=$PATH:$ANDROID_HOME/tools
 PATH=$PATH:$ANDROID_HOME/platform-tools
 

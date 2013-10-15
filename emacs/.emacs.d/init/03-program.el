@@ -256,7 +256,6 @@
                            (replace-regexp-in-string "\.cs$" ".exe"
                                                      (buffer-file-name (current-buffer)))))
              (define-key csharp-mode-map "\C-c\C-c" 'compile)
-             (setq indent-tabs-mode t)
 			 (c-set-offset 'substatement-open 0)
 			 (c-set-offset 'case-label '+)
 			 (c-set-offset 'arglist-intro '+)
