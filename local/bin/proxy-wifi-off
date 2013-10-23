@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sudo networksetup -setwebproxystate Wi-Fi off
