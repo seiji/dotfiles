@@ -47,3 +47,6 @@ if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
 fi
 
 source aws_zsh_completer.sh
+
+function mkcd(){mkdir -p $1 && cd $1}
+
