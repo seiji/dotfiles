@@ -1,5 +1,6 @@
 tap 'homebrew/dupes'
 tap 'sanemat/font'
+tap 'jingweno/gh'
 brew 'ack'
 brew 'appledoc'
 brew 'aspell'

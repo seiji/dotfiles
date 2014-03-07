@@ -113,6 +113,7 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
 (eval-after-load "dired"
     '(define-key dired-mode-map "\M-r" 'my-dired-do-reveal)) ; move-to-window-line
 
-(defun js-json-reformat (beg end)
-    (interactive "r")
-      (shell-command-on-region beg end "python -m json.tool" nil t))
+(defun json-reformat (beg end)
+  (interactive "r")
+  (shell-command-on-region beg end "python -m json.tool" nil t))
+
