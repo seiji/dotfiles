@@ -41,12 +41,14 @@ function gem() {
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 #z.sh - brew install z
+if [ -x "`which brew`" ]; then
 _Z_CMD=j
-if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
-  . `brew --prefix`/etc/profile.d/z.sh
+  if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
+    . `brew --prefix`/etc/profile.d/z.sh
+  fi
 fi
 
-source aws_zsh_completer.sh
+[[ -x "`which aws_zsh_completer.sh`" ] && source aws_zsh_completer.sh
 
 function mkcd(){mkdir -p $1 && cd $1}
 
