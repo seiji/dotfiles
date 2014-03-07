@@ -4,7 +4,8 @@ emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/auto-save-list
 emacs/.emacs.d/elpa/archives/gnu/archive-contents
 emacs/.emacs.d/bin
-emacs/.emacs.d/elisp
+emacs/.emacs.d/elisp/*
+!emacs/.emacs.d/elisp/.gitkeep
 emacs/.emacs.d/elpa
 emacs/.emacs.d/eshell
 emacs/.emacs.d/history
