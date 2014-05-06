@@ -5,7 +5,7 @@ set title
 set ruler
 set showcmd
 set showmatch
-set statusline=%<%F\ %r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).'\|'.&ff.']'}\ \ %l/%L\ (%P)%m%=%{strftime(\"%Y/%m/%d\ %H:%M\")} 
+set t_Co=256
 set laststatus=2
 set nobackup
 set hidden
@@ -113,84 +113,35 @@ let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_altv = 1
 let g:netrw_alto = 1
 
-"===== Vundler
+"===== NeoBundle
 set nocompatible
-filetype off                  
 
-set rtp+=~/.vim/vundle.git/   
-call vundle#rc()              
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-"===== Unite.vim
-let g:unite_enable_start_insert=1
-nnoremap <silent> <C-f> :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-inoremap <silent> <C-f> <ESC>:<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> <C-b> :<C-u>Unite buffer file_mru<CR>
-inoremap <silent> <C-b> <ESC>:<C-u>Unite buffer file_mru<CR>
+call neobundle#rc(expand('~/.vim/bundle/'))
 
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR> 
-au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-au BufRead,BufNewFile *.mm            set filetype=objc
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'itchyny/lightline.vim'
 
-Bundle 'quickrun.vim'
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-" vim-scripts repos
-"Bundle 'rails.vim'
-Bundle 'tpope/vim-rails'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimshell'
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/vinarise'
+call neobundle#end()
+filetype plugin indent on
+NeoBundleCheck
 
-Bundle 'msanders/cocoa.vim'
-Bundle 'gmarik/github-search.vim'
-
-
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-
-filetype plugin indent on 
-
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_snippets_dir='~/.vim/snippets'
-
-" quickvim
-let g:quickrun_config = { }
-let g:quickrun_config["_"] = {
-            \ "outputter/buffer/split" : ":rightbelow 8sp",
-            \ "outputter/buffer/info" : 1,
-            \ }
-let g:quickrun_config['cs'] = {
-			\ 'command': 'dmcs',
-			\ 'exec': ['%c %o %s -out:%s:p:r.exe', 'mono %s:p:r.exe %a', 'rm -f %s:p:r.exe'],
-			\ 'tempfile': '%{tempname(}.cs',
-			\}
-let g:quickrun_config['java'] = {
-            \ 'command': 'javac',
-            \ 'exec'   : ['%c %o %s', 'java %s:t:r %a', ':call delete("%S:t:r.class")'],
-            \ 'tempfile': '%{tempname(}.java',
-           \}
-let g:quickrun_config["cpp"] = {
-            \    "type"    : "cpp",
-            \    "command" : "g++",
-            \    "cmdopt"    : " -Wall",
-            \}
-
-" vimfiler
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_safe_mode_by_default=0
-autocmd FileType vimfiler nnoremap <buffer> / /\_^- \zs
+"===== lightline
+let g:lightline = {
+  \ 'colorscheme': 'wombat'
+  \ }

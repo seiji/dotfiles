@@ -3,9 +3,7 @@ alias browse="hub browse"
 alias ls="ls -1G"
 alias ll="ls -la"
 
-alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
-
-alias vi="/usr/bin/vim"
+alias vi="/usr/local/bin/vim"
 alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
