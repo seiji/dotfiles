@@ -10,3 +10,6 @@ windows:
   - blank: cd ~/
   - github: cd github
   - github: cd github; emacs .
+  - go: cd ~/.go
+  - E;go: cd ~/.go; emacs .
+

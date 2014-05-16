@@ -20,9 +20,10 @@ setopt nonomatch
 
 bindkey -e
 
-
-#[[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
-eval "$(rbenv init -)"
+# initialize autocomplete here, otherwise functions won't be loaded
+# also load compdef so git-completion doesn't complain about no compdef
+autoload -U compinit compdef
+compinit
 
 #rbenv
 function gem() {
@@ -40,15 +41,19 @@ function gem() {
 #test -f ~/.tmuxrc && . ~/.tmuxrc
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-#z.sh - brew install z
+[[ -x "`which aws_zsh_completer.sh 2>&1`" ]] && source aws_zsh_completer.sh
+
 if [[ -x "`which brew 2>&1`" ]]; then
+#z.sh
 _Z_CMD=j
   if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
     . `brew --prefix`/etc/profile.d/z.sh
   fi
+#golang
+  if [ -f `brew --prefix go`/share/zsh/site-functions/go ]; then
+    . `brew --prefix go`/share/zsh/site-functions/go
+  fi
 fi
 
-[[ -x "`which aws_zsh_completer.sh 2>&1`" ]] && source aws_zsh_completer.sh
 
 function mkcd(){mkdir -p $1 && cd $1}
-

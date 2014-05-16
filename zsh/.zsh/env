@@ -51,5 +51,6 @@ export NODE_PATH=/usr/local/lib/node_modules
 export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 # Golang
+export GOROOT=`go env GOROOT`
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin

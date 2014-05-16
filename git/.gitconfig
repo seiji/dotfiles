@@ -1,6 +1,6 @@
 [user]
-  name = Seiji Toyama
-  email = seijit@me.com
+    username = Seiji Toyama
+	email = seijit@me.com
 
 [color]
   ui = auto
@@ -10,6 +10,7 @@
 
 [core]
   editor = /usr/local/bin/emacs
+	excludesfile = /Users/seiji/.gitignore_global
 
 [branch]
   autosetuprebase = always
@@ -53,3 +54,9 @@
     curl "http://gitignore.io/api/$s"; }; f"
 
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
