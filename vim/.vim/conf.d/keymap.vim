@@ -36,3 +36,9 @@ nmap sj <C-W>j<C-w>
 nmap sk <C-W>k<C-w>
 nmap sh <C-w>h<C-w>
 nmap sl <C-w>l<C-w>
+
+nnoremap <S-Tab> gt
+nnoremap <Tab><Tab> gT
+for i in range(1, 9)
+    execute 'nnoremap <Tab>' . i . ' ' . i . 'gt'
+endfor

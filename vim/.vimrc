@@ -1,6 +1,8 @@
-set runtimepath+=~/.vim/
+set rtp+=~/.vim/
+set rtp+=$GOROOT/misc/vim
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 runtime! conf.d/*.vim
-
+set completeopt=menu,preview
 set nocompatible
 filetype plugin indent on
 
