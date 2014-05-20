@@ -2,7 +2,7 @@ set rtp+=~/.vim/
 set rtp+=$GOROOT/misc/vim
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 runtime! conf.d/*.vim
-set completeopt=menu,preview
+set completeopt=menu
 set nocompatible
 filetype plugin indent on
 
@@ -29,8 +29,8 @@ set noswapfile
 
 syntax on
 set smartindent 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 "=== Encoding
@@ -78,8 +78,3 @@ autocmd FileType perl :map <C-n> <ESC>:!perl -cw %<CR>
 autocmd FileType perl :map <C-e> <ESC>:!perl %<CR>
 autocmd FileType ruby :map <C-n> <ESC>:!ruby -cW %<CR>
 autocmd FileType ruby :map <C-e> <ESC>:!ruby %<CR>
-"== netrw
-let g:netrw_liststyle = 3
-let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_altv = 1
-let g:netrw_alto = 1

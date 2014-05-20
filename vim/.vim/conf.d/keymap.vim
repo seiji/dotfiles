@@ -1,6 +1,6 @@
 "=== KeyMap
-"noremap ; :
-"noremap : ;
+noremap ; :
+noremap : ;
 
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>

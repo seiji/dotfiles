@@ -4,6 +4,7 @@ alias ls="ls -1G"
 alias ll="ls -la"
 
 alias vi="/usr/local/bin/vim"
+alias v="/usr/local/bin/vim"
 alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'

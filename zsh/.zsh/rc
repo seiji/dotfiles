@@ -26,6 +26,8 @@ autoload -U compinit compdef
 compinit
 
 #rbenv
+[[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
+
 function gem() {
     $HOME/.rbenv/shims/gem $*
     if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
