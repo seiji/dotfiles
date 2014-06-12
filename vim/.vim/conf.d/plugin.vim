@@ -24,6 +24,7 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Blackrush/vim-gocode'
+NeoBundle 'toyamarinyon/vim-swift'
 
 call neobundle#end()
 NeoBundleCheck
@@ -32,7 +33,7 @@ NeoBundleCheck
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = '^\%(.DS_Store\)$'
 let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_edit_action = 'tabopen'
+"let g:vimfiler_edit_action = 'tabopen'
 
 "===== neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -56,7 +57,7 @@ let g:lightline = {
 "let g:quickrun_config={'*': {'split': 'vertical'}}
 let g:quickrun_config={
 \  "_" : {
-\    "outputter/buffer/split" : ":botright",
+\    "outputter/buffer/split" : ":botright 8sp",
 \    "outputter/buffer/close_on_empty" : 1,
 \    "runner" : "vimproc",
 \    "runner/vimproc/updatetime" : 60,
@@ -67,4 +68,8 @@ let g:quickrun_config.go = {
 \ 'command': 'go',
 \ 'exec': '%c run %s',
 \ }
-
+let g:quickrun_config.swift = {
+\ 'type': 'swift',
+\ 'command': 'xcrun',
+\ 'exec': '%c swift -i %s',
+\ }

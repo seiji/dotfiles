@@ -10,7 +10,7 @@ inoremap <C-e> <End>
 inoremap <C-a> <Home>
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
-inoremap <C-j> <ESC>
+inoremap <C-[> <ESC>
 
 ""noremap <C-j> <C-f>
 ""noremap <C-k> <C-b>
@@ -25,6 +25,11 @@ inoremap <C-j> <ESC>
 ""vnoremap ( "zdi(<C-R>z)<ESC>
 ""vnoremap " "zdi"<C-R>z"<ESC>
 ""vnoremap ' "zdi'<C-R>z'<ESC>
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 " - split window 
 nnoremap <C-x>1 :only<CR>
