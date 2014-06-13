@@ -70,6 +70,7 @@ let g:quickrun_config.go = {
 \ }
 let g:quickrun_config.swift = {
 \ 'type': 'swift',
+\ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
 \ 'command': 'xcrun',
-\ 'exec': '%c swift -i %s',
+\ 'exec': '%c swift -i %s %o', 
 \ }
