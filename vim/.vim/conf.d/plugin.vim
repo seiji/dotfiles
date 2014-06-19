@@ -25,7 +25,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'toyamarinyon/vim-swift'
-NeoBundle "tyru/caw.vim.git"
+NeoBundle 'tomtom/tcomment_vim'
 
 call neobundle#end()
 NeoBundleCheck
