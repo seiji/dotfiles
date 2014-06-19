@@ -1,6 +1,6 @@
 "=== KeyMap
-noremap ; :
-noremap : ;
+" noremap ; :
+" noremap : ;
 
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
@@ -47,3 +47,7 @@ nnoremap <Tab><Tab> gT
 for i in range(1, 9)
     execute 'nnoremap <Tab>' . i . ' ' . i . 'gt'
 endfor
+
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
+

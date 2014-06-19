@@ -25,6 +25,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'toyamarinyon/vim-swift'
+NeoBundle "tyru/caw.vim.git"
 
 call neobundle#end()
 NeoBundleCheck
@@ -74,3 +75,4 @@ let g:quickrun_config.swift = {
 \ 'command': 'xcrun',
 \ 'exec': '%c swift -i %s %o', 
 \ }
+
