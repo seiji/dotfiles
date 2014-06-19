@@ -1,32 +1,42 @@
 "=====  Basic
+" display
 set number
+set laststatus=2
+set showcmd
+set showmatch
 set showmode
 set title
 set ruler
-set showcmd
-set showmatch
-set t_Co=256
-set laststatus=2
-set nobackup
+" cursor
+set backspace=indent,eol,start 
+set scrolloff=8
+" file
+set confirm
 set hidden
-set vb t_vb=
-set backspace=indent,eol,start
 set autoread
-"set whichwrap=b,s,h,l,<,>,[,]
-set scrolloff=5
-
-set nowritebackup
 set nobackup
+set nowritebackup
 set noswapfile
-
-syntax on
-set smartindent 
+" search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set wrapscan
+set gdefault
+" indent
 set expandtab
 set tabstop=2
-set softtabstop=2
 set shiftwidth=2
+set softtabstop=2
+set smartindent
+" color
+set t_Co=256
+set vb t_vb=
 
-"=== Encoding
+syntax on
+
+" encoding
 set encoding=utf-8
 set fileencodings=utf-8,euc-jp,cp932,iso-2022-jp
 

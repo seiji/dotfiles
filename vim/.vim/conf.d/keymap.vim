@@ -26,11 +26,6 @@ inoremap <C-[> <ESC>
 ""vnoremap " "zdi"<C-R>z"<ESC>
 ""vnoremap ' "zdi'<C-R>z'<ESC>
 
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
 " - split window 
 nnoremap <C-x>1 :only<CR>
 nnoremap <C-x>2 :split<CR>
@@ -48,6 +43,9 @@ for i in range(1, 9)
     execute 'nnoremap <Tab>' . i . ' ' . i . 'gt'
 endfor
 
+" - comment
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
+" - highlight
+nnoremap <silent> <C-L> :noh<C-L><CR>
