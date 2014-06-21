@@ -26,6 +26,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'toyamarinyon/vim-swift'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'ekalinin/Dockerfile.vim'
 
 call neobundle#end()
 NeoBundleCheck

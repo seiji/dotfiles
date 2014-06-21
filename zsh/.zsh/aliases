@@ -45,5 +45,11 @@ alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.ke
 
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+
+# docker
+alias dl='docker ps -l -q'
+alias drmc='docker rm $(docker ps -a -q)'
+alias drmi='docker rmi $(docker images -q)'
+
 #########################################
 ##########################################
