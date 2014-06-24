@@ -59,3 +59,14 @@ fi
 
 
 function mkcd(){mkdir -p $1 && cd $1}
+
+export DOCKER_HOST=tcp://:2375
+boot2docker status
+if [ $? -ne 0 ]; then
+  boot2docker up
+  boot2docker ssh "sudo modprobe vboxsf && mkdir -p $HOME && sudo mount -t vboxsf home $HOME"
+else
+  echo "boot2docker is already running. Execute this manuallly:"
+  echo 'boot2docker ssh "sudo modprobe vboxsf && mkdir -p $HOME && sudo mount -t vboxsf home $HOME"'
+fi
+
