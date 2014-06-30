@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-prerequires [Bundler](http://bundler.io/).
+prerequires Homebrew, [Bundler](http://bundler.io/).
 
 Installation
 ------------
@@ -19,9 +19,7 @@ Using [Bundler](http://bundler.io/):
 
 ### Install package dependencies
 
-Using [brewdler](https://github.com/andrew/brewdler):
-
-    dotfiles $ brewdle install
+    dotfiles $ brew bundle
     
 ### Link a package
 
