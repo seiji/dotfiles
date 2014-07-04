@@ -2,14 +2,14 @@
 
 name: home
 root: ~/
-pre_window: rbenv shell 2.0.0-p0
+pre_window: export PATH=$HOME/.rbenv/shims:$PATH
 
 windows:
   - home: cd ~/
   - irc: weechat-curses
   - blank: cd ~/
   - github: cd github
-  - github: cd github; emacs .
+  - github: cd github; vi .
   - go: cd ~/.go
-  - E;go: cd ~/.go; emacs .
+  - E;go: cd ~/.go; vi .
 
