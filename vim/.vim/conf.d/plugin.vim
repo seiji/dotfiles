@@ -43,12 +43,13 @@ let g:unite_enable_smart_case = 1
 let g:unite_source_history_yank_enable =1
 
 " nmap <Space> [unite]
-nmap u [unite]
+nmap , [unite]
 
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab file_mru<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab file_mru directory_mru<CR>
 nnoremap <silent> [unite]l :<C-u>Unite -buffer-name=files bookmark<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files jump_point file_point file file/new<CR>
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=dirs directory directory/new<CR>
 
 nnoremap <silent> [unite]h :<C-u>Unite history/yank<CR>
 nnoremap <silent> [unite]o :<C-u>Unite file_rec/async:!<CR>
