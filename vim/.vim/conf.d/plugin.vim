@@ -26,9 +26,11 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'danro/rename.vim'
 NeoBundle 'Blackrush/vim-gocode'
+NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'toyamarinyon/vim-swift'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
+NeoBundle 'junegunn/vim-easy-align'
 
 call neobundle#end()
 NeoBundleCheck

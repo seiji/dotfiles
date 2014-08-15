@@ -10,7 +10,7 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
-export EDITOR=emacs
+export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
@@ -18,9 +18,12 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
+export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
+export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+export BUNDLER_EDITOR="vim +VimFiler"
 
 # perl
 [[ -s $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
@@ -52,5 +55,5 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 # Golang
 export GOROOT=`go env GOROOT`
-export GOPATH=$HOME/.go
+export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
