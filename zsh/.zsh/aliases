@@ -3,8 +3,8 @@ alias browse="hub browse"
 alias ls="ls -1G"
 alias ll="ls -la"
 
-alias vi="/usr/local/bin/vim"
-alias v="/usr/local/bin/vim"
+alias vi="$(which vim)"
+alias v="$(which vim)"
 alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
