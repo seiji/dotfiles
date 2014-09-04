@@ -8,6 +8,6 @@ windows:
   - home: cd ~/
   - irc: weechat-curses
   - blank: cd ~/
-  - github: cd src/github
-  - github: cd src/github; vi .
+  - github: cd src/github.com
+  - github: cd src/github.com; vi .
 

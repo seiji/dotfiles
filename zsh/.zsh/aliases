@@ -1,7 +1,7 @@
 alias browse="hub browse"
 
-alias ls="ls -1G"
-alias ll="ls -la"
+alias ls="ls -1G --color"
+alias ll="ls -la --color"
 
 alias vi="$(which vim)"
 alias v="$(which vim)"

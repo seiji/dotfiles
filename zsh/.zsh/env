@@ -18,7 +18,14 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
 
-export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+case ${OSTYPE} in
+  darwin*)
+    export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+    ;;
+  linux*)
+    export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    ;;
+esac
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
@@ -57,3 +64,4 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 export GOROOT=`go env GOROOT`
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+
