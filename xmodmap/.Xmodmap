@@ -1,0 +1,13 @@
+! asus c720 chromebook
+remove mod1 = Alt_L
+remove mod4 = Super_L
+remove control = Control_L
+remove lock = Alt_L
+
+keycode 64 = Super_L
+keycode 37 = Alt_L
+keycode 133 = Control_L
+
+add mod1 = Alt_L
+add mod4 = Super_L
+add control = Control_L
