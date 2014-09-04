@@ -24,6 +24,7 @@ case ${OSTYPE} in
     ;;
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    export NO_AT_BRIDGE=1 # naulitulus
     ;;
 esac
 

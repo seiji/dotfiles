@@ -31,3 +31,7 @@ Uninstallation
 --------------
 
     dotfiles $ stow -D -t $HOME -v zsh
+
+### dircolors
+
+see https://github.com/seebi/dircolors-solarized

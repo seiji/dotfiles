@@ -83,3 +83,43 @@ case ${OSTYPE} in
 esac
 
 eval "$(direnv hook zsh)"
+
+#peco
+function peco-history() {
+  local tac
+  if which tac > /dev/null; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
+  BUFFER=$(history -n 1 | \
+    eval $tac | \
+    peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-history
+bindkey '^r' peco-select-history
+
+function peco-cd () {
+  local selected_dir=$(find ~/ -type d | peco)
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-cd
+bindkey '^x^f' peco-cd
+
+# for OSX
+function peco-open() {
+  local selected_dir=$(find ~/ -type d | peco)
+  if [ -n "$selected_dir" ]; then
+    BUFFER="open ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-open
+bindkey '^x^o' peco-open

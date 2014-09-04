@@ -51,7 +51,4 @@ alias dl='docker ps -l -q'
 alias drmc='docker rm $(docker ps -a -q)'
 alias drmi='docker rmi $(docker images -q)'
 
-p() { peco | while read LINE; do $@ $LINE; done }
-alias e='ghq list -p | p cd'
-#########################################
 ##########################################
