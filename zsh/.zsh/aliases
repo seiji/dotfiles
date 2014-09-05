@@ -1,7 +1,15 @@
 alias browse="hub browse"
 
-alias ls="ls -1G --color"
-alias ll="ls -la --color"
+case "${OSTYPE}" in
+darwin*)
+  alias ls="ls -1G"
+  alias ll="ls -laG"
+  ;;
+linux*)
+  alias ls='ls --color'
+  alias ll='ls -la --color'
+  ;;
+esac
 
 alias vi="$(which vim)"
 alias v="$(which vim)"

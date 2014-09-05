@@ -27,7 +27,7 @@ compinit
 
 #XmodMap
 [[ -f "$HOME/.Xmodmap" ]] && eval "$(xmodmap ~/.Xmodmap)"
-[[ -f "$HOME/.dircolors" ]] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+[[ -f "$HOME/.dircolors" ]] && ( eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" )
 
 #rbenv
 [[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
@@ -99,12 +99,12 @@ function peco-history() {
   zle clear-screen
 }
 zle -N peco-history
-bindkey '^r' peco-select-history
+bindkey '^r' peco-history
 
 function peco-cd () {
-  local selected_dir=$(find ~/ -type d | peco)
+  local selected_dir=$(find $HOME/src -type d -maxdepth 5 -not -path '*/\.*' | peco)
   if [ -n "$selected_dir" ]; then
-    BUFFER="cd ${selected_dir}"
+    BUFFER="pushd \"$selected_dir\""
     zle accept-line
   fi
   zle clear-screen
@@ -114,9 +114,9 @@ bindkey '^x^f' peco-cd
 
 # for OSX
 function peco-open() {
-  local selected_dir=$(find ~/ -type d | peco)
+  local selected_dir=$(find $HOME/src -type d -maxdepth 5 -not -path '*/\.*' | peco)
   if [ -n "$selected_dir" ]; then
-    BUFFER="open ${selected_dir}"
+    BUFFER="open \"$selected_dir\""
     zle accept-line
   fi
   zle clear-screen
