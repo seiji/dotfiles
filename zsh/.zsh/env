@@ -64,5 +64,5 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 # Golang
 export GOROOT=`go env GOROOT`
 export GOPATH=$HOME
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 

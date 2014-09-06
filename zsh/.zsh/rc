@@ -25,8 +25,6 @@ bindkey -e
 autoload -U compinit compdef
 compinit
 
-#XmodMap
-[[ -f "$HOME/.Xmodmap" ]] && eval "$(xmodmap ~/.Xmodmap)"
 [[ -f "$HOME/.dircolors" ]] && ( eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" )
 
 #rbenv
