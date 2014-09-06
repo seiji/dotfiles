@@ -11,28 +11,27 @@ let g:filetype_m = 'objc'
 
 " 
 function InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
+  if pumvisible()
+    return "\<c-n>"
+  endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+    return "\<tab>"
+  elseif exists('&omnifunc') && &omnifunc == ''
+    return "\<c-n>"
+  else
+    return "\<c-x>\<c-o>"
+  endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " Languge Specification
 
 " = Skelton
-augroup SkeletonAu
-    autocmd!
-    autocmd BufNewFile *.html 0r $HOME/.vim/skel.html
-    autocmd BufNewFile *.pl 0r $HOME/.vim/skel.pl
-    autocmd BufNewFile *.pm 0r $HOME/.vim/skel.pm
+augroup TemplatesAu
+  autocmd!
+  autocmd BufNewFile *.rb 0r $HOME/.vim/templates/tpl.rb
+  autocmd BufNewFile *.html 0r $HOME/.vim/templates/tpl.html
 augroup END
 
 autocmd FileType perl :map <C-n> <ESC>:!perl -cw %<CR>
