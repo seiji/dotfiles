@@ -31,6 +31,14 @@ NeoBundle 'toyamarinyon/vim-swift'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'scrooloose/syntastic'
+
+if has("unix")
+  if system('uname')=~'Darwin'
+  else
+    NeoBundle 'vim-scripts/fcitx.vim'
+  endif
+endif
 
 call neobundle#end()
 NeoBundleCheck
@@ -99,6 +107,11 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 let g:lightline = {
   \ 'colorscheme': 'wombat'
   \ }
+
+"===== syntax
+let g:syntastic_mode_map = { 'mode': 'passive',
+ \ 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
 
 "===== quickrun
 "set splitbelow
