@@ -25,16 +25,3 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-" Languge Specification
-
-" = Skelton
-augroup TemplatesAu
-  autocmd!
-  autocmd BufNewFile *.rb 0r $HOME/.vim/templates/tpl.rb
-  autocmd BufNewFile *.html 0r $HOME/.vim/templates/tpl.html
-augroup END
-
-autocmd FileType perl :map <C-n> <ESC>:!perl -cw %<CR>
-autocmd FileType perl :map <C-e> <ESC>:!perl %<CR>
-autocmd FileType ruby :map <C-n> <ESC>:!ruby -cW %<CR>
-autocmd FileType ruby :map <C-e> <ESC>:!ruby %<CR>
