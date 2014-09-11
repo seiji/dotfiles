@@ -128,7 +128,7 @@ let g:quickrun_config={
 let g:quickrun_config.go = {
 \ 'type': 'go',
 \ 'command': 'go',
-\ 'exec': '%c run %s',
+\ 'exec': '%c run *.go',
 \ }
 let g:quickrun_config.swift = {
 \ 'type': 'swift',

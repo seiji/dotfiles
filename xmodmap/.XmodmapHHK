@@ -1,0 +1,17 @@
+! asus c720 chromebook
+remove mod1 = Alt_L
+remove mod4 = Super_L
+remove control = Control_L
+remove lock = Alt_L
+
+keycode  9 = grave asciitilde grave asciitilde
+keycode 49 = Escape NoSymbol Escape
+keycode 51 = BackSpace BackSpace BackSpace BackSpace
+keycode 22 = backslash bar backslash bar
+keycode 133 = Super_L
+keycode 64 = Alt_L
+keycode 37 = Control_L
+
+add mod1 = Alt_L
+add mod4 = Super_L
+add control = Control_L

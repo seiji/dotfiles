@@ -4,10 +4,14 @@ case "${OSTYPE}" in
 darwin*)
   alias ls="ls -1G"
   alias ll="ls -laG"
+  alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
+  alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   ;;
 linux*)
   alias ls='ls --color'
   alias ll='ls -la --color'
+  alias keyboard_link="xinput enable 'AT Translated Set 2 keyboard' && xmodmap ~/.Xmodmap"
+  alias keyboard_unlink="xinput disable 'AT Translated Set 2 keyboard' && xmodmap ~/.XmodmapHHK"
   ;;
 esac
 
@@ -46,11 +50,6 @@ alias gsu='cd $(git rev-parse --show-toplevel) && git submodule update && cd -'
 
 # ruby
 alias rake='noglob rake'
-
-# keyboard
-alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
-alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
-
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 
