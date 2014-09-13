@@ -12,6 +12,7 @@ linux*)
   alias ll='ls -la --color'
   alias keyboard_link="xinput enable 'AT Translated Set 2 keyboard' && xmodmap ~/.Xmodmap"
   alias keyboard_unlink="xinput disable 'AT Translated Set 2 keyboard' && xmodmap ~/.XmodmapHHK"
+  alias open='google-chrome'
   ;;
 esac
 
@@ -25,11 +26,6 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
-
-alias firefox="open -a Firefox"
-alias safari="open -a Safari"
-alias prev="open -a Preview"
-alias qlook="qlmanage -p"
 
 alias fcd='source ~/bin/fcd.sh'
 alias sc='screen -U -D -RR'
