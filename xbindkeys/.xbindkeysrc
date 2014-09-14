@@ -1,0 +1,2 @@
+"xdotool keyup control+BackSpace; xdotool key Delete; xdotool keydown control"
+control+BackSpace
