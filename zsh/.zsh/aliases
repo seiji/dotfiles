@@ -12,7 +12,7 @@ linux*)
   alias ll='ls -la --color'
   alias keyboard_link="xinput enable 'AT Translated Set 2 keyboard' && xmodmap ~/.Xmodmap"
   alias keyboard_unlink="xinput disable 'AT Translated Set 2 keyboard' && xmodmap ~/.XmodmapHHK"
-  alias open='google-chrome'
+  alias open='gnome-open'
   ;;
 esac
 
