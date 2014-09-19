@@ -41,3 +41,4 @@ set encoding=utf-8
 set fileencodings=utf-8,euc-jp,cp932,iso-2022-jp
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+autocmd BufWritePre * :%s/\s\+$//e
