@@ -1,3 +1,4 @@
 #!/bin/sh
 
 sudo networksetup -setwebproxy Wi-Fi localhost 1181
+sudo networksetup -setsecurewebproxy Wi-Fi localhost 1181

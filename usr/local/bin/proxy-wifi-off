@@ -1,3 +1,4 @@
 #!/bin/sh
 
 sudo networksetup -setwebproxystate Wi-Fi off
+sudo networksetup -setsecurewebproxystate Wi-Fi off
