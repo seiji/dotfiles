@@ -8,7 +8,7 @@ set showmode
 set title
 set ruler
 " cursor
-set backspace=indent,eol,start 
+set backspace=indent,eol,start
 set scrolloff=8
 " file
 set confirm
@@ -33,6 +33,11 @@ set smartindent
 " color
 set t_Co=256
 set vb t_vb=
+
+" exmode
+set wildmenu
+set wildmode=full
+set history=200
 
 syntax on
 

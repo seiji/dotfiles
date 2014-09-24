@@ -53,28 +53,28 @@ let g:unite_enable_smart_case = 1
 let g:unite_source_history_yank_enable =1
 
 " nmap <Space> [unite]
-nmap , [unite]
-
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab file_mru directory_mru<CR>
-nnoremap <silent> [unite]l :<C-u>Unite -buffer-name=files bookmark<CR>
-nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files jump_point file_point file file/new<CR>
-nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=dirs directory directory/new<CR>
-
-nnoremap <silent> [unite]h :<C-u>Unite history/yank<CR>
-nnoremap <silent> [unite]o :<C-u>Unite file_rec/async:!<CR>
-nnoremap <silent> [unite]m :<C-u>Unite file_mru buffer<CR>
-nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-
-nnoremap <silent> [unite]t :<C-u>Unite<Space>tab<CR>
-nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-
-" CakePHP
-nnoremap <silent> [unite]jl  :<C-u>Unite file_rec/async:app/Logic/<CR>
-nnoremap <silent> [unite]jfl :<C-u>Unite file/new -input=app/Logic/<CR>
-nnoremap <silent> [unite]jt  :<C-u>Unite file_rec/async:app/Test/<C-R>
-nnoremap <silent> [unite]jft :<C-u>Unite file/new -input=app/Test/<C-R>
+" nmap , [unite]
+"
+" nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab file_mru directory_mru<CR>
+" nnoremap <silent> [unite]l :<C-u>Unite -buffer-name=files bookmark<CR>
+" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files jump_point file_point file file/new<CR>
+" nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+" nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=dirs directory directory/new<CR>
+"
+" nnoremap <silent> [unite]h :<C-u>Unite history/yank<CR>
+" nnoremap <silent> [unite]o :<C-u>Unite file_rec/async:!<CR>
+" nnoremap <silent> [unite]m :<C-u>Unite file_mru buffer<CR>
+" nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"
+" nnoremap <silent> [unite]t :<C-u>Unite<Space>tab<CR>
+" nnoremap <silent> [unite]g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+"
+" " CakePHP
+" nnoremap <silent> [unite]jl  :<C-u>Unite file_rec/async:app/Logic/<CR>
+" nnoremap <silent> [unite]jfl :<C-u>Unite file/new -input=app/Logic/<CR>
+" nnoremap <silent> [unite]jt  :<C-u>Unite file_rec/async:app/Test/<C-R>
+" nnoremap <silent> [unite]jft :<C-u>Unite file/new -input=app/Test/<C-R>
 
 if executable('ag')
    let g:unite_source_grep_command = 'ag'
