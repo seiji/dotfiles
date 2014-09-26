@@ -38,6 +38,7 @@ set vb t_vb=
 set wildmenu
 set wildmode=full
 set history=200
+set pastetoggle=<C-E>
 
 syntax on
 
@@ -47,3 +48,4 @@ set fileencodings=utf-8,euc-jp,cp932,iso-2022-jp
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
+autocmd InsertLeave * set nopaste
