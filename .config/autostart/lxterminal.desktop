@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Lxterminal
+Comment=Lxterminal
+Exec=lxterminal
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=lxterminal
+Categories=Utility;
+
+# disable for now
+Hidden=false
