@@ -179,30 +179,30 @@
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Keybindings for desktop switching -->
-    <keybind key="C-A-Left">
-      <action name="GoToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Right">
-      <action name="GoToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Up">
-      <action name="GoToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Down">
-      <action name="GoToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
+    <!-- <keybind key="C&#45;A&#45;Left"> -->
+    <!--   <action name="GoToDesktop"> -->
+    <!--     <to>left</to> -->
+    <!--     <wrap>no</wrap> -->
+    <!--   </action> -->
+    <!-- </keybind> -->
+    <!-- <keybind key="C&#45;A&#45;Right"> -->
+    <!--   <action name="GoToDesktop"> -->
+    <!--     <to>right</to> -->
+    <!--     <wrap>no</wrap> -->
+    <!--   </action> -->
+    <!-- </keybind> -->
+    <!-- <keybind key="C&#45;A&#45;Up"> -->
+    <!--   <action name="GoToDesktop"> -->
+    <!--     <to>up</to> -->
+    <!--     <wrap>no</wrap> -->
+    <!--   </action> -->
+    <!-- </keybind> -->
+    <!-- <keybind key="C&#45;A&#45;Down"> -->
+    <!--   <action name="GoToDesktop"> -->
+    <!--     <to>down</to> -->
+    <!--     <wrap>no</wrap> -->
+    <!--   </action> -->
+    <!-- </keybind> -->
     <keybind key="S-A-Left">
       <action name="SendToDesktop">
         <to>left</to>
@@ -251,7 +251,7 @@
       <action name="ToggleShowDesktop"/>
     </keybind>
     <!-- Keybindings for windows -->
-    <keybind key="A-F4">
+    <keybind key="W-q">
       <action name="Close"/>
     </keybind>
     <keybind key="A-Escape">
@@ -323,19 +323,19 @@
     <!--   </action> -->
     <!-- </keybind> -->
     <!-- Keybindings for window tiling -->
-    <keybind key="W-S-Left">        # HalfLeftScreen
+    <keybind key="C-A-Left">        # HalfLeftScreen
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>0</y><height>100%</height><width>50%</width></action>
     </keybind>
-    <keybind key="W-S-Right">        # HalfRightScreen
+    <keybind key="C-A-Right">        # HalfRightScreen
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>-0</x><y>0</y><height>100%</height><width>50%</width></action>
     </keybind>
-    <keybind key="W-S-Up">        # HalfUpperScreen
+    <keybind key="C-A-Up">        # HalfUpperScreen
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>0</y><width>100%</width><height>100%</height></action>
     </keybind>
-    <keybind key="W-S-Down">        # HalfLowerScreen
+    <keybind key="C-A-Down">        # HalfLowerScreen
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>100%</height></action>
     </keybind>

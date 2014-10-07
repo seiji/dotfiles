@@ -1,12 +1,12 @@
 [Desktop Entry]
 Version=1.0
-Name=Lxterminal
-Comment=Lxterminal
-Exec=lxterminal --geometry=100x100
+Name=GoogleChrome
+Comment=GoogleaChrome
+Exec=google-chrome
 Terminal=false
 X-MultipleArgs=false
 Type=Application
-Icon=lxterminal
+Icon=GoogleChrome
 Categories=Utility;
 
 # disable for now
