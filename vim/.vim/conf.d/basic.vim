@@ -33,12 +33,14 @@ set smartindent
 " color
 set t_Co=256
 set vb t_vb=
-
 " exmode
 set wildmenu
 set wildmode=full
 set history=200
 set pastetoggle=<C-E>
+
+" suffix
+set suffixesadd+=.rb
 
 syntax on
 

@@ -31,11 +31,11 @@
 [alias]
 
   # Reset
-  rsh = reset --soft HEAD  
+  rsh = reset --soft HEAD
   rhh = reset --hard HEAD
   nffmerge = merge --no-ff
 
-  # Log         
+  # Log
   log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 
   log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
@@ -62,3 +62,7 @@
 	trustExitCode = true
 [ghq]
 	root = /Users/seiji/src
+
+[filter "csharp-format"]
+  clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
+#  smudge = cat
