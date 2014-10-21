@@ -16,6 +16,10 @@ linux*)
   ;;
 esac
 
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
 alias vi="$(which vim)"
 alias v="$(which vim)"
 alias grep='grep -i --color=auto'
@@ -36,7 +40,7 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 # git
-alias gst='git status -s -b && git stash list' 
+alias gst='git status -s -b && git stash list'
 alias gush='git push origin $1'
 alias gull='git pull origin $1'
 alias gfix='git commit --amend'
