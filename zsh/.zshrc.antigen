@@ -8,4 +8,6 @@ antigen-bundle heroku
 antigen-bundle rails
 antigen-bundle vagrant
 
+antigen-bundle zsh-users/zsh-syntax-highlighting
+
 antigen-apply
