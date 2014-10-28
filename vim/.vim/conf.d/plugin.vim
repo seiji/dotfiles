@@ -16,6 +16,8 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+NeoBundle 'vim-scripts/repeat.vim'
+NeoBundle 'vim-scripts/surround.vim'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -32,6 +34,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'slim-template/vim-slim'
 
 if has("unix")
   if system('uname')=~'Darwin'
