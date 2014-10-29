@@ -33,6 +33,7 @@ NeoBundle 'toyamarinyon/vim-swift'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'slim-template/vim-slim'
 
