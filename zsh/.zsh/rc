@@ -29,6 +29,8 @@ zstyle ':zle:*' word-style unspecified
 
 # initialize autocomplete here, otherwise functions won't be loaded
 # also load compdef so git-completion doesn't complain about no compdef
+fpath=(~/.zsh/completion $fpath)
+
 autoload -U compinit compdef
 compinit
 

@@ -1,13 +1,10 @@
 #!/bin/zsh
 source ~/.zsh/antigen/antigen.zsh
 
-antigen-bundle brew
 antigen-bundle docker
 antigen-bundle git
-antigen-bundle heroku
-antigen-bundle rails
-antigen-bundle vagrant
 
+antigen-bundle zsh-users/zsh-completions src
 antigen-bundle zsh-users/zsh-syntax-highlighting
 
 antigen-apply

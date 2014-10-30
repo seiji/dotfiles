@@ -1,0 +1,44 @@
+#compdef gsutil
+
+# zsh completion for gsutil
+
+_gsutil() {
+    local -a commands
+    commands=(
+  'acl:Get, set, or change bucket and/or object ACLs'
+  'cat:Concatenate object content to stdout'
+  'compose:Concatenate a sequence of objects into a new composite object.'
+  'config:Obtain credentials and create configuration file'
+  'cors:Set a CORS JSON document for one or more buckets'
+  'cp:Copy files and objects'
+  'defacl:Get, set, or change default ACL on buckets'
+  'du:Display object size usage'
+  'hash:Calculate file hashes'
+  'help:Get help about commands and topics'
+  'lifecycle:Get or set lifecycle configuration for a bucket'
+  'logging:Configure or retrieve logging on buckets'
+  'ls:List providers, buckets, or objects'
+  'mb:Make buckets'
+  'mv:Move/rename objects and/or subdirectories'
+  'notification:Configure object change notification'
+  'perfdiag:Run performance diagnostic'
+  'rb:Remove buckets'
+  'rm:Remove objects'
+  'rsync:Synchronize content of two buckets/directories'
+  'setmeta:Set metadata on already uploaded objects'
+  'signurl:Create a signed url'
+  'stat:Display object status'
+  'test:Run gsutil tests'
+  'version:Print version info about gsutil'
+  'versioning:Enable or suspend versioning for one or more buckets'
+  'web:Set a main page and/or error page for one or more buckets'
+    )
+
+    if (( CURRENT == 2 )); then
+      _describe -t commands 'commands' commands
+    fi
+
+    return 0
+}
+
+_gsutil
