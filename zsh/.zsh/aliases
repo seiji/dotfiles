@@ -59,4 +59,22 @@ alias dl='docker ps -l -q'
 alias drmc='docker rm $(docker ps -a -q)'
 alias drmi='docker rmi $(docker images -q)'
 
+# GCP
+function gcloud_login () {
+  docker run -ti --name gcloud-config -e CLOUDSDK_CONFIG=/.config/gcloud google/cloud-sdk gcloud auth login
+}
+
+function gcloud_shell () {
+  if [ $# -gt 0 ]; then
+    docker run -ti --rm -e CLOUDSDK_CONFIG=/.config/gcloud --volumes-from gcloud-config google/cloud-sdk $argv
+  else
+    docker run -ti --rm -e CLOUDSDK_CONFIG=/.config/gcloud --volumes-from gcloud-config google/cloud-sdk /bin/bash
+  fi
+}
+
+alias gclogin=gcloud_login
+alias gcshell=gcloud_shell
+
+# $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
+
 ##########################################
