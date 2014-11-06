@@ -5,7 +5,7 @@ setopt prompt_subst
 
 setopt hist_ignore_dups
 
-. ~/.zsh/env
+#. ~/.zsh/env
 . ~/.zsh/prompt
 . ~/.zsh/aliases
 

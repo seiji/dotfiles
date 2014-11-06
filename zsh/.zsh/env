@@ -40,8 +40,9 @@ EXTLIB=./extlib/lib/perl5:./extlib/lib/perl5/$ARCHNAME
 PERL5LIB=./lib:$EXTLIB
 export PERL5LIB=$PERL5LIB
 
-# Hadoop
-export PATH="${PATH}:/usr/local/hadoop/bin"
+# GCP
+export GCP_HOME="$HOME/google-cloud-sdk"
+export PATH="${GCP_HOME}/bin:${PATH}"
 
 # EC2
 export EC2_HOME="$HOME/local/ec2-api-tools"
