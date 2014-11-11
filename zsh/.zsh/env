@@ -64,9 +64,8 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 # Golang
 #export PATH=$HOME/go/bin:$PATH
-# export GOROOT=$HOME/go
-if [ -x "`which go`" ]; then
-  export GOROOT=`go env GOROOT`
+if [[ -s $HOME/go ]]; then
+  export GOROOT=$HOME/go
   export GOPATH=$HOME
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
