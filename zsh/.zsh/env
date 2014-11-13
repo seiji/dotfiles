@@ -1,4 +1,3 @@
-#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 export MANPATH="/usr/local/share/man:/usr/X11/man:/usr/share/man"
 
 export LANG="en_US.UTF-8"
@@ -25,6 +24,10 @@ case ${OSTYPE} in
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export NO_AT_BRIDGE=1 # naulitulus
+    if [[ -s $HOME/.linuxbrew ]]; then
+      export PATH="$HOME/.linuxbrew/bin:$PATH"
+      export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+    fi
     ;;
 esac
 
