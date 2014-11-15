@@ -1,6 +1,8 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "tmuxinator"
-gem "brewdler"
-gem "rails"
-gem "rubocop"
+gem 'tmuxinator'
+gem 'awesome_print'
+gem 'brewdler'
+gem 'rails'
+gem 'rails-api'
+gem 'rubocop'

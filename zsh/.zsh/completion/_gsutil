@@ -29,6 +29,7 @@ _gsutil() {
   'signurl:Create a signed url'
   'stat:Display object status'
   'test:Run gsutil tests'
+  'update:Update to the latest gsutil release'
   'version:Print version info about gsutil'
   'versioning:Enable or suspend versioning for one or more buckets'
   'web:Set a main page and/or error page for one or more buckets'
