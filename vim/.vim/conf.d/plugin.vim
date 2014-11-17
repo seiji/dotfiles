@@ -122,6 +122,7 @@ let g:syntastic_ruby_checkers = ['rubocop']
 "set splitbelow
 "set splitright
 "let g:quickrun_config={'*': {'split': 'vertical'}}
+autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 let g:quickrun_config={
 \  "_" : {
 \    "outputter/buffer/split" : ":botright 8sp",
@@ -129,6 +130,17 @@ let g:quickrun_config={
 \    "runner" : "vimproc",
 \    "runner/vimproc/updatetime" : 60,
 \  },
+\}
+let g:quickrun_config['ruby.rspec'] = {
+\ 'type': 'ruby.rspec',
+\ 'command': 'rspec',
+\ 'exec': 'bundle exec %c',
+\ 'cmdopt': '-cfd'
+\ }
+let g:quickrun_config.rspecl = {
+\ 'type': 'ruby.rspec',
+\ 'command': 'rspec',
+\ 'exec': 'bundle exec %c %s -l ' . line('.'),
 \}
 let g:quickrun_config.go = {
 \ 'type': 'go',
