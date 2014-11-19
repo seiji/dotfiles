@@ -18,5 +18,6 @@ weechat/.weechat/*.log
 weechat/.weechat/logs/*
 weechat/.weechat/script
 vim/.vim/bundle/*
-!vim/.vim/bundle/neobundle.vim
+!vim/.vim/bundle/Vundle.vim
+.netrwhist
 zsh/.zsh/zsh_history

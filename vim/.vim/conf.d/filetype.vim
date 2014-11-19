@@ -20,6 +20,8 @@ autocmd FileType javascript setl smartindent cinwords=if,else,for,while,try,exce
 autocmd FileType javascript setl expandtab tabstop=2 shiftwidth=2 softtabstop=0
 " CSharp
 autocmd FileType cs setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
+" ObjectiveC
+let g:filetype_m = 'objc'
 " Go
-auto BufWritePre *.go Fmt
+auto BufWritePre *.go GoFmt
 

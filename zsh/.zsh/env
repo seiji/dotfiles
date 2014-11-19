@@ -70,6 +70,11 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 # Golang
 #export PATH=$HOME/go/bin:$PATH
+if [ -x `brew --prefix go` ]; then
+  export GOROOT=$(brew --prefix go)/libexec
+  export GOPATH=$HOME
+  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+fi
 if [[ -s $HOME/go ]]; then
   export GOROOT=$HOME/go
   export GOPATH=$HOME

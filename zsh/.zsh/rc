@@ -71,7 +71,6 @@ _Z_CMD=j
   fi
 fi
 
-
 function mkcd(){mkdir -p $1 && cd $1}
 
 case ${OSTYPE} in
