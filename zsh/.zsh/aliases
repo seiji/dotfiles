@@ -40,6 +40,7 @@ alias E='emacsclient -t'
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
+alias tmux='tmux -2'
 # git
 alias gst='git status -s -b && git stash list'
 alias gush='git push origin $1'
