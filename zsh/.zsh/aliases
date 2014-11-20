@@ -23,6 +23,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias vi="$(which vim)"
 alias v="$(which vim)"
+alias t="tig"
 alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'

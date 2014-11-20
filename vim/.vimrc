@@ -5,16 +5,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " Other plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 't9md/vim-choosewin'
-Plugin 'tomtom/tcomment_vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'bling/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tomtom/tcomment_vim'
+
+Plugin 'tpope/vim-fugitive'
+" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'fatih/vim-go'
+Plugin 't9md/vim-choosewin'
 
 call vundle#end()               " required
 
@@ -155,15 +160,9 @@ augroup END
 " Golang
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
-" Perl
-autocmd FileType perl :map <C-n> <ESC>:!perl -cw %<CR>
-autocmd FileType perl :map <C-e> <ESC>:!perl %<CR>
 " Python
 autocmd FileType python setl expandtab shiftwidth=4 softtabstop=4
 " Ruby
-autocmd FileType ruby :map <C-n> <ESC>:!ruby -cW %<CR>
-autocmd FileType ruby :map <C-e> <ESC>:!ruby %<CR>
 " JavaScript
 autocmd Filetype javascript setl autoindent
 autocmd FileType javascript setl smartindent cinwords=if,else,for,while,try,except,finally,def,class
@@ -173,9 +172,54 @@ autocmd FileType cs setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
 " ObjectiveC
 let g:filetype_m = 'objc'
 
+" Wildmenu completion {{{
+set wildmenu
+" set wildmode=list:longest
+set wildmode=list:full
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.luac                           " Lua byte code
+set wildignore+=go/pkg                           " Go static files
+set wildignore+=go/bin                           " Go bin files
+set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip         " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
+
 com! JSONFormat %!python -m json.tool
 
 "===== Plugin
+
+" ctrlp
+let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_height = 10
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_mruf_max=450
+let g:ctrlp_max_files=0
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+let g:ctrlp_buftag_types = {
+            \ 'go'         : '--language-force=go --golang-types=ftv',
+            \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
+            \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
+            \ 'objc'       : '--language-force=objc --objc-types=mpci',
+            \ 'rc'         : '--language-force=rust --rust-types=fTm'
+            \ }
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \}
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -219,6 +263,40 @@ let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "gofmt"
 "
 noremap <Leader>l :TagbarToggle<CR>
+
+" snippets
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res == 0
+        if pumvisible()
+            return "\<C-N>"
+        else
+            return "\<TAB>"
+        endif
+    endif
+    return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+    call UltiSnips#JumpBackwards()
+    if g:ulti_jump_backwards_res == 0
+        return "\<C-P>"
+    endif
+    return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+
 
 " vim-go
 au FileType go nmap gd <Plug>(go-def)

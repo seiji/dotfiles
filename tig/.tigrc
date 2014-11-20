@@ -1,0 +1,53 @@
+set show-author = full
+set show-changes = yes
+set show-date = local
+set show-file-size = units
+set show-line-numbers = yes
+set show-refs = true
+set show-rev-graph = true
+set horizontal-scroll = 33%
+set line-number-interval = 10
+set line-graphics = ascii
+
+bind generic G none
+bind generic D none
+bind generic A none
+bind generic g none
+bind generic F none
+bind generic I none
+bind generic i none
+bind generic s none
+bind generic S none
+bind generic R none
+
+bind main C none
+bind main s view-status
+bind main b view-refs
+
+bind diff i view-close
+
+bind generic y scroll-line-up
+bind generic e scroll-line-down
+bind generic g move-first-line
+bind generic G move-last-line
+bind generic o enter
+bind generic ? view-help
+
+bind generic R !?git reset --hard %(commit)
+bind generic F !git fetch
+bind generic P !?git push
+bind generic p !?git pull
+bind generic A !git commit --amend
+bind generic S !git status
+
+# Copy rev id to clipboard
+bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy'
+
+bind tree v !vim %(file) # open file from tree
+bind branch n !@git branch %(prompt) # Create a new branch
+bind branch d !?git branch -D %(branch) # Delete local branch
+bind branch c !git checkout %(branch) # Checkout branch
+bind branch C !git checkout -b %(prompt) %(branch) # Create a new branch
+
+bind status d !@?rm -rf %(file) # delete untracked files
+
