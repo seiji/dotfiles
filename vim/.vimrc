@@ -87,7 +87,7 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 syntax enable
 
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 let mapleader = ","
 let g:mapleader = ","
 
