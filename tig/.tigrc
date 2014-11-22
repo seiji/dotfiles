@@ -7,6 +7,7 @@ set tree-view = date:local author:full id file-size:units mode file-name
 set show-changes = yes
 set horizontal-scroll = 33%
 set line-graphics = ascii
+set refresh-mode = auto
 
 bind generic G none
 bind generic D none
