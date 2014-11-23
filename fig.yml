@@ -1,0 +1,11 @@
+# docker run -it --name gcloud_config -e CLOUDSDK_CONFIG=/.config/gcloud google/cloud-sdk gcloud auth login
+# docker run -ti --volumes-from gcloud_config google/cloud-sdk  gcloud config set project $project_name
+gcsregistry:
+  image: google/docker-registry
+  volumes_from:
+    - gcloud_config
+  ports:
+    - "5000:5000"
+  environment:
+    GCS_BUCKET: seiji-docker
+    BOTO_PATH: /.config/gcloud/legacy_credentials/toyama.seiji@gmail.com/.boto
