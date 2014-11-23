@@ -15,7 +15,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'vim-scripts/surround.vim'
+Plugin 'slim-template/vim-slim'
 
+""""""""
 Plugin 'tpope/vim-fugitive'
 " Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'fatih/vim-go'
