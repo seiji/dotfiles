@@ -11,7 +11,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'bling/vim-airline'
-
 Plugin 'tpope/vim-rbenv.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
@@ -232,6 +231,7 @@ let g:ctrlp_custom_ignore = {
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_filetype_blacklist = { 'ruby' : 1 }
 
 " go
 let g:go_fmt_autosave = 0
