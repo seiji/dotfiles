@@ -11,17 +11,21 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'bling/vim-airline'
+
+Plugin 'tpope/vim-rbenv.git'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/surround.vim'
+
 Plugin 'slim-template/vim-slim'
+Plugin 'fatih/vim-go'
+Plugin 'vim-scripts/nginx.vim'
 
 """"""""
 Plugin 'tpope/vim-fugitive'
 " Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'fatih/vim-go'
 Plugin 't9md/vim-choosewin'
 
 call vundle#end()               " required

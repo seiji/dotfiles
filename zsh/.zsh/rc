@@ -75,6 +75,7 @@ function mkcd(){mkdir -p $1 && cd $1}
 
 case ${OSTYPE} in
   darwin*)
+    # VBoxManage startvm --type headless boot2docker-vm // if fail
     $(boot2docker shellinit)
 
     boot2docker status
