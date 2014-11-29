@@ -5,6 +5,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " Other plugins
+Plugin 'Shougo/vimproc', {
+       \ 'build' : {
+       \     'windows' : 'make -f make_mingw32.mak',
+       \     'cygwin' : 'make -f make_cygwin.mak',
+       \     'mac' : 'make -f make_mac.mak',
+       \     'unix' : 'make -f make_unix.mak',
+       \    },
+       \ }
+
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -17,6 +26,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/surround.vim'
+Plugin 'thinca/vim-quickrun'
 
 Plugin 'slim-template/vim-slim'
 Plugin 'fatih/vim-go'
@@ -314,8 +324,8 @@ au FileType go nmap <Leader>t <Plug>(go-def-tab)
 
 au FileType go nmap <Leader>i <Plug>(go-info)
 
-au FileType go nmap  <leader>r  <Plug>(go-run)
-au FileType go nmap  <leader>b  <Plug>(go-build)
+" au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
 
 au FileType go nmap <Leader>d <Plug>(go-doc)
 
@@ -334,4 +344,41 @@ function! InsertTabWrapper()
   endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
+"===== quickrun
+""set splitbelow
+"set splitright
+""let g:quickrun_config={'*': {'split': 'vertical'}}
+autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+let g:quickrun_config={
+      \  "_" : {
+      \    "outputter/buffer/split" : ":botright 8sp",
+      \    "outputter/buffer/close_on_empty" : 1,
+      \    "runner" : "vimproc",
+      \    "runner/vimproc/updatetime" : 60,
+      \  },
+      \}
+let g:quickrun_config['ruby.rspec'] = {
+      \ 'type': 'ruby.rspec',
+      \ 'command': 'rspec',
+      \ 'exec': 'bundle exec %c',
+      \ 'cmdopt': '-cfd'
+      \ }
+let g:quickrun_config.rspecl = {
+      \ 'type': 'ruby.rspec',
+      \ 'command': 'rspec',
+      \ 'exec': 'bundle exec %c %s -l ' . line('.'),
+      \}
+let g:quickrun_config.go = {
+      \ 'type': 'go',
+      \ 'command': 'go',
+      \ 'exec': '%c run *.go',
+      \ }
+let g:quickrun_config.swift = {
+      \ 'type': 'swift',
+      \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
+      \ 'command': 'xcrun',
+      \ 'exec': '%c swift -i %s %o',
+      \ }
+
 
