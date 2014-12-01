@@ -24,8 +24,8 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists= ["https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
-let mapleader= ","
+let blacklists=["chrome://bookmarks/*","https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
+let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
 let locale=""
@@ -62,8 +62,11 @@ map <A-n> nextTab
 map <C-i> goForward
 map <C-h> deleteWord
 map <C-o> goBack
+map F createMultiHint
 map R reloadTabUncached
 
-
+site '*://*.translate.google.com/*' {
+  set autofocus
+}
 
 iunmapAll
