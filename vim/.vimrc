@@ -166,6 +166,7 @@ augroup TemplatesAu
   autocmd BufNewFile *.rb 0r $HOME/.vim/templates/tpl.rb
   autocmd BufNewFile *.go 0r $HOME/.vim/templates/tpl.go
   autocmd BufNewFile *.html 0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
 augroup END
 
 augroup filetypedetect

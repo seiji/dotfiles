@@ -24,7 +24,6 @@ set autofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let completionengines=[]
 let blacklists= ["https://mail.google.com/*"]
 let mapleader= ","
 let highlight="#ffff00"
@@ -64,9 +63,5 @@ map <C-n> nextTab
 map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
-
-" Mac :Command
-unmap <M-n>
-unmap <M-t>
 
 iunmapAll
