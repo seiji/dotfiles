@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists= ["https://mail.google.com/*","https://inbox.google.com/*"]
+let blacklists= ["https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
 let mapleader= ","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -37,7 +37,7 @@ let barposition = "bottom"
 
 " qmarks
 let qmark c = ["https://www.google.com/calendar"]
-let qmark f = ["https://cloud.feedly.com/#latest"]
+let qmark f = ["http://feedly.com/index.html#latest"]
 let qmark g = ["https://github.com/"]
 let qmark i = ["https://inbox.google.com"]
 let qmark l = ["https://www.google.com/language_tools"]
@@ -56,14 +56,14 @@ map <C-b> scrollFullPageUp
 map <C-f> scrollFullPageDown
 
 map d closeTab
-map f createTabbedHint
 map u lastClosedTab
 map <A-p> previousTab
 map <A-n> nextTab
 map <C-i> goForward
+map <C-h> deleteWord
 map <C-o> goBack
 map R reloadTabUncached
 
-map <C-h> deleteWord
+
 
 iunmapAll
