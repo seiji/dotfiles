@@ -24,7 +24,7 @@ set autofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists= ["https://mail.google.com/*"]
+let blacklists= ["https://mail.google.com/*","https://inbox.google.com/*"]
 let mapleader= ","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -63,5 +63,7 @@ map <C-n> nextTab
 map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
+
+imap <C-m> deleteWord
 
 iunmapAll
