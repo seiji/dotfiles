@@ -1,15 +1,38 @@
 " sync from https://raw.githubusercontent.com/seiji/dotfiles/master/cvim/.cvimrc
-let scrolltep = 30
+let searchlimit=30
+let scrolltep=30
+let timeoutlen=1000
 let fullpagescrollpercent = 100
-"set nohud
+let typelinkhintsdelay=500
+let scrollduration=20
+let zoomfactor=0.1
+set nohud
+set regexp
+set ignorecase
+set nolinkanimations
+set nonumerichints
+set dimhintcharacters
+set nodefaultnewtabpage
+set cncpcompletion
+set smartcase
+set incsearch
+set notypelinkhints
 set autohidecursor
-"set noinsertmappings
+set autofocus
+set insertmappings
 set nosmoothscroll
-let blacklists = ["https://mail.google.com/*"]
-let mapleader = ","
+set autoupdategist
+let completionengines=[]
+let blacklists= ["https://mail.google.com/*"]
+let mapleader= ","
+let highlight="#ffff00"
+let defaultengine="google"
+let locale=""
+let activehighlight="#ff9632"
+let homedirectory=""
+
 let hintcharacters = "hjklasdfgyuiopqwertnmzxcvb"
 let barposition = "bottom"
-set autoupdategist
 
 " qmarks
 let qmark c = ["https://www.google.com/calendar"]
@@ -40,5 +63,9 @@ map <C-n> nextTab
 map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
+
+" test
+map <M-j> scrollDown
+map <M-k> scrollUp
 
 iunmapAll
