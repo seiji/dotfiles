@@ -58,12 +58,12 @@ map <C-f> scrollFullPageDown
 map d closeTab
 map f createTabbedHint
 map u lastClosedTab
-map <C-p> previousTab
-map <C-n> nextTab
+map <A-p> previousTab
+map <A-n> nextTab
 map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
 
-imap <C-m> deleteWord
+map <C-m> deleteWord
 
 iunmapAll
