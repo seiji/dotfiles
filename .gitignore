@@ -1,4 +1,5 @@
 # ~/.gitignore
+.netrwhist
 *.elc
 emacs/.emacs.d/ac-comphist.dat
 emacs/.emacs.d/auto-save-list
@@ -19,5 +20,6 @@ weechat/.weechat/logs/*
 weechat/.weechat/script
 vim/.vim/bundle/*
 !vim/.vim/bundle/Vundle.vim
-.netrwhist
+
+registry-params.env
 zsh/.zsh/zsh_history
