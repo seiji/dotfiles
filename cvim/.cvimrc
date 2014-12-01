@@ -1,4 +1,6 @@
 " sync from https://raw.githubusercontent.com/seiji/dotfiles/master/cvim/.cvimrc
+" keymap: https://raw.githubusercontent.com/1995eaton/chromium-vim/585d89f8eb2f21cca910e0fc5837f3a46885f4fe/content_scripts/mappings.js
+"
 let searchlimit=30
 let scrolltep=30
 let timeoutlen=1000
@@ -36,11 +38,9 @@ let barposition = "bottom"
 
 " qmarks
 let qmark c = ["https://www.google.com/calendar"]
-let qmark e = ["javascript:var%20t=((window.getSelection&&window.getSelection())%7C%7C(document.getSelection&&document.getSelection())%7C%7C(document.selection&&document.selection.createRange&&document.selection.createRange().text));var%20e=(document.charset%7C%7Cdocument.characterSet);if(t!='')%7Blocation.href='http://translate.google.com/translate_t?text='+t+'&hl=ja&langpair=auto%7Cen&tbb=1&ie='+e;%7Delse%7Blocation.href='http://translate.google.com/translate?u='+escape(location.href)+'&hl=ja&langpair=auto%7Cen&tbb=1&ie='+e;%7D;"]
 let qmark f = ["https://cloud.feedly.com/#latest"]
 let qmark g = ["https://github.com/"]
 let qmark i = ["https://inbox.google.com"]
-let qmark j = ["javascript:var%20t=((window.getSelection&&window.getSelection())%7C%7C(document.getSelection&&document.getSelection())%7C%7C(document.selection&&document.selection.createRange&&document.selection.createRange().text));var%20e=(document.charset%7C%7Cdocument.characterSet);if(t!='')%7Blocation.href='http://translate.google.com/?text='+t+'&hl=ja&langpair=auto%7Cja&tbb=1&ie='+e;%7Delse%7Blocation.href='http://translate.google.com/translate?u='+encodeURIComponent(location.href)+'&hl=ja&langpair=auto%7Cja&tbb=1&ie='+e;%7D;"]
 let qmark l = ["https://www.google.com/language_tools"]
 let qmark m = ["https://mail.google.com"]
 let qmark p = ["https://getpocket.com/a/queue/"]
@@ -64,8 +64,8 @@ map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
 
-" test
-map <M-j> scrollDown
-map <M-k> scrollUp
+" Mac :Command
+unmap <M-n>
+unmap <M-t>
 
 iunmapAll
