@@ -64,6 +64,6 @@ map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
 
-map <C-n> deleteWord
+map <C-h> deleteWord
 
 iunmapAll
