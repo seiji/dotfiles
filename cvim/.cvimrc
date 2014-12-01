@@ -20,7 +20,7 @@ set smartcase
 set incsearch
 set notypelinkhints
 set autohidecursor
-set autofocus
+set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
@@ -64,6 +64,6 @@ map <C-i> goForward
 map <C-o> goBack
 map R reloadTabUncached
 
-map <C-m> deleteWord
+map <C-n> deleteWord
 
 iunmapAll
