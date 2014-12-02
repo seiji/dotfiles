@@ -59,12 +59,13 @@ map <Leader>ex :open!  chrome://extensions<CR>
 map <Leader>fa :script javascript:(function(){var d=document;var el=d.getElementsByTagName('link');var g=false;var j=false;for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/rss+xml')!=-1||ty.indexOf('text/xml')!=-1){g=true;h=el[i].getAttribute('href');var k=h.substring(0,1);if(k=='/'){h='http://'+location.host+h;}break;}}}if(g){window.open('http://cloud.feedly.com/#subscription'+encodeURIComponent('/feed/')+encodeURIComponent(h));return;}if(!g){for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/atom+xml')!=-1){j=true;h=el[i].getAttribute('href');var l=h.substring(0,1);if(l=='/'){h='http://'+location.host+h;}break;}}}if(j){window.open('http://cloud.feedly.com/#subscription'+encodeURIComponent('/feed/')+encodeURIComponent(h));return;}if(!j){window.alert('Could not find the RSS/Atom Feed');}}})();<CR>
 map <Leader>fl :open! http://feedly.com/#label/global.must<CR>
 map <Leader>gc :open! https://www.google.com/calendar<CR>
-map <Leader>gh :open! http://github.com<CR>
 map <Leader>gi :open! https://inbox.google.com<CR>
 map <Leader>gl :open! https://www.google.com/language_tools<CR>
 map <Leader>gm :open! https://mail.google.com<CR>
-map <Leader>gs :tabnew site:github.com
 map <Leader>gt :open! https://mail.google.com/tasks/canvas<CR>
+map <Leader>hh :open! http://github.com<CR>
+map <Leader>hs :tabnew site:github.com<SPACE>
+map <Leader>if :open! https://ifttt.com/dashboard<CR>
 map <Leader>pl :open! https://getpocket.com/a/queue/<CR>
 
 site '*://*.translate.google.com/*' {
