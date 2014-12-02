@@ -37,7 +37,7 @@ let barposition = "bottom"
 
 " qmarks
 let qmark c = ["https://www.google.com/calendar"]
-let qmark f = ["http://feedly.com/%23label/global.must"]
+let qmark f = ["http://feedly.com/#label/global.must"]
 let qmark g = ["https://github.com/"]
 let qmark i = ["https://inbox.google.com"]
 let qmark l = ["https://www.google.com/language_tools"]
