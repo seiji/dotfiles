@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://bookmarks/*","https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
+let blacklists=["chrome://bookmarks*","https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -46,22 +46,21 @@ let qmark p = ["https://getpocket.com/a/queue/"]
 let qmark t = ["https://mail.google.com/tasks/canvas"]
 
 " keymaps
-map <C-h> scrollLeft
+map <C-h> deleteWord
 map <C-j> scrollDown
 map <C-k> scrollUp
-map <C-l> scrollRight
 map <C-u> scrollPageUp
 map <C-d> scrollPageDown
 map <C-b> scrollFullPageUp
 map <C-f> scrollFullPageDown
+map <C-i> goForward
+map <C-o> goBack
+
+map <A-p> previousTab
+map <A-n> nextTab
 
 map d closeTab
 map u lastClosedTab
-map <A-p> previousTab
-map <A-n> nextTab
-map <C-i> goForward
-map <C-h> deleteWord
-map <C-o> goBack
 map F createMultiHint
 map R reloadTabUncached
 
