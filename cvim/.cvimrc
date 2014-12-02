@@ -56,15 +56,16 @@ map R reloadTabUncached
 
 map <Leader>cl :open!  chrome://chrome/settings/clearBrowserData<CR>
 map <Leader>ex :open!  chrome://extensions<CR>
-map <Leader>fa :script javascript:void(d=document);void(el=d.getElementsByTagName('link'));void(g=false);for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/rss+xml')!=-1||ty.indexOf('text/xml')!=-1){g=true;h=el[i].getAttribute('href');void(location.href='http://www.feedly.com/home#subscription/feed/'+h);}}};if(!g){window.alert('Could$20not%20find%20the%20RSS%20Feed');};
-map <Leader>fl :open!* http://feedly.com/#label/global.must<CR>
-map <Leader>gc :open!* https://www.google.com/calendar<CR>
-map <Leader>gh :open!  http://github.com<CR>
-map <Leader>gi :open!  https://inbox.google.com<CR>
-map <Leader>gl :open!  https://www.google.com/language_tools<CR>
-map <Leader>gm :open!  https://mail.google.com<CR>
-map <Leader>gt :open!  https://mail.google.com/tasks/canvas<CR>
-map <Leader>pl :open!  https://getpocket.com/a/queue/<CR>
+map <Leader>fa :script javascript:void(d=document);void(el=d.getElementsByTagName('link'));void(g=false);for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/rss+xml')!=-1||ty.indexOf('text/xml')!=-1){g=true;h=el[i].getAttribute('href');void(location.href='http://www.feedly.com/home#subscription/feed/@%' + h);}}};if(!g){window.alert('Could not find the RSS Feed');};<CR>
+map <Leader>fl :open! http://feedly.com/#label/global.must<CR>
+map <Leader>gc :open! https://www.google.com/calendar<CR>
+map <Leader>gh :open! http://github.com<CR>
+map <Leader>gi :open! https://inbox.google.com<CR>
+map <Leader>gl :open! https://www.google.com/language_tools<CR>
+map <Leader>gm :open! https://mail.google.com<CR>
+map <Leader>gs :tabnew site:github.com
+map <Leader>gt :open! https://mail.google.com/tasks/canvas<CR>
+map <Leader>pl :open! https://getpocket.com/a/queue/<CR>
 
 site '*://*.translate.google.com/*' {
   set autofocus
