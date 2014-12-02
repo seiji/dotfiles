@@ -56,8 +56,8 @@ map <C-f> scrollFullPageDown
 map <C-i> goForward
 map <C-o> goBack
 
-map <A-p> previousTab
-map <A-n> nextTab
+map <C-[> previousTab
+map <C-]> nextTab
 
 map d closeTab
 map u lastClosedTab
