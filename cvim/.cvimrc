@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*""http://feedly.com/*"]
+let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -34,16 +34,6 @@ let homedirectory=""
 
 let hintcharacters = "hjklasdfgyuiopqwertnmzxcvb"
 let barposition = "bottom"
-
-" qmarks
-let qmark c = ["https://www.google.com/calendar"]
-let qmark f = ["http://feedly.com/#label/global.must"]
-let qmark g = ["https://github.com/"]
-let qmark i = ["https://inbox.google.com"]
-let qmark l = ["https://www.google.com/language_tools"]
-let qmark m = ["https://mail.google.com"]
-let qmark p = ["https://getpocket.com/a/queue/"]
-let qmark t = ["https://mail.google.com/tasks/canvas"]
 
 " keymaps
 map <C-h> deleteWord
@@ -64,9 +54,17 @@ map u lastClosedTab
 map F createMultiHint
 map R reloadTabUncached
 
-map <Leader>cl :open! chrome://chrome/settings/clearBrowserData<CR>
-map <Leader>ex :open! chrome://extensions<CR>
-map <Leader>fe :open http://feedly.com/#label/global.must<CR>
+map <Leader>cl :open!  chrome://chrome/settings/clearBrowserData<CR>
+map <Leader>ex :open!  chrome://extensions<CR>
+map <Leader>fa :script javascript:void(d=document);void(el=d.getElementsByTagName('link'));void(g=false);for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/rss+xml')!=-1||ty.indexOf('text/xml')!=-1){g=true;h=el[i].getAttribute('href');void(location.href='http://www.feedly.com/home#subscription/feed/'+h);}}};if(!g){window.alert('Could$20not%20find%20the%20RSS%20Feed');};
+map <Leader>fl :open!* http://feedly.com/#label/global.must<CR>
+map <Leader>gc :open!* https://www.google.com/calendar<CR>
+map <Leader>gh :open!  http://github.com<CR>
+map <Leader>gi :open!  https://inbox.google.com<CR>
+map <Leader>gl :open!  https://www.google.com/language_tools<CR>
+map <Leader>gm :open!  https://mail.google.com<CR>
+map <Leader>gt :open!  https://mail.google.com/tasks/canvas<CR>
+map <Leader>pl :open!  https://getpocket.com/a/queue/<CR>
 
 site '*://*.translate.google.com/*' {
   set autofocus
