@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://bookmarks*","https://mail.google.com/*","https://inbox.google.com/*","http://feedly.com/*"]
+let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*""http://feedly.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -56,13 +56,17 @@ map <C-f> scrollFullPageDown
 map <C-i> goForward
 map <C-o> goBack
 
-map <C-[> previousTab
-map <C-]> nextTab
+map <C-h> previousTab
+map <C-l> nextTab
 
 map d closeTab
 map u lastClosedTab
 map F createMultiHint
 map R reloadTabUncached
+
+map <Leader>cl :open! chrome://chrome/settings/clearBrowserData<CR>
+map <Leader>ex :open! chrome://extensions<CR>
+map <Leader>fe :open http://feedly.com/#label/global.must<CR>
 
 site '*://*.translate.google.com/*' {
   set autofocus
