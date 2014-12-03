@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*"]
+let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*","https://www.readability.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -67,6 +67,7 @@ map <Leader>hh :open! http://github.com<CR>
 map <Leader>hs :tabnew site:github.com<SPACE>
 map <Leader>if :open! https://ifttt.com/dashboard<CR>
 map <Leader>pl :open! https://getpocket.com/a/queue/<CR>
+map <Leader>rl :open! https://www.readability.com/reading-list<CR>
 
 site '*://*.translate.google.com/*' {
   set autofocus
