@@ -24,7 +24,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*","https://www.readability.com/*"]
+let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
@@ -55,6 +55,7 @@ map F createMultiHint
 map R reloadTabUncached
 
 map <Leader>cl :open!  chrome://chrome/settings/clearBrowserData<CR>
+map <Leader>ds :tabnew https://registry.hub.docker.com/search?q=
 map <Leader>ex :open!  chrome://extensions<CR>
 map <Leader>fa :script javascript:(function(){var d=document;var el=d.getElementsByTagName('link');var g=false;var j=false;for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/rss+xml')!=-1||ty.indexOf('text/xml')!=-1){g=true;h=el[i].getAttribute('href');var k=h.substring(0,1);if(k=='/'){h='http://'+location.host+h;}break;}}}if(g){window.open('http://cloud.feedly.com/#subscription'+encodeURIComponent('/feed/')+encodeURIComponent(h));return;}if(!g){for(i=0;i<el.length;i++){if(el[i].getAttribute('rel').indexOf('alternate')!=-1){ty=el[i].getAttribute('type');if(ty.indexOf('application/atom+xml')!=-1){j=true;h=el[i].getAttribute('href');var l=h.substring(0,1);if(l=='/'){h='http://'+location.host+h;}break;}}}if(j){window.open('http://cloud.feedly.com/#subscription'+encodeURIComponent('/feed/')+encodeURIComponent(h));return;}if(!j){window.alert('Could not find the RSS/Atom Feed');}}})();<CR>
 map <Leader>fl :open! http://feedly.com/#label/global.must<CR>
@@ -67,7 +68,6 @@ map <Leader>hh :open! http://github.com<CR>
 map <Leader>hs :tabnew site:github.com<SPACE>
 map <Leader>if :open! https://ifttt.com/dashboard<CR>
 map <Leader>pl :open! https://getpocket.com/a/queue/<CR>
-map <Leader>rl :open! https://www.readability.com/reading-list<CR>
 
 site '*://*.translate.google.com/*' {
   set autofocus
