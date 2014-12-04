@@ -13,8 +13,6 @@ export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
 
 case ${OSTYPE} in
@@ -38,13 +36,6 @@ esac
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 export BUNDLER_EDITOR="vim +VimFiler"
-
-# perl
-[[ -s $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
-ARCHNAME=$(perl -MConfig -e 'print $Config{archname}')
-EXTLIB=./extlib/lib/perl5:./extlib/lib/perl5/$ARCHNAME
-PERL5LIB=./lib:$EXTLIB
-export PERL5LIB=$PERL5LIB
 
 # GCP
 export GCP_HOME="$HOME/google-cloud-sdk"
