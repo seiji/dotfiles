@@ -7,7 +7,7 @@ tmux_options: -2
 
 windows:
   - home: cd ~/
-  - irc: weechat-curses
+  - irc: weechat
   - blank: cd ~/
   - github: cd src/github.com
   - github: cd src/github.com; vi .

@@ -42,6 +42,8 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 
 alias tmux='tmux -2'
+alias weechat='TERM=screen-256color weechat'
+alias weechat-curses='TERM=screen-256color weechat-curses'
 # git
 alias gst='git status -s -b && git stash list'
 alias gush='git push origin $1'

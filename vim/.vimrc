@@ -177,6 +177,8 @@ augroup END
 " Golang
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+" PHP
+autocmd FileType php setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
 " Python
 autocmd FileType python setl expandtab shiftwidth=4 softtabstop=4
 " Ruby
