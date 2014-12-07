@@ -1,13 +1,12 @@
 " sync from https://raw.githubusercontent.com/seiji/dotfiles/master/cvim/.cvimrc
 " keymap: https://raw.githubusercontent.com/1995eaton/chromium-vim/585d89f8eb2f21cca910e0fc5837f3a46885f4fe/content_scripts/mappings.js
-"
+
 let searchlimit=30
 let scrolltep=30
 let timeoutlen=1000
 let fullpagescrollpercent = 100
 let typelinkhintsdelay=500
 let scrollduration=20
-let zoomfactor=0.1
 set nohud
 set regexp
 set ignorecase
