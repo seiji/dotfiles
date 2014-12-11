@@ -356,6 +356,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 "set splitright
 ""let g:quickrun_config={'*': {'split': 'vertical'}}
 autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+autocmd BufWinEnter,BufNewFile *_test.go set filetype=go.testing
 let g:quickrun_config={
       \  "_" : {
       \    "outputter/buffer/split" : ":botright 8sp",
@@ -380,11 +381,14 @@ let g:quickrun_config.go = {
       \ 'command': 'go',
       \ 'exec': '%c run *.go',
       \ }
+let g:quickrun_config['go.testing'] = {
+      \ 'type': 'go',
+      \ 'command': 'go',
+      \ 'exec': '%c test -v %s',
+      \ }
 let g:quickrun_config.swift = {
       \ 'type': 'swift',
       \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
       \ 'command': 'xcrun',
       \ 'exec': '%c swift -i %s %o',
       \ }
-
-
