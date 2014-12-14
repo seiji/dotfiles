@@ -335,6 +335,12 @@ au FileType go nmap <Leader>b <Plug>(go-build)
 
 au FileType go nmap <Leader>d <Plug>(go-doc)
 
+let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
+let g:go_fmt_autosave = 1 " Enable auto fmt on save
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
 "
 function! InsertTabWrapper()
   if pumvisible()
@@ -379,12 +385,12 @@ let g:quickrun_config.rspecl = {
 let g:quickrun_config.go = {
       \ 'type': 'go',
       \ 'command': 'go',
-      \ 'exec': '%c run *.go',
+      \ 'exec': 'go run `ls *.go | grep -v _test.go`',
       \ }
 let g:quickrun_config['go.testing'] = {
       \ 'type': 'go',
       \ 'command': 'go',
-      \ 'exec': '%c test -v %s',
+      \ 'exec': '%c test -v',
       \ }
 let g:quickrun_config.swift = {
       \ 'type': 'swift',
