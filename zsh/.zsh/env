@@ -72,3 +72,8 @@ if [[ -s $HOME/go ]]; then
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
+# docker/machine
+if type machine >/dev/null; then
+  export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
+fi
+
