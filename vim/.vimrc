@@ -28,10 +28,12 @@ Plugin 'honza/vim-snippets'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/surround.vim'
 Plugin 'thinca/vim-quickrun'
-
+" language
 Plugin 'slim-template/vim-slim'
 Plugin 'fatih/vim-go'
 Plugin 'vim-scripts/nginx.vim'
+Plugin 'jcfaria/Vim-R-plugin'
+
 
 """"""""
 Plugin 'tpope/vim-fugitive'
