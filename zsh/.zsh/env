@@ -47,13 +47,18 @@ export EC2_PRIVATE_KEY="$HOME/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G2
 export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
 export PATH="${PATH}:${EC2_HOME}/bin"
 
-# Android
-export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
-PATH=$PATH:$ANDROID_HOME/tools
-PATH=$PATH:$ANDROID_HOME/platform-tools
+# Android sdk
+if [[ -s /Applications/android-sdk-macosx ]]; then
+  export ANDROID_HOME=/Applications/android-sdk-macosx
+  PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
 
-export ANDROID_NDK_HOME=/Applications/android-ndk-r9c
-PATH=$PATH:$ANDROID_NDK_HOME
+# Android ndk
+if [[ -s /Applications/android-ndk-r9c ]]; then
+  export ANDROID_NDK_HOME=/Applications/android-ndk-r9c
+  export PATH=$PATH:$ANDROID_NDK_HOME
+fi
 
 # Node
 export NODE_PATH=/usr/local/lib/node_modules
@@ -74,6 +79,9 @@ fi
 
 # docker/machine
 if type machine >/dev/null; then
-  export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
+  machine url >&/dev/null
+  if [ $? -eq 0 ]; then
+    export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
+  fi
 fi
 

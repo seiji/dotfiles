@@ -387,7 +387,7 @@ let g:quickrun_config.rspecl = {
 let g:quickrun_config.go = {
       \ 'type': 'go',
       \ 'command': 'go',
-      \ 'exec': 'go run `ls *.go | grep -v _test.go`',
+      \ 'exec': 'go run *.go',
       \ }
 let g:quickrun_config['go.testing'] = {
       \ 'type': 'go',
