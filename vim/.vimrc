@@ -338,7 +338,8 @@ au FileType go nmap <Leader>b <Plug>(go-build)
 au FileType go nmap <Leader>d <Plug>(go-doc)
 
 let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
-let g:go_fmt_autosave = 1 " Enable auto fmt on save
+let g:go_fmt_autosave = 0 " Enable auto fmt on save
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1

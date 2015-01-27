@@ -77,7 +77,17 @@ if [[ -s $HOME/go ]]; then
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
+# PHP composer
+if [[ -s $HOME/.composer ]]; then
+  export PATH=$HOME/.composer/vendor/bin:$PATH
+fi
+
 # docker/machine
+export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
+
 if type machine >/dev/null; then
   machine url >&/dev/null
   if [ $? -eq 0 ]; then

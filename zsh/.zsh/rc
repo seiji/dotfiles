@@ -57,7 +57,7 @@ function gem() {
 #test -f ~/.tmuxrc && . ~/.tmuxrc
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-[[ -x "`which aws_zsh_completer.sh 2>&1`" ]] && source aws_zsh_completer.sh
+#[[ -x "`which aws_zsh_completer.sh 2>&1`" ]] && source aws_zsh_completer.sh
 
 if [[ -x "`which brew 2>&1`" ]]; then
 #z.sh
@@ -70,6 +70,9 @@ _Z_CMD=j
     . `brew --prefix go`/share/zsh/site-functions/go
   fi
 fi
+
+# phpbrew
+[[ -f $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
 
 function mkcd(){mkdir -p $1 && cd $1}
 
