@@ -58,12 +58,23 @@ alias rake='noglob rake'
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 
+# php
+alias sf='app/console --no-ansi'
+alias sfcl='sf cache:clear'
+alias sfcw='sf cache:warmup'
+alias sfroute='sf router:debug'
+alias sfcontainer='sf container:debug'
+alias sft='bin/phpunit -c app'
+
 # docker
 alias docker='docker $(machine config dev)'
+
 alias dl='docker ps -l -q'
 #  except data container
 alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data\|_run" | tail -n +2 | cut -c-12)'
 alias drmi='docker rmi $(docker images -q)'
+
+alias compose='docker-compose'
 
 # GCP
 function gcloud_login () {

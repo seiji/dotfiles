@@ -23,7 +23,7 @@ set noautofocus
 set insertmappings
 set nosmoothscroll
 set autoupdategist
-let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*","https://circleci.com/*"]
+let blacklists=["chrome://*","https://mail.google.com/*","https://inbox.google.com/*","https://www.google.com/calendar/*","http://feedly.com/*","https://getpocket.com/*","https://creately.com/*","https://circleci.com/*"]
 let mapleader=","
 let highlight="#ffff00"
 let defaultengine="google"
