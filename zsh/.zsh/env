@@ -17,7 +17,7 @@ export PATH=$HOME/bin:$HOME/local/bin:$PATH
 
 case ${OSTYPE} in
   darwin*)
-    export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+    #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
     export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
