@@ -6,6 +6,8 @@ darwin*)
   alias ll="ls -laG"
   alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
+  alias ldd="echo ldd is not on OSX. Use otool -L."
+  alias strace="echo strace is not on OSX. Use dtruss"
   ;;
 linux*)
   alias ls='ls --color'
@@ -71,11 +73,17 @@ alias docker='docker $(machine config dev)'
 
 alias dl='docker ps -l -q'
 #  except data container
-alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data\|_run" | tail -n +2 | cut -c-12)'
+alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
 alias drmi='docker rmi $(docker images -q)'
+alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 
 alias compose='docker-compose'
+function dsh() {
+  machine ssh dev '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
+  machine ssh dev /var/lib/boot2docker/docker-enter "$@"
+}
 
+alias tf='terraform'
 # GCP
 function gcloud_login () {
   docker run -ti --name gcloud-config -e CLOUDSDK_CONFIG=/.config/gcloud google/cloud-sdk gcloud auth login
