@@ -1,11 +1,16 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+set rtp+=~/.vim/plugged/vim-plug
+call plug#begin('~/.vim/plugged')
 " Other plugins
-Plugin 'Shougo/vimproc', {
+Plug 'Shougo/vimproc', {
        \ 'build' : {
        \     'windows' : 'make -f make_mingw32.mak',
        \     'cygwin' : 'make -f make_cygwin.mak',
@@ -14,40 +19,35 @@ Plugin 'Shougo/vimproc', {
        \    },
        \ }
 
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim'
-Plugin 'JazzCore/ctrlp-cmatcher'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-rbenv.git'
-Bundle 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-scripts/surround.vim'
-Plugin 'thinca/vim-quickrun'
-" language
-Plugin 'slim-template/vim-slim'
-Plugin 'fatih/vim-go'
-Plugin 'vim-scripts/nginx.vim'
-Plugin 'jcfaria/Vim-R-plugin'
+Plug 'justinmk/vim-dirvish'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'JazzCore/ctrlp-cmatcher'
+Plug 'bling/vim-airline'
+" " Bundle 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tomtom/tcomment_vim'
+Plug 'vim-scripts/surround.vim'
+Plug 'thinca/vim-quickrun'
+" " language
+" Plug 'fatih/vim-go'
+" Plug 'jcfaria/Vim-R-plugin'
+"
+"
+" """"""""
+Plug 'tpope/vim-fugitive'
+" " Plugin 'git://git.wincent.com/command-t.git'
 
-
-""""""""
-Plugin 'tpope/vim-fugitive'
-" Plugin 'git://git.wincent.com/command-t.git'
-Plugin 't9md/vim-choosewin'
-
-call vundle#end()               " required
+call plug#end()
 
 filetype plugin indent on
 "
 " Settings
 "
-set autowrite
 set autoread
+set autowrite
 set backspace=indent,eol,start
 set confirm
 set encoding=utf-8
@@ -105,6 +105,12 @@ set re=1
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 syntax enable
+
+augroup my_dirvish_events
+    au!
+    " always show hidden files
+    au User DirvishEnter let b:dirvish.showhidden = 1
+augroup END
 
 " imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 let mapleader = ","
@@ -263,27 +269,6 @@ nmap  -  <Plug>(choosewin)
 let g:airline_theme = 'badwolf'
 let g:airline_left_sep  = ' '
 let g:airline_right_sep = ' '
-
-" nerdtree
-let g:NERDTreeShowHidden=1
-let g:NERDTreeShowBookmarks=1
-let g:NERDTreeMinimalUI=1
-
-let file_name = expand("%:p")
-if has('vim_starting') &&  file_name == ""
-  autocmd VimEnter * execute 'NERDTree ./'
-endif
-
-function! g:NerdTreeFindToggle()
-    if nerdtree#isTreeOpen()
-        exec 'NERDTreeClose'
-    else
-        exec 'NERDTreeFind'
-    endif
-endfunction
-
-noremap <Leader>n :<C-u>call g:NerdTreeFindToggle()<cr>
-noremap <Leader>j :NERDTreeFind<cr>
 
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "gofmt"

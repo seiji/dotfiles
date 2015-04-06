@@ -18,8 +18,8 @@ emacs/.emacs.d/anything-c-adaptive-history
 weechat/.weechat/*.log
 weechat/.weechat/logs/*
 weechat/.weechat/script
-vim/.vim/bundle/*
-!vim/.vim/bundle/Vundle.vim
+vim/.vim/autoload
+vim/.vim/plugged/*
 
 registry-params.env
 zsh/.zsh/zsh_history

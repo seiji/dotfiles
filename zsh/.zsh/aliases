@@ -70,14 +70,14 @@ alias sft='bin/phpunit -c app'
 
 # docker
 alias docker='docker $(machine config dev)'
-
 alias dl='docker ps -l -q'
 #  except data container
 alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
 alias drmi='docker rmi $(docker images -q)'
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
-
+alias machine='docker-machine'
 alias compose='docker-compose'
+
 function dsh() {
   machine ssh dev '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
   machine ssh dev /var/lib/boot2docker/docker-enter "$@"
