@@ -30,6 +30,8 @@
 
 [alias]
 
+  br = branch
+  st = status
   # Reset
   rsh = reset --soft HEAD
   rhh = reset --hard HEAD
@@ -44,6 +46,7 @@
 
   log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
 
+  sb = show-branch --all --color
   sgraph = !"git log --oneline --graph"
 
   graph = !"git log1"
@@ -55,7 +58,7 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

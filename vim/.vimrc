@@ -10,15 +10,7 @@ endif
 set rtp+=~/.vim/plugged/vim-plug
 call plug#begin('~/.vim/plugged')
 " Other plugins
-Plug 'Shougo/vimproc', {
-       \ 'build' : {
-       \     'windows' : 'make -f make_mingw32.mak',
-       \     'cygwin' : 'make -f make_cygwin.mak',
-       \     'mac' : 'make -f make_mac.mak',
-       \     'unix' : 'make -f make_unix.mak',
-       \    },
-       \ }
-
+Plug 'Shougo/vimproc'
 Plug 'justinmk/vim-dirvish'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
@@ -32,13 +24,13 @@ Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/surround.vim'
 Plug 'thinca/vim-quickrun'
 " " language
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 " Plug 'jcfaria/Vim-R-plugin'
 "
 "
 " """"""""
 Plug 'tpope/vim-fugitive'
-" " Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 
 call plug#end()
 
@@ -105,12 +97,6 @@ set re=1
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 syntax enable
-
-augroup my_dirvish_events
-    au!
-    " always show hidden files
-    au User DirvishEnter let b:dirvish.showhidden = 1
-augroup END
 
 " imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 let mapleader = ","
@@ -183,6 +169,7 @@ augroup filetypedetect
   au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
 augroup END
 
+autocmd FileType yaml setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
 " Golang
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
@@ -224,6 +211,12 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
 com! JSONFormat %!python -m json.tool
 
 "===== Plugin
+" dirvish
+augroup my_dirvish_events
+    au!
+    " always show hidden files
+    au User DirvishEnter let b:dirvish.showhidden = 1
+augroup END
 
 " ctrlp
 let g:ctrlp_cmd = 'CtrlPMRU'
@@ -249,6 +242,8 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
   \ 'file': '\v\.(exe|so|dll)$'
   \}
+let g:ctrlp_reuse_window  = 1
+" let g:ctrlp_reuse_window  = 'startify'
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -351,7 +346,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 ""let g:quickrun_config={'*': {'split': 'vertical'}}
 autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 autocmd BufWinEnter,BufNewFile *_test.go set filetype=go.testing
-let g:quickrun_config={
+let g:quickrun_config = {
       \  "_" : {
       \    "outputter/buffer/split" : ":botright 8sp",
       \    "outputter/buffer/close_on_empty" : 1,
@@ -361,9 +356,9 @@ let g:quickrun_config={
       \}
 let g:quickrun_config['ruby.rspec'] = {
       \ 'type': 'ruby.rspec',
+      \ 'cmdopt': '-cfd',
       \ 'command': 'rspec',
-      \ 'exec': 'bundle exec %c',
-      \ 'cmdopt': '-cfd'
+      \ 'exec': 'bundle exec %c %o',
       \ }
 let g:quickrun_config.rspecl = {
       \ 'type': 'ruby.rspec',
@@ -380,6 +375,7 @@ let g:quickrun_config['go.testing'] = {
       \ 'command': 'go',
       \ 'exec': '%c test -v',
       \ }
+
 let g:quickrun_config.swift = {
       \ 'type': 'swift',
       \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
