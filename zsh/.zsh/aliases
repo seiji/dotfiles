@@ -4,9 +4,12 @@ case "${OSTYPE}" in
 darwin*)
   alias ls="ls -1G"
   alias ll="ls -laG"
+  alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+  alias chrome='open "/opt/homebrew-cask/Caskroom/google-chrome/latest/Google Chrome.app" --args --renderer-process-limit=3'
   alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias ldd="echo ldd is not on OSX. Use otool -L."
+  alias sed="gsed"
   alias strace="echo strace is not on OSX. Use dtruss"
   ;;
 linux*)
