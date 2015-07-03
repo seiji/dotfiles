@@ -1,0 +1,191 @@
+#compdef gcloud
+
+# zsh completion for gcloud
+
+_gcloud() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  local -a _commands
+  _commands=(
+
+    # command groups
+    # gcloud  --help | grep -A -1 "GROUPS" | grep -v '^$' | grep '^     ' | sed -e 's/^     \([^ ]\+\)/\1:/' | perl -0pe 's/\n        / /gm' | sed "s/^/'/;s/$/'/"
+'auth: Manage oauth2 credentials for the Google Cloud SDK.'
+'components: List, install, update, or remove Google Cloud SDK components or packages.'
+'compute: Read and manipulate Google Compute Engine resources.'
+'config: View and edit Google Cloud SDK properties.'
+'dns: Manage your Cloud DNS managed-zones and record-sets.'
+'sql: Manage Cloud SQL databases.'
+'topic: gcloud supplementary help.'
+'docker: Provides the docker CLI access to the Google Container Registry.'
+'help: Prints detailed help messages for the specified commands.'
+'info: Display information about the current gcloud environment.'
+'init: Create and initialize a gcloud workspace in the current directory.'
+'version: Print version information for Cloud SDK components.'
+  )
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+
+    (options)
+      # subcommands
+      case $line[1] in
+        (auth)
+          _gcloud_auth
+          ;;
+        (components)
+          _gcloud_components
+          ;;
+        (compute)
+          _gcloud_compute
+          ;;
+        (config)
+          _gcloud_config
+          ;;
+        (sql)
+          _gcloud_sql
+          ;;
+      esac
+    ;;
+  esac
+}
+_gcloud
+
+_gcloud_auth() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  local -a _commands
+  _commands=(
+'activate-refresh-token: Get credentials via an existing refresh token.'
+'activate-service-account: Get credentials via the private key for a service account.'
+'list: List the accounts for known credentials.'
+'login: Get credentials for the tools in the Google Cloud SDK via a web flow.'
+'revoke: Revoke authorization for credentials.'
+  )
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+  esac
+}
+
+_gcloud_components() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  local -a _commands
+  _commands=(
+'repositories: Manage additional component repositories for Trusted Tester programs.'
+'list: List the status of all Cloud SDK components.'
+'reinstall: Reinstall the Cloud SDK with the same components you have now.'
+'remove: Remove one or more installed components.'
+'restore: Restore the Cloud SDK installation to its previous state.'
+'update: Update or install one or more Cloud SDK components or packages.'
+  )
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+  esac
+}
+
+_gcloud_compute() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  local -a _commands
+  _commands=(
+    # command groups
+'addresses: Read and manipulate Google Compute Engine addresses.'
+'backend-services: List, create, and delete backend services.'
+'disk-types: Read Google Compute Engine virtual disk types.'
+'disks: Read and manipulate Google Compute Engine disks.'
+'firewall-rules: List, create, and delete Google Compute Engine firewall rules.'
+'forwarding-rules: Read and manipulate forwarding rules to send traffic to load balancers.'
+'http-health-checks: Read and manipulate HTTP health checks for load balanced instances.'
+'images: List, create, and delete Google Compute Engine images.'
+'instance-templates: Read and manipulate Google Compute Engine instances templates.'
+'instances: Read and manipulate Google Compute Engine virtual machine instances.'
+'machine-types: Read Google Compute Engine virtual machine types.'
+'networks: List, create, and delete Google Compute Engine networks.'
+'operations: Read and manipulate Google Compute Engine operations.'
+'project-info: Read and manipulate project-level data like quotas and metadata.'
+'regions: List Google Compute Engine regions.'
+'routes: Read and manipulate routes.'
+'snapshots: List, describe, and delete Google Compute Engine snapshots.'
+'target-http-proxies: List, create, and delete target HTTP proxies.'
+'target-instances: Read and manipulate Google Compute Engine virtual target instances.'
+'target-pools: Control Compute Engine target pools for network load balancing.'
+'target-vpn-gateways: Read and manipulate Google Compute Engine VPN Gateways.'
+'url-maps: List, create, and delete URL maps.'
+'vpn-tunnels: Read and manipulate Google Compute Engine VPN Tunnels.'
+'zones: List Google Compute Engine zones.'
+'config-ssh: Populate SSH config files with Host entries from each instance.'
+'copy-files: Copy files to and from Google Compute Engine virtual machines.'
+'reset-windows-password: Reset and return a password for a Windows machine instance.'
+'ssh: SSH into a virtual machine instance.'
+  )
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+  esac
+}
+
+_gcloud_config() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  local -a _commands
+  _commands=(
+'list: View Google Cloud SDK properties.'
+'set: Edit Google Cloud SDK properties.'
+'unset: Erase Google Cloud SDK properties.'
+  )
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+  esac
+}
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 2
+# indent-tabs-mode: nil
+# sh-basic-offset: 2
+# End:
+# vim: ft=zsh sw=2 ts=2 et
