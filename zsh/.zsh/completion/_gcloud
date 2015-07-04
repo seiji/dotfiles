@@ -27,7 +27,7 @@ _gcloud() {
           _gcloud_command _commands_components
           ;;
         (compute)
-          _gcloud_command _commands_compute
+          _gcloud_compute
           ;;
         (config)
           _gcloud_command _commands_config
@@ -43,6 +43,99 @@ _gcloud() {
   esac
 }
 _gcloud
+
+_gcloud_compute() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands_compute
+    ;;
+    (options)
+      # subcommands
+      case $line[1] in
+        (addresses)
+          _gcloud_command _commands_compute_addresses
+          ;;
+        (backend-services)
+          _gcloud_command _commands_compute_backend_services
+          ;;
+        (disk-types)
+          _gcloud_command _commands_compute_disk_types
+          ;;
+        (disks)
+          _gcloud_command _commands_compute_disks
+          ;;
+        (firewall-rules)
+          _gcloud_command _commands_compute_firewall_rules
+          ;;
+        (forwarding-rules)
+          _gcloud_command _commands_compute_forwarding_rules
+          ;;
+        (http-health-checks)
+          _gcloud_command _commands_compute_http_health_checks
+          ;;
+        (images)
+          _gcloud_command _commands_compute_images
+          ;;
+        (instance-templates)
+          _gcloud_command _commands_compute_instance_template
+          ;;
+        (instances)
+          _gcloud_command _commands_compute_instances
+          ;;
+        (machine-types)
+          _gcloud_command _commands_compute_machine_types
+          ;;
+        (networks)
+          _gcloud_command _commands_compute_networks
+          ;;
+        (operation)
+          _gcloud_command _commands_compute_operation
+          ;;
+        (project-info)
+          _gcloud_command _commands_compute_project_info
+          ;;
+        (regions)
+          _gcloud_command _commands_compute_regions
+          ;;
+        (routes)
+          _gcloud_command _commands_compute_routes
+          ;;
+        (snapshots)
+          _gcloud_command _commands_compute_snapshots
+          ;;
+        (target-http-proxies)
+          _gcloud_command _commands_compute_target_http_proxies
+          ;;
+        (target-instances)
+          _gcloud_command _commands_compute_target_instances
+          ;;
+        (target-pools)
+          _gcloud_command _commands_compute_target_pools
+          ;;
+        (target-vpn-gateways)
+          _gcloud_command _commands_compute_target_vpn_gateways
+          ;;
+        (url-maps)
+          _gcloud_command _commands_compute_url_maps
+          ;;
+        (vpn-tunnels)
+          _gcloud_command _commands_compute_vpn_tunnels
+          ;;
+        (zones)
+          _gcloud_command _commands_compute_zones
+          ;;
+      esac
+    ;;
+  esac
+}
 
 _gcloud_command() {
   local context curcontext=$curcontext state line
@@ -125,6 +218,179 @@ _commands_compute=(
 'ssh: SSH into a virtual machine instance.'
 )
 
+_commands_compute_addresses=(
+'create: Reserve IP addresses.'
+'delete: Release reserved IP addresses.'
+'describe: Display detailed information about an address.'
+'list: List addresses.'
+)
+_commands_compute_backend_services=(
+'add-backend: Add a backend to a backend service.'
+'create: Create a backend service.'
+'delete: Delete backend services.'
+'describe: Describe a backend service.'
+'edit: Modify backend services.'
+'get-health: Get backend health statuses from a backend service.'
+'list: List Google Compute Engine backend services.'
+'remove-backend: Remove a backend from a backend service.'
+'update: Update a backend service.'
+'update-backend: Update an existing backend in a backend service.'
+)
+_commands_compute_disk_types=(
+'describe: Describe a Google Compute Engine disk type.'
+'list: List Google Compute Engine disk types.'
+)
+_commands_compute_disks=(
+'create: Create Google Compute Engine persistent disks.'
+'delete: Delete Google Compute Engine persistent disks.'
+'describe: Describe a Google Compute Engine disk.'
+'list: List Google Compute Engine disks.'
+'move: Move a disk between zones.'
+'snapshot: Snapshot Google Compute Engine persistent disks.'
+)
+_commands_compute_firewall_rules=(
+'create: Create a Google Compute Engine firewall rule.'
+'delete: Delete Google Compute Engine firewall rules.'
+'describe: Describe a Google Compute Engine firewall rule.'
+'list: List Google Compute Engine firewall rules.'
+'update: Update a firewall rule.'
+)
+_commands_compute_forwarding_rules=(
+'create: Create a forwarding rule to direct network traffic to a load balancer.'
+'delete: Delete forwarding rules.'
+'describe: Display detailed information about a forwarding rule.'
+'list: List Google Compute Engine forwarding rules.'
+'set-target: Modify a forwarding rule to direct network traffic to a new target.'
+)
+_commands_compute_http_health_checks=(
+'create: Create an HTTP health check to monitor load balanced instances.'
+'delete: Delete HTTP health checks.'
+'describe: Display detailed information about an HTTP health check.'
+'list: List Google Compute Engine health checks.'
+'update: Update an HTTP health check.'
+)
+_commands_compute_images=(
+'create: Create Google Compute Engine images.'
+'delete: Delete Google Compute Engine images.'
+'deprecate: Manage deprecation status of Google Compute Engine images.'
+'describe: Describe a Google Compute Engine image.'
+'list: List Google Compute Engine images.'
+)
+_commands_compute_instance_template=(
+'create: Create a Compute Engine virtual machine instance template.'
+'delete: Delete Google Compute Engine virtual machine instance templates.'
+'describe: Describe a virtual machine instance template.'
+'list: List Google Compute Engine instance tempates.'
+)
+_commands_compute_instances=(
+'add-access-config: Create a Google Compute Engine virtual machine access configuration.'
+'add-metadata: Add or update instance metadata.'
+'add-tags: Add tags to Google Compute Engine virtual machine instances.'
+'attach-disk: Attach a disk to an instance.'
+'create: Create Google Compute Engine virtual machine instances.'
+'delete: Delete Google Compute Engine virtual machine instances.'
+'delete-access-config: Delete an access configuration from a virtual machine network interface.'
+'describe: Describe a virtual machine instance.'
+'detach-disk: Detach disks from Compute Engine virtual machine instances.'
+'get-serial-port-output: Read output from a virtual machine instance''s serial port.'
+'list: List Google Compute Engine instances.'
+'move: Move an instance between zones.'
+'remove-metadata: Remove instance metadata.'
+'remove-tags: Remove tags from Google Compute Engine virtual machine instances.'
+'reset: Reset a virtual machine instance.'
+'set-disk-auto-delete: Set auto-delete behavior for disks.'
+'set-scheduling: Set scheduling options for Google Compute Engine virtual machines.'
+'start: Start a stopped virtual machine instance.'
+'stop: Stop a virtual machine instance.'
+)
+_commands_compute_machine_types=(
+'describe: Describe a Google Compute Engine machine type.'
+'list: List Google Compute Engine machine types.'
+)
+_commands_compute_networks=(
+'create: Create a Google Compute Engine network.'
+'delete: Delete Google Compute Engine networks.'
+'describe: Describe a Google Compute Engine network.'
+'list: List Google Compute Engine networks.'
+)
+_commands_compute_operation=(
+'describe: Describe a Google Compute Engine operation.'
+'list: List Google Compute Engine operations.'
+)
+_commands_compute_project_info=(
+'add-metadata: Add or update project-wide metadata.'
+'describe: Describe the Google Compute Engine project resource.'
+'remove-metadata: Remove project-wide metadata entries.'
+'set-usage-bucket: Set the usage reporting bucket for a project.'
+)
+_commands_compute_regions=(
+'describe: Describe a Google Compute Engine region.'
+'list: List Google Compute Engine regions.'
+)
+_commands_compute_routes=(
+'create: Create a new route.'
+'delete: Delete routes.'
+'describe: Describe a route.'
+'list: List Google Compute Engine routes.'
+)
+_commands_compute_snapshots=(
+'delete: Delete Google Compute Engine snapshots.'
+'describe: Describe a Google Compute Engine snapshot.'
+'list: List Google Compute Engine snapshots.'
+)
+_commands_compute_target_http_proxies=(
+'create: Create a target HTTP proxy.'
+'delete: Delete target HTTP proxies.'
+'describe: Display detailed information about a target HTTP proxy.'
+'list: List Google Compute Engine target HTTP proxies.'
+'update: Update a target HTTP proxy.'
+)
+_commands_compute_target_instances=(
+'create: Create a target instance for handling traffic from a forwarding rule.'
+'delete: Delete target instances.'
+'describe: Describe a target instance.'
+'list: List Google Compute Engine target instances.'
+)
+_commands_compute_target_pools=(
+'add-health-checks: Add an HTTP health check to a target pool.'
+'add-instances: Add instances to a target pool.'
+'create: Define a load-balanced pool of virtual machine instances.'
+'delete: Delete target pools.'
+'describe: Describe a Google Compute Engine target pool.'
+'get-health: Get the health of instances in a target pool.'
+'list: List Google Compute Engine target pools.'
+'remove-health-checks: Remove an HTTP health check from a target pool.'
+'remove-instances: Remove instances from a target pool.'
+'set-backup: Set a backup pool for a target pool.'
+)
+_commands_compute_target_vpn_gateways=(
+'create: Create a target VPN Gateway.'
+'delete: Delete target vpn gateways.'
+'describe: Describe a Google Compute Engine target vpn gateway.'
+'list: List Google Compute Engine target VPN gateways.'
+)
+_commands_compute_url_maps=(
+'add-host-rule: Add a rule to a URL map to map hosts to a path matcher.'
+'add-path-matcher: Add a path matcher to a URL map.'
+'create: Create a URL map.'
+'delete: Delete URL maps.'
+'describe: Describe a URL map.'
+'edit: Modify URL maps.'
+'list: List Google Compute Engine URL maps.'
+'remove-host-rule: Remove a host rule from a URL map.'
+'remove-path-matcher: Remove a path matcher from a URL map.'
+'set-default-service: Change the default service of a URL map.'
+)
+_commands_compute_vpn_tunnels=(
+'create: Create a VPN tunnel.'
+'delete: Delete vpn tunnels.'
+'describe: Describe a Google Compute Engine vpn tunnel.'
+'list: List Google Compute Engine VPN tunnels.'
+)
+_commands_compute_zones=(
+'describe: Describe a Google Compute Engine zone.'
+'list: List Google Compute Engine zones.'
+)
 _commands_config=(
 'list: View Google Cloud SDK properties.'
 'set: Edit Google Cloud SDK properties.'

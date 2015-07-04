@@ -13,7 +13,7 @@ export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
-export PATH=$HOME/local/bin:$PATH
+export PATH=/usr/local/sbin:$HOME/local/bin:$PATH
 
 case ${OSTYPE} in
   darwin*)

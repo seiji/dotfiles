@@ -100,8 +100,23 @@ function gcloud_shell () {
   fi
 }
 
+function gcloud_image_push () {
+  if [ $# -gt 0 ]; then
+    docker run --rm -v $HOME/.docker:$HOME/.docker -v $HOME/.config:/.config seiji/gcloud /bin/sh -c "eval '$(machine env dev)' && gcloud docker -- push $argv"
+  fi
+}
+
+function gcloud_image_pull () {
+  if [ $# -gt 0 ]; then
+    docker run --rm -v $HOME/.docker:$HOME/.docker -v $HOME/.config:/.config seiji/gcloud /bin/sh -c "eval '$(machine env dev)' && gcloud docker -- pull $argv"
+  fi
+}
+
 alias gclogin=gcloud_login
 alias gcshell=gcloud_shell
+alias gcpush=gcloud_image_push
+alias gcpull=gcloud_image_pull
+
 
 # $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
 
