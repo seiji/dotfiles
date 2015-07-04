@@ -1,49 +1,102 @@
 #compdef gsutil
-
 # zsh completion for gsutil
+# gsutil version: 4.13
 
 _gsutil() {
-    local -a commands
-    commands=(
-  'acl:Get, set, or change bucket and/or object ACLs'
-  'cat:Concatenate object content to stdout'
-  'compose:Concatenate a sequence of objects into a new composite object.'
-  'config:Obtain credentials and create configuration file'
-  'cors:Set a CORS JSON document for one or more buckets'
-  'cp:Copy files and objects'
-  'defacl:Get, set, or change default ACL on buckets'
-  'du:Display object size usage'
-  'hash:Calculate file hashes'
-  'help:Get help about commands and topics'
-  'lifecycle:Get or set lifecycle configuration for a bucket'
-  'logging:Configure or retrieve logging on buckets'
-  'ls:List providers, buckets, or objects'
-  'mb:Make buckets'
-  'mv:Move/rename objects and/or subdirectories'
-  'notification:Configure object change notification'
-  'perfdiag:Run performance diagnostic'
-  'rb:Remove buckets'
-  'rm:Remove objects'
-  'rsync:Synchronize content of two buckets/directories'
-  'setmeta:Set metadata on already uploaded objects'
-  'signurl:Create a signed url'
-  'stat:Display object status'
-  'test:Run gsutil tests'
-  'update:Update to the latest gsutil release'
-  'version:Print version info about gsutil'
-  'versioning:Enable or suspend versioning for one or more buckets'
-  'web:Set a main page and/or error page for one or more buckets'
-    )
+    local context curcontext=$curcontext state line
+    local -A opt_args
 
-    if (( CURRENT == 2 )); then
-      _describe -t commands 'commands' commands
-    fi
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
 
-    return 0
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+
+    (options)
+      # subcommands
+      case $line[1] in
+        (help)
+          _gsutil_command _commands_help
+          ;;
+      esac
+    ;;
+  esac
+}
+_gsutil _commands
+
+_gsutil_command() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" "$1"
+    ;;
+  esac
 }
 
-_gsutil
-
+# gsutil help | grep -A -1 "Available commands" | grep -v '^$' | grep '^  ' | sed -e 's/^  \([^ ]\+\) \+/\1:/' | sed "s/^/'/;s/$/'/"
+#
+_commands=(
+'acl:Get, set, or change bucket and/or object ACLs'
+'cat:Concatenate object content to stdout'
+'compose:Concatenate a sequence of objects into a new composite object.'
+'config:Obtain credentials and create configuration file'
+'cors:Set a CORS JSON document for one or more buckets'
+'cp:Copy files and objects'
+'defacl:Get, set, or change default ACL on buckets'
+'du:Display object size usage'
+'hash:Calculate file hashes'
+'help:Get help about commands and topics'
+'lifecycle:Get or set lifecycle configuration for a bucket'
+'logging:Configure or retrieve logging on buckets'
+'ls:List providers, buckets, or objects'
+'mb:Make buckets'
+'mv:Move/rename objects and/or subdirectories'
+'notification:Configure object change notification'
+'perfdiag:Run performance diagnostic'
+'rb:Remove buckets'
+'rm:Remove objects'
+'rsync:Synchronize content of two buckets/directories'
+'setmeta:Set metadata on already uploaded objects'
+'signurl:Create a signed url'
+'stat:Display object status'
+'test:Run gsutil tests'
+'update:Update to the latest gsutil release'
+'version:Print version info about gsutil'
+'versioning:Enable or suspend versioning for one or more buckets'
+'web:Set a main page and/or error page for one or more buckets'
+)
+_commands_help=(
+'acls:Working With Access Control Lists'
+'anon:Accessing Public Data Without Credentials'
+'apis:Cloud Storage APIs'
+'crc32c:CRC32C and Installing crcmod'
+'creds:Credential Types Supporting Various Use Cases'
+'dev:Contributing Code to gsutil'
+'encoding:Filename encoding and interoperability problems'
+'metadata:Working With Object Metadata'
+'naming:Object and Bucket Naming'
+'options:Top-Level Command-Line Options'
+'prod:Scripting Production Transfers'
+'projects:Working With Projects'
+'retries:Retry Handling Strategy'
+'security:Security and Privacy Considerations'
+'subdirs:How Subdirectories Work'
+'support:Google Cloud Storage Support'
+'throttling:Throttling gsutil'
+'versions:Object Versioning and Concurrency Control'
+'wildcards:Wildcard Names'
+)
 # Local Variables:
 # mode: Shell-Script
 # sh-indentation: 2

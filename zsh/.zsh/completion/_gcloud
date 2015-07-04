@@ -1,29 +1,11 @@
 #compdef gcloud
-
 # zsh completion for gcloud
+# Google Cloud SDK 0.9.67
 
 _gcloud() {
   local context curcontext=$curcontext state line
   local -A opt_args
 
-  local -a _commands
-  _commands=(
-
-    # command groups
-    # gcloud  --help | grep -A -1 "GROUPS" | grep -v '^$' | grep '^     ' | sed -e 's/^     \([^ ]\+\)/\1:/' | perl -0pe 's/\n        / /gm' | sed "s/^/'/;s/$/'/"
-'auth: Manage oauth2 credentials for the Google Cloud SDK.'
-'components: List, install, update, or remove Google Cloud SDK components or packages.'
-'compute: Read and manipulate Google Compute Engine resources.'
-'config: View and edit Google Cloud SDK properties.'
-'dns: Manage your Cloud DNS managed-zones and record-sets.'
-'sql: Manage Cloud SQL databases.'
-'topic: gcloud supplementary help.'
-'docker: Provides the docker CLI access to the Google Container Registry.'
-'help: Prints detailed help messages for the specified commands.'
-'info: Display information about the current gcloud environment.'
-'init: Create and initialize a gcloud workspace in the current directory.'
-'version: Print version information for Cloud SDK components.'
-  )
 
   _arguments -C \
     $common_ops \
@@ -39,19 +21,22 @@ _gcloud() {
       # subcommands
       case $line[1] in
         (auth)
-          _gcloud_auth
+          _gcloud_command _commands_auth
           ;;
         (components)
-          _gcloud_components
+          _gcloud_command _commands_components
           ;;
         (compute)
-          _gcloud_compute
+          _gcloud_command _commands_compute
           ;;
         (config)
-          _gcloud_config
+          _gcloud_command _commands_config
+          ;;
+        (dns)
+          _gcloud_command _commands_dns
           ;;
         (sql)
-          _gcloud_sql
+          _gcloud_command _commands_sql
           ;;
       esac
     ;;
@@ -59,18 +44,9 @@ _gcloud() {
 }
 _gcloud
 
-_gcloud_auth() {
+_gcloud_command() {
   local context curcontext=$curcontext state line
   local -A opt_args
-
-  local -a _commands
-  _commands=(
-'activate-refresh-token: Get credentials via an existing refresh token.'
-'activate-service-account: Get credentials via the private key for a service account.'
-'list: List the accounts for known credentials.'
-'login: Get credentials for the tools in the Google Cloud SDK via a web flow.'
-'revoke: Revoke authorization for credentials.'
-  )
 
   _arguments -C \
     $common_ops \
@@ -79,44 +55,46 @@ _gcloud_auth() {
 
   case $state in
     (command)
-      _describe -t commands "Google Cloud SDK Commands" _commands
+      _describe -t commands "Google Cloud SDK Commands" "$1"
     ;;
   esac
 }
 
-_gcloud_components() {
-  local context curcontext=$curcontext state line
-  local -A opt_args
+# gcloud --help | grep -A -1 "GROUPS" | grep -v '^$' | grep '^     ' | sed -e 's/^     \([^ ]\+\)/\1:/' | perl -0pe 's/\n        / /gm' | sed "s/^/'/;s/$/'/"
+#
+_commands=(
+'auth: Manage oauth2 credentials for the Google Cloud SDK.'
+'components: List, install, update, or remove Google Cloud SDK components or packages.'
+'compute: Read and manipulate Google Compute Engine resources.'
+'config: View and edit Google Cloud SDK properties.'
+'dns: Manage your Cloud DNS managed-zones and record-sets.'
+'sql: Manage Cloud SQL databases.'
+'topic: gcloud supplementary help.'
+'docker: Provides the docker CLI access to the Google Container Registry.'
+'help: Prints detailed help messages for the specified commands.'
+'info: Display information about the current gcloud environment.'
+'init: Create and initialize a gcloud workspace in the current directory.'
+'version: Print version information for Cloud SDK components.'
+)
 
-  local -a _commands
-  _commands=(
+_commands_auth=(
+'activate-refresh-token: Get credentials via an existing refresh token.'
+'activate-service-account: Get credentials via the private key for a service account.'
+'list: List the accounts for known credentials.'
+'login: Get credentials for the tools in the Google Cloud SDK via a web flow.'
+'revoke: Revoke authorization for credentials.'
+)
+
+_commands_components=(
 'repositories: Manage additional component repositories for Trusted Tester programs.'
 'list: List the status of all Cloud SDK components.'
 'reinstall: Reinstall the Cloud SDK with the same components you have now.'
 'remove: Remove one or more installed components.'
 'restore: Restore the Cloud SDK installation to its previous state.'
 'update: Update or install one or more Cloud SDK components or packages.'
-  )
+)
 
-  _arguments -C \
-    $common_ops \
-    ':command:->command' \
-    '*::options:->options'
-
-  case $state in
-    (command)
-      _describe -t commands "Google Cloud SDK Commands" _commands
-    ;;
-  esac
-}
-
-_gcloud_compute() {
-  local context curcontext=$curcontext state line
-  local -A opt_args
-
-  local -a _commands
-  _commands=(
-    # command groups
+_commands_compute=(
 'addresses: Read and manipulate Google Compute Engine addresses.'
 'backend-services: List, create, and delete backend services.'
 'disk-types: Read Google Compute Engine virtual disk types.'
@@ -145,43 +123,28 @@ _gcloud_compute() {
 'copy-files: Copy files to and from Google Compute Engine virtual machines.'
 'reset-windows-password: Reset and return a password for a Windows machine instance.'
 'ssh: SSH into a virtual machine instance.'
-  )
+)
 
-  _arguments -C \
-    $common_ops \
-    ':command:->command' \
-    '*::options:->options'
-
-  case $state in
-    (command)
-      _describe -t commands "Google Cloud SDK Commands" _commands
-    ;;
-  esac
-}
-
-_gcloud_config() {
-  local context curcontext=$curcontext state line
-  local -A opt_args
-
-  local -a _commands
-  _commands=(
+_commands_config=(
 'list: View Google Cloud SDK properties.'
 'set: Edit Google Cloud SDK properties.'
 'unset: Erase Google Cloud SDK properties.'
-  )
+)
 
-  _arguments -C \
-    $common_ops \
-    ':command:->command' \
-    '*::options:->options'
+_commands_dns=(
+'managed-zones: Manage your Cloud DNS managed-zones.'
+'project-info: View Cloud DNS related information for a project.'
+'record-sets: Manage the record-sets within your managed-zones. $ gcloud dns managed-zones $ gcloud dns record-sets $ gcloud dns project-info describe'
+)
 
-  case $state in
-    (command)
-      _describe -t commands "Google Cloud SDK Commands" _commands
-    ;;
-  esac
-}
-
+_commands_sql=(
+'backups: Provide commands for working with backups of Cloud SQL instances.'
+'flags: Provide a command to list flags.'
+'instances: Provide commands for managing Cloud SQL instances.'
+'operations: Provide commands for working with Cloud SQL instance operations.'
+'ssl-certs: Provide commands for managing SSL certificates of Cloud SQL instances.'
+'tiers: Provide a command to list tiers.'
+)
 # Local Variables:
 # mode: Shell-Script
 # sh-indentation: 2
