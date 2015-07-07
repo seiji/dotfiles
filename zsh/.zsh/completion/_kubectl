@@ -1,0 +1,89 @@
+#compdef kubectl
+# zsh completion for kubectl
+# Google Cloud SDK 0.9.67
+
+_kubectl() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" _commands
+    ;;
+
+    (options)
+      # subcommands
+      case $line[1] in
+        (config)
+          _kubectl_command _commands_config
+          ;;
+      esac
+    ;;
+  esac
+}
+_kubectl
+
+_kubectl_command() {
+  local context curcontext=$curcontext state line
+  local -A opt_args
+
+  _arguments -C \
+    $common_ops \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+      _describe -t commands "Google Cloud SDK Commands" "$1"
+    ;;
+  esac
+}
+
+#
+_commands=(
+'get:Display one or many resources'
+'describe:Show details of a specific resource'
+'create:Create a resource by filename or stdin'
+'update:Update a resource by filename or stdin.'
+'delete:Delete a resource by filename, stdin, resource and ID, or by resources and label selector.'
+'namespace:SUPERCEDED: Set and view the current Kubernetes namespace'
+'logs:Print the logs for a container in a pod.'
+'rolling-update:Perform a rolling update of the given ReplicationController.'
+'scale:Set a new size for a Replication Controller.'
+'exec:Execute a command in a container.'
+'port-forward:Forward one or more local ports to a pod.'
+'proxy:Run a proxy to the Kubernetes API server'
+'run:Run a particular image on the cluster.'
+'stop:Gracefully shut down a resource by id or filename.'
+'expose:Take a replicated application and expose it as Kubernetes Service'
+'label:Update the labels on a resource'
+'config:config modifies kubeconfig files'
+'cluster-info:Display cluster info'
+'api-versions:Print available API versions.'
+'version:Print the client and server version information.'
+'help:Help about any command'
+)
+
+_commands_config=(
+'view:displays Merged kubeconfig settings or a specified kubeconfig file.'
+'set-cluster:Sets a cluster entry in kubeconfig'
+'set-credentials:Sets a user entry in kubeconfig'
+'set-context:Sets a context entry in kubeconfig'
+'set:Sets an individual value in a kubeconfig file'
+'unset:Unsets an individual value in a kubeconfig file'
+'use-context:Sets the current-context in a kubeconfig file'
+)
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 2
+# indent-tabs-mode: nil
+# sh-basic-offset: 2
+# End:
+# vim: ft=zsh sw=2 ts=2 et

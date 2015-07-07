@@ -87,6 +87,7 @@ function dsh() {
 }
 
 alias tf='terraform'
+
 # GCP
 function gcloud_login () {
   docker run -ti --name gcloud-config -e CLOUDSDK_CONFIG=/.config/gcloud google/cloud-sdk gcloud auth login
@@ -117,6 +118,8 @@ alias gcshell=gcloud_shell
 alias gcpush=gcloud_image_push
 alias gcpull=gcloud_image_pull
 
+alias gce='gcloud compute'
+alias gke='gcloud beta container'
 
 # $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
 
