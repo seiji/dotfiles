@@ -1,6 +1,7 @@
 [user]
   username = Seiji Toyama
-  email = toyama.seiji@gmail.com
+	email = toyama.seiji@gmail.com
+	name = Seiji Toyama
 
 [color]
   ui = auto
@@ -11,6 +12,7 @@
 [core]
   editor = vim
 	excludesfile = /Users/seiji/.gitignore_global
+	quotepath = false
 
 [branch]
   autosetuprebase = always
@@ -29,22 +31,27 @@
   mergeoptions = --no-ff
 
 [alias]
-
-  br = branch
-  st = status
-  # Reset
-  rsh = reset --soft HEAD
-  rhh = reset --hard HEAD
-  nffmerge = merge --no-ff
+  al  = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t= \\2/' | sort
+  br  = branch
+  ci  = commit
+  cia = commit --amend
+  co  = checkout
+  di  = diff
+  dc  = diff --cached
+  fe  = fetch --prune
+  fs  = !cd $(git rev-parse --show-toplevel) && git submodule update && cd -
+  ls  = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+  ll  = log --stat --abbrev-commit
+  mnf = merge --no-ff
+  pl  = pull origin
+  ps  = push origin
+  rs  = reset --soft HEAD
+  rh  = reset --hard HEAD
+  st  = !git status -s -b && git stash list
 
   # Log
-  log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 
-  log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
 
-  log3 = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
-
-  log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
 
   sb = show-branch --all --color
   sgraph = !"git log --oneline --graph"
@@ -68,3 +75,7 @@
 [filter "csharp-format"]
   clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
 #  smudge = cat
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
