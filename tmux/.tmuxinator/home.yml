@@ -8,6 +8,7 @@ tmux_options: -2
 windows:
   - home: cd ~/
   - irc: weechat
+  - blog: cd ~/Dropbox/blog/ghost; npm start
   - blank: cd ~/
   - github: cd src/github.com
   - github: cd src/github.com; vi .

@@ -1,6 +1,22 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+let g:loaded_2html_plugin      = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_gzip              = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -10,12 +26,14 @@ endif
 set rtp+=~/.vim/plugged/vim-plug
 call plug#begin('~/.vim/plugged')
 " Other plugins
-Plug 'Shougo/vimproc'
+Plug 'Shougo/vimproc.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-eunuch'
 " " Bundle 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
@@ -24,8 +42,9 @@ Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/surround.vim'
 Plug 'thinca/vim-quickrun'
 " " language
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'fatih/vim-go'
-" Plug 'jcfaria/Vim-R-plugin'
+Plug 'vim-scripts/Vim-R-plugin'
 "
 "
 " """"""""
@@ -158,9 +177,10 @@ nnoremap <silent> <C-L> :noh<C-L><CR>
 " = Skelton
 augroup TemplatesAu
   autocmd!
-  autocmd BufNewFile *.rb 0r $HOME/.vim/templates/tpl.rb
-  autocmd BufNewFile *.go 0r $HOME/.vim/templates/tpl.go
-  autocmd BufNewFile *.html 0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
+  autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
+  autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
 augroup END
 
@@ -365,17 +385,16 @@ let g:quickrun_config.rspecl = {
       \ 'command': 'rspec',
       \ 'exec': 'bundle exec %c %s -l ' . line('.'),
       \}
-let g:quickrun_config.go = {
-      \ 'type': 'go',
-      \ 'command': 'go',
-      \ 'exec': 'go run *.go',
-      \ }
+" let g:quickrun_config.go = {
+"       \ 'type': 'go',
+"       \ 'command': 'go',
+"       \ 'exec': 'go run *.go',
+"       \ }
 let g:quickrun_config['go.testing'] = {
       \ 'type': 'go',
       \ 'command': 'go',
       \ 'exec': '%c test -v',
       \ }
-
 let g:quickrun_config.swift = {
       \ 'type': 'swift',
       \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
