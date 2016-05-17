@@ -1,3 +1,5 @@
+setopt no_global_rcs
+
 export MANPATH="/usr/local/share/man:/usr/X11/man:/usr/share/man"
 
 export LANG="en_US.UTF-8"
@@ -13,7 +15,7 @@ export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
-export PATH=/usr/local/sbin:$HOME/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$PATH
 
 case ${OSTYPE} in
   darwin*)
@@ -37,6 +39,13 @@ export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 #export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 export BUNDLER_EDITOR="vim +VimFiler"
+
+# Python
+if [ -x `brew --prefix pyenv` ]; then
+  export PYENV_ROOT=$(brew --prefix pyenv)
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 # GCP
 export GCP_HOME="$HOME/google-cloud-sdk"
@@ -72,11 +81,11 @@ if [ -x `brew --prefix go` ]; then
   export GOPATH=$HOME
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
-if [[ -s $HOME/go ]]; then
-  export GOROOT=$HOME/go
-  export GOPATH=$HOME
-  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-fi
+#if [[ -s $HOME/go ]]; then
+#  export GOROOT=$HOME/go
+#  export GOPATH=$HOME
+#  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+#fi
 
 # PHP composer
 if [[ -s $HOME/.composer ]]; then
