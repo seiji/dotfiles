@@ -30,9 +30,8 @@ Plug 'Shougo/vimproc.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
-Plug 'JazzCore/ctrlp-cmatcher'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nixprime/cpsm'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-eunuch'
 " " Bundle 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
@@ -71,7 +70,10 @@ set hlsearch
 set history=200
 set incsearch
 set ignorecase
+
+
 set laststatus=2
+
 set number
 set nobackup
 set noerrorbells
@@ -172,45 +174,25 @@ vmap <Leader>c <Plug>(caw:i:toggle)
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
-"===== Filetype
+let s:ignore_patterns = [
+    \ '__pycache__/',
+    \ '__pycache__',
+    \ '.git',
+    \ '.gitmodules',
+    \ '*.min.js',
+    \ '*.pyc',
+    \ '*.sql',
+    \ '*.sqlite3',
+    \ '*.swp',
+    \ '*.csproj',
+    \ '*.sln',
+    \ '*.unityproj',
+    \ '*.userprefs',
+    \ '.sass-cache',
+    \ ]
 
-" = Skelton
-augroup TemplatesAu
-  autocmd!
-  autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
-  autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
-  autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
-  autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
-  autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
-augroup END
-
-augroup filetypedetect
-  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-  au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-augroup END
-
-autocmd FileType yaml setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
-" Golang
-au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-" PHP
-autocmd FileType php setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
-" Python
-autocmd FileType python setl expandtab shiftwidth=4 softtabstop=4
-" Ruby
-" JavaScript
-autocmd Filetype javascript setl autoindent
-autocmd FileType javascript setl smartindent cinwords=if,else,for,while,try,except,finally,def,class
-autocmd FileType javascript setl expandtab tabstop=2 shiftwidth=2 softtabstop=0
-" CSharp
-autocmd FileType cs setl expandtab tabstop=4 shiftwidth=4 softtabstop=0
-" ObjectiveC
-let g:filetype_m = 'objc'
-
-" Wildmenu completion {{{
-set wildmenu
-" set wildmode=list:longest
-set wildmode=list:full
+call add(s:ignore_patterns, '*.meta') " Unity
+call add(s:ignore_patterns, 'tags') " ctags
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -227,20 +209,77 @@ set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip         " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
+"===== Filetype
+
+" = Skelton
+augroup TemplatesAu
+  autocmd!
+  autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
+  autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
+  autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
+  autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
+augroup END
+
+augroup FileTypeDetect
+  autocmd!
+  " Golang
+  autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
+  autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+  " PHP
+  autocmd FileType php setl tabstop=4 shiftwidth=4 softtabstop=4
+  " Python
+  autocmd FileType python setl tabstop=4 shiftwidth=4 softtabstop=4
+  " Ruby
+  " JavaScript
+  autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
+  autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  " CSharp
+  autocmd FileType cs setl  tabstop=4 shiftwidth=4 softtabstop=4
+  " Yaml
+  autocmd FileType yaml setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup END
+
+" ObjectiveC
+let g:filetype_m = 'objc'
+
+" Wildmenu completion {{{
+set wildmenu
+" set wildmode=list:longest
+set wildmode=list:full
+
+let &wildignore=join(s:ignore_patterns, ',')
 
 com! JSONFormat %!python -m json.tool
 
 "===== Plugin
 " dirvish
-augroup my_dirvish_events
-    au!
-    " always show hidden files
-    au User DirvishEnter let b:dirvish.showhidden = 1
+augroup dirvish_commands
+  autocmd!
+
+  autocmd FileType dirvish nnoremap <silent> <buffer> <C-r> :<C-u>Dirvish %<CR>
+  autocmd FileType dirvish unmap <silent> <buffer> <CR>
+  autocmd FileType dirvish nnoremap <silent> <buffer> <CR> :<C-u> call <SID>dirvish_open()<CR>
+  autocmd FileType dirvish setlocal nonumber norelativenumber statusline=%F
+  " autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
+
+  " au User DirvishEnter let b:dirvish.showhidden = 1
+  for pat in s:ignore_patterns
+    execute 'autocmd FileType dirvish silent! keeppatterns g@\v/'.pat.'/?$@d'
+  endfor
 augroup END
+
+" augroup my_dirvish_events
+"     au!
+"     " always show hidden files
+" augroup END
 
 " ctrlp
 let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 10
@@ -255,17 +294,30 @@ let g:ctrlp_buftag_types = {
             \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
             \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
             \ 'objc'       : '--language-force=objc --objc-types=mpci',
-            \ 'rc'         : '--language-force=rust --rust-types=fTm'
+            \ 'rc'         : '--language-force=rust --rust-types=fTm',
             \ }
-
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
-  \ 'file': '\v\.(exe|so|dll)$'
+  \ 'file': '\v\.(exe|so|dll|meta)$'
   \}
 let g:ctrlp_reuse_window  = 1
 " let g:ctrlp_reuse_window  = 'startify'
 
+let g:ctrlp_buffer_func = {
+    \ 'enter': 'Function_Name_1',
+    \ 'exit':  'Function_Name_2',
+    \ }
+
+func! Function_Name_1()
+    set laststatus=0
+endfunc
+
+func! Function_Name_2()
+    set laststatus=2
+endfunc
+
 " YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 1
 " let g:ycm_filetype_blacklist = { 'ruby' : 1 }
@@ -280,13 +332,6 @@ let g:go_fmt_command = "gofmt"
 " choosewin
 nmap  -  <Plug>(choosewin)
 
-" vim-airline
-let g:airline_theme = 'badwolf'
-let g:airline_left_sep  = ' '
-let g:airline_right_sep = ' '
-
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "gofmt"
 noremap <Leader>l :TagbarToggle<CR>
 
 " snippets
@@ -401,3 +446,4 @@ let g:quickrun_config.swift = {
       \ 'command': 'xcrun',
       \ 'exec': '%c swift -i %s %o',
       \ }
+
