@@ -1,7 +1,7 @@
 [user]
   username = Seiji Toyama
-	email = toyama.seiji@gmail.com
-	name = Seiji Toyama
+  email = toyama.seiji@gmail.com
+  name = Seiji Toyama
 
 [color]
   ui = auto
@@ -9,9 +9,12 @@
 [mergetool]
   keepBackup = true
 
+[init]
+  templatedir = ~/.git-templates
+
 [core]
   editor = vim
-	excludesfile = /Users/seiji/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	quotepath = false
 
 [branch]
@@ -65,7 +68,7 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
