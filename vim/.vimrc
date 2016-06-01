@@ -215,6 +215,7 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
 augroup TemplatesAu
   autocmd!
   autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
+  autocmd BufNewFile *.cs      0r $HOME/.vim/templates/tpl.cs
   autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
   autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
   autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
@@ -223,24 +224,27 @@ augroup END
 
 augroup FileTypeDetect
   autocmd!
-  " Golang
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  " Golang
   autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  " autocmd BufWritePre *.go GoFmt
+
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   " PHP
-  autocmd FileType php setl tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
   " Python
-  autocmd FileType python setl tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   " Ruby
   " JavaScript
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   " CSharp
-  autocmd FileType cs setl  tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufWritePre *.cs OmniSharpCodeFormat
   " Yaml
-  autocmd FileType yaml setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType yaml setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 augroup END
 
 " ObjectiveC
