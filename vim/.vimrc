@@ -44,6 +44,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'fatih/vim-go'
 Plug 'vim-scripts/Vim-R-plugin'
+Plug 'myhere/vim-nodejs-complete'
 "
 "
 " """"""""
@@ -224,20 +225,23 @@ augroup END
 
 augroup FileTypeDetect
   autocmd!
-  autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
+  autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+  " C++
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
   " Golang
   autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
+  autocmd BufNewFile,BufRead *_test.go set filetype=go.testing
 
-  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
-  autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   " PHP
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
   " Python
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   " Ruby
+  autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
   " JavaScript
+  autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   " CSharp
@@ -413,8 +417,11 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 ""set splitbelow
 "set splitright
 ""let g:quickrun_config={'*': {'split': 'vertical'}}
-autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-autocmd BufWinEnter,BufNewFile *_test.go set filetype=go.testing
+
+let g:quickrun_config = {'_': {}}
+let g:quickrun_config._.input = '=@i'
+let g:quickrun_config._.input = '=%{b:input}'
+
 let g:quickrun_config = {
       \  "_" : {
       \    "outputter/buffer/split" : ":botright 8sp",
@@ -423,6 +430,11 @@ let g:quickrun_config = {
       \    "runner/vimproc/updatetime" : 60,
       \  },
       \}
+let g:quickrun_config.cpp = {
+      \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
+      \ 'command': 'clang++',
+      \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+      \ }
 let g:quickrun_config['ruby.rspec'] = {
       \ 'type': 'ruby.rspec',
       \ 'cmdopt': '-cfd',

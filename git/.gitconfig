@@ -54,8 +54,6 @@
 
   # Log
 
-
-
   sb = show-branch --all --color
   sgraph = !"git log --oneline --graph"
 
@@ -63,8 +61,8 @@
 
   # Other
   ignore = !"f() { local s=$1; shift; \
-    while [ $# -gt 0 ]; do s="$s,$1"; shift; done;\
-    curl "http://gitignore.io/api/$s"; }; f"
+          while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
+          curl \"https://www.gitignore.io/api/$s\"; }; f"
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -78,7 +76,16 @@
 [filter "csharp-format"]
   clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
 #  smudge = cat
+#
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+
+[diff]
+	compactionHeuristic = true
