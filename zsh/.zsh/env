@@ -34,6 +34,12 @@ case ${OSTYPE} in
     ;;
 esac
 
+# Git
+if [ -x `brew --prefix git` ]; then
+  export GIT_ROOT=$(brew --prefix git)
+  export PATH="$GIT_ROOT/share/git-core/contrib/diff-highlight:$PATH"
+fi
+
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"

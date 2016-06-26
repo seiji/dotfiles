@@ -2,15 +2,18 @@ alias browse="hub browse"
 
 case "${OSTYPE}" in
 darwin*)
-  alias ls="ls -1G"
-  alias ll="ls -laG"
   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
   alias chrome='open "/opt/homebrew-cask/Caskroom/google-chrome/latest/Google Chrome.app" --args --renderer-process-limit=3'
-  alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
+  alias date='gdate'
+  alias gpg=gpg2
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
+  alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias ldd="echo ldd is not on OSX. Use otool -L."
+  alias ll="ls -laG"
+  alias ls="ls -1G"
   alias sed="gsed"
   alias strace="echo strace is not on OSX. Use dtruss"
+  alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
   ;;
 linux*)
   alias ls='ls --color'
@@ -49,14 +52,24 @@ alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias tmux='tmux -2'
 alias weechat='TERM=screen-256color weechat'
 alias weechat-curses='TERM=screen-256color weechat-curses'
+
 # git
-alias gst='git status -s -b && git stash list'
-alias gush='git push origin $1'
-alias gull='git pull origin $1'
-alias gfix='git commit --amend'
-alias gra='git reset HEAD $1'
-alias grcs='git reset --soft HEAD^'
-alias gsu='cd $(git rev-parse --show-toplevel) && git submodule update && cd -'
+if [[ -f "$HOME/.gitconfig" ]]; then
+  eval `\
+    sed -e 's/;.*$//' \
+        -e 's/[[:space:]]*$//' -e 's/^[[:space:]]*//' < "$HOME/.gitconfig" | \
+    sed -n -e "/^\[alias\]/,/^\s*\[/{/^[^;].*\=.*/p;}" | \
+    sed -e 's/\([^ =]\+\).*/alias g\1="git \1"/g' \
+  `
+fi
+
+# golang
+alias get=go_get
+function go_get () {
+  if [ $# -gt 0 ]; then
+    go get -d github.com/$argv
+  fi
+}
 
 # ruby
 alias rake='noglob rake'
