@@ -1,4 +1,10 @@
 #!/bin/sh
 
-sudo networksetup -setwebproxy Wi-Fi localhost 1181
-sudo networksetup -setsecurewebproxy Wi-Fi localhost 1181
+port=${1:-8080}
+server=${2:-localhost}
+
+sudo networksetup -setwebproxy Wi-Fi $server $port
+sudo networksetup -setsecurewebproxy Wi-Fi $server $port
+
+networksetup -getwebproxy Wi-Fi
+networksetup -getsecurewebproxy Wi-Fi

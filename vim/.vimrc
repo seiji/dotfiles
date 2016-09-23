@@ -72,7 +72,6 @@ set history=200
 set incsearch
 set ignorecase
 
-
 set laststatus=2
 
 set number
@@ -215,10 +214,13 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
 " = Skelton
 augroup TemplatesAu
   autocmd!
+  autocmd BufNewFile *.c       0r $HOME/.vim/templates/tpl.c
   autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
   autocmd BufNewFile *.cs      0r $HOME/.vim/templates/tpl.cs
   autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
   autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.proto   0r $HOME/.vim/templates/tpl.proto
+  autocmd BufNewFile *.py      0r $HOME/.vim/templates/tpl.py
   autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
 augroup END
@@ -227,28 +229,20 @@ augroup FileTypeDetect
   autocmd!
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-  " C++
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  " Golang
   autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
   autocmd BufNewFile,BufRead *_test.go set filetype=go.testing
-
-  " PHP
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  " Python
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  " Ruby
   autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
-  " JavaScript
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-  " CSharp
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufWritePre *.cs OmniSharpCodeFormat
-  " Yaml
   autocmd FileType yaml setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
 augroup END
 
 " ObjectiveC
@@ -332,11 +326,6 @@ let g:ycm_min_num_of_chars_for_completion = 1
 
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" go
-let g:go_fmt_autosave = 0
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "gofmt"
-
 " choosewin
 nmap  -  <Plug>(choosewin)
 
@@ -378,24 +367,33 @@ au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:U
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
 " vim-go
-au FileType go nmap gd <Plug>(go-def)
-au FileType go nmap <Leader>s <Plug>(go-def-split)
-au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>t <Plug>(go-def-tab)
+au FileType go nmap <Leader>d <Plug>(go-def)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <Leader>im  <Plug>(go-import)
+au FileType go nmap <Leader>ims <Plug>(go-imports)
 
-au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>if <Plug>(go-info)
 
 " au FileType go nmap <Leader>r <Plug>(go-run)
 au FileType go nmap <Leader>b <Plug>(go-build)
 
 au FileType go nmap <Leader>d <Plug>(go-doc)
 
-let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
+
+" let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
+let g:go_fmt_command = "gofmt"
 let g:go_fmt_autosave = 0 " Enable auto fmt on save
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_template_autocreate = 0
 
 "
 function! InsertTabWrapper()
