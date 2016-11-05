@@ -2,7 +2,7 @@
 source ~/.zsh/antigen/antigen.zsh
 
 antigen-bundle docker
-antigen-bundle git
+#antigen-bundle git
 
 antigen-bundle zsh-users/zsh-completions src
 antigen-bundle zsh-users/zsh-syntax-highlighting

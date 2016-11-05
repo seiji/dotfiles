@@ -45,6 +45,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'fatih/vim-go'
 Plug 'vim-scripts/Vim-R-plugin'
 Plug 'myhere/vim-nodejs-complete'
+Plug 'keith/swift.vim'
 "
 "
 " """"""""
@@ -191,6 +192,7 @@ let s:ignore_patterns = [
     \ '.sass-cache',
     \ ]
 
+call add(s:ignore_patterns, '*.o') " langc
 call add(s:ignore_patterns, '*.meta') " Unity
 call add(s:ignore_patterns, 'tags') " ctags
 
@@ -223,6 +225,7 @@ augroup TemplatesAu
   autocmd BufNewFile *.py      0r $HOME/.vim/templates/tpl.py
   autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
+  autocmd BufNewFile Makefile  0r $HOME/.vim/templates/tpl.Makefile
 augroup END
 
 augroup FileTypeDetect
@@ -427,6 +430,11 @@ let g:quickrun_config = {
       \    "runner" : "vimproc",
       \    "runner/vimproc/updatetime" : 60,
       \  },
+      \  "make" : {
+      \    "command" : "make %o",
+      \    "exec" : "%c",
+      \    "runner" : "vimproc",
+      \   },
       \}
 let g:quickrun_config.cpp = {
       \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
@@ -458,6 +466,6 @@ let g:quickrun_config.swift = {
       \ 'type': 'swift',
       \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
       \ 'command': 'xcrun',
-      \ 'exec': '%c swift -i %s %o',
+      \ 'exec': '%c swift %s %o',
       \ }
 

@@ -45,6 +45,10 @@ alias fcd='source ~/bin/fcd.sh'
 alias sc='screen -U -D -RR'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
+alias public_ip=get_public_ip
+function get_public_ip () {
+  dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
+}
 alias E='emacsclient -t'
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
@@ -131,8 +135,36 @@ alias gcshell=gcloud_shell
 alias gcpush=gcloud_image_push
 alias gcpull=gcloud_image_pull
 
-alias gce='gcloud compute'
 alias gke='gcloud beta container'
+
+function gce () {
+  if [ $# -gt 1 ]; then
+    if [ "$1" == "info" ]; then
+      gcloud compute instances describe $2
+    elif [ "$1" == "create" ]; then
+      gcloud compute instances create $2 \
+        --boot-disk-auto-delete \
+        --image-family=centos-6 \
+        --image-project=centos-cloud \
+        --machine-type=f1-micro \
+        --maintenance-policy TERMINATE \
+        --preemptible \
+        --zone asia-east1-a
+    elif [ "$1" == "delete" ]; then
+      gcloud compute instances delete $2
+    else
+      gcloud compute $argv
+    fi
+  elif [ $# -gt 0 ]; then
+    if [ "$1" == "instances" ]; then
+      gcloud compute instances list
+    else
+      gcloud compute $argv
+    fi
+  else
+    gcloud compute $argv
+  fi
+}
 
 # $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
 

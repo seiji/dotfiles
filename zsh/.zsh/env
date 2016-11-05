@@ -20,6 +20,11 @@ export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$PATH
 case ${OSTYPE} in
   darwin*)
     #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+    # openssl
+    export PATH=/usr/local/opt/openssl/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$LD_LIBRARY_PATH
+    export CPATH=/usr/local/opt/openssl/include:$LD_LIBRARY_PATH
+
     export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
@@ -63,17 +68,15 @@ export EC2_PRIVATE_KEY="$HOME/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G2
 export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
 export PATH="${PATH}:${EC2_HOME}/bin"
 
-# Android sdk
-if [[ -s /Applications/android-sdk-macosx ]]; then
-  export ANDROID_HOME=/Applications/android-sdk-macosx
-  PATH=$PATH:$ANDROID_HOME/tools
-  export PATH=$PATH:$ANDROID_HOME/platform-tools
+# Android
+if [ -x `brew --prefix android-sdk` ]; then
+  export ANDROID_SDK_ROOT=$(brew --prefix android-sdk)
+#  PATH=$PATH:$ANDROID_SDK_ROOT/tools
+#  export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 fi
-
-# Android ndk
-if [[ -s /Applications/android-ndk-r9c ]]; then
-  export ANDROID_NDK_HOME=/Applications/android-ndk-r9c
-  export PATH=$PATH:$ANDROID_NDK_HOME
+if [ -x `brew --prefix android-ndk-r10e` ]; then
+  export ANDROID_NDK_ROOT=$(brew --prefix android-ndk-r10e)
+#  export PATH=$PATH:$ANDROID_NDK_ROOT
 fi
 
 # Node
