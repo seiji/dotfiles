@@ -98,6 +98,9 @@ alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 alias machine='docker-machine'
 alias compose='docker-compose'
 
+# adb
+alias apk='adb shell pm list packages -f'
+
 function dsh() {
   machine ssh dev '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
   machine ssh dev /var/lib/boot2docker/docker-enter "$@"

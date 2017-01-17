@@ -441,6 +441,12 @@ let g:quickrun_config.cpp = {
       \ 'command': 'clang++',
       \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
       \ }
+let g:quickrun_config.matlab = {
+      \ 'cmdopt' : '',
+      \ 'command': 'octave-cli',
+      \ 'exec' : '%c %o %s',
+      \ }
+
 let g:quickrun_config['ruby.rspec'] = {
       \ 'type': 'ruby.rspec',
       \ 'cmdopt': '-cfd',
