@@ -80,6 +80,7 @@ fi
 # phpbrew
 [[ -f $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
 
+
 function mkcd(){mkdir -p $1 && cd $1}
 
 # case ${OSTYPE} in

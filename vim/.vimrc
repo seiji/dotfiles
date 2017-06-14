@@ -178,40 +178,44 @@ nnoremap <silent> <C-L> :noh<C-L><CR>
 let s:ignore_patterns = [
     \ '__pycache__/',
     \ '__pycache__',
-    \ '.git',
-    \ '.gitmodules',
-    \ '*.min.js',
-    \ '*.pyc',
-    \ '*.sql',
-    \ '*.sqlite3',
-    \ '*.swp',
-    \ '*.csproj',
-    \ '*.sln',
-    \ '*.unityproj',
-    \ '*.userprefs',
-    \ '.sass-cache',
+    \ '\.git',
+    \ '\.gitmodules',
+    \ '*\.min\.js',
+    \ '*\.pyc',
+    \ '*\.sqlite3',
+    \ '*\.swp',
+    \ '*\.csproj',
+    \ '*\.sln',
+    \ '*\.unityproj',
+    \ '*\.userprefs',
+    \ '\.sass-cache',
     \ ]
 
-call add(s:ignore_patterns, '*.o') " langc
-call add(s:ignore_patterns, '*.meta') " Unity
+call add(s:ignore_patterns, '*\.o') " langc
+call add(s:ignore_patterns, '*\.meta') " Unity
 call add(s:ignore_patterns, 'tags') " ctags
 
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
-set wildignore+=*.luac                           " Lua byte code
-set wildignore+=*.vagrant                        " Vagrant
+set wildignore+=\.hg,\.git,\.svn                    " Version control
+set wildignore+=*\.aux,*\.out,*\.toc                " LaTeX intermediate files
+set wildignore+=*\.jpg,*\.bmp,*\.gif,*\.png,*\.jpeg   " binary images
+set wildignore+=*\.o,*\.obj,*\.exe,*\.dll,*\.manifest " compiled object files
+set wildignore+=*\.spl                            " compiled spelling word lists
+set wildignore+=*\.sw?                            " Vim swap files
+set wildignore+=*\.DS_Store                       " OSX bullshit
+set wildignore+=*\.luac                           " Lua byte code
+set wildignore+=*\.vagrant                        " Vagrant
 set wildignore+=go/pkg                           " Go static files
 set wildignore+=go/bin                           " Go bin files
 set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
-set wildignore+=*.pyc                            " Python byte code
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip         " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe      " Windows
+set wildignore+=*\.pyc                            " Python byte code
+set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip         " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe      " Windows
 "===== Filetype
+
+function! NewJavaFile()
+  silent! 0r $HOME/.vim/templates/tpl.java
+  %s/FILENAME/\=expand("%:t:r")
+endfunction
 
 " = Skelton
 augroup TemplatesAu
@@ -221,11 +225,13 @@ augroup TemplatesAu
   autocmd BufNewFile *.cs      0r $HOME/.vim/templates/tpl.cs
   autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
   autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
+  autocmd BufNewFile *.java    call NewJavaFile()
   autocmd BufNewFile *.proto   0r $HOME/.vim/templates/tpl.proto
   autocmd BufNewFile *.py      0r $HOME/.vim/templates/tpl.py
   autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
   autocmd BufNewFile Makefile  0r $HOME/.vim/templates/tpl.Makefile
+  autocmd BufNewFile README.md 0r $HOME/.vim/templates/tpl.README.md
 augroup END
 
 augroup FileTypeDetect
@@ -246,6 +252,7 @@ augroup FileTypeDetect
   autocmd BufWritePre *.cs OmniSharpCodeFormat
   autocmd FileType yaml setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
+  autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 augroup END
 
 " ObjectiveC
@@ -466,7 +473,7 @@ let g:quickrun_config.rspecl = {
 let g:quickrun_config['go.testing'] = {
       \ 'type': 'go',
       \ 'command': 'go',
-      \ 'exec': '%c test -v',
+      \ 'exec': '%c test -v *.go',
       \ }
 let g:quickrun_config.swift = {
       \ 'type': 'swift',

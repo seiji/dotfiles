@@ -15,7 +15,7 @@ export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
 
 case ${OSTYPE} in
   darwin*)
@@ -28,6 +28,8 @@ case ${OSTYPE} in
     export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
+    # Unity
+    export PATH="/Applications/Unity/Unity.app/Contents/Mono/bin:$PATH"
     ;;
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
@@ -62,9 +64,12 @@ export PATH="$RBENV_ROOT/bin:$PATH"
 #export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 export BUNDLER_EDITOR="vim +VimFiler"
 
+export GEM_HOME=$HOME/.gem
+export GEM_PATH=$HOME/.gem
+
 # Python
 if [ -x `brew --prefix pyenv` ]; then
-  export PYENV_ROOT=$(brew --prefix pyenv)
+  export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
@@ -80,27 +85,36 @@ export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC
 export PATH="${PATH}:${EC2_HOME}/bin"
 
 # Android
-if [ -x `brew --prefix android-sdk` ]; then
-  export ANDROID_SDK_ROOT=$(brew --prefix android-sdk)
+#if [ -x `brew --prefix android-sdk` ]; then
+#  export ANDROID_SDK_ROOT=$(brew --prefix android-sdk)
 #  PATH=$PATH:$ANDROID_SDK_ROOT/tools
 #  export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-fi
-if [ -x `brew --prefix android-ndk-r10e` ]; then
-  export ANDROID_NDK_ROOT=$(brew --prefix android-ndk-r10e)
+#fi
+#if [ -x `brew --prefix android-ndk` ]; then
+#  export ANDROID_NDK_ROOT=$(brew --prefix android-ndk)
 #  export PATH=$PATH:$ANDROID_NDK_ROOT
-fi
+#fi
 
 # Node
 export NODE_PATH=/usr/local/lib/node_modules
 export PATH=$PATH:$HOME/.nodebrew/current/bin
 
+# Haskel
+if [ -x `brew --prefix ghc` ]; then
+  export CABALBIN=$HOME/.cabal/bin
+  export PATH=$CABALBIN:$PATH
+fi
+
 # Golang
 #export PATH=$HOME/go/bin:$PATH
+
 if [ -x `brew --prefix go` ]; then
   export GOROOT=$(brew --prefix go)/libexec
   export GOPATH=$HOME
-  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+  export GOBIN=$GOPATH/bin
+  export PATH=$GOBIN:$GOROOT/bin:$PATH
 fi
+
 #if [[ -s $HOME/go ]]; then
 #  export GOROOT=$HOME/go
 #  export GOPATH=$HOME
