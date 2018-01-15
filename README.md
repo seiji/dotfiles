@@ -6,12 +6,12 @@ prerequires Homebrew, [Bundler](http://bundler.io/).
 Installation
 ------------
 
-### Checkout src  
+### Checkout src
 
     $ hub clone seiji/dotfiles
     $ cd dotfiles
-    
-### Install gem dependencies   
+
+### Install gem dependencies
 
 Using [Bundler](http://bundler.io/):
 
@@ -20,17 +20,17 @@ Using [Bundler](http://bundler.io/):
 ### Install package dependencies
 
     dotfiles $ brew bundle
-    
+
 ### Link a package
 
 Using [GNU Stow](http://www.gnu.org/software/stow/):
 
-    dotfiles $ stow -S -t $HOME -v zsh
+    i.g.) dotfiles $ stow -S -t $HOME -v zsh
 
 Uninstallation
 --------------
 
-    dotfiles $ stow -D -t $HOME -v zsh
+    i.g.) dotfiles $ stow -D -t $HOME -v zsh
 
 ### dircolors
 
