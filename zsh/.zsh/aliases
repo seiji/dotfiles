@@ -89,11 +89,13 @@ alias sfcontainer='sf container:debug'
 alias sft='bin/phpunit -c app'
 
 # docker
-alias docker='docker $(machine config dev)'
-alias dl='docker ps -l -q'
+alias docker='docker $(machine config)'
+alias dl='docker ps -q'
 #  except data container
 alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
-alias drmi='docker rmi $(docker images -q)'
+#alias drmi='docker rmi $(docker images -q)'
+alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
+alias drmv='docker volume rm $(docker volume ls -qf dangling=true)'
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 alias machine='docker-machine'
 alias compose='docker-compose'

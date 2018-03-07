@@ -232,6 +232,7 @@ augroup TemplatesAu
   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
   autocmd BufNewFile Makefile  0r $HOME/.vim/templates/tpl.Makefile
   autocmd BufNewFile README.md 0r $HOME/.vim/templates/tpl.README.md
+  autocmd BufNewFile docker-compose.* 0r $HOME/.vim/templates/tpl.docker-compose.yml
 augroup END
 
 augroup FileTypeDetect
@@ -250,7 +251,7 @@ augroup FileTypeDetect
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufWritePre *.cs OmniSharpCodeFormat
-  autocmd FileType yaml setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 augroup END

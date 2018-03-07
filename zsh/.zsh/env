@@ -64,14 +64,18 @@ export PATH="$RBENV_ROOT/bin:$PATH"
 #export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 export BUNDLER_EDITOR="vim +VimFiler"
 
-export GEM_HOME=$HOME/.gem
-export GEM_PATH=$HOME/.gem
+#export GEM_HOME=$HOME/.gem
+#export GEM_PATH=$HOME/.gem
 
 # Python
 if [ -x `brew --prefix pyenv` ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
+fi
+if [ -d '/usr/local/miniconda3' ]; then
+  export MINICONDA_ROOT="/usr/local/miniconda3"
+  export PATH="$MINICONDA_ROOT/bin:$PATH"
 fi
 
 # GCP
@@ -126,6 +130,7 @@ if [[ -s $HOME/.composer ]]; then
   export PATH=$HOME/.composer/vendor/bin:$PATH
 fi
 
+
 # docker/machine
 # export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
 # export DOCKER_TLS_VERIFY=1
@@ -135,7 +140,7 @@ fi
 if type machine >/dev/null; then
   machine url >&/dev/null
   if [ $? -eq 0 ]; then
-    $(machine env)
+    eval "$(machine env)"
     #export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
   fi
 fi
