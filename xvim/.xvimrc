@@ -5,14 +5,13 @@ set smartcase
 " nmap ; :
 " nmap : ;
 
-nmap n nzz
-nmap N Nzz
-nmap * *zz
-nmap # #zz
-nmap g* g*zz
-nmap g# g#zz
-nmap <CR> o<Esc>
-
+" nmap n nzz
+" nmap N Nzz
+" nmap * *zz
+" nmap # #zz
+" nmap g* g*zz
+" nmap g# g#zz
+" nmap <CR> o<Esc>
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
@@ -33,17 +32,22 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
 " Comment & uncomment
-nmap <C-/> :xccmd commentAndUncommentCurrentLines<CR><ESC>
-nnoremap <Leader>c :xccmd commentAndUncommentCurrentLines<CR>
+nnoremap gcc :xcmenucmd Comment Selection<CR>
+vnoremap gc :xcmenucmd Comment Selection<CR>
 
 " Edit in scope
-nnoremap <Leader>e :xccmd toggleTokenizedEditing<CR>
+nnoremap <C-x> :xccmd toggleTokenizedEditing<cr>
 
 " Open quickly
 nnoremap <C-p> :xccmd openQuickly<CR>
 
-" Indent selection
-nnoremap <Leader>i ==
-
 " Open navigator
-nnoremap <Leader>n :xccmd toggleNavigatorsVisibility<CR>
+nnoremap <C-n> :xccmd toggleNavigatorsVisibility<CR>
+
+" Jump history
+map <C-i> :xccmd goForwardInHistoryByCommand<CR>
+map <C-o> :xccmd goBackInHistoryByCommand<CR>
+
+" Hide bar
+set laststatus=0
+set noblinkcursor
