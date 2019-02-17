@@ -16,6 +16,9 @@ export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
 
 case ${OSTYPE} in
   darwin*)
@@ -58,6 +61,11 @@ if [ -x `brew --prefix git` ]; then
   export PATH="$GIT_ROOT/share/git-core/contrib/diff-highlight:$PATH"
 fi
 
+# Haskel
+if [[ -s $HOME/.local ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
@@ -66,6 +74,7 @@ export BUNDLER_EDITOR="vim +VimFiler"
 
 #export GEM_HOME=$HOME/.gem
 #export GEM_PATH=$HOME/.gem
+#export PATH="$GEM_HOME/bin:$PATH"
 
 # Python
 if [ -x `brew --prefix pyenv` ]; then
@@ -101,7 +110,7 @@ export PATH="${PATH}:${EC2_HOME}/bin"
 
 # Node
 export NODE_PATH=/usr/local/lib/node_modules
-export PATH=$PATH:$HOME/.nodebrew/current/bin
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Haskel
 if [ -x `brew --prefix ghc` ]; then
@@ -140,7 +149,7 @@ fi
 if type machine >/dev/null; then
   machine url >&/dev/null
   if [ $? -eq 0 ]; then
-    eval "$(machine env)"
+    eval $(docker-machine env)
     #export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
   fi
 fi
