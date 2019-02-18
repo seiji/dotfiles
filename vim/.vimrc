@@ -32,6 +32,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'itchyny/lightline.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'thinca/vim-quickrun'
 
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-eunuch'
@@ -39,9 +41,7 @@ Plug 'tpope/vim-eunuch'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/surround.vim'
-Plug 'thinca/vim-quickrun'
 " " language
 " Plug 'OmniSharp/omnisharp-vim'
 " Plug 'fatih/vim-go'
@@ -52,6 +52,7 @@ Plug 'thinca/vim-quickrun'
 "
 " """"""""
 Plug 'tpope/vim-fugitive'
+
 
 call plug#end()
 
@@ -256,7 +257,7 @@ augroup FileTypeDetect
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufWritePre *.cs OmniSharpCodeFormat
+  " autocmd BufWritePre *.cs OmniSharpCodeFormat
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -281,9 +282,12 @@ augroup dirvish_commands
 
   autocmd FileType dirvish nnoremap <silent> <buffer> <C-r> :<C-u>Dirvish %<CR>
   autocmd FileType dirvish unmap <silent> <buffer> <CR>
+  autocmd FileType dirvish silent! unmap <buffer> <C-p>
   autocmd FileType dirvish nnoremap <silent> <buffer> <CR> :<C-u> call <SID>dirvish_open()<CR>
   autocmd FileType dirvish setlocal nonumber norelativenumber statusline=%F
-  " autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
+  autocmd FileType dirvish nnoremap <buffer><silent> <C-j> <C-\><C-n>j:call feedkeys("p")<CR>
+  autocmd FileType dirvish nnoremap <buffer><silent> <C-k> <C-\><C-n>k:call feedkeys("p")<CR>
+  autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
 
   " au User DirvishEnter let b:dirvish.showhidden = 1
   for pat in s:ignore_patterns
@@ -291,15 +295,10 @@ augroup dirvish_commands
   endfor
 augroup END
 
-" augroup my_dirvish_events
-"     au!
-"     " always show hidden files
-" augroup END
-
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 1
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_min_num_of_chars_for_completion = 1
 " let g:ycm_filetype_blacklist = { 'ruby' : 1 }
 
 let g:SuperTabDefaultCompletionType = '<C-n>'

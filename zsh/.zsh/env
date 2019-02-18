@@ -99,6 +99,11 @@ if (( $+commands[git] )); then
   esac
 fi
 
+# PHP
+if [[ -s $HOME/.config/composer ]]; then
+  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+fi
+
 # Haskel
 if [[ -s $HOME/.local ]]; then
   export PATH="$HOME/.local/bin:$PATH"

@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.applet.*;
 
-public class FILENAME extends Applet{
+public class FILENAME extends Applet {
 
-    public void Init() {
+    public void init() {
 
     }
 
