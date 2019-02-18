@@ -66,6 +66,10 @@ set re=1
 "========================================="
 " Keymap settings
 "========================================="
+nmap ; :Buffers
+nmap t :Files
+nmap r :Tags
+
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-b> <Left>
@@ -129,6 +133,7 @@ set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
 set wildignore+=*\.pyc                            " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip         " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe      " Windows
+
 augroup FileTypeDetect
   autocmd!
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
