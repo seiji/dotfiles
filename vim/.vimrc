@@ -27,30 +27,31 @@ set rtp+=~/.vim/plugged/vim-plug
 call plug#begin('~/.vim/plugged')
 " Other plugins
 Plug 'Shougo/vimproc.vim'
+Plug 'w0rp/ale'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'majutsushi/tagbar'
-Plug 'kien/ctrlp.vim'
-Plug 'nixprime/cpsm'
 Plug 'itchyny/lightline.vim'
+
+Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-eunuch'
-" " Bundle 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
+" " Plug 'ervandew/supertab'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/surround.vim'
 Plug 'thinca/vim-quickrun'
 " " language
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'fatih/vim-go'
-Plug 'vim-scripts/Vim-R-plugin'
-Plug 'myhere/vim-nodejs-complete'
-Plug 'keith/swift.vim'
+" Plug 'OmniSharp/omnisharp-vim'
+" Plug 'fatih/vim-go'
+" Plug 'vim-scripts/Vim-R-plugin'
+" Plug 'myhere/vim-nodejs-complete'
+" Plug 'keith/swift.vim'
 "
 "
 " """"""""
 Plug 'tpope/vim-fugitive'
-" Plugin 'git://git.wincent.com/command-t.git'
 
 call plug#end()
 
@@ -146,6 +147,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
 
 "===== Keymapping
+nmap ; :Buffers
+nmap t :Files
+nmap r :Tags
+nmap f :Rg<Space>
+
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-b> <Left>
@@ -289,45 +295,6 @@ augroup END
 "     au!
 "     " always show hidden files
 " augroup END
-
-" ctrlp
-let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_mruf_max=450
-let g:ctrlp_max_files=0
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-let g:ctrlp_buftag_types = {
-            \ 'go'         : '--language-force=go --golang-types=ftv',
-            \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
-            \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
-            \ 'objc'       : '--language-force=objc --objc-types=mpci',
-            \ 'rc'         : '--language-force=rust --rust-types=fTm',
-            \ }
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
-  \ 'file': '\v\.(exe|so|dll|meta)$'
-  \}
-let g:ctrlp_reuse_window  = 1
-" let g:ctrlp_reuse_window  = 'startify'
-
-let g:ctrlp_buffer_func = {
-    \ 'enter': 'Function_Name_1',
-    \ 'exit':  'Function_Name_2',
-    \ }
-
-func! Function_Name_1()
-    set laststatus=0
-endfunc
-
-func! Function_Name_2()
-    set laststatus=2
-endfunc
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -483,3 +450,21 @@ let g:quickrun_config.swift = {
       \ 'exec': '%c swift %s %o',
       \ }
 
+"""
+nnoremap <C-p> :FZFFileList<CR>
+command! FZFFileList call fzf#run({
+  \ 'down': '50%',
+  \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+  \ 'sink': 'e'})
+command! -bang -nargs=* Ripgrep
+  \ call fzf#vim#grep(
+	\   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+	\   <bang>0 ? fzf#vim#with_preview('up:60%')
+	\           : fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
+	\   <bang>0)
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
