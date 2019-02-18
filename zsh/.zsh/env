@@ -55,10 +55,48 @@ case ${OSTYPE} in
     ;;
 esac
 
+# GCP
+export GCP_HOME="$HOME/google-cloud-sdk"
+export PATH="${GCP_HOME}/bin:${PATH}"
+
+# docker/machine
+# export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
+# export DOCKER_TLS_VERIFY=1
+
+# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
+
+if type machine >/dev/null; then
+  machine url >&/dev/null
+  if [ $? -eq 0 ]; then
+    eval $(docker-machine env)
+    #export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
+  fi
+fi
+
+# FZF; ag
+if (( $+commands[fzf] )) && (( $+commands[ag] )); then
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  --height 40% --reverse --border
+'
+fi
+
 # Git
-if [ -x `brew --prefix git` ]; then
-  export GIT_ROOT=$(brew --prefix git)
-  export PATH="$GIT_ROOT/share/git-core/contrib/diff-highlight:$PATH"
+if (( $+commands[git] )); then
+  case ${OSTYPE} in
+    darwin*)
+      export GIT_ROOT=$(brew --prefix git)
+      export PATH="$GIT_ROOT/share/git-core/contrib/diff-highlight:$PATH"
+      ;;
+    linux*)
+      export GIT_ROOT=/usr/lib/git
+      export PATH="/usr/share/doc/git/contrib/diff-highlight:$PATH"
+      ;;
+  esac
 fi
 
 # Haskel
@@ -77,7 +115,7 @@ export BUNDLER_EDITOR="vim +VimFiler"
 #export PATH="$GEM_HOME/bin:$PATH"
 
 # Python
-if [ -x `brew --prefix pyenv` ]; then
+if (( $+commands[pyenv] )); then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
@@ -87,33 +125,12 @@ if [ -d '/usr/local/miniconda3' ]; then
   export PATH="$MINICONDA_ROOT/bin:$PATH"
 fi
 
-# GCP
-export GCP_HOME="$HOME/google-cloud-sdk"
-export PATH="${GCP_HOME}/bin:${PATH}"
-
-# EC2
-export EC2_HOME="$HOME/local/ec2-api-tools"
-export EC2_PRIVATE_KEY="$HOME/Dropbox/Document/AWS/pk-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
-export EC2_CERT="$HOME/Dropbox/Document/AWS/cert-F5TNG7ECOHRJFVER6PFRNJN5G23N6CC2.pem"
-export PATH="${PATH}:${EC2_HOME}/bin"
-
-# Android
-#if [ -x `brew --prefix android-sdk` ]; then
-#  export ANDROID_SDK_ROOT=$(brew --prefix android-sdk)
-#  PATH=$PATH:$ANDROID_SDK_ROOT/tools
-#  export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-#fi
-#if [ -x `brew --prefix android-ndk` ]; then
-#  export ANDROID_NDK_ROOT=$(brew --prefix android-ndk)
-#  export PATH=$PATH:$ANDROID_NDK_ROOT
-#fi
-
 # Node
 export NODE_PATH=/usr/local/lib/node_modules
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Haskel
-if [ -x `brew --prefix ghc` ]; then
+if (( $+commands[ghc] )); then
   export CABALBIN=$HOME/.cabal/bin
   export PATH=$CABALBIN:$PATH
 fi
@@ -121,36 +138,16 @@ fi
 # Golang
 #export PATH=$HOME/go/bin:$PATH
 
-if [ -x `brew --prefix go` ]; then
-  export GOROOT=$(brew --prefix go)/libexec
+if (( $+commands[go] )); then
+  case ${OSTYPE} in
+    darwin*)
+      export GOROOT=$(brew --prefix go)/libexec
+      ;;
+    linux*)
+      export GOROOT=/usr/lib/go
+      ;;
+  esac
   export GOPATH=$HOME
   export GOBIN=$GOPATH/bin
   export PATH=$GOBIN:$GOROOT/bin:$PATH
 fi
-
-#if [[ -s $HOME/go ]]; then
-#  export GOROOT=$HOME/go
-#  export GOPATH=$HOME
-#  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-#fi
-
-# PHP composer
-if [[ -s $HOME/.composer ]]; then
-  export PATH=$HOME/.composer/vendor/bin:$PATH
-fi
-
-
-# docker/machine
-# export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-
-# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
-
-if type machine >/dev/null; then
-  machine url >&/dev/null
-  if [ $? -eq 0 ]; then
-    eval $(docker-machine env)
-    #export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
-  fi
-fi
-

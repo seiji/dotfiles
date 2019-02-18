@@ -15,6 +15,7 @@ emacs/.emacs.d/share
 emacs/.emacs.d/tramp
 emacs/.emacs.d/url/cookies
 emacs/.emacs.d/anything-c-adaptive-history
+git-worktrees/*
 weechat/.weechat/*.log
 weechat/.weechat/logs/*
 weechat/.weechat/script

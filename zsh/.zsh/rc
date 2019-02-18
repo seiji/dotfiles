@@ -56,9 +56,6 @@ function gem() {
         rehash
     fi
 }
-#nvm
-[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
-
 #tmux
 #test -f ~/.tmuxrc && . ~/.tmuxrc
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
@@ -79,6 +76,9 @@ fi
 
 # phpbrew
 [[ -f $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
+
+#nvm
+[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
 
 
 function mkcd(){mkdir -p $1 && cd $1}
@@ -103,10 +103,45 @@ function mkcd(){mkdir -p $1 && cd $1}
 #     ;;
 # esac
 
-eval "$(direnv hook zsh)"
+if (( $+commands[direnv] )); then
+  eval "$(direnv hook zsh)"
+fi
 
-#peco
-function peco-history() {
+# gwt  - create git worktree branch
+function gwt() {
+  GIT_CDUP_DIR=`git rev-parse --show-cdup`
+  git worktree add ${GIT_CDUP_DIR}git-worktrees/$1 -b $1
+}
+
+# fgbr - checkout git branch
+function fgbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.*//")
+}
+# fgrbr - checkout git remote branch
+function fgrbr() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+    fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+# fgshow - show git commits
+function fgshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'EOF'
+                {}
+EOF"
+}
+
+# fhist - show history
+function fhist() {
   local tac
   if which tac > /dev/null; then
     tac="tac"
@@ -115,35 +150,36 @@ function peco-history() {
   fi
   BUFFER=$(history -n 1 | \
     eval $tac | \
-    peco --query "$LBUFFER")
+    fzf --query "$LBUFFER" --reverse)
   CURSOR=$#BUFFER
-  zle clear-screen
+  text_to_add="a==="
+  zle reset-prompt
 }
-zle -N peco-history
-bindkey '^r' peco-history
+zle -N fhist
+bindkey '^r' fhist
 
-function peco-cd () {
-  local selected_dir=$(find $HOME/src -type d -maxdepth 5 -not -path '*/\.*' | peco)
+# fcd - change directory
+function fcd () {
+  local selected_dir=$(find $HOME/src -type d -maxdepth 5 -not -path '*/\.*' | fzf)
   if [ -n "$selected_dir" ]; then
     BUFFER="pushd \"$selected_dir\""
     zle accept-line
   fi
-  zle clear-screen
+  zle reset-prompt
 }
-zle -N peco-cd
-bindkey '^x^f' peco-cd
+zle -N fcd
+bindkey '^x^f' fcd
 
-# for OSX
-function peco-open() {
-  local selected_dir=$(find $HOME/src -type d -maxdepth 5 -not -path '*/\.*' | peco)
-  if [ -n "$selected_dir" ]; then
-    BUFFER="open \"$selected_dir\""
-    zle accept-line
+# fssh - ssh hosts
+function fssh(){
+  local sshLoginHost
+  sshLoginHost=`cat ~/.ssh/config | grep -i ^host | awk '{print $2}' | fzf`
+
+  if [ "$sshLoginHost" = "" ]; then
+      return 1
   fi
-  zle clear-screen
+  ssh ${sshLoginHost}
 }
-zle -N peco-open
-bindkey '^x^o' peco-open
 
 # tag
 if (( $+commands[tag] )); then

@@ -2,4 +2,6 @@
 . ~/.zsh/rc
 [ -f ~/.zsh/antigen/antigen.zsh ] && source ~/.zshrc.antigen
 
-eval $(/usr/libexec/path_helper -s)
+if [ -x /usr/libexec/path_helper ]; then
+    eval `/usr/libexec/path_helper -s`
+fi
