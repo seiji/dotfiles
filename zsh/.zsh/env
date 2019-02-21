@@ -111,8 +111,8 @@ fi
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
-#export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+#export PATH="$RBENV_ROOT/bin:$PATH"
+export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 export BUNDLER_EDITOR="vim +VimFiler"
 
 #export GEM_HOME=$HOME/.gem
@@ -130,9 +130,8 @@ if [ -d '/usr/local/miniconda3' ]; then
   export PATH="$MINICONDA_ROOT/bin:$PATH"
 fi
 
-# Node
-export NODE_PATH=/usr/local/lib/node_modules
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# Homebrew Cask
+export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
 
 # Haskel
 if (( $+commands[ghc] )); then

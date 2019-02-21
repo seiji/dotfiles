@@ -37,11 +37,15 @@ Plug 'thinca/vim-quickrun'
 
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-eunuch'
-" " Plug 'ervandew/supertab'
+Plug 'editorconfig/editorconfig-vim'
+
+" Plug 'ervandew/supertab'
 " Plug 'Valloric/YouCompleteMe'
+
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'vim-scripts/surround.vim'
+
 " " language
 " Plug 'OmniSharp/omnisharp-vim'
 " Plug 'fatih/vim-go'
@@ -185,6 +189,8 @@ nnoremap <silent> <C-L> :noh<C-L><CR>
 let s:ignore_patterns = [
     \ '__pycache__/',
     \ '__pycache__',
+    \ '\.bundle',
+    \ '\.facts',
     \ '\.git',
     \ '\.gitmodules',
     \ '*\.min\.js',
@@ -287,11 +293,11 @@ augroup dirvish_commands
   autocmd FileType dirvish setlocal nonumber norelativenumber statusline=%F
   autocmd FileType dirvish nnoremap <buffer><silent> <C-j> <C-\><C-n>j:call feedkeys("p")<CR>
   autocmd FileType dirvish nnoremap <buffer><silent> <C-k> <C-\><C-n>k:call feedkeys("p")<CR>
-  autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
+  "autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
 
   " au User DirvishEnter let b:dirvish.showhidden = 1
   for pat in s:ignore_patterns
-    execute 'autocmd FileType dirvish silent! keeppatterns g@\v/'.pat.'/?$@d'
+    autocmd FileType dirvish silent! keeppatterns g@\v/\.pat./?$@d
   endfor
 augroup END
 

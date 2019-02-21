@@ -1,11 +1,10 @@
 #compdef gcloud
 # zsh completion for gcloud
-# Google Cloud SDK 0.9.67
+# Google Cloud SDK 193.0.0
 
 _gcloud() {
   local context curcontext=$curcontext state line
   local -A opt_args
-
 
   _arguments -C \
     $common_ops \
@@ -18,7 +17,6 @@ _gcloud() {
     ;;
 
     (options)
-      # subcommands
       case $line[1] in
         (auth)
           _gcloud_command _commands_auth
@@ -154,20 +152,61 @@ _gcloud_command() {
 }
 
 # gcloud --help | grep -A -1 "GROUPS" | grep -v '^$' | grep '^     ' | sed -e 's/^     \([^ ]\+\)/\1:/' | perl -0pe 's/\n        / /gm' | sed "s/^/'/;s/$/'/"
-#
 _commands=(
+'app: Manage your App Engine deployments.'
 'auth: Manage oauth2 credentials for the Google Cloud SDK.'
-'components: List, install, update, or remove Google Cloud SDK components or packages.'
-'compute: Read and manipulate Google Compute Engine resources.'
-'config: View and edit Google Cloud SDK properties.'
+'components: List, install, update, or remove Google Cloud SDK components.'
+'compute: Create and manipulate Google Compute Engine resources.'
+'config: View and edit Cloud SDK properties.'
+'container: Deploy and manage clusters of machines for running containers.'
+'dataflow: Manage Google Cloud Dataflow jobs.'
+'dataproc: Create and manage Google Cloud Dataproc clusters and jobs.'
+'datastore: Manage your Cloud Datastore indexes.'
+'debug: Commands for interacting with the Cloud Debugger.'
+'deployment-manager: Manage deployments of cloud resources.'
 'dns: Manage your Cloud DNS managed-zones and record-sets.'
+'domains: Manage domains for your Google Cloud projects.'
+'endpoints: Create, enable and manage API services.'
+'firebase: Work with Google Firebase.'
+'iam: Manage IAM service accounts and keys.'
+'iot: Manage Cloud IoT resources.'
+'kms: Manage cryptographic keys in the cloud.'
+'logging: Manage Stackdriver Logging.'
+'ml: Use Google Cloud machine learning capabilities.'
+'ml-engine: Manage Cloud ML Engine jobs and models.'
+'organizations: Create and manage Google Cloud Platform Organizations.'
+'projects: Create and manage project access policies.'
+'pubsub: Manage Cloud Pub/Sub topics and subscriptions.'
+'services: List, enable and disable APIs and services.'
+'source: Cloud git repository commands.'
+'spanner: Command groups for Cloud Spanner.'
 'sql: Manage Cloud SQL databases.'
 'topic: gcloud supplementary help.'
 'docker: Provides the docker CLI access to the Google Container Registry.'
+'feedback: Provide feedback to the Google Cloud SDK team.'
 'help: Prints detailed help messages for the specified commands.'
 'info: Display information about the current gcloud environment.'
-'init: Create and initialize a gcloud workspace in the current directory.'
+'init: Initialize or reinitialize gcloud.'
 'version: Print version information for Cloud SDK components.'
+)
+
+# gcloud app --help | grep -A -1 "GROUPS" | grep -B -1 "EXAMPLES" | grep -v '^$' | grep '^     ' | sed -e 's/^     \([^ ]\+\)/\1:/' | perl -0pe 's/\n        / /gm' | sed "s/^/'/;s/$/'/"
+_commands_app=(
+'domain-mappings: View and manage your App Engine domain mappings.'
+'firewall-rules: View and manage your App Engine firewall rules.'
+'instances: View and manage your App Engine instances.'
+'logs: Manage your App Engine logs.'
+'operations: View and manage your App Engine Operations.'
+'regions: View regional availability of App Engine runtime environments.'
+'services: View and manage your App Engine services.'
+'ssl-certificates: View and manage your App Engine SSL certificates.'
+'versions: View and manage your App Engine versions.'
+'browse: Open the current app in a web browser.'
+'create: Create an App Engine app within the current Google Cloud Project.'
+'deploy: Deploy the local code and/or configuration of your app to App Engine.'
+'describe: Display all data about an existing service.'
+'open-console: Open the App Engine dashboard, or log viewer, in a web browser.'
+'update: Updates an App Engine application.'
 )
 
 _commands_auth=(
@@ -392,9 +431,11 @@ _commands_compute_zones=(
 'list: List Google Compute Engine zones.'
 )
 _commands_config=(
-'list: View Google Cloud SDK properties.'
-'set: Edit Google Cloud SDK properties.'
-'unset: Erase Google Cloud SDK properties.'
+'configurations Manage the set of gcloud named configurations.'
+'get-value: Print the value of a Cloud SDK property.'
+'list: View Cloud SDK properties.'
+'set: Set a Cloud SDK property.'
+'unset: Unset a Cloud SDK property.'
 )
 
 _commands_dns=(

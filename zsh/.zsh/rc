@@ -75,11 +75,10 @@ _Z_CMD=j
 fi
 
 # phpbrew
-[[ -f $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
+[[ -e $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
 
 #nvm
 [[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
-
 
 function mkcd(){mkdir -p $1 && cd $1}
 
@@ -87,21 +86,12 @@ function mkcd(){mkdir -p $1 && cd $1}
 #   darwin*)
 #     # VBoxManage startvm --type headless boot2docker-vm // if fail
 #     $(boot2docker shellinit)
+# gcloud
+# [ -f "${HOMEBREW_CASK_PREFIX}/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ] \
+#   && source "${HOMEBREW_CASK_PREFIX}/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+[ -f "${HOMEBREW_CASK_PREFIX}/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ] \
+  && source "${HOMEBREW_CASK_PREFIX}/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 #
-#     boot2docker status
-#     if [ $? -ne 0 ]; then
-#       # VBoxManage sharedfolder add boot2docker-vm -name home -hostpath $HOME
-#       boot2docker up
-#     #   # boot2docker ssh "sudo modprobe vboxsf && mkdir -p $HOME && sudo mount -t vboxsf home $HOME"
-#     #   boot2docker ssh "sudo modprobe vboxsf && mkdir -p /home/ec2-user && sudo mount -t vboxsf home /home/ec2-user"
-#     else
-#       echo "boot2docker is already running. Execute this manuallly:"
-#       echo 'boot2docker ssh "sudo modprobe vboxsf && mkdir -p $HOME && sudo mount -t vboxsf home $HOME"'
-#     fi
-#     ;;
-#   linux*)
-#     ;;
-# esac
 
 if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
