@@ -23,6 +23,9 @@ export XDG_DATA_HOME=$HOME/.local/share
 case ${OSTYPE} in
   darwin*)
     #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+    # Homebrew Cask
+    export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
+
     # openssl
     export PATH=/usr/local/opt/openssl/bin:$PATH
     export LD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$LD_LIBRARY_PATH
@@ -129,9 +132,6 @@ if [ -d '/usr/local/miniconda3' ]; then
   export MINICONDA_ROOT="/usr/local/miniconda3"
   export PATH="$MINICONDA_ROOT/bin:$PATH"
 fi
-
-# Homebrew Cask
-export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
 
 # Haskel
 if (( $+commands[ghc] )); then

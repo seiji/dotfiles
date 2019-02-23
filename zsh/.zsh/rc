@@ -40,11 +40,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 [[ -f "$HOME/.dircolors" ]] && ( eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" )
 
 #ssh
-function ssh() {
-    local window_name=$(tmux display -p '#{window_name}')
-    command ssh $@
-    tmux rename-window $window_name
-}
+# function ssh() {
+#     local window_name=$(tmux display -p '#{window_name}')
+#     command ssh $@
+#     tmux rename-window $window_name
+# }
 #rbenv
 [[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
 
