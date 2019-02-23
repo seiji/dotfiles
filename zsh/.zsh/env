@@ -78,7 +78,7 @@ fi
 
 # FZF; rg
 if (( $+commands[fzf] )) && (( $+commands[rg] )); then
-  export FZF_DEFAULT_COMMAND='rg --nocolor -g ""'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='
