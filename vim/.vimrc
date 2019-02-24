@@ -25,6 +25,7 @@ endif
 
 set rtp+=~/.vim/plugged/vim-plug
 call plug#begin('~/.vim/plugged')
+
 " Other plugins
 Plug 'Shougo/vimproc.vim'
 Plug 'w0rp/ale'
@@ -34,6 +35,9 @@ Plug 'justinmk/vim-dirvish'
 Plug 'itchyny/lightline.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'thinca/vim-quickrun'
+
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/async.vim'
 
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-eunuch'
@@ -47,6 +51,7 @@ Plug 'honza/vim-snippets'
 Plug 'vim-scripts/surround.vim'
 
 " " language
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 " Plug 'OmniSharp/omnisharp-vim'
 " Plug 'fatih/vim-go'
 " Plug 'vim-scripts/Vim-R-plugin'
@@ -56,7 +61,6 @@ Plug 'vim-scripts/surround.vim'
 "
 " """"""""
 Plug 'tpope/vim-fugitive'
-
 
 call plug#end()
 
@@ -348,6 +352,17 @@ endif
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+
+" w0rp/ale
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+  \ 'php': ['phpcs', 'php']
+\}
+let g:ale_php_phpcs_standard = 'PSR1,PSR2'
+
+""" phpcd
+let g:phpcd_autoload_path = 'vendor/autoload.php'
 
 " vim-go
 au FileType go nmap <Leader>d <Plug>(go-def)
