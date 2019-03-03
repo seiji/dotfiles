@@ -24,17 +24,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 set rtp+=~/.vim/plugged/vim-plug
+set tags+=tags
 call plug#begin('~/.vim/plugged')
 
 " Other plugins
-Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimproc.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'itchyny/lightline.vim'
 Plug 'tomtom/tcomment_vim'
-Plug 'thinca/vim-quickrun'
+
+Plug 'janko-m/vim-test'
+Plug 'craigemery/vim-autotag'
+" Plug 'thinca/vim-quickrun'
 
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/async.vim'
@@ -52,6 +57,7 @@ Plug 'vim-scripts/surround.vim'
 
 " " language
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+Plug 'arnaud-lb/vim-php-namespace'
 " Plug 'OmniSharp/omnisharp-vim'
 " Plug 'fatih/vim-go'
 " Plug 'vim-scripts/Vim-R-plugin'
@@ -79,6 +85,8 @@ set fileformats=unix,dos,mac
 set gdefault
 set hidden
 set hlsearch
+hi Search ctermbg=Cyan
+hi Search ctermfg=White
 set history=200
 set incsearch
 set ignorecase
@@ -88,6 +96,7 @@ set laststatus=2
 set number
 set nobackup
 set noerrorbells
+set noshowmode
 set noswapfile
 set nowritebackup
 set pastetoggle=<C-E>
@@ -95,7 +104,6 @@ set ruler
 set scrolloff=8
 set shiftwidth=2
 set showcmd
-set showmode
 set smartcase
 set smartindent
 set softtabstop=2
@@ -158,7 +166,7 @@ autocmd InsertLeave * set nopaste
 "===== Keymapping
 nmap ; :Buffers
 nmap t :Files
-nmap r :Tags
+" nmap r :Tags
 nmap f :Rg<Space>
 
 inoremap <C-p> <Up>
@@ -353,6 +361,15 @@ endif
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
+
+let g:lightline = {
+\ 'colorscheme': 'powerline',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'readonly', 'filename', 'modified', ] ]
+\ },
+\ }
+
 " w0rp/ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -361,8 +378,17 @@ let g:ale_linters = {
 \}
 let g:ale_php_phpcs_standard = 'PSR1,PSR2'
 
+let g:autotagTagsFile=".tags"
+
 """ phpcd
 let g:phpcd_autoload_path = 'vendor/autoload.php'
+
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 
 " vim-go
 au FileType go nmap <Leader>d <Plug>(go-def)
@@ -409,7 +435,16 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-"===== quickrun
+
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> <Leader>r :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+let test#strategy = "dispatch"
+let g:test#preserve_screen = 1
+
+"===== qmuickrun
 ""set splitbelow
 "set splitright
 ""let g:quickrun_config={'*': {'split': 'vertical'}}
