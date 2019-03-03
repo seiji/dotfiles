@@ -11,7 +11,6 @@ darwin*)
   alias ldd="echo ldd is not on OSX. Use otool -L."
   alias ll="ls -laG"
   alias ls="ls -1G"
-  alias sed="gsed"
   alias strace="echo strace is not on OSX. Use dtruss"
   alias timeout='gtimeout'
   alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
@@ -68,6 +67,11 @@ if [[ -f "$HOME/.gitconfig" ]]; then
   `
 fi
 
+# ripgrep
+if (( $+commands[rg] )); then
+  alias rg='rg --hidden --glob "!.git"'
+fi
+
 # docker
 if (( $+commands[docker-machine] )); then
   alias docker='docker $(docker-machine config)'
@@ -103,6 +107,17 @@ alias sfroute='sf router:debug'
 alias sfcontainer='sf container:debug'
 alias sft='bin/phpunit -c app'
 
+# docker
+alias docker='docker $(machine config)'
+alias dl='docker ps -l -q'
+#  except data container
+alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
+#alias drmi='docker rmi $(docker images -q)'
+alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
+alias drmv='docker volume rm $(docker volume ls -qf dangling=true)'
+alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
+alias machine='docker-machine'
+alias compose='docker-compose'
 
 # adb
 alias apk='adb shell pm list packages -f'

@@ -15,7 +15,9 @@ export EDITOR=vim
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS=Gxfxcxdxhxegedahagacgx
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
+#export PATH=/usr/local/bin:/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
+export PATH=/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
+
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
@@ -31,11 +33,12 @@ case ${OSTYPE} in
     export LD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$LD_LIBRARY_PATH
     export CPATH=/usr/local/opt/openssl/include:$LD_LIBRARY_PATH
 
-    export DEVELOPER_DIR=$(xcode-select -p)
+    export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+    export PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
+
+    #export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
-    export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
-    # Unity
-    export PATH="/Applications/Unity/Unity.app/Contents/Mono/bin:$PATH"
+    #export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
     ;;
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
@@ -57,10 +60,6 @@ case ${OSTYPE} in
 
     ;;
 esac
-
-# GCP
-export GCP_HOME="$HOME/google-cloud-sdk"
-export PATH="${GCP_HOME}/bin:${PATH}"
 
 # docker/machine
 # export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm

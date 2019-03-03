@@ -142,7 +142,6 @@ function fhist() {
     eval $tac | \
     fzf --query "$LBUFFER" --reverse)
   CURSOR=$#BUFFER
-  text_to_add="a==="
   zle reset-prompt
 }
 zle -N fhist
@@ -162,14 +161,30 @@ bindkey '^x^f' fcd
 
 # fssh - ssh hosts
 function fssh(){
-  local sshLoginHost
-  sshLoginHost=`cat ~/.ssh/config | grep -i ^host | awk '{print $2}' | fzf`
-
-  if [ "$sshLoginHost" = "" ]; then
-      return 1
+  local selected_host=$(cat ~/.ssh/config | grep -i '^host' | awk '{print $2}' | grep -v '*' | fzf)
+  if [ -n "$selected_host" ]; then
+    BUFFER="ssh $selected_host"
   fi
-  ssh ${sshLoginHost}
+  CURSOR=$#BUFFER
+  zle reset-prompt
 }
+zle -N fssh
+bindkey '^x^j' fssh
+
+# fgce - ssh hosts
+function fgce(){
+  local selected_host=$(gcloud compute instances list --filter="STATUS:RUNNING" | \
+  tail -n +2 | \
+  fzf)
+  if [ -n "$selected_host" ]; then
+    read name zone internal_ip external_ip<<< $( awk -F@ '{print $1, $2, $5 $6}' <<< $selected_host )
+    BUFFER="gcloud compute ssh --zone $zone $name"
+  fi
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fgce
+bindkey '^x^l' fgce
 
 # tag
 if (( $+commands[tag] )); then
