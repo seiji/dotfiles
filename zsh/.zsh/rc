@@ -161,9 +161,17 @@ bindkey '^x^f' fcd
 
 # fssh - ssh hosts
 function fssh(){
-  local selected_host=$(cat ~/.ssh/config | grep -i '^host' | awk '{print $2}' | grep -v '*' | fzf)
+  local selected_host
+  local cmd='ssh'
+  if [[ -e ssh_config ]]; then
+    selected_host=$(cat ssh_config | grep -i '^host' | awk '{print $2}' | grep -v '*' | fzf)
+    cmd="ssh -F ssh_config"
+  else
+    selected_host=$(cat ~/.ssh/config | grep -i '^host' | awk '{print $2}' | grep -v '*' | fzf)
+  fi
+
   if [ -n "$selected_host" ]; then
-    BUFFER="ssh $selected_host"
+    BUFFER="$cmd $selected_host"
   fi
   CURSOR=$#BUFFER
   zle reset-prompt

@@ -41,7 +41,6 @@ alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 
-alias fcd='source ~/bin/fcd.sh'
 alias sc='screen -U -D -RR'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
@@ -58,14 +57,13 @@ alias weechat='TERM=screen-256color weechat'
 alias weechat-curses='TERM=screen-256color weechat-curses'
 
 # git
-if [[ -f "$HOME/.gitconfig" ]]; then
-  eval `\
-    sed -e 's/;.*$//' \
-        -e 's/[[:space:]]*$//' -e 's/^[[:space:]]*//' < "$HOME/.gitconfig" | \
-    sed -n -e "/^\[alias\]/,/^\s*\[/{/^[^;].*\=.*/p;}" | \
-    sed -e 's/\([^ =]\+\).*/alias g\1="git \1"/g' \
-  `
-fi
+# if [[ -f "$HOME/.gitconfig" ]]; then
+#   eval `\
+#     sed -e 's/;.*$//' -e 's/[[:space:]]*$//' -e 's/^[[:space:]]*//' < "$HOME/.gitconfig" | \
+#     sed -n -e "/^\[alias\]/,/^\s*\[/{/^[^;].*\=.*/p;}" | \
+#     sed -e 's/\([^ =]\+\).*/alias g\1="git \1"/g'
+#   `
+# fi
 
 # ripgrep
 if (( $+commands[rg] )); then
