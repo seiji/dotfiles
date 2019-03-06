@@ -28,8 +28,8 @@ set tags+=tags
 call plug#begin('~/.vim/plugged')
 
 " Other plugins
-" Plug 'Shougo/vimproc.vim'
-Plug 'tpope/vim-dispatch'
+Plug 'Shougo/vimproc.vim'
+" Plug 'tpope/vim-dispatch'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -39,7 +39,7 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'janko-m/vim-test'
 Plug 'craigemery/vim-autotag'
-" Plug 'thinca/vim-quickrun'
+Plug 'thinca/vim-quickrun'
 
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/async.vim'
@@ -270,6 +270,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead *_test.go set filetype=go.testing
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *Test.php setlocal filetype=php.phpunit
   autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
@@ -436,13 +437,13 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> <Leader>r :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
-let test#strategy = "dispatch"
-let g:test#preserve_screen = 1
+" nmap <silent> t<C-n> :TestNearest<CR>
+" nmap <silent> <Leader>r :TestFile<CR>
+" nmap <silent> t<C-s> :TestSuite<CR>
+" nmap <silent> t<C-l> :TestLast<CR>
+" nmap <silent> t<C-g> :TestVisit<CR>
+" let test#strategy = "dispatch"
+" let g:test#preserve_screen = 1
 
 "===== qmuickrun
 ""set splitbelow
@@ -454,56 +455,68 @@ let g:quickrun_config._.input = '=@i'
 let g:quickrun_config._.input = '=%{b:input}'
 
 let g:quickrun_config = {
-      \  "_" : {
-      \    "outputter/buffer/split" : ":botright 8sp",
-      \    "outputter/buffer/close_on_empty" : 1,
-      \    "runner" : "vimproc",
-      \    "runner/vimproc/updatetime" : 60,
-      \  },
-      \  "make" : {
-      \    "command" : "make %o",
-      \    "exec" : "%c",
-      \    "runner" : "vimproc",
-      \   },
-      \}
+  \  "_" : {
+  \    'outputter': 'multi:quickfix',
+  \    "outputter/buffer/split" : ":botright 8sp",
+  \    "outputter/buffer/close_on_empty" : 1,
+  \    "runner" : "vimproc",
+  \    "runner/vimproc/updatetime" : 60,
+  \    'hook/close_quickfix/enable_hook_loaded' : 1,
+  \    'hook/close_quickfix/enable_success'     : 1,
+  \    'hook/close_buffer/enable_failure'       : 1,
+  \  },
+  \  "make" : {
+  \    "command" : "make %o",
+  \    "exec" : "%c",
+  \    "runner" : "vimproc",
+  \   },
+  \}
 let g:quickrun_config.cpp = {
-      \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
-      \ 'command': 'clang++',
-      \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
-      \ }
+  \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
+  \ 'command': 'clang++',
+  \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+  \ }
 let g:quickrun_config.matlab = {
-      \ 'cmdopt' : '',
-      \ 'command': 'octave-cli',
-      \ 'exec' : '%c %o %s',
-      \ }
+  \ 'cmdopt' : '',
+  \ 'command': 'octave-cli',
+  \ 'exec' : '%c %o %s',
+  \ }
+
+let g:quickrun_config['php.phpunit'] = {
+  \ 'hook/cd/directory'              : '%S:p:h',
+  \ 'command'                        : './vendor/bin/phpunit',
+  \ 'cmdopt'                         : '',
+  \ 'exec'                           : '%c %o %s',
+  \ 'outputter/quickfix/errorformat' : '%f:%l,%m in %f on line %l',
+  \}
 
 let g:quickrun_config['ruby.rspec'] = {
-      \ 'type': 'ruby.rspec',
-      \ 'cmdopt': '-cfd',
-      \ 'command': 'rspec',
-      \ 'exec': 'bundle exec %c %o',
-      \ }
+  \ 'type': 'ruby.rspec',
+  \ 'cmdopt': '-cfd',
+  \ 'command': 'rspec',
+  \ 'exec': 'bundle exec %c %o',
+  \ }
 let g:quickrun_config.rspecl = {
-      \ 'type': 'ruby.rspec',
-      \ 'command': 'rspec',
-      \ 'exec': 'bundle exec %c %s -l ' . line('.'),
-      \}
+  \ 'type': 'ruby.rspec',
+  \ 'command': 'rspec',
+  \ 'exec': 'bundle exec %c %s -l ' . line('.'),
+  \}
 " let g:quickrun_config.go = {
 "       \ 'type': 'go',
 "       \ 'command': 'go',
 "       \ 'exec': 'go run *.go',
 "       \ }
 let g:quickrun_config['go.testing'] = {
-      \ 'type': 'go',
-      \ 'command': 'go',
-      \ 'exec': '%c test -v *.go',
-      \ }
+  \ 'type': 'go',
+  \ 'command': 'go',
+  \ 'exec': '%c test -v *.go',
+  \ }
 let g:quickrun_config.swift = {
-      \ 'type': 'swift',
-      \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
-      \ 'command': 'xcrun',
-      \ 'exec': '%c swift %s %o',
-      \ }
+  \ 'type': 'swift',
+  \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
+  \ 'command': 'xcrun',
+  \ 'exec': '%c swift %s %o',
+  \ }
 
 """
 nnoremap <C-p> :FZFFileList<CR>
