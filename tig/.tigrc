@@ -1,14 +1,35 @@
-set blame-view = date:local author:full id line-number:true,interval=1 text
-set main-view = line-number:true,interval=10 date:local author:full id commit-title:true,graph=true,refs=true
-set refs-view = date:local author:full id ref:true commit-title:true
-set status-view = file-name status:long
-set tree-view = date:local author:full id file-size:units mode file-name
+# View settings
+set main-view = \
+  id:yes \
+  date:display=custom,format="%Y/%m/%d %H:%M" \
+  author:width=7 \
+  commit-title:graph=v2,refs=true
 
-set show-changes = yes
+set blame-view = \
+	id:yes,color \
+  date:display=custom,format="%Y/%m/%d %H:%M" \
+  author:width=7 \
+	line-number:yes,interval=1 text
+
+set refs-view = \
+  date:display=custom,format="%Y/%m/%d %H:%M" \
+  author:width=7 \
+  ref:true \
+  commit-title:true
+
+set blame-options = -C -C -C
+set diff-context = 3
+set commit-order = default
+set focus-child = yes
 set horizontal-scroll = 33%
-set line-graphics = ascii
-set refresh-mode = auto
+set id-width = 7
+set ignore-case = yes
+set ignore-space = some
+set show-changes = no
+set show-notes = yes
+set tab-size = 2
 
+# Bind Settings
 bind generic G none
 bind generic D none
 bind generic A none
@@ -23,9 +44,15 @@ bind generic R none
 bind main C none
 bind main s view-status
 bind main b view-refs
+bind main G move-last-line
 
 bind diff i view-close
+bind diff D :toggle diff-options --minimal	# Use minimal diff algorithm
+bind diff [ :toggle diff-context -3		# Decrease context (-U arg)
+bind diff ] :toggle diff-context +3		# Increase context
 
+bind generic <C-f> move-page-down
+bind generic <C-b> move-page-up
 bind generic y scroll-line-up
 bind generic e scroll-line-down
 bind generic g move-first-line
@@ -44,10 +71,9 @@ bind generic S !git status
 bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy'
 
 bind tree v !vim %(file) # open file from tree
-bind branch n !@git branch %(prompt) # Create a new branch
-bind branch d !?git branch -D %(branch) # Delete local branch
-bind branch c !git checkout %(branch) # Checkout branch
-bind branch C !git checkout -b %(prompt) %(branch) # Create a new branch
+bind refs n !@git branch %(prompt) # Create a new branch
+bind refs d !?git branch -D %(branch) # Delete local branch
+bind refs c !git checkout %(branch) # Checkout branch
+bind refs C !git checkout -b %(branch) origin/%(branch) # Create a new branch
 
 bind status d !@?rm -rf %(file) # delete untracked files
-
