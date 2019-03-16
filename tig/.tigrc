@@ -30,16 +30,33 @@ set show-notes = yes
 set tab-size = 2
 
 # Bind Settings
-bind generic G none
-bind generic D none
 bind generic A none
-bind generic g none
+bind generic D none
 bind generic F none
+bind generic G none
 bind generic I none
+bind generic R none
+bind generic S none
+bind generic g none
 bind generic i none
 bind generic s none
-bind generic S none
-bind generic R none
+
+bind generic <C-b> move-page-up
+bind generic <C-f> move-page-down
+bind generic ? view-help
+bind generic A !git commit --amend
+bind generic F !git fetch --prune
+bind generic G move-last-line
+bind generic P !?git push
+bind generic R !?git reset --hard %(commit)
+bind generic S !git status
+bind generic e scroll-line-down
+bind generic g move-first-line
+bind generic o enter
+bind generic p !?git pull
+bind generic y scroll-line-up
+# Copy rev id to clipboard
+bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy'
 
 bind main C none
 bind main s view-status
@@ -50,25 +67,6 @@ bind diff i view-close
 bind diff D :toggle diff-options --minimal	# Use minimal diff algorithm
 bind diff [ :toggle diff-context -3		# Decrease context (-U arg)
 bind diff ] :toggle diff-context +3		# Increase context
-
-bind generic <C-f> move-page-down
-bind generic <C-b> move-page-up
-bind generic y scroll-line-up
-bind generic e scroll-line-down
-bind generic g move-first-line
-bind generic G move-last-line
-bind generic o enter
-bind generic ? view-help
-
-bind generic R !?git reset --hard %(commit)
-bind generic F !git fetch
-bind generic P !?git push
-bind generic p !?git pull
-bind generic A !git commit --amend
-bind generic S !git status
-
-# Copy rev id to clipboard
-bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy'
 
 bind tree v !vim %(file) # open file from tree
 bind refs n !@git branch %(prompt) # Create a new branch
