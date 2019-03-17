@@ -27,6 +27,7 @@ set ignore-case = yes
 set ignore-space = some
 set show-changes = no
 set show-notes = yes
+set split-view-width = 50%
 set tab-size = 2
 
 # Bind Settings

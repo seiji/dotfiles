@@ -1,16 +1,7 @@
 [user]
-  username = Seiji Toyama
+  username = seiji
   email = toyama.seiji@gmail.com
-  name = Seiji Toyama
-
-[color]
-  ui = auto
-
-[mergetool]
-  keepBackup = true
-
-[init]
-  templatedir = ~/.git-templates
+  name = seiji
 
 [core]
   editor = vim
@@ -20,14 +11,31 @@
 [branch]
   autosetuprebase = always
 
-[merge]
-  ff = false
+[color]
+  ui = auto
+
+[diff]
+  indent-heuristic = true
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
 
 [push]
   default = upstream
 
 [pull]
   rebase = true
+
+[merge]
+  ff = false
+
+[mergetool]
+  keepBackup = true
+
+[init]
+  templatedir = ~/.git-templates
 
 [branch "master"]
   rebase = true
@@ -41,6 +49,8 @@
   co  = checkout
   di  = diff
   dc  = diff --cached
+  dn  = diff --name-status
+  ds  = diff --stat
   fe  = fetch --prune
   fs  = !cd $(git rev-parse --show-toplevel) && git submodule update && cd -
   ls  = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
@@ -53,25 +63,13 @@
   st  = !git status -s -b && git stash list
 
   # Log
-
   sb = show-branch --all --color
-  sgraph = !"git log --oneline --graph"
-
-  graph = !"git log1"
+  graph = !"git log --oneline --graph"
 
   # Other
   ignore = !"f() { local s=$1; shift; \
           while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
           curl \"https://www.gitignore.io/api/$s\"; }; f"
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[ghq]
-  root = /Users/seiji/src
 
 [filter "csharp-format"]
   clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
@@ -82,10 +80,3 @@
 	smudge = git-lfs smudge %f
 	required = true
 
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
-
-[diff]
-	compactionHeuristic = true

@@ -75,6 +75,9 @@ if (( $+commands[docker-machine] )); then
   alias docker='docker $(docker-machine config)'
   alias machine='docker-machine'
 fi
+if (( $+commands[docker-compose] )); then
+  alias compose='docker-compose'
+fi
 
 alias dl='docker ps -q'
 alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
@@ -82,7 +85,6 @@ alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | 
 alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
 alias drmv='docker volume rm $(docker volume ls -qf dangling=true)'
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
-alias compose='docker-compose'
 
 # golang
 alias get=go_get
@@ -104,18 +106,6 @@ alias sfcw='sf cache:warmup'
 alias sfroute='sf router:debug'
 alias sfcontainer='sf container:debug'
 alias sft='bin/phpunit -c app'
-
-# docker
-alias docker='docker $(machine config)'
-alias dl='docker ps -l -q'
-#  except data container
-alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
-#alias drmi='docker rmi $(docker images -q)'
-alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
-alias drmv='docker volume rm $(docker volume ls -qf dangling=true)'
-alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
-alias machine='docker-machine'
-alias compose='docker-compose'
 
 # adb
 alias apk='adb shell pm list packages -f'
