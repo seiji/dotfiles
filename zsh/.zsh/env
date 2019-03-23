@@ -67,14 +67,6 @@ esac
 
 # export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
 
-if type machine >/dev/null; then
-  machine url >&/dev/null
-  if [ $? -eq 0 ]; then
-    eval $(docker-machine env)
-    #export DOCKER_HOST=`machine url` DOCKER_AUTH=identity
-  fi
-fi
-
 # FZF; rg
 if (( $+commands[fzf] )) && (( $+commands[rg] )); then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
@@ -101,9 +93,15 @@ if (( $+commands[git] )); then
   esac
 fi
 
+# Pulumi
+if [[ -s $home/.pulumi ]]; then
+  export path="$home/.pulumi/bin:$path"
+fi
+
+### Languages
 # PHP
-if [[ -s $HOME/.config/composer ]]; then
-  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+if [[ -s $home/.config/composer ]]; then
+  export path="$home/.config/composer/vendor/bin:$path"
 fi
 
 # Haskel
@@ -139,8 +137,6 @@ if (( $+commands[ghc] )); then
 fi
 
 # Golang
-#export PATH=$HOME/go/bin:$PATH
-
 if (( $+commands[go] )); then
   case ${OSTYPE} in
     darwin*)

@@ -79,12 +79,31 @@ if (( $+commands[docker-compose] )); then
   alias compose='docker-compose'
 fi
 
-alias dl='docker ps -q'
-alias drmc='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
-#alias drmi='docker rmi $(docker images -q)'
-alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
-alias drmv='docker volume rm $(docker volume ls -qf dangling=true)'
+# docker container
+alias dc='docker container'
+alias dcid='docker container ls -q'
+alias dcls='docker container ls'
+alias drun='docker container run'
+alias dcrm='docker rm  $(docker ps -a | grep -v "_config\|_data" | tail -n +2 | cut -c-12)'
+# docker image
+alias di='docker image'
+alias diid='docker image ls -q'
+alias dils='docker image ls'
+alias dirm='docker rmi $(docker image ls -qf dangling=true)'
+# docker volume
+alias dv='docker image'
+alias dvid='docker volume ls -q'
+alias dvls='docker volume ls'
+alias dvrm='docker volume rm $(docker volume ls -qf dangling=true)'
+
+#
+
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
+
+function dsh() {
+  machine ssh dev '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
+  machine ssh dev /var/lib/boot2docker/docker-enter "$@"
+}
 
 # golang
 alias get=go_get
@@ -109,11 +128,6 @@ alias sft='bin/phpunit -c app'
 
 # adb
 alias apk='adb shell pm list packages -f'
-
-function dsh() {
-  machine ssh dev '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
-  machine ssh dev /var/lib/boot2docker/docker-enter "$@"
-}
 
 alias tf='terraform'
 
