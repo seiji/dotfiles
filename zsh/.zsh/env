@@ -72,11 +72,7 @@ if (( $+commands[fzf] )) && (( $+commands[rg] )); then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS='
-  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-  --height 40% --reverse --border
-'
+  export FZF_DEFAULT_OPTS='--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168 --height 40% --reverse --border'
 fi
 
 # Git
@@ -94,14 +90,14 @@ if (( $+commands[git] )); then
 fi
 
 # Pulumi
-if [[ -s $home/.pulumi ]]; then
-  export path="$home/.pulumi/bin:$path"
+if [[ -s $HOME/.pulumi ]]; then
+  export PATH="$HOME/.pulumi/bin:$PATH"
 fi
 
 ### Languages
 # PHP
-if [[ -s $home/.config/composer ]]; then
-  export path="$home/.config/composer/vendor/bin:$path"
+if [[ -s $HOME/.config/composer ]]; then
+  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 fi
 
 # Haskel

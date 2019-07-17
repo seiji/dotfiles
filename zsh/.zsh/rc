@@ -130,6 +130,14 @@ function fgshow() {
 EOF"
 }
 
+# fgvim - show files
+function fgvim() {
+  # local selected_file=$(git ls-files | fzf -m --preview 'head -100 {}')
+  local selcted_files
+  selected_files=$(git ls-files | fzf -m --preview 'head -100 {}') && \
+  vim $selected_files
+}
+
 # fhist - show history
 function fhist() {
   local tac

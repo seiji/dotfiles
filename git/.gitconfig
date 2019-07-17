@@ -3,19 +3,44 @@
   email = toyama.seiji@gmail.com
   name = seiji
 
-[core]
-  editor = vim
-	excludesfile = ~/.gitignore_global
-	quotepath = false
+[init]
+  templatedir = ~/.git-templates
 
 [branch]
   autosetuprebase = always
 
+[branch "master"]
+  rebase = true
+  mergeoptions = --no-ff
+
 [color]
   ui = auto
 
+[core]
+  editor = vim
+	excludesfile = /Users/seiji/.gitignore_global
+	quotepath = false
+
+[commit]
+	template = /Users/seiji/.stCommitMsg
+
 [diff]
-  indent-heuristic = true
+	compactionHeuristic = true
+
+[filter "csharp-format"]
+  clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
+#  smudge = cat
+#
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[merge]
+  ff = false
+
+[mergetool]
+  keepBackup = true
 
 [pager]
 	log = diff-highlight | less
@@ -27,19 +52,6 @@
 
 [pull]
   rebase = true
-
-[merge]
-  ff = false
-
-[mergetool]
-  keepBackup = true
-
-[init]
-  templatedir = ~/.git-templates
-
-[branch "master"]
-  rebase = true
-  mergeoptions = --no-ff
 
 [alias]
   al  = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t= \\2/' | sort
@@ -70,13 +82,4 @@
   ignore = !"f() { local s=$1; shift; \
           while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
           curl \"https://www.gitignore.io/api/$s\"; }; f"
-
-[filter "csharp-format"]
-  clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
-#  smudge = cat
-#
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
 

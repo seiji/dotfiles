@@ -56,11 +56,11 @@ Plug 'honza/vim-snippets'
 Plug 'vim-scripts/surround.vim'
 
 " " language
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-Plug 'arnaud-lb/vim-php-namespace'
+" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+" Plug 'arnaud-lb/vim-php-namespace'
 " Plug 'OmniSharp/omnisharp-vim'
-" Plug 'fatih/vim-go'
-" Plug 'vim-scripts/Vim-R-plugin'
+Plug 'fatih/vim-go'
+Plug 'posva/vim-vue'
 " Plug 'myhere/vim-nodejs-complete'
 " Plug 'keith/swift.vim'
 "
@@ -157,8 +157,14 @@ function! CloseSplitOrDeleteBuffer()
   endif
 endfunction
 
-nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
+function! s:ChangeCurrentDirectory()
+  let l:dir = expand("%:p:h")
+  if isdirectory(fnamemodify(l:dir, ":p"))
+    execute printf('lcd `=%s`', string(fnamemodify(l:dir, ":p")))
+  endif
+endfunction
 
+autocmd BufEnter * call s:ChangeCurrentDirectory()
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
@@ -168,6 +174,8 @@ nmap ; :Buffers
 nmap t :Files
 " nmap r :Tags
 nmap f :Rg<Space>
+nnoremap <silent> <leader>v :Dirvish<CR>
+nnoremap <silent> <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
@@ -178,6 +186,15 @@ inoremap <C-a> <Home>
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
 inoremap <C-[> <ESC>
+
+nnoremap <silent> ,f :GFiles<CR>
+nnoremap <silent> ,F :GFiles?<CR>
+nnoremap <silent> ,b :Buffers<CR>
+nnoremap <silent> ,l :BLines<CR>
+nnoremap <silent> ,h :History<CR>
+nnoremap <silent> ,m :Mark<CR>
+nnoremap <silent> <C-p> :FZFFileList<CR>
+nnoremap <silent> <C-x><C-f> :FZFCd<CR>
 
 " - buffer
 nnoremap <silent> [b :bprevious<CR>
@@ -197,6 +214,7 @@ vmap <Leader>c <Plug>(caw:i:toggle)
 
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
+
 
 let s:ignore_patterns = [
     \ '__pycache__/',
@@ -267,7 +285,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
-  autocmd BufNewFile,BufRead *_test.go set filetype=go.testing
+  autocmd BufNewFile,BufRead *_test.go setlocal filetype=go.testing tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *Test.php setlocal filetype=php.phpunit
@@ -329,24 +347,25 @@ noremap <Leader>l :TagbarToggle<CR>
 
 " snippets
 function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res == 0
-        if pumvisible()
-            return "\<C-N>"
-        else
-            return "\<TAB>"
-        endif
+  call UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res == 0
+    if pumvisible()
+      return "\<C-N>"
+    else
+      return "\<TAB>"
     endif
-    return ""
+  endif
+  return ""
 endfunction
 
 function! g:UltiSnips_Reverse()
-    call UltiSnips#JumpBackwards()
-    if g:ulti_jump_backwards_res == 0
-        return "\<C-P>"
-    endif
-    return ""
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+  return ""
 endfunction
+
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -362,13 +381,23 @@ endif
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
+function! FilePath()
+  if winwidth(0) > 90
+    return expand("%:s")
+  else
+    return expand("%:t")
+  endif
+endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'powerline',
-\ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'readonly', 'filename', 'modified', ] ]
-\ },
+\   'colorscheme': 'powerline',
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ],
+\               [ 'readonly', 'filename', 'modified', ] ]
+\   },
+\   'component_function':{
+\     'filename': 'FilePath'
+\   },
 \ }
 
 " w0rp/ale
@@ -456,14 +485,16 @@ let g:quickrun_config._.input = '=%{b:input}'
 
 let g:quickrun_config = {
   \  "_" : {
-  \    'outputter': 'multi:quickfix',
-  \    "outputter/buffer/split" : ":botright 8sp",
-  \    "outputter/buffer/close_on_empty" : 1,
   \    "runner" : "vimproc",
   \    "runner/vimproc/updatetime" : 60,
   \    'hook/close_quickfix/enable_hook_loaded' : 1,
-  \    'hook/close_quickfix/enable_success'     : 1,
-  \    'hook/close_buffer/enable_failure'       : 1,
+  \    'hook/close_quickfix/enable_success' : 1,
+  \    'hook/close_buffer/enable_failure': 1,
+  \    'outputter' : 'error',
+  \    'outputter/error/success' : 'buffer',
+  \    'outputter/error/error'   : 'quickfix',
+  \    'outputter/buffer/split'  : ':rightbelow 8sp',
+  \    'outputter/buffer/close_on_empty' : 1,
   \  },
   \  "make" : {
   \    "command" : "make %o",
@@ -519,7 +550,10 @@ let g:quickrun_config.swift = {
   \ }
 
 """
-nnoremap <C-p> :FZFFileList<CR>
+command! FZFCd call fzf#run({
+  \ 'down': '50%',
+  \ 'source': 'find $HOME/src -type d -maxdepth 5',
+  \ 'sink': 'e'})
 command! FZFFileList call fzf#run({
   \ 'down': '50%',
   \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
@@ -536,3 +570,4 @@ command! -bang -nargs=* Ripgrep
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
