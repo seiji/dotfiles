@@ -187,12 +187,12 @@ inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
 inoremap <C-[> <ESC>
 
-nnoremap <silent> ,f :GFiles<CR>
-nnoremap <silent> ,F :GFiles?<CR>
-nnoremap <silent> ,b :Buffers<CR>
-nnoremap <silent> ,l :BLines<CR>
-nnoremap <silent> ,h :History<CR>
-nnoremap <silent> ,m :Mark<CR>
+" nnoremap <silent> <leader>f :GFiles<CR>
+" nnoremap <silent> <leader>F :GFiles?<CR>
+" nnoremap <silent> <leader>b :Buffers<CR>
+" nnoremap <silent> <leader>l :BLines<CR>
+" nnoremap <silent> <leader>h :History<CR>
+" nnoremap <silent> <leader>m :Mark<CR>
 nnoremap <silent> <C-p> :FZFFileList<CR>
 nnoremap <silent> <C-x><C-f> :FZFCd<CR>
 
@@ -284,6 +284,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go.testing setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
   autocmd BufNewFile,BufRead *_test.go setlocal filetype=go.testing tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -421,20 +422,26 @@ autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
 autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 
 " vim-go
-au FileType go nmap <Leader>d <Plug>(go-def)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>im  <Plug>(go-import)
-au FileType go nmap <Leader>ims <Plug>(go-imports)
+augroup go_commands
+  autocmd!
+  au FileType go nmap <Leader>d <Plug>(go-def)
+  au FileType go nmap <Leader>ds <Plug>(go-def-split)
+  au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  au FileType go nmap <Leader>im  <Plug>(go-import)
+  au FileType go nmap <Leader>ims <Plug>(go-imports)
+  au FileType go nmap <Leader>mt :GoFmt<CR>
+  au FileType go.testing nmap <Leader>im  <Plug>(go-import)
+  au FileType go.testing nmap <Leader>ims <Plug>(go-imports)
+  au FileType go.testing nmap <Leader>mt :GoFmt<CR>
 
-au FileType go nmap <Leader>if <Plug>(go-info)
+  au FileType go nmap <Leader>if <Plug>(go-info)
 
-" au FileType go nmap <Leader>r <Plug>(go-run)
-au FileType go nmap <Leader>b <Plug>(go-build)
+  " au FileType go nmap <Leader>r <Plug>(go-run)
+  au FileType go nmap <Leader>b <Plug>(go-build)
 
-au FileType go nmap <Leader>d <Plug>(go-doc)
-
+  au FileType go nmap <Leader>d <Plug>(go-doc)
+augroup END
 
 " let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
 let g:go_fmt_command = "gofmt"
