@@ -61,6 +61,7 @@ Plug 'vim-scripts/surround.vim'
 " Plug 'OmniSharp/omnisharp-vim'
 Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
+Plug 'hashivim/vim-terraform'
 " Plug 'myhere/vim-nodejs-complete'
 " Plug 'keith/swift.vim'
 "
