@@ -11,6 +11,7 @@ darwin*)
   alias ldd="echo ldd is not on OSX. Use otool -L."
   alias ll="ls -laG"
   alias ls="ls -1G"
+  alias less='less -R'
   alias strace="echo strace is not on OSX. Use dtruss"
   alias timeout='gtimeout'
   alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"

@@ -59,9 +59,11 @@ Plug 'vim-scripts/surround.vim'
 " Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 " Plug 'arnaud-lb/vim-php-namespace'
 " Plug 'OmniSharp/omnisharp-vim'
+Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
 Plug 'hashivim/vim-terraform'
+Plug 'chr4/nginx.vim'
 " Plug 'myhere/vim-nodejs-complete'
 " Plug 'keith/swift.vim'
 "
