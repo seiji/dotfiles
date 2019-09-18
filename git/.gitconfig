@@ -18,17 +18,17 @@
 
 [core]
   editor = vim
-	excludesfile = /Users/seiji/.gitignore_global
-	quotepath = false
+  excludesfile = ~/.gitignore_global
+  quotepath = false
 
 [commit]
-	template = /Users/seiji/.stCommitMsg
+	template = ~/.git_commit_msg
 
 [diff]
 	compactionHeuristic = true
 
 [filter "csharp-format"]
-  clean = /usr/local/bin/astyle --style=linux --mode=cs --suffix=none
+  clean = astyle --style=linux --mode=cs --suffix=none
 #  smudge = cat
 #
 [filter "lfs"]
