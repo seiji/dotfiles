@@ -3,7 +3,7 @@ alias browse="hub browse"
 case "${OSTYPE}" in
 darwin*)
   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
-  alias chrome='open "/opt/homebrew-cask/Caskroom/google-chrome/latest/Google Chrome.app" --args --renderer-process-limit=3'
+  alias chrome='open "/Applications/Google Chrome.app" --args --renderer-process-limit=3'
   alias date='gdate'
   alias gpg=gpg2
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
@@ -37,12 +37,12 @@ alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias screen='screen -U -D -RR'
+alias sc='screen -U -D -RR'
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 
-alias sc='screen -U -D -RR'
 alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
 
 alias public_ip=get_public_ip
