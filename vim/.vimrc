@@ -562,7 +562,7 @@ let g:quickrun_config.swift = {
 """
 command! FZFCd call fzf#run({
   \ 'down': '50%',
-  \ 'source': 'find $HOME/src -type d -maxdepth 5',
+  \ 'source': 'find . -type d -maxdepth 5',
   \ 'sink': 'e'})
 command! FZFFileList call fzf#run({
   \ 'down': '50%',

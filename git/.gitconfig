@@ -83,3 +83,5 @@
           while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
           curl \"https://www.gitignore.io/api/$s\"; }; f"
 
+[url "git@github.com:"]
+  insteadOf = https://github.com/
