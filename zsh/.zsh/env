@@ -48,6 +48,10 @@ case ${OSTYPE} in
       export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
     fi
 
+    if [[ -s $HOME/.tfenv ]]; then
+      export PATH="$PATH:$HOME/.tfenv/bin"
+    fi
+
     if [[ -s /usr/local/cuda ]]; then
       # CUDA Toolkit
       export CUDA_HOME=/usr/local/cuda
