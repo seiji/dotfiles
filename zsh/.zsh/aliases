@@ -218,5 +218,12 @@ function aws_images_table_amazn2 () {
     --output table
 }
 
+function aws_ecr_image_latest () {
+  aws ecr describe-images \
+    --repository-name $1 \
+    --query 'sort_by(imageDetails,& imagePushedAt)[-1]' \
+    --output table
+}
+
 alias aws_images_amzn2=aws_images_table_amazn2
 ##########################################
