@@ -118,6 +118,8 @@ function dsh() {
   machine ssh dev /var/lib/boot2docker/docker-enter "$@"
 }
 
+alias kc='kubectl'
+
 # golang
 alias get=go_get
 function go_get () {
