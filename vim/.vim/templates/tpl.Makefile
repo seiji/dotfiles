@@ -18,6 +18,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CXXFLAGS) -c $^ $(INCDIR)
 
 .PHONY: clean
+.DEFAULT_GOAL := help
 
 clean:
 	$(RM) $(TARGET) $(OBJS)
