@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set list listchars=tab:»\ ,
 
 let g:loaded_2html_plugin      = 1
 let g:loaded_getscript         = 1
@@ -302,6 +303,7 @@ augroup FileTypeDetect
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType make setlocal noexpandtab
 augroup END
 
 " ObjectiveC
