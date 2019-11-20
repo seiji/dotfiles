@@ -48,7 +48,6 @@ bind generic ? view-help
 bind generic A !git commit --amend
 bind generic F !git fetch --prune
 bind generic G move-last-line
-bind generic P !?git push
 bind generic R !?git reset --hard %(commit)
 bind generic S !git status
 bind generic e scroll-line-down
@@ -63,6 +62,7 @@ bind main C none
 bind main s view-status
 bind main b view-refs
 bind main G move-last-line
+bind main P !?git push origin %(branch)
 
 bind diff i view-close
 bind diff D :toggle diff-options --minimal	# Use minimal diff algorithm
