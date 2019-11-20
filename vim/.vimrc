@@ -226,7 +226,6 @@ let s:ignore_patterns = [
     \ '\.bundle',
     \ '\.facts',
     \ '\.git',
-    \ '\.gitmodules',
     \ '*\.min\.js',
     \ '*\.pyc',
     \ '*\.sqlite3',
