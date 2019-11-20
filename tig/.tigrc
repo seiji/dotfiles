@@ -53,6 +53,7 @@ bind generic S !git status
 bind generic e scroll-line-down
 bind generic g move-first-line
 bind generic o enter
+bind generic P !?git push origin %(branch)
 bind generic p !?git pull
 bind generic y scroll-line-up
 # Copy rev id to clipboard
@@ -62,7 +63,6 @@ bind main C none
 bind main s view-status
 bind main b view-refs
 bind main G move-last-line
-bind main P !?git push origin %(branch)
 
 bind diff i view-close
 bind diff D :toggle diff-options --minimal	# Use minimal diff algorithm
