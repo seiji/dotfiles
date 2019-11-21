@@ -409,10 +409,10 @@ let g:lightline = {
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-  \ 'php': ['phpcs', 'php']
+  \ 'php': ['phpcs', 'php'],
+  \ 'terraform': ['fmt']
 \}
 let g:ale_php_phpcs_standard = 'PSR1,PSR2'
-
 let g:autotagTagsFile=".tags"
 
 """ phpcd
@@ -450,15 +450,15 @@ augroup END
 " let g:go_fmt_command = "goimports" " Enable goimports to automatically insert import paths instead of gofmt
 let g:go_fmt_command = "gofmt"
 let g:go_fmt_autosave = 0 " Enable auto fmt on save
-
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-
 let g:go_template_autocreate = 0
+
+let g:terraform_fmt_on_save=0
 
 "
 function! InsertTabWrapper()
