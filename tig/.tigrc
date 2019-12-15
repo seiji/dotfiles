@@ -62,23 +62,27 @@ bind generic G move-last-line
 bind generic g move-first-line
 bind generic h view-help
 bind generic o enter
-bind generic P !?git push origin %(branch)
-bind generic p !?git pull
-bind generic R !?git reset --hard %(commit)
-bind generic S !git status
 bind generic y scroll-line-up
+
+bind main ! ?git reset --soft HEAD^
+bind main R !?git reset --hard %(commit)
+bind main p !?git pull
 
 bind diff D :toggle diff-options --minimal  # Use minimal diff algorithm
 bind diff [ :toggle diff-context -3         # Decrease context (-U arg)
 bind diff ] :toggle diff-context +3         # Increase context
 bind diff i view-close
 
-bind tree v !vim %(file) # open file from tree
+bind tree v !vim %(file)                                # open file from tree
 
 bind refs C !git checkout -b %(branch) origin/%(branch) # Create a new branch
-bind refs c !git checkout %(branch) # Checkout branch
-bind refs d !?git branch -D %(branch) # Delete local branch
-bind refs n !@git branch %(prompt) # Create a new branch
+bind refs c !git checkout %(branch)                     # Checkout branch
+bind refs d ?git branch -D %(branch)                    # Delete local branch
+bind refs n !@git branch %(prompt)                      # Create a new branch
 
-bind status d !@?rm -rf %(file) # delete untracked files
-bind status v !vim %(file)
+bind status C >git commit
+bind status D >@?rm -rf %(file)                         # Delete untracked files
+bind status p >?git push origin %(branch)
+bind status s >?git stash save
+bind status S >?git stash pop
+bind status v >vim %(file)
