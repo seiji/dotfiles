@@ -1,47 +1,55 @@
 # View settings
 set main-view = \
+  date:default \
   id:yes \
-  date:display=custom,format="%Y/%m/%d %H:%M" \
   author:width=7 \
-  commit-title:graph=v2,refs=true
+  commit-title:graph=yes,refs=yes
 
 set blame-view = \
+  date:default \
   id:yes,color \
-  date:display=custom,format="%Y/%m/%d %H:%M" \
   author:width=7 \
   line-number:yes,interval=1 text
 
 set refs-view = \
-  date:display=custom,format="%Y/%m/%d %H:%M" \
+  date:default \
   author:width=7 \
   ref:true \
   commit-title:true
 
+set blob-view  = line-number:yes,interval=1 text
+set diff-view  = line-number:yes,interval=1 text:yes,commit-title-overflow=no
+set log-view   = line-number:yes,interval=1 text
+set stage-view = line-number:yes,interval=1 text
+
 set blame-options = -C -C -C
 set commit-order = default
 set diff-context = 3
+set diff-highlight = true
+set editor-line-number = yes
 set focus-child = yes
 set horizontal-scroll = 33%
 set id-width = 7
 set ignore-case = yes
 set ignore-space = some
+set refresh-mode = auto
 set show-changes = no
 set show-notes = yes
 set split-view-width = 50%
 set tab-size = 2
 
 # Bind Settings
-bind generic A none
-bind generic D none
-bind generic F none
-bind generic G none
-bind generic I none
-bind generic R none
-bind generic S none
-bind generic g none
-bind generic h none
-bind generic i none
-bind generic s none
+# bind generic A none
+# bind generic D none
+# bind generic F none
+# bind generic G none
+# bind generic I none
+# bind generic R none
+# bind generic S none
+# bind generic g none
+# bind generic h none
+# bind generic i none
+# bind generic s none
 
 bind generic <C-b> move-page-up
 bind generic <C-f> move-page-down
@@ -60,13 +68,9 @@ bind generic R !?git reset --hard %(commit)
 bind generic S !git status
 bind generic y scroll-line-up
 
-bind main C none
-bind main b view-refs
-bind main s view-status
-
-bind diff D :toggle diff-options --minimal	# Use minimal diff algorithm
-bind diff [ :toggle diff-context -3		# Decrease context (-U arg)
-bind diff ] :toggle diff-context +3		# Increase context
+bind diff D :toggle diff-options --minimal  # Use minimal diff algorithm
+bind diff [ :toggle diff-context -3         # Decrease context (-U arg)
+bind diff ] :toggle diff-context +3         # Increase context
 bind diff i view-close
 
 bind tree v !vim %(file) # open file from tree
@@ -77,3 +81,4 @@ bind refs d !?git branch -D %(branch) # Delete local branch
 bind refs n !@git branch %(prompt) # Create a new branch
 
 bind status d !@?rm -rf %(file) # delete untracked files
+bind status v !vim %(file)
