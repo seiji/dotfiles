@@ -54,8 +54,7 @@ set tab-size = 2
 bind generic <C-b> move-page-up
 bind generic <C-f> move-page-down
 bind generic A !git commit --amend
-# Copy rev id to clipboard
-bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy'
+bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy' # Copy rev id to clipboard
 bind generic e scroll-line-down
 bind generic F !git fetch --prune
 bind generic G move-last-line
@@ -64,9 +63,9 @@ bind generic h view-help
 bind generic o enter
 bind generic y scroll-line-up
 
-bind main ! ?git reset --soft HEAD^
-bind main R !?git reset --hard %(commit)
-bind main p !?git pull
+bind main r >?git reset --soft HEAD^
+bind main R >?git reset --hard %(commit)
+bind main p >?git pull
 
 bind diff D :toggle diff-options --minimal  # Use minimal diff algorithm
 bind diff [ :toggle diff-context -3         # Decrease context (-U arg)
@@ -82,7 +81,7 @@ bind refs n !@git branch %(prompt)                      # Create a new branch
 
 bind status C >git commit
 bind status D >@?rm -rf %(file)                         # Delete untracked files
-bind status p >?git push origin %(branch)
+bind status P >?git push origin %(branch)
 bind status s >?git stash save
 bind status S >?git stash pop
 bind status v >vim %(file)
