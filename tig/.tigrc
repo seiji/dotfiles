@@ -63,7 +63,7 @@ bind generic h view-help
 bind generic o enter
 bind generic y scroll-line-up
 
-bind main r >?git reset --soft HEAD^
+bind main ! >?git reset --soft HEAD^
 bind main R >?git reset --hard %(commit)
 bind main p >?git pull
 
@@ -74,13 +74,13 @@ bind diff i view-close
 
 bind tree v !vim %(file)                                # open file from tree
 
-bind refs C !git checkout -b %(branch) origin/%(branch) # Create a new branch
-bind refs c !git checkout %(branch)                     # Checkout branch
-bind refs d ?git branch -D %(branch)                    # Delete local branch
-bind refs n !@git branch %(prompt)                      # Create a new branch
+bind refs C !git checkout -b %(branch) origin/%(branch)  # Create a new branch
+bind refs c !git checkout %(branch)                      # Checkout branch
+bind refs D ?@git branch -D %(branch)                    # Delete local branch
+bind refs n !@git branch "%(prompt Enter branch name: )" # Create a new branch
 
 bind status C >git commit
-bind status D >@?rm -rf %(file)                         # Delete untracked files
+bind status D ?@rm -rf %(file)                         # Delete untracked files
 bind status P >?git push origin %(branch)
 bind status s >?git stash save
 bind status S >?git stash pop
