@@ -1,61 +1,55 @@
-alias browse="hub browse"
-
 case "${OSTYPE}" in
 darwin*)
   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
   alias chrome='open "/Applications/Google Chrome.app" --args --renderer-process-limit=3'
   alias date='gdate'
+  alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
+  alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
   alias gpg=gpg2
+  alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias ldd="echo ldd is not on OSX. Use otool -L."
+  alias less='less -R'
   alias ll="ls -laG"
   alias ls="ls -1G"
-  alias less='less -R'
+  alias ql='qlmanage -p "$@" >& /dev/null'
   alias strace="echo strace is not on OSX. Use dtruss"
   alias timeout='gtimeout'
-  alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
+  alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
   ;;
 linux*)
-  alias ls='ls --color'
-  alias ll='ls -la --color'
+  alias anice='ionice -c2 -n7 nice -n19'
   alias keyboard_link="xinput enable 'AT Translated Set 2 keyboard' && xmodmap ~/.Xmodmap"
   alias keyboard_unlink="xinput disable 'AT Translated Set 2 keyboard' && xmodmap ~/.XmodmapHHK"
+  alias ll='ls -la --color'
+  alias ls='ls --color'
   alias open='gnome-open'
-  alias anice='ionice -c2 -n7 nice -n19'
   ;;
 esac
 
-alias rm='rm -i'
+alias ..='cd ..'
 alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
-alias vi="$(which vim)"
-alias v="$(which vim)"
-alias t="tig"
-alias grep='grep -i --color=auto'
-alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias screen='screen -U -D -RR'
-alias sc='screen -U -D -RR'
-alias ql='qlmanage -p "$@" >& /dev/null'
-alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
-alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
-alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
-
-alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
-
+alias fgrep='fgrep --color=auto'
+alias grep='grep -i --color=auto'
+alias mkdir='mkdir -p'
+alias mv='mv -i'
 alias public_ip=get_public_ip
+alias rm='rm -i'
+alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
+alias sc='screen -U -D -RR'
+alias screen='screen -U -D -RR'
+alias t="tig"
+alias tmux='tmux -2'
+alias v="$(which vim)"
+alias vi="$(which vim)"
+alias weechat-curses='TERM=screen-256color weechat-curses'
+alias weechat='TERM=screen-256color weechat'
+
 function get_public_ip () {
   dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{print $2}'
 }
-alias E='emacsclient -t'
-alias start-emacs="emacs --daemon"
-alias kill-emacs="emacsclient -e '(kill-emacs)'"
-
-alias tmux='tmux -2'
-alias weechat='TERM=screen-256color weechat'
-alias weechat-curses='TERM=screen-256color weechat-curses'
 
 # git
 # if [[ -f "$HOME/.gitconfig" ]]; then
@@ -67,7 +61,6 @@ alias weechat-curses='TERM=screen-256color weechat-curses'
 # fi
 
 # homebrew
-
 function brew() {
   local CMD=/usr/local/bin/brew
   $CMD $*
