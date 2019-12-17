@@ -286,7 +286,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go,go.mod setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.go.testing setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
   autocmd BufNewFile,BufRead *_test.go setlocal filetype=go.testing tabstop=4 shiftwidth=4 softtabstop=4
