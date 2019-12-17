@@ -39,33 +39,22 @@ set split-view-width = 50%
 set tab-size = 2
 
 # Bind Settings
-# bind generic A none
-# bind generic D none
-# bind generic F none
-# bind generic G none
-# bind generic I none
-# bind generic R none
-# bind generic S none
-# bind generic g none
-# bind generic h none
-# bind generic i none
-# bind generic s none
-
 bind generic <C-b> move-page-up
 bind generic <C-f> move-page-down
 bind generic A !git commit --amend
 bind generic c !@sh -c 'echo %(commit) | tr -d "\n" | pbcopy' # Copy rev id to clipboard
 bind generic e scroll-line-down
-bind generic F !git fetch --prune
+bind generic F >!git fetch --prune
 bind generic G move-last-line
 bind generic g move-first-line
 bind generic h view-help
 bind generic o enter
+bind generic P >?git pull
 bind generic y scroll-line-up
 
 bind main ! >?git reset --soft HEAD^
+bind main F >!git fetch --prune
 bind main R >?git reset --hard %(commit)
-bind main p >?git pull
 
 bind diff D :toggle diff-options --minimal  # Use minimal diff algorithm
 bind diff [ :toggle diff-context -3         # Decrease context (-U arg)
@@ -74,14 +63,14 @@ bind diff i view-close
 
 bind tree v !vim %(file)                                # open file from tree
 
-bind refs C >!git checkout -b %(branch) origin/%(branch)  # Create a new branch
-bind refs c >!git checkout %(branch)                      # Checkout branch
-bind refs D ?@git branch -D %(branch)                    # Delete local branch
-bind refs n !@git checkout -b "%(prompt Enter branch name: )" # Create a new branch
+bind refs C >!git checkout -b %(branch) origin/%(branch)      # Create a new branch
+bind refs c >!git checkout %(branch)                          # Checkout branch
+bind refs D ?@git branch -D %(branch)                         # Delete local branch
+bind refs N !@git checkout -b "%(prompt Enter branch name: )" # Create a new branch
 
 bind status C >git commit
 bind status D ?@rm -rf %(file)                         # Delete untracked files
-bind status P >?git push origin %(branch)
+bind status p >?git push origin %(branch)
 bind status s >?git stash save
 bind status S >?git stash pop
 bind status v >vim %(file)
