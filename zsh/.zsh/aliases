@@ -40,7 +40,7 @@ alias rm='rm -i'
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 alias sc='screen -U -D -RR'
 alias screen='screen -U -D -RR'
-alias t="tig"
+alias tig='tig --all'
 alias tmux='tmux -2'
 alias v="$(which vim)"
 alias vi="$(which vim)"
