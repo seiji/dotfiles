@@ -65,6 +65,7 @@ Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
 Plug 'hashivim/vim-terraform'
 Plug 'chr4/nginx.vim'
+Plug 'isRuslan/vim-es6'
 " Plug 'myhere/vim-nodejs-complete'
 " Plug 'keith/swift.vim'
 "

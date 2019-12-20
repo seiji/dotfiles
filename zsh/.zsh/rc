@@ -45,6 +45,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #     command ssh $@
 #     tmux rename-window $window_name
 # }
+#
 #rbenv
 [[ -d "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
 
@@ -73,6 +74,9 @@ _Z_CMD=j
     . `brew --prefix go`/share/zsh/site-functions/go
   fi
 fi
+#goenv
+export GOENV_DISABLE_GOPATH=1
+[[ -d "$HOME/.goenv" ]] && eval "$(goenv init -)"
 
 # phpbrew
 [[ -e $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc

@@ -150,3 +150,4 @@ if (( $+commands[go] )); then
   export GOBIN=$GOPATH/bin
   export PATH=$GOBIN:$GOROOT/bin:$PATH
 fi
+export GO111MODULE=on
