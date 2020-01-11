@@ -305,6 +305,7 @@ augroup FileTypeDetect
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType make setlocal noexpandtab
+  autocmd FileType gitconfig setlocal noexpandtab
 augroup END
 
 " ObjectiveC

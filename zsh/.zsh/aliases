@@ -5,7 +5,6 @@ darwin*)
   alias date='gdate'
   alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
   alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
-  alias gpg=gpg2
   alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
   alias keyboard_unlink='sudo kextunload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'

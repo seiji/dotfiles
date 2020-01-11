@@ -22,6 +22,7 @@ brew "git"
 brew "git-secrets"
 brew "gnu-sed"
 brew "libevent"
+brew "gnupg"
 brew "go"
 brew "goenv", args: ["HEAD"]
 brew "hub"
