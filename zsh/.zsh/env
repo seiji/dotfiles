@@ -36,6 +36,7 @@ case ${OSTYPE} in
     export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
     export PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
 
+    export GPG_TTY=`tty`
     #export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     #export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
