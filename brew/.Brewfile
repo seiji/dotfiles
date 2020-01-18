@@ -27,7 +27,6 @@ brew "goenv", args: ["HEAD"]
 brew "hub"
 brew "hugo"
 brew "iproute2mac"
-brew "jmeter"
 brew "jq"
 brew "k6"
 brew "maven"
