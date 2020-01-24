@@ -204,21 +204,33 @@ function gce () {
 
 # $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
 
-function aws_images_table_amazn2 () {
+function aws_ec2_instances () {
+  aws ec2 describe-instances \
+    --filter "Name=instance-state-name,Values=running" \
+    --query 'Reservations[].Instances[]' \
+    --output json
+}
+
+function aws_ec2 images_amazn2 () {
   aws ec2 describe-images \
     --owners amazon \
     --filters \
     "Name=name,Values=amzn2-ami-hvm*x86_64-gp2" \
     --query 'reverse(sort_by(Images, &CreationDate))[].[Name,ImageId]' \
-    --output table
+    --output json
+}
+
+function aws_rds_instances () {
+  aws rds describe-db-instances \
+    --query 'DBInstances[]' \
+    --output json
 }
 
 function aws_ecr_image_latest () {
   aws ecr describe-images \
     --repository-name $1 \
     --query 'sort_by(imageDetails,& imagePushedAt)[-1]' \
-    --output table
+    --output json
 }
 
-alias aws_images_amzn2=aws_images_table_amazn2
 ##########################################
