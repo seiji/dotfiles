@@ -300,6 +300,7 @@ augroup FileTypeDetect
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.cs OmniSharpCodeFormat
+  autocmd FileType yml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
