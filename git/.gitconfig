@@ -60,6 +60,7 @@
 	br  = branch
 	ci  = commit
 	cia = commit --amend
+	cloc = !cloc $(git ls-files)
 	co  = checkout
 	di  = diff
 	dc  = diff --cached
