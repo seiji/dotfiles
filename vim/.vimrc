@@ -66,6 +66,7 @@ Plug 'posva/vim-vue'
 Plug 'hashivim/vim-terraform'
 Plug 'chr4/nginx.vim'
 Plug 'isRuslan/vim-es6'
+Plug 'tsandall/vim-rego'
 " Plug 'myhere/vim-nodejs-complete'
 " Plug 'keith/swift.vim'
 "
@@ -307,6 +308,7 @@ augroup FileTypeDetect
   autocmd FileType scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType make setlocal noexpandtab
   autocmd FileType gitconfig setlocal noexpandtab
+  autocmd FileType rego setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 " ObjectiveC
