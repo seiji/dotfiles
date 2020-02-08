@@ -25,6 +25,7 @@ brew "libevent"
 brew "gnupg"
 brew "go"
 brew "goenv", args: ["HEAD"]
+brew "haskell-stack"
 brew "hub"
 brew "hugo"
 brew "iproute2mac"

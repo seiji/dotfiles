@@ -112,6 +112,11 @@ function dsh() {
 
 alias kc='kubectl'
 
+# Huskell
+alias ghc='stack ghc --'
+alias ghci='stack ghci'
+alias runghc='stack runghc --'
+
 # golang
 alias get=go_get
 function go_get () {
