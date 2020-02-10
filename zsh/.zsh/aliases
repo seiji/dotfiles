@@ -112,7 +112,7 @@ function dsh() {
 
 alias kc='kubectl'
 
-# Huskell
+# Haskell
 alias ghc='stack ghc --'
 alias ghci='stack ghci'
 alias runghc='stack runghc --'
