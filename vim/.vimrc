@@ -41,6 +41,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'janko-m/vim-test'
 Plug 'craigemery/vim-autotag'
 Plug 'thinca/vim-quickrun'
+Plug 'osyo-manga/shabadou.vim'
 
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/async.vim'
@@ -57,18 +58,13 @@ Plug 'honza/vim-snippets'
 Plug 'vim-scripts/surround.vim'
 
 " " language
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-" Plug 'arnaud-lb/vim-php-namespace'
-" Plug 'OmniSharp/omnisharp-vim'
-Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go'
-Plug 'posva/vim-vue'
-Plug 'hashivim/vim-terraform'
+" Plug 'posva/vim-vue'
 Plug 'chr4/nginx.vim'
+Plug 'hashivim/vim-terraform'
 Plug 'isRuslan/vim-es6'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'tsandall/vim-rego'
-" Plug 'myhere/vim-nodejs-complete'
-" Plug 'keith/swift.vim'
 "
 "
 " """"""""
@@ -502,12 +498,13 @@ let g:quickrun_config._.input = '=@i'
 let g:quickrun_config._.input = '=%{b:input}'
 
 let g:quickrun_config = {
-  \  "_" : {
-  \    "runner" : "vimproc",
-  \    "runner/vimproc/updatetime" : 60,
+  \  '_' : {
+  \    'runner' : 'vimproc',
+  \    'runner/vimproc/updatetime' : 60,
+  \    'hook/close_buffer/enable_failure': 1,
+  \    'hook/close_buffer/enable_empty_data': 1,
   \    'hook/close_quickfix/enable_hook_loaded' : 1,
   \    'hook/close_quickfix/enable_success' : 1,
-  \    'hook/close_buffer/enable_failure': 1,
   \    'outputter' : 'error',
   \    'outputter/error/success' : 'buffer',
   \    'outputter/error/error'   : 'quickfix',
@@ -566,7 +563,10 @@ let g:quickrun_config.swift = {
   \ 'command': 'xcrun',
   \ 'exec': '%c swift %s %o',
   \ }
-
+let g:quickrun_config.haskell = {
+  \ 'cmdopt' : 'runhaskell',
+  \ 'command': 'stack',
+  \ }
 """
 command! FZFCd call fzf#run({
   \ 'down': '50%',
