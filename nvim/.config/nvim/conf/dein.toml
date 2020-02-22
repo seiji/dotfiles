@@ -32,16 +32,16 @@ depends = 'fzf'
 hook_add = '''
 nnoremap <C-p> :FZFFileList<CR>
 command! FZFFileList call fzf#run({
-  \ 'down': '50%',
-  \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
-  \ 'sink': 'e'})
+ \ 'down': '50%',
+ \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+ \ 'sink': 'e'})
 command! -bang -nargs=* Ripgrep
-  \ call fzf#vim#grep(
-	\   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-	\   <bang>0 ? fzf#vim#with_preview('up:60%')
-	\           : fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
-	\   <bang>0)
-	'''
+ \ call fzf#vim#grep(
+ \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+ \   <bang>0 ? fzf#vim#with_preview('up:60%')
+ \           : fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
+ \   <bang>0)
+'''
 
 [[plugins]]
 repo = 'Townk/vim-autoclose'
