@@ -2,6 +2,65 @@ let $CACHE = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME
 let $CONFIG = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
 let $DATA = empty($XDG_DATA_HOME) ? expand('$HOME/.local/share') : $XDG_DATA_HOME
 
+let g:loaded_2html_plugin      = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_gzip              = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+
+let mapleader = ","
+
+"========================================="
+" plugins
+"========================================="
+if &compatible
+ set nocompatible
+endif
+filetype off
+
+if empty( glob($CONFIG . '/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+set rtp+=~/.config/nvim/plugged/vim-plug
+
+set tags+=tags
+call plug#begin($CONFIG . '/nvim/plugged')
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'vim-airline/vim-airline'
+  Plug 'justinmk/vim-dirvish'
+  Plug 'tomtom/tcomment_vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
+  Plug 'kassio/neoterm'
+  Plug 'tpope/vim-fugitive'
+
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
+
+call plug#end()
+
+filetype plugin indent on
+
 "========================================="
 " Basic settings
 "========================================="
@@ -19,9 +78,7 @@ set hlsearch
 set history=200
 set incsearch
 set ignorecase
-
 set laststatus=2
-
 set number
 set nobackup
 set noerrorbells
@@ -63,12 +120,26 @@ syntax sync minlines=256
 set synmaxcol=128
 set re=1
 
+syntax enable
+
+augroup ColorScheme
+  autocmd!
+  autocmd Colorscheme * highlight Normal ctermbg=none
+  autocmd Colorscheme * highlight NonText ctermbg=none
+  autocmd Colorscheme * highlight LineNr ctermbg=none ctermbg=none
+  autocmd Colorscheme * highlight Folded ctermbg=none
+  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
+  autocmd Colorscheme * highlight Search ctermbg=none ctermbg=none
+
+augroup END
+
 "========================================="
 " Keymap settings
 "========================================="
 nmap ; :Buffers
-nmap t :Files
-nmap r :Tags
+" nmap t :Files
+" nmap r :Tags
+nmap f :Rg<Space>
 
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
@@ -79,6 +150,10 @@ inoremap <C-a> <Home>
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
 inoremap <C-[> <ESC>
+
+nnoremap <Leader>tt :Ttoggle<CR>
+tnoremap <Leader>tt <C-\><C-n>:Ttoggle<CR>
+tnoremap <C-[> <C-\><C-n>
 
 " - buffer
 nnoremap <silent> [b :bprevious<CR>
@@ -92,18 +167,17 @@ nnoremap <C-x>2 :split<CR>
 nnoremap <C-x>3 :vsplit<CR>
 nnoremap <C-x>4 :close<CR>
 
-" - comment
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
-
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
+
 let s:ignore_patterns = [
     \ '__pycache__/',
     \ '__pycache__',
     \ '\.git',
     \ '\.gitmodules',
+    \ '*\.meta',
     \ '*\.min\.js',
+    \ '*\.o',
     \ '*\.pyc',
     \ '*\.sqlite3',
     \ '*\.swp',
@@ -112,11 +186,8 @@ let s:ignore_patterns = [
     \ '*\.unityproj',
     \ '*\.userprefs',
     \ '\.sass-cache',
+    \ 'tags',
     \ ]
-
-call add(s:ignore_patterns, '*\.o') " langc
-call add(s:ignore_patterns, '*\.meta') " Unity
-call add(s:ignore_patterns, 'tags') " ctags
 
 set wildignore+=\.hg,\.git,\.svn                    " Version control
 set wildignore+=*\.aux,*\.out,*\.toc                " LaTeX intermediate files
@@ -154,39 +225,33 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
 augroup END
-"========================================="
-" plugin Manager: dein.vim setting
-"========================================="
-if &compatible
- set nocompatible
-endif
 
-let s:dein_dir = expand('$CACHE/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
-
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  let g:conf_dir    = expand('$CONFIG/nvim/conf')
-  let s:toml      = g:conf_dir . '/dein.toml'
-  let s:lazy_toml = g:conf_dir . '/dein_lazy.toml'
-
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-if dein#check_install()
-  call dein#install()
-endif
-
-let g:dein#install_max_processes = 16
 ""
+set list listchars=tab:»\ ,
+
+set background=dark
+colorscheme solarized
+
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+let g:neoterm_default_mod = 'botright'
+
+" dirvish
+augroup dirvish_commands
+  autocmd!
+
+  autocmd FileType dirvish nnoremap <silent> <buffer> <C-r> :<C-u>Dirvish %<CR>
+  autocmd FileType dirvish unmap <silent> <buffer> <CR>
+  autocmd FileType dirvish silent! unmap <buffer> <C-p>
+  autocmd FileType dirvish nnoremap <silent> <buffer> <CR> :<C-u> call <SID>dirvish_open()<CR>
+  autocmd FileType dirvish setlocal nonumber norelativenumber statusline=%F
+  autocmd FileType dirvish nnoremap <buffer><silent> <C-j> <C-\><C-n>j:call feedkeys("p")<CR>
+  autocmd FileType dirvish nnoremap <buffer><silent> <C-k> <C-\><C-n>k:call feedkeys("p")<CR>
+  "autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
+
+  " au User DirvishEnter let b:dirvish.showhidden = 1
+  for pat in s:ignore_patterns
+    autocmd FileType dirvish silent! keeppatterns g@\v/\.pat./?$@d
+  endfor
+augroup END
+

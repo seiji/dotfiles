@@ -1,0 +1,16 @@
+{
+  "suggest.timeout": 5000,
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["tf"],
+      "initializationOptions": {}
+    }
+  },
+  "golang": {
+    "command": "gopls",
+    "args": [],
+    "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+    "filetypes": ["go"]
+  }
+}

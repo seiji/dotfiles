@@ -16,11 +16,13 @@ emacs/.emacs.d/tramp
 emacs/.emacs.d/url/cookies
 emacs/.emacs.d/anything-c-adaptive-history
 git-worktrees/*
+nvim/.config/nvim/autoload
+nvim/.config/nvim/plugged/*
+vim/.vim/autoload
+vim/.vim/plugged/*
 weechat/.weechat/*.log
 weechat/.weechat/logs/*
 weechat/.weechat/script
-vim/.vim/autoload
-vim/.vim/plugged/*
 
 registry-params.env
 zsh/.zsh/zsh_history

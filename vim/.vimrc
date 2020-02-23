@@ -217,14 +217,14 @@ vmap <Leader>c <Plug>(caw:i:toggle)
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
-
 let s:ignore_patterns = [
     \ '__pycache__/',
     \ '__pycache__',
-    \ '\.bundle',
-    \ '\.facts',
     \ '\.git',
+    \ '\.gitmodules',
+    \ '*\.meta',
     \ '*\.min\.js',
+    \ '*\.o',
     \ '*\.pyc',
     \ '*\.sqlite3',
     \ '*\.swp',
@@ -233,11 +233,8 @@ let s:ignore_patterns = [
     \ '*\.unityproj',
     \ '*\.userprefs',
     \ '\.sass-cache',
+    \ 'tags',
     \ ]
-
-call add(s:ignore_patterns, '*\.o') " langc
-call add(s:ignore_patterns, '*\.meta') " Unity
-call add(s:ignore_patterns, 'tags') " ctags
 
 set wildignore+=\.hg,\.git,\.svn                    " Version control
 set wildignore+=*\.aux,*\.out,*\.toc                " LaTeX intermediate files
