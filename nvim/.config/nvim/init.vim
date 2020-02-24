@@ -46,6 +46,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'kassio/neoterm'
+  Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
 
   Plug 'prabirshrestha/async.vim'
@@ -55,7 +56,11 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'mattn/vim-lsp-settings'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
+
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -208,25 +213,55 @@ set wildignore+=*\.pyc                                " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
 
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+autocmd BufWritePre * :%s/\s\+$//e
+autocmd InsertLeave * set nopaste
+"
+" augroup TemplatesAu
+"   autocmd!
+"   autocmd BufNewFile *.c       0r $HOME/.vim/templates/tpl.c
+"   autocmd BufNewFile *.cpp     0r $HOME/.vim/templates/tpl.cpp
+"   autocmd BufNewFile *.cs      0r $HOME/.vim/templates/tpl.cs
+"   autocmd BufNewFile *.go      0r $HOME/.vim/templates/tpl.go
+"   autocmd BufNewFile *.html    0r $HOME/.vim/templates/tpl.html
+"   autocmd BufNewFile *.java    call NewJavaFile()
+"   autocmd BufNewFile *.proto   0r $HOME/.vim/templates/tpl.proto
+"   autocmd BufNewFile *.py      0r $HOME/.vim/templates/tpl.py
+"   autocmd BufNewFile *.rb      0r $HOME/.vim/templates/tpl.rb
+"   autocmd BufNewFile *.service 0r $HOME/.vim/templates/tpl.service
+"   autocmd BufNewFile Makefile  0r $HOME/.vim/templates/tpl.Makefile
+"   autocmd BufNewFile README.md 0r $HOME/.vim/templates/tpl.README.md
+"   autocmd BufNewFile docker-compose.* 0r $HOME/.vim/templates/tpl.docker-compose.yml
+" augroup END
+
 augroup FileTypeDetect
   autocmd!
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+  autocmd BufNewFile,BufRead *.cafe setf cafe
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go,go.mod setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go.testing setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
-  autocmd BufNewFile,BufRead *_test.go set filetype=go.testing
+  autocmd BufNewFile,BufRead *_test.go setlocal filetype=go.testing tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *Test.php setlocal filetype=php.phpunit
   autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufWritePre *.cs OmniSharpCodeFormat
+  " autocmd BufWritePre *.cs OmniSharpCodeFormat
+  autocmd FileType yml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType make setlocal noexpandtab
+  autocmd FileType gitconfig setlocal noexpandtab
+  autocmd FileType rego setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType hs setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 ""
@@ -319,6 +354,42 @@ augroup dirvish_commands
   endfor
 augroup END
 
+" snippets
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res == 0
+    if pumvisible()
+      return "\<C-N>"
+    else
+      return "\<TAB>"
+    endif
+  endif
+  return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+  return ""
+endfunction
+
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:UltiSnipsExpandTrigger = "<tab>"
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" fzf
 command! FZFCd call fzf#run({
   \ 'down': '50%',
   \ 'source': 'find . -type d -maxdepth 5',
