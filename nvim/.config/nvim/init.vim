@@ -39,7 +39,7 @@ set rtp+=~/.config/nvim/plugged/vim-plug
 set tags+=tags
 call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'altercation/vim-colors-solarized'
-  Plug 'vim-airline/vim-airline'
+  Plug 'itchyny/lightline.vim'
   Plug 'justinmk/vim-dirvish'
   Plug 'tomtom/tcomment_vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -228,7 +228,6 @@ augroup END
 
 ""
 set list listchars=tab:»\ ,
-
 set background=dark
 colorscheme solarized
 
@@ -236,15 +235,62 @@ let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = 'botright'
 
+function! LightlineModified() abort
+  return &buftype ==# 'terminal' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+let g:lightline = {
+\   'colorscheme': 'powerline',
+\   'active': {
+\     'left': [
+\       [ 'mode', 'paste' ],
+\       [ 'branch' ],
+\       [ 'readonly', 'filename', 'modified' ],
+\     ],
+\     'right': [
+\       [ 'lineinfo' ],
+\       [  ],
+\       [ 'filetype' ],
+\       [  ],
+\       [ ],
+\     ],
+\   },
+\   'inactive': {
+\     'left': [
+\       [  ],
+\       [  ],
+\       [ 'readonly', 'filename' ],
+\     ],
+\     'right': [
+\       [ 'lineinfo' ],
+\       [  ],
+\       [ 'filetype' ],
+\     ],
+\   },
+\   'component_function':{
+\     'branch': 'fugitive#head',
+\     'modified': 'LightlineModified',
+\     'filename' : 'LightlineFilename'
+\   },
+\ }
+
 " dirvish
 augroup dirvish_commands
   autocmd!
-
   autocmd FileType dirvish nnoremap <silent> <buffer> <C-r> :<C-u>Dirvish %<CR>
   autocmd FileType dirvish unmap <silent> <buffer> <CR>
   autocmd FileType dirvish silent! unmap <buffer> <C-p>
   autocmd FileType dirvish nnoremap <silent> <buffer> <CR> :<C-u> call <SID>dirvish_open()<CR>
-  autocmd FileType dirvish setlocal nonumber norelativenumber statusline=%F
+  autocmd FileType dirvish setlocal nonumber norelativenumber
   autocmd FileType dirvish nnoremap <buffer><silent> <C-j> <C-\><C-n>j:call feedkeys("p")<CR>
   autocmd FileType dirvish nnoremap <buffer><silent> <C-k> <C-\><C-n>k:call feedkeys("p")<CR>
   "autocmd FileType dirvish silent! keeppatterns g@\v/\.[^\/]+/?$@d
