@@ -41,7 +41,6 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'altercation/vim-colors-solarized'
   Plug 'itchyny/lightline.vim'
   Plug 'justinmk/vim-dirvish'
-  Plug 'tomtom/tcomment_vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
@@ -49,13 +48,18 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
 
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
+  Plug 'tomtom/tcomment_vim'
+  " Plug 'tpope/vim-surround'
+  " Plug 'tpope/vim-repeat'
+
+  " Plug 'prabirshrestha/async.vim'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  " Plug 'prabirshrestha/vim-lsp'
+  " Plug 'mattn/vim-lsp-settings'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "
   Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
 
@@ -213,6 +217,14 @@ set wildignore+=*\.pyc                                " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
 
+function! s:ChangeCurrentDirectory()
+  let l:dir = expand("%:p:h")
+  if isdirectory(fnamemodify(l:dir, ":p"))
+    execute printf('lcd `=%s`', string(fnamemodify(l:dir, ":p")))
+  endif
+endfunction
+
+autocmd BufEnter * call s:ChangeCurrentDirectory()
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
