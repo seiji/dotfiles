@@ -155,6 +155,9 @@ nnoremap <Leader>tt :Ttoggle<CR>
 tnoremap <Leader>tt <C-\><C-n>:Ttoggle<CR>
 tnoremap <C-[> <C-\><C-n>
 
+nnoremap <silent> <C-p> :FZFFileList<CR>
+nnoremap <silent> <C-x><C-f> :FZFCd<CR>
+
 " - buffer
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -189,21 +192,21 @@ let s:ignore_patterns = [
     \ 'tags',
     \ ]
 
-set wildignore+=\.hg,\.git,\.svn                    " Version control
-set wildignore+=*\.aux,*\.out,*\.toc                " LaTeX intermediate files
+set wildignore+=\.hg,\.git,\.svn                      " Version control
+set wildignore+=*\.aux,*\.out,*\.toc                  " LaTeX intermediate files
 set wildignore+=*\.jpg,*\.bmp,*\.gif,*\.png,*\.jpeg   " binary images
 set wildignore+=*\.o,*\.obj,*\.exe,*\.dll,*\.manifest " compiled object files
-set wildignore+=*\.spl                            " compiled spelling word lists
-set wildignore+=*\.sw?                            " Vim swap files
-set wildignore+=*\.DS_Store                       " OSX bullshit
-set wildignore+=*\.luac                           " Lua byte code
-set wildignore+=*\.vagrant                        " Vagrant
-set wildignore+=go/pkg                           " Go static files
-set wildignore+=go/bin                           " Go bin files
-set wildignore+=go/bin-vagrant                   " Go bin-vagrant files
-set wildignore+=*\.pyc                            " Python byte code
-set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip         " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe      " Windows
+set wildignore+=*\.spl                                " compiled spelling word lists
+set wildignore+=*\.sw?                                " Vim swap files
+set wildignore+=*\.DS_Store                           " OSX bullshit
+set wildignore+=*\.luac                               " Lua byte code
+set wildignore+=*\.vagrant                            " Vagrant
+set wildignore+=go/pkg                                " Go static files
+set wildignore+=go/bin                                " Go bin files
+set wildignore+=go/bin-vagrant                        " Go bin-vagrant files
+set wildignore+=*\.pyc                                " Python byte code
+set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
 
 augroup FileTypeDetect
   autocmd!
@@ -230,6 +233,21 @@ augroup END
 set list listchars=tab:»\ ,
 set background=dark
 colorscheme solarized
+
+function! InsertTabWrapper()
+  if pumvisible()
+    return "\<c-n>"
+  endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+    return "\<tab>"
+  elseif exists('&omnifunc') && &omnifunc == ''
+    return "\<c-n>"
+  else
+    return "\<c-x>\<c-o>"
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
@@ -300,4 +318,25 @@ augroup dirvish_commands
     autocmd FileType dirvish silent! keeppatterns g@\v/\.pat./?$@d
   endfor
 augroup END
+
+command! FZFCd call fzf#run({
+  \ 'down': '50%',
+  \ 'source': 'find . -type d -maxdepth 5',
+  \ 'sink': 'e'})
+command! FZFFileList call fzf#run({
+  \ 'down': '50%',
+  \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+  \ 'sink': 'e'})
+command! -bang -nargs=* Ripgrep
+  \ call fzf#vim#grep(
+	\   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+	\   <bang>0 ? fzf#vim#with_preview('up:60%')
+	\           : fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
+	\   <bang>0)
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.config/local/share/fzf-history'
 
