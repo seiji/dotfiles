@@ -49,8 +49,8 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'tpope/vim-fugitive'
 
   Plug 'tomtom/tcomment_vim'
-  " Plug 'tpope/vim-surround'
-  " Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
 
   " Plug 'prabirshrestha/async.vim'
   " Plug 'prabirshrestha/asyncomplete.vim'

@@ -208,7 +208,19 @@ function gce () {
 }
 
 # $ gcshell $CONFIG_CONTAINER gcloud config set project $PROJECT_NAME // if you could set project.
+function aws_cloudwatch_set_alarm_state_ok () {
+  aws cloudwatch set-alarm-state \
+    --alarm-name $1 \
+    --state-value OK \
+    --state-reason "test"
+}
 
+function aws_cloudwatch_set_alarm_state_alarm () {
+  aws cloudwatch set-alarm-state \
+    --alarm-name $1 \
+    --state-value ALARM \
+    --state-reason "test"
+}
 function aws_ec2_instances () {
   aws ec2 describe-instances \
     --filter "Name=instance-state-name,Values=running" \
@@ -243,4 +255,4 @@ function aws_s3_buckets () {
   aws s3api list-buckets \
     --query 'Buckets[]' | jq -r '.[] | [.Name, .CreationDate]'
 }
-##########################################
+
