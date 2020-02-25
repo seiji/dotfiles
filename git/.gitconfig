@@ -2,7 +2,7 @@
 	username = seiji
 	email = toyama.seiji@gmail.com
 	name = seiji
-	signingkey = AE7FA752
+	signingkey = EEEA0BD5
 
 [init]
 	templateDir = ~/.git-templates/git-secrets

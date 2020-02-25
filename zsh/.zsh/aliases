@@ -213,7 +213,8 @@ function aws_ec2_instances () {
   aws ec2 describe-instances \
     --filter "Name=instance-state-name,Values=running" \
     --query 'Reservations[].Instances[]' \
-    --output json
+    --output json \
+    | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Project:(.Tags[] | select(.Key=="project").Value), Env:(.Tags[] | select(.Key=="env").Value), InstanceType:.InstanceType }'
 }
 
 function aws_ec2 images_amazn2 () {
@@ -225,12 +226,6 @@ function aws_ec2 images_amazn2 () {
     --output json
 }
 
-function aws_rds_instances () {
-  aws rds describe-db-instances \
-    --query 'DBInstances[]' \
-    --output json
-}
-
 function aws_ecr_image_latest () {
   aws ecr describe-images \
     --repository-name $1 \
@@ -238,4 +233,14 @@ function aws_ecr_image_latest () {
     --output json
 }
 
+function aws_rds_instances () {
+  aws rds describe-db-instances \
+    --query 'DBInstances[]' \
+    --output json
+}
+
+function aws_s3_buckets () {
+  aws s3api list-buckets \
+    --query 'Buckets[]' | jq -r '.[] | [.Name, .CreationDate]'
+}
 ##########################################
