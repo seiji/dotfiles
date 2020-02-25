@@ -45,18 +45,11 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'kassio/neoterm'
+  Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
-
-  Plug 'tomtom/tcomment_vim'
-  Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-
-  " Plug 'prabirshrestha/async.vim'
-  " Plug 'prabirshrestha/asyncomplete.vim'
-  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  " Plug 'prabirshrestha/vim-lsp'
-  " Plug 'mattn/vim-lsp-settings'
+  Plug 'tpope/vim-surround'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   "
