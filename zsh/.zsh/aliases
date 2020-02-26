@@ -69,6 +69,15 @@ function brew() {
   fi
 }
 
+# pip
+function pip() {
+  local CMD=/usr/local/var/pyenv/shims/pip
+  $CMD $*
+  if [[ $? -eq 0 ]]; then
+    $CMD freeze > ~/requirements.txt
+  fi
+}
+
 # ripgrep
 if (( $+commands[rg] )); then
   alias rg='rg --hidden --glob "!.git"'
