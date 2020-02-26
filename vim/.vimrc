@@ -40,6 +40,7 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'janko-m/vim-test'
 Plug 'craigemery/vim-autotag'
+
 Plug 'thinca/vim-quickrun'
 Plug 'osyo-manga/shabadou.vim'
 

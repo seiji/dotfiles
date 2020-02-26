@@ -18,8 +18,6 @@ let g:loaded_vimballPlugin     = 1
 let g:loaded_zip               = 1
 let g:loaded_zipPlugin         = 1
 
-let mapleader = ","
-
 "========================================="
 " plugins
 "========================================="
@@ -52,7 +50,11 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'tpope/vim-surround'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  "
+
+  Plug 'Shougo/vimproc.vim',  { 'do': 'make' }
+  Plug 'thinca/vim-quickrun'
+  Plug 'osyo-manga/shabadou.vim'
+
   Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
 
@@ -175,6 +177,7 @@ nnoremap <C-x>4 :close<CR>
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
+
 let s:ignore_patterns = [
     \ '__pycache__/',
     \ '__pycache__',
@@ -209,6 +212,24 @@ set wildignore+=go/bin-vagrant                        " Go bin-vagrant files
 set wildignore+=*\.pyc                                " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
+
+let mapleader = ","
+let g:mapleader = ","
+
+function! CloseSplitOrDeleteBuffer()
+  let curNr = winnr()
+  let curBuf = bufnr('%')
+  wincmd w
+  if winnr() == curNr
+    exe 'bdelete'
+  elseif curBuf != bufnr('%')
+    wincmd W
+    exe 'bdelete'
+  else
+    wincmd W
+    wincmd c
+  endif
+endfunction
 
 function! s:ChangeCurrentDirectory()
   let l:dir = expand("%:p:h")
@@ -245,14 +266,12 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cafe setf cafe
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *.go,go.mod setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *.go.testing setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go,go.mod setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.go.testing setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
   autocmd BufNewFile,BufRead *_test.go setlocal filetype=go.testing tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *Test.php setlocal filetype=php.phpunit
   autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
+  autocmd BufNewFile,BufRead *.rego set filetype=rego tabstop=4 softtabstop=4 noexpandtab
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -262,6 +281,7 @@ augroup FileTypeDetect
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType make setlocal noexpandtab
   autocmd FileType gitconfig setlocal noexpandtab
@@ -380,8 +400,6 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:UltiSnipsExpandTrigger = "<tab>"
 
 if !exists("g:UltiSnipsJumpForwardTrigger")
@@ -416,3 +434,89 @@ command! -bang -nargs=* Ripgrep
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.config/local/share/fzf-history'
 
+let g:quickrun_config = {'_': {}}
+let g:quickrun_config._.input = '=@i'
+let g:quickrun_config._.input = '=%{b:input}'
+
+let g:quickrun_config = {
+  \  '_' : {
+  \    'runner' : 'vimproc',
+  \    'runner/vimproc/updatetime' : 60,
+  \    'hook/close_buffer/enable_failure': 1,
+  \    'hook/close_buffer/enable_empty_data': 1,
+  \    'hook/close_quickfix/enable_hook_loaded' : 1,
+  \    'hook/close_quickfix/enable_success' : 1,
+  \    'outputter' : 'error',
+  \    'outputter/error/success' : 'buffer',
+  \    'outputter/error/error'   : 'quickfix',
+  \    'outputter/buffer/split'  : ':rightbelow 8sp',
+  \    'outputter/buffer/close_on_empty' : 1,
+  \  },
+  \  "make" : {
+  \    "command" : "make %o",
+  \    "exec" : "%c",
+  \    "runner" : "vimproc",
+  \   },
+  \}
+let g:quickrun_config.cafe = {
+  \ 'cmdopt' : '-batch',
+  \ 'command': 'cafeobj',
+  \ 'exec' : '%c %o %s',
+  \ 'outputter/buffer/split'  : 'vsplit',
+  \ }
+let g:quickrun_config.cpp = {
+  \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
+  \ 'command': 'clang++',
+  \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+  \ }
+let g:quickrun_config.matlab = {
+  \ 'cmdopt' : '',
+  \ 'command': 'octave-cli',
+  \ 'exec' : '%c %o %s',
+  \ }
+
+let g:quickrun_config['php.phpunit'] = {
+  \ 'hook/cd/directory'              : '%S:p:h',
+  \ 'command'                        : './vendor/bin/phpunit',
+  \ 'cmdopt'                         : '',
+  \ 'exec'                           : '%c %o %s',
+  \ 'outputter/quickfix/errorformat' : '%f:%l,%m in %f on line %l',
+  \}
+
+let g:quickrun_config['ruby.rspec'] = {
+  \ 'type': 'ruby.rspec',
+  \ 'cmdopt': '-cfd',
+  \ 'command': 'rspec',
+  \ 'exec': 'bundle exec %c %o',
+  \ }
+let g:quickrun_config.rspecl = {
+  \ 'type': 'ruby.rspec',
+  \ 'command': 'rspec',
+  \ 'exec': 'bundle exec %c %s -l ' . line('.'),
+  \}
+" let g:quickrun_config.go = {
+"       \ 'type': 'go',
+"       \ 'command': 'go',
+"       \ 'exec': 'go run *.go',
+"       \ }
+let g:quickrun_config['go.testing'] = {
+  \ 'type': 'go',
+  \ 'command': 'go',
+  \ 'exec': '%c test -v *.go',
+  \ }
+let g:quickrun_config.rego = {
+  \ 'cmdopt' : 'test',
+  \ 'command': 'opa',
+  \ 'exec' : '%c %o %s',
+  \ }
+let g:quickrun_config.swift = {
+  \ 'type': 'swift',
+  \ 'cmdopt': "-sdk `xcrun --show-sdk-path --sdk macosx`",
+  \ 'command': 'xcrun',
+  \ 'exec': '%c swift %s %o',
+  \ }
+let g:quickrun_config.haskell = {
+  \ 'cmdopt' : 'runhaskell',
+  \ 'command': 'stack',
+  \ }
+"""
