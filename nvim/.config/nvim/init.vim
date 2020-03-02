@@ -140,6 +140,9 @@ augroup END
 "========================================="
 " Keymap settings
 "========================================="
+let mapleader = ","
+let g:mapleader = ","
+
 nmap ; :Buffers
 " nmap t :Files
 " nmap r :Tags
@@ -212,9 +215,6 @@ set wildignore+=go/bin-vagrant                        " Go bin-vagrant files
 set wildignore+=*\.pyc                                " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
-
-let mapleader = ","
-let g:mapleader = ","
 
 function! CloseSplitOrDeleteBuffer()
   let curNr = winnr()
