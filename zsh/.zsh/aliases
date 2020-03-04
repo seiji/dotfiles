@@ -260,8 +260,11 @@ function aws_rds_instances () {
     --output json
 }
 
+function aws_sts_get_caller () {
+  aws sts get-caller-identity
+}
+
 function aws_s3_buckets () {
   aws s3api list-buckets \
     --query 'Buckets[]' | jq -r '.[] | [.Name, .CreationDate]'
 }
-
