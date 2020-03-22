@@ -8,6 +8,7 @@ custodian==2019.9.23
 distlib==0.3.0
 docutils==0.15.2
 filelock==3.0.12
+graphviz==0.13.2
 greenlet==0.4.15
 jmespath==0.9.5
 jsonpatch==1.25

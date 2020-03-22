@@ -254,6 +254,16 @@ function aws_ecr_image_latest () {
     --output json
 }
 
+function aws_ecr_login () {
+  url=$(aws sts get-caller-identity --output text --query 'Account').dkr.ecr.$(aws configure get region).amazonaws.com
+  aws ecr get-login-password | docker login --username AWS --password-stdin $url
+}
+
+function aws_ecr_logout () {
+  url=$(aws sts get-caller-identity --output text --query 'Account').dkr.ecr.$(aws configure get region).amazonaws.com
+  docker logout $url
+}
+
 function aws_rds_instances () {
   aws rds describe-db-instances \
     --query 'DBInstances[]' \

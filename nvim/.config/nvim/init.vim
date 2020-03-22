@@ -55,8 +55,10 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'thinca/vim-quickrun'
   Plug 'osyo-manga/shabadou.vim'
 
+  Plug 'chr4/nginx.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
+  Plug 'jxnblk/vim-mdx-js'
 
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
