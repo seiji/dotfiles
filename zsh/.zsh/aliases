@@ -232,10 +232,10 @@ function aws_cloudwatch_set_alarm_state_alarm () {
 }
 function aws_ec2_instances () {
   aws ec2 describe-instances \
-    --filter "Name=instance-state-name,Values=running" \
-    --query 'Reservations[].Instances[]' \
+    --filter 'Name=instance-state-name,Values=running' \
+    --query 'Reservations[].Instances[?InstanceLifecycle==null]'[] \
     --output json \
-    | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Project:(.Tags[] | select(.Key=="project").Value), Env:(.Tags[] | select(.Key=="env").Value), InstanceType:.InstanceType }'
+    | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Project:(.Tags[] | select(.Key=="project").Value), Env:(.Tags[] | select(.Key=="env").Value), InstanceType:.InstanceType}'
 }
 
 function aws_ec2 images_amazn2 () {
