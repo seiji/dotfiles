@@ -33,6 +33,7 @@ case ${OSTYPE} in
     export LD_LIBRARY_PATH=/usr/local/opt/openssl/lib:$LD_LIBRARY_PATH
     export CPATH=/usr/local/opt/openssl/include:$LD_LIBRARY_PATH
 
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
     export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
     export PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
 
@@ -146,8 +147,8 @@ if (( $+commands[go] )); then
       export GOROOT=/usr/lib/go
       ;;
   esac
-  export GOPATH=$HOME
-  export GOBIN=$GOPATH/bin
-  export PATH=$GOBIN:$GOROOT/bin:$PATH
+  #export GOPATH=$HOME
+  #export GOBIN=$HOME/bin
+  export PATH=$HOME/bin:$GOROOT/bin:$PATH
 fi
 export GO111MODULE=on
