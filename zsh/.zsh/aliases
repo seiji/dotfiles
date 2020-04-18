@@ -41,8 +41,8 @@ alias sc='screen -U -D -RR'
 alias screen='screen -U -D -RR'
 alias tig='tig --all'
 alias tmux='tmux -2'
-alias v="$(which vim)"
-alias vi="$(which vim)"
+alias v="$(which nvim)"
+alias vi="$(which nvim)"
 alias weechat-curses='TERM=screen-256color weechat-curses'
 alias weechat='TERM=screen-256color weechat'
 
