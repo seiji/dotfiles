@@ -55,6 +55,11 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'thinca/vim-quickrun'
   Plug 'osyo-manga/shabadou.vim'
 
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp'
+
   Plug 'chr4/nginx.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
@@ -243,7 +248,8 @@ endfunction
 autocmd BufEnter * call s:ChangeCurrentDirectory()
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd InsertLeave * set nopaste
+" autocmd InsertLeave * set nopaste
+
 "
 " augroup TemplatesAu
 "   autocmd!
@@ -290,6 +296,30 @@ augroup FileTypeDetect
   autocmd FileType rego setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType hs setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
+
+if executable('gopls')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'whitelist': ['go'],
+        \ 'workspace_config': {'gopls': {
+        \     'staticcheck': v:true,
+        \     'completeUnimported': v:true,
+        \     'caseSensitiveCompletion': v:true,
+        \     'usePlaceholders': v:true,
+        \     'completionDocumentation': v:true,
+        \     'watchFileChanges': v:true,
+        \     'hoverKind': 'SingleLine',
+        \   }},
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+    autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+    autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+    autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+  augroup END
+endif
 
 ""
 set list listchars=tab:»\ ,
@@ -495,12 +525,12 @@ let g:quickrun_config.rspecl = {
   \ 'type': 'ruby.rspec',
   \ 'command': 'rspec',
   \ 'exec': 'bundle exec %c %s -l ' . line('.'),
-  \}
-" let g:quickrun_config.go = {
-"       \ 'type': 'go',
-"       \ 'command': 'go',
-"       \ 'exec': 'go run *.go',
-"       \ }
+  \ }
+let g:quickrun_config.go = {
+  \ 'type': 'go',
+  \ 'command': 'go',
+  \ 'exec': 'go run *.go',
+  \ }
 let g:quickrun_config['go.testing'] = {
   \ 'type': 'go',
   \ 'command': 'go',
