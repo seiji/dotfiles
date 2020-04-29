@@ -295,6 +295,7 @@ augroup FileTypeDetect
   autocmd FileType gitconfig setlocal noexpandtab
   autocmd FileType rego setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType hs setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType terraform setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 if executable('gopls')
