@@ -259,6 +259,13 @@ function aws_ecr_login () {
   aws ecr get-login-password | docker login --username AWS --password-stdin $url
 }
 
+function aws_ecs_taskdef_images () {
+  aws ecs describe-task-definition \
+    --task-definition $1 \
+    --query "taskDefinition.containerDefinitions[*].image" \
+    --output json
+}
+
 function aws_ecr_logout () {
   url=$(aws sts get-caller-identity --output text --query 'Account').dkr.ecr.$(aws configure get region).amazonaws.com
   docker logout $url
