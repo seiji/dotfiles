@@ -248,7 +248,7 @@ endfunction
 autocmd BufEnter * call s:ChangeCurrentDirectory()
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
-" autocmd InsertLeave * set nopaste
+autocmd InsertLeave * set nopaste
 
 "
 " augroup TemplatesAu
@@ -273,7 +273,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cafe setf cafe
-  autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd BufNewFile,BufRead *.cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead *.go,go.mod setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.go.testing setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt
@@ -498,7 +498,7 @@ let g:quickrun_config.cafe = {
   \ 'outputter/buffer/split'  : 'vsplit',
   \ }
 let g:quickrun_config.cpp = {
-  \ 'cmdopt' : '-std=c++1y -Wall -Wextra -O2',
+  \ 'cmdopt' : '-std=c++1z -Wall -Wextra -O2',
   \ 'command': 'clang++',
   \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
   \ }
