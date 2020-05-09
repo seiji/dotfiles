@@ -1,16 +1,18 @@
 {
+  "coc.preferences.formatOnType": true,
+  "suggest.autoTrigger": "trigger",
   "suggest.timeout": 5000,
   "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
       "initializationOptions": {}
+    },
+    "golang": {
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
     }
-  },
-  "golang": {
-    "command": "gopls",
-    "args": [],
-    "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-    "filetypes": ["go"]
   }
 }

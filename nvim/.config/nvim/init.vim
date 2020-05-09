@@ -93,6 +93,7 @@ set laststatus=2
 set number
 set nobackup
 set noerrorbells
+set nopaste
 set noswapfile
 set nowritebackup
 set pastetoggle=<C-E>
@@ -187,6 +188,7 @@ nnoremap <C-x>4 :close<CR>
 " - highlight
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 let s:ignore_patterns = [
     \ '__pycache__/',
