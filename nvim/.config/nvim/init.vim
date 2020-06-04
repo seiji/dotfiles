@@ -276,6 +276,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cafe setf cafe
   autocmd BufNewFile,BufRead *.cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufRead *.dhall setlocal filetype=dhall tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead *.go,go.mod setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   autocmd BufNewFile,BufRead *.go.testing setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.go GoFmt

@@ -149,7 +149,7 @@ if (( $+commands[go] )); then
       export GOROOT=/usr/lib/go
       ;;
   esac
-  #export GOPATH=$HOME
+  export GOPATH=$HOME
   #export GOBIN=$HOME/bin
   export PATH=$HOME/bin:$GOROOT/bin:$PATH
 fi

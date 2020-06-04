@@ -63,7 +63,7 @@ bind diff [ :toggle diff-context -3         # Decrease context (-U arg)
 bind diff ] :toggle diff-context +3         # Increase context
 bind diff i view-close
 
-bind tree v !vim %(file)                                # open file from tree
+bind tree v !vi %(file)                                # open file from tree
 
 bind refs C >!git checkout -b %(branch) origin/%(branch)      # Create a new branch
 bind refs c >!git checkout %(branch)                          # Checkout branch
@@ -75,4 +75,4 @@ bind status D ?@rm -rf %(file)                         # Delete untracked files
 bind status p >?git push origin %(branch)
 bind status s >?git stash save
 bind status S >?git stash pop
-bind status v >vim %(file)
+bind status v >vi %(file)
