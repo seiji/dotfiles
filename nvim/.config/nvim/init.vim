@@ -64,6 +64,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'editorconfig/editorconfig-vim'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
   Plug 'jxnblk/vim-mdx-js'
+  Plug 'sirtaj/vim-openscad'
 
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
