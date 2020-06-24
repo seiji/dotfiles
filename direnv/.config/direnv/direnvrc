@@ -2,3 +2,8 @@ use_aws_profile(){
   profile=$1
   export $(aws-vault exec $profile -- env | grep AWS_ | grep -v AWS_VAULT)
 }
+
+use_aws_profile_nosession(){
+  profile=$1
+  export $(aws-vault exec $profile --no-session -- env | grep AWS_ | grep -v AWS_VAULT)
+}
