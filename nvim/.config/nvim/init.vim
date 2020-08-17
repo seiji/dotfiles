@@ -62,6 +62,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
 
   Plug 'chr4/nginx.vim'
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'habamax/vim-asciidoctor'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
   Plug 'jxnblk/vim-mdx-js'
   Plug 'sirtaj/vim-openscad'
@@ -273,6 +274,7 @@ autocmd InsertLeave * set nopaste
 
 augroup FileTypeDetect
   autocmd!
+  autocmd BufNewFile,BufRead *.{asciidoc,adoc,asc} set filetype=asciidoc
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf*  setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.cafe setf cafe
@@ -285,13 +287,13 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
   autocmd BufNewFile,BufRead *.rego set filetype=rego tabstop=4 softtabstop=4 noexpandtab
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4
   " autocmd BufWritePre *.cs OmniSharpCodeFormat
   autocmd FileType yml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
   autocmd FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType scala setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
