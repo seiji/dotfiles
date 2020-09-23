@@ -2,6 +2,12 @@
   "coc.preferences.formatOnType": true,
   "suggest.autoTrigger": "trigger",
   "suggest.timeout": 5000,
+  "list.normalMappings": {
+    "<C-c>": "do:exit"
+  },
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  },
   "languageserver": {
     "dhall": {
       "command": "dhall-lsp-server",
@@ -29,9 +35,14 @@
       }
     },
     "terraform": {
-      "command": "terraform-lsp",
-      "filetypes": ["terraform"],
-      "initializationOptions": {}
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
     }
   }
 }

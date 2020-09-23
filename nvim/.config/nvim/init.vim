@@ -191,6 +191,8 @@ nnoremap <C-x>4 :close<CR>
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
 let s:ignore_patterns = [
     \ '__pycache__/',
