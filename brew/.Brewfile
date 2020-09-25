@@ -37,6 +37,7 @@ brew "gnu-sed"
 brew "libevent"
 brew "gnupg"
 brew "go"
+brew "gobject-introspection"
 brew "goenv", args: ["HEAD"]
 brew "harfbuzz"
 brew "pango"
