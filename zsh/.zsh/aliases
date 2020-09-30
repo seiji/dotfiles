@@ -35,6 +35,7 @@ alias grep='grep -i --color=auto'
 alias mkdir='mkdir -p'
 alias mv='mv -i'
 alias public_ip=get_public_ip
+alias relogin='exec $SHELL -l'
 alias rm='rm -i'
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 alias sc='screen -U -D -RR'
