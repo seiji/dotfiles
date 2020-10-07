@@ -122,6 +122,7 @@ cask "macs-fan-control"
 cask "mendeley"
 cask "notion"
 cask "openscad"
+cask "owasp-zap"
 cask "path-finder"
 cask "pritunl"
 cask "qlimagesize"
@@ -142,5 +143,6 @@ mas "Diagrams", id: 1276248849
 mas "Fotor Photo Editor", id: 503039729
 mas "Keynote", id: 409183694
 mas "LanScan", id: 472226235
+mas "Pages", id: 409201541
 mas "Spark", id: 1176895641
 mas "Type Fu", id: 509818877

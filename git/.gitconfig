@@ -98,3 +98,5 @@
 	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 [gpg]
 	program = gpg
+[fetch]
+	prune = true
