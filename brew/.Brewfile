@@ -138,6 +138,7 @@ cask "tableplus"
 cask "typora"
 cask "uhk-agent"
 cask "visual-studio-code"
+cask "yubico-yubikey-manager"
 cask "zoomus"
 mas "Diagrams", id: 1276248849
 mas "Fotor Photo Editor", id: 503039729

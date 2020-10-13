@@ -561,3 +561,4 @@ let g:quickrun_config.haskell = {
   \ 'command': 'stack',
   \ }
 """
+command! RemoveAnsi %s/\e\[[0-9;]*m/
