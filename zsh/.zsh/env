@@ -74,6 +74,8 @@ esac
 # export DOCKER_TLS_VERIFY=1
 
 # export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
 
 # FZF; rg
 if (( $+commands[fzf] )) && (( $+commands[rg] )); then
