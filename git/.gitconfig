@@ -85,6 +85,7 @@
 	ignore = !"f() { local s=$1; shift; \
 		while [ $# -gt 0 ]; do s=\"$s,$1\"; shift; done;\
 		curl \"https://www.gitignore.io/api/$s\"; }; f"
+	pushf = push --force-with-lease
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/

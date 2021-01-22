@@ -2,14 +2,12 @@
 
 name: home
 root: ~/
-pre_window: export PATH=$HOME/.rbenv/shims:$PATH
+# pre_window: export PATH=$HOME/.rbenv/shims:$PATH
 tmux_options: -2
 
 windows:
-  - home: cd ~/
+  - dotfiles: cd ~/src/github.com/seiji/dotfiles
   - irc: weechat
-  - blog: cd ~/Dropbox/blog/ghost; npm start
-  - blank: cd ~/
-  - github: cd src/github.com
-  - github: cd src/github.com; vi .
+  - private: cd ~/src/github.com/seiji/private
+  - vprivate: cd ~/src/github.com/seiji/private; vi .
 

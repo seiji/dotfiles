@@ -290,6 +290,7 @@ augroup FileTypeDetect
   autocmd BufNewFile,BufRead *.rego set filetype=rego tabstop=4 softtabstop=4 noexpandtab
   autocmd BufNewFile,BufRead *.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead Dockerfile*  setf dockerfile
+  autocmd BufNewFile,BufRead .terraformrc  setf terraform
   autocmd FileType javascript setlocal smartindent cinwords=if,else,for,while,try,except,finally,def,class
   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
   autocmd FileType cs setlocal  tabstop=4 shiftwidth=4 softtabstop=4

@@ -284,5 +284,5 @@ function aws_sts_get_caller () {
 
 function aws_s3_buckets () {
   aws s3api list-buckets \
-    --query 'Buckets[]' | jq -r '.[] | [.Name, .CreationDate]'
+    --query 'Buckets[]' | jq -r '.[] |  {name:.Name, creation_date:.CreationDate}'
 }
