@@ -16,3 +16,4 @@ aliases:
     epicsBy: issue list --author="$1" --label="epic"
     igrep: '!gh issue list --label="$1" | grep $2'
     prTitle: pr create --title "$1" --body "t/o"
+    status: '!gh issue status && gh pr status'
