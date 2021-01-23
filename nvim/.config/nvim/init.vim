@@ -199,14 +199,14 @@ let s:ignore_patterns = [
     \ '__pycache__',
     \ '\.git',
     \ '\.gitmodules',
+    \ '*\.csproj',
     \ '*\.meta',
     \ '*\.min\.js',
     \ '*\.o',
     \ '*\.pyc',
+    \ '*\.sln',
     \ '*\.sqlite3',
     \ '*\.swp',
-    \ '*\.csproj',
-    \ '*\.sln',
     \ '*\.unityproj',
     \ '*\.userprefs',
     \ '\.sass-cache',
@@ -228,6 +228,7 @@ set wildignore+=go/bin-vagrant                        " Go bin-vagrant files
 set wildignore+=*\.pyc                                " Python byte code
 set wildignore+=*/tmp/*,*\.so,*\.swp,*\.zip           " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*\.swp,*\.zip,*\.exe        " Windows
+set wildignore+=*\.class                              " Java
 
 function! CloseSplitOrDeleteBuffer()
   let curNr = winnr()
