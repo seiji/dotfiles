@@ -61,18 +61,19 @@ function get_public_ip () {
 # fi
 
 # homebrew
-function brew() {
-  local CMD=/usr/local/bin/brew
-  $CMD $*
-  if [[ $? -eq 0 ]]; then
-    $CMD bundle dump --global --force
-    $CMD bundle cleanup --global
+function brew_bundle_dump() {
+  brew_root=$(brew --prefix)
+  if [[ $brew_root = "/opt/homebrew" ]]; then
+    brew bundle dump --force --file=~/.Brewfile.m1
+  else 
+    brew bundle dump --global --force $opts
   fi
+  brew bundle cleanup --global
 }
 
 # pip
 function pip() {
-  local CMD=/usr/local/var/pyenv/shims/pip
+  local CMD=pip3
   $CMD $*
   if [[ $? -eq 0 ]]; then
     $CMD freeze > ~/requirements.txt
@@ -239,7 +240,7 @@ function aws_ec2_instances () {
     | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Project:(.Tags[] | select(.Key=="project").Value), Env:(.Tags[] | select(.Key=="env").Value), InstanceType:.InstanceType}'
 }
 
-function aws_ec2 images_amazn2 () {
+function aws_ec2_images_amazn2 () {
   aws ec2 describe-images \
     --owners amazon \
     --filters \

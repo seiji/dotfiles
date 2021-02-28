@@ -154,6 +154,7 @@ if (( $+commands[go] )); then
   export PATH=$HOME/bin:$GOROOT/bin:$PATH
 fi
 export GO111MODULE=on
+export GODEBUG=asyncpreemptoff=1
 
 # Pq
 export PQ_ROOT=$(brew --prefix libpq)
