@@ -14,6 +14,7 @@ darwin*)
   alias ls="ls -1G"
   alias ql='qlmanage -p "$@" >& /dev/null'
   alias strace="echo strace is not on OSX. Use dtruss"
+  alias softwareupdate_all='softwareupdate --all --install --force'
   alias timeout='gtimeout'
   alias xattr_w='xattr -w com.apple.metadata:kMDItemFinderComment'
   ;;
@@ -65,7 +66,7 @@ function brew_bundle_dump() {
   brew_root=$(brew --prefix)
   if [[ $brew_root = "/opt/homebrew" ]]; then
     brew bundle dump --force --file=~/.Brewfile.m1
-  else 
+  else
     brew bundle dump --global --force $opts
   fi
   brew bundle cleanup --global
@@ -156,6 +157,13 @@ alias sft='bin/phpunit -c app'
 alias apk='adb shell pm list packages -f'
 
 alias tf='terraform'
+
+function llvm (){
+  export PATH="/usr/local/opt/llvm/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/llvm/lib"
+  export CPPFLAGS="-I/usr/local/opt/llvm/include"
+  unset -f llvm
+}
 
 # GCP
 function gcloud_login () {
