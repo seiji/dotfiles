@@ -114,6 +114,7 @@ alias dvid='docker volume ls -q'
 alias dvls='docker volume ls'
 alias dvrm='docker volume rm $(docker volume ls -qf dangling=true)'
 
+alias hadolint='docker run --rm -i hadolint/hadolint'
 #
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 
@@ -243,11 +244,12 @@ function aws_cloudwatch_set_alarm_state_alarm () {
 function aws_ec2_instances () {
   aws ec2 describe-instances \
     --filter 'Name=instance-state-name,Values=running' \
-    --query 'Reservations[].Instances[?InstanceLifecycle==null]'[] \
+    --query 'Reservations[].Instances[*]'[] \
     --output json \
-    | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Project:(.Tags[] | select(.Key=="project").Value), Env:(.Tags[] | select(.Key=="env").Value), InstanceType:.InstanceType}'
+    | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), InstanceType:.InstanceType}'
 }
 
+# | jq -r '.[]|{ InstanceId:.InstanceId, Name:(.Tags[] | select(.Key == "Name").Value), Service:(.Tags[] | select(.Key == "service").Value), Env:(.Tags[] | select(.Key =="env").Value), InstanceType:.InstanceType}'
 function aws_ec2_images_amazn2 () {
   aws ec2 describe-images \
     --owners amazon \
