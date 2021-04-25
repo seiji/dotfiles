@@ -61,6 +61,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'prabirshrestha/vim-lsp'
 
   Plug 'chr4/nginx.vim'
+  Plug 'ekalinin/Dockerfile.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'habamax/vim-asciidoctor'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }

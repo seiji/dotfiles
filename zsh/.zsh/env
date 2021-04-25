@@ -97,6 +97,12 @@ if (( $+commands[git] )); then
   esac
 fi
 
+# GoogleCloudSDK
+if [[ -s $HOMEBREW_CASK_PREFIX/google-cloud-sdk ]]; then
+  export PATH="$HOMEBREW_CASK_PREFIX/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc:$PATH"
+fi
+
+
 # Pulumi
 if [[ -s $HOME/.pulumi ]]; then
   export PATH="$HOME/.pulumi/bin:$PATH"
@@ -114,11 +120,13 @@ if [[ -s $HOME/.config/composer ]]; then
 fi
 
 # Ruby
-export RBENV_ROOT="$HOME/.rbenv"
-#export PATH="$RBENV_ROOT/bin:$PATH"
-export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-export BUNDLER_EDITOR="vim +VimFiler"
+if [[ -s $HOME/.rbenv ]]; then
+  export RBENV_ROOT="$HOME/.rbenv"
+  #export PATH="$RBENV_ROOT/bin:$PATH"
+  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+fi
 
+export BUNDLER_EDITOR="vim +VimFiler"
 #export GEM_HOME=$HOME/.gem
 #export GEM_PATH=$HOME/.gem
 #export PATH="$GEM_HOME/bin:$PATH"
@@ -159,3 +167,7 @@ export GODEBUG=asyncpreemptoff=1
 export PQ_ROOT=$(brew --prefix libpq)
 export PATH=$PQ_ROOT/bin:$PATH
 
+# amplify
+if [[ -s $HOME/.amplify ]]; then
+  export PATH="$HOME/.amplify/bin:$PATH"
+fi
