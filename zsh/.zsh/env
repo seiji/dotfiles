@@ -45,8 +45,8 @@ case ${OSTYPE} in
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export NO_AT_BRIDGE=1 # naulitulus
-    if [[ -s $HOME/.linuxbrew ]]; then
-      export PATH="$HOME/.linuxbrew/bin:$PATH"
+    if [[ -s /home/linuxbrew/.linuxbrew ]]; then
+      export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
       export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
     fi
 
