@@ -6,6 +6,7 @@
 
 [init]
 	templateDir = ~/.git-templates/git-secrets
+	defaultBranch = main
 
 [branch]
 	autosetuprebase = always
