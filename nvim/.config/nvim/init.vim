@@ -139,7 +139,7 @@ set re=1
 
 syntax enable
 
-augroup ColorScheme
+augroup _ColorScheme
   autocmd!
   autocmd Colorscheme * highlight Normal ctermbg=none
   autocmd Colorscheme * highlight NonText ctermbg=none
@@ -147,7 +147,6 @@ augroup ColorScheme
   autocmd Colorscheme * highlight Folded ctermbg=none
   autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
   autocmd Colorscheme * highlight Search ctermbg=none ctermbg=none
-
 augroup END
 
 "========================================="
