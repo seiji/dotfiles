@@ -159,7 +159,7 @@ if (( $+commands[go] )); then
       ;;
   esac
   export GOPATH=$HOME
-  #export GOBIN=$HOME/bin
+  export GOBIN=$HOME/bin
   export PATH=$HOME/bin:$GOROOT/bin:$PATH
 fi
 export GO111MODULE=on

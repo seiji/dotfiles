@@ -126,9 +126,10 @@ function dsh() {
 alias kc='kubectl'
 
 # Haskell
-alias ghc='stack ghc --'
-alias ghci='stack ghci'
-alias runghc='stack runghc --'
+#alias dhall-json='docker run --rm -i --platform linux/amd64 dhallhaskell/dhall-json'
+#alias ghc='stack ghc --'
+#alias ghci='stack ghci'
+#alias runghc='stack runghc --'
 
 # golang
 alias get=go_get
@@ -143,8 +144,10 @@ alias activate="source $PYENV_ROOT/versions/miniconda3-latest/bin/activate"
 
 # ruby
 alias rake='noglob rake'
+
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+#alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))"'
 
 # php
 alias sf='app/console --no-ansi'
