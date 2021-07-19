@@ -172,6 +172,8 @@ inoremap <C-[> <ESC>
 
 nnoremap <Leader>tt :Ttoggle<CR>
 tnoremap <Leader>tt <C-\><C-n>:Ttoggle<CR>
+silent! map <unique> <Leader>r <Plug>(quickrun)
+
 tnoremap <C-[> <C-\><C-n>
 
 nnoremap <silent> <C-p> :FZFFileList<CR>
@@ -513,6 +515,12 @@ let g:quickrun_config.cpp = {
   \ 'cmdopt' : '-std=c++1z -Wall -Wextra -O2',
   \ 'command': 'clang++',
   \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+  \ }
+let g:quickrun_config.dhall = {
+  \ 'cmdopt' : '--file',
+  \ 'command': 'dhall',
+  \ 'exec' : '%c %o %s',
+  \ 'outputter/buffer/split'  : 'vsplit',
   \ }
 let g:quickrun_config.matlab = {
   \ 'cmdopt' : '',
