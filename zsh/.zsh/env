@@ -110,6 +110,11 @@ if [[ -s $HOME/.pulumi ]]; then
 fi
 
 ### Languages
+# Haskell
+if [[ -s $HOME/.ghcup ]]; then
+  source $HOME/.ghcup/env
+fi
+
 # Rust
 if [[ -s $HOME/.cargo ]]; then
   export PATH="$HOME/.cargo/bin:$PATH"

@@ -15,6 +15,8 @@ emacs/.emacs.d/share
 emacs/.emacs.d/tramp
 emacs/.emacs.d/url/cookies
 emacs/.emacs.d/anything-c-adaptive-history
+gh/.config/gh/*
+!gh/.config/gh/config.yml
 git-worktrees/*
 gnupg/.gnupg/*
 !gnupg/.gnupg/gpg-agent.conf
