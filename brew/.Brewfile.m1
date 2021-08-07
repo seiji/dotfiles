@@ -52,7 +52,7 @@ brew "nodenv"
 brew "opa"
 brew "openssh"
 brew "perl"
-brew "pinentry-mac"
+brew "pinentry-mac" if OS.mac?
 brew "pwgen"
 brew "pyenv"
 brew "rbenv"

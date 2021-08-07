@@ -45,9 +45,11 @@ case ${OSTYPE} in
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export NO_AT_BRIDGE=1 # naulitulus
+    export GPG_TTY=$(tty)
+
     if [[ -s /home/linuxbrew/.linuxbrew ]]; then
       export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-      export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+      export LD_LIBRARY_PATH="/home/liunxbrew/.linuxbrew/lib:$LD_LIBRARY_PATH"
     fi
 
     if [[ -s $HOME/.tfenv ]]; then
