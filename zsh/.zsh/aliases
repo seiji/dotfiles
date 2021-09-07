@@ -38,6 +38,7 @@ alias mv='mv -i'
 alias public_ip=get_public_ip
 alias relogin='exec $SHELL -l'
 alias rm='rm -i'
+alias rmcolor='gsed "s/\x1b\[[0-9;]*m//g"'
 alias rsync="rsync -avz --exclude=\".svn\" --exclude=\".DS_Store\""
 alias sc='screen -U -D -RR'
 alias screen='screen -U -D -RR'

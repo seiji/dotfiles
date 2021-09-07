@@ -24,6 +24,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 case ${OSTYPE} in
   darwin*)
+    export PATH=/opt/homebrew/bin:$PATH
     #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
     # Homebrew Cask
     export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
