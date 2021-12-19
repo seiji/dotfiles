@@ -88,13 +88,11 @@ if (( $+commands[rg] )); then
 fi
 
 # docker
-#if (( $+commands[docker-machine] )); then
-#  alias docker='docker $(docker-machine config)'
-#  alias machine='docker-machine'
+#alias docker='lima nerdctl'
+#alias docker-compose='lima nerdctl compose'
+#if (( $+commands[docker-compose] )); then
+#  alias dco='docker-compose'
 #fi
-if (( $+commands[docker-compose] )); then
-  alias dco='docker-compose'
-fi
 
 ## docker container
 alias dc='docker container'

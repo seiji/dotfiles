@@ -1,4 +1,3 @@
-# debug
 #set -x
 
 if [ -x /usr/libexec/path_helper ]; then

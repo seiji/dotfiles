@@ -24,7 +24,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 case ${OSTYPE} in
   darwin*)
-    export PATH=/opt/homebrew/bin:$PATH
+    [ -x /opt/homebrew/bin/brew ] && eval $(/opt/homebrew/bin/brew shellenv)
     #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
     # Homebrew Cask
     export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
@@ -77,6 +77,7 @@ esac
 # export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
+# export DOCKER_DEFAULT_PLATFORM=linux/arm64/v8
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 # FZF; rg
@@ -173,6 +174,8 @@ if (( $+commands[go] )); then
 fi
 export GO111MODULE=on
 export GODEBUG=asyncpreemptoff=1
+
+. "$HOME/.cargo/env"
 
 # Pq
 export PQ_ROOT=$(brew --prefix libpq)
