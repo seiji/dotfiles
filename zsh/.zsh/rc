@@ -171,6 +171,24 @@ function fcd () {
 zle -N fcd
 bindkey '^x^f' fcd
 
+# sussh - ssh sudo
+function sussh(){
+  if [ $# -lt 2 ]; then
+    cat <<EOS
+usage: sussh <command> <host>
+Example:
+$ pssh "sudo echo OK" server01
+EOS
+    return 1
+  fi
+  local command="$1"
+  vared -p 'sudo password: ' -c _password
+  local host="$2"
+  echo $_password | ssh $host "sudo -S bash -c \"$command\""
+  unset _password
+}
+zle -N sussh
+
 # fssh - ssh hosts
 function fssh(){
   local selected_host
