@@ -70,24 +70,6 @@ case ${OSTYPE} in
     ;;
 esac
 
-# docker/machine
-# export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-
-# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
-export DOCKER_BUILDKIT=1
-export COMPOSE_DOCKER_CLI_BUILD=1
-# export DOCKER_DEFAULT_PLATFORM=linux/arm64/v8
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
-
-# FZF; rg
-if (( $+commands[fzf] )) && (( $+commands[rg] )); then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS='--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168 --height 40% --reverse --border'
-fi
-
 # Git
 if (( $+commands[git] )); then
   case ${OSTYPE} in
@@ -102,11 +84,31 @@ if (( $+commands[git] )); then
   esac
 fi
 
+# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+# export DOCKER_DEFAULT_PLATFORM=linux/arm64/v8
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+###
+if (( $+commands[fzf] )) && (( $+commands[rg] )); then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168 --height 40% --reverse --border'
+fi
+
+if (( $+commands[navi] )); then
+  export NAVI_PATH="$(navi info cheats-path)"
+  export NAVI_PATH="$XDG_CONFIG_HOME/navi/cheats:.cheats:$NAVI_PATH"
+fi
+
+###
+
 # GoogleCloudSDK
 if [[ -s $HOMEBREW_CASK_PREFIX/google-cloud-sdk ]]; then
   export PATH="$HOMEBREW_CASK_PREFIX/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc:$PATH"
 fi
-
 
 # Pulumi
 if [[ -s $HOME/.pulumi ]]; then
@@ -123,6 +125,8 @@ fi
 if [[ -s $HOME/.cargo ]]; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+. "$HOME/.cargo/env"
 
 # PHP
 if [[ -s $HOME/.config/composer ]]; then
@@ -174,8 +178,6 @@ if (( $+commands[go] )); then
 fi
 export GO111MODULE=on
 export GODEBUG=asyncpreemptoff=1
-
-. "$HOME/.cargo/env"
 
 # Pq
 export PQ_ROOT=$(brew --prefix libpq)

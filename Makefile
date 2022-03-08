@@ -6,6 +6,7 @@ pkgs := brew \
 				gh \
 				git \
 				gnupg \
+				navi \
 				nvim \
 				terraform \
 				tig \

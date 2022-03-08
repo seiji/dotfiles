@@ -1,0 +1,60 @@
+% aws common
+
+% aws ec2
+@ aws common
+
+$ instance_id: aws ec2 describe-instances \
+  --query 'Reservations[].Instances[].{instanceId:InstanceId,privateIp:PrivateIpAddress,name:Tags[?Key==`Name`].Value}' \
+  --filters Name=instance-state-name,Values=running \
+  | jq -r '.[] | [.name[0], .instanceId, .privateIp] | @tsv' | sort  | column -t -s $'\t' --- --column 2
+$ private_ip: aws ec2 describe-instances \
+  --query 'Reservations[].Instances[].{instanceId:InstanceId,privateIp:PrivateIpAddress,name:Tags[?Key==`Name`].Value}' \
+  --filters Name=instance-state-name,Values=running \
+  | jq -r '.[] | [.name[0], .instanceId, .privateIp] | @tsv' | sort  | column -t -s $'\t' --- --column 3
+
+% aws ecs
+@ aws common
+
+# Runs a command remotely on a container within a task
+aws ecs execute-command --cluster <cluster_name> --task <task_id> --container app --interactive  --command "/bin/bash"
+
+$ cluster_name: aws ecs list-clusters | jq -r '.clusterArns[]' | awk -F '/' '{print $NF}' | sort
+$ service_name: aws ecs list-services --cluster <cluster_name> | jq -r '.serviceArns[]' | awk -F '/' '{print $NF}' | sort
+$ taskdef_family: aws ecs list-task-definition-families | jq -r '.families[]' | sort
+$ task_id: aws ecs list-tasks --cluster <cluster_name> | jq -r '.taskArns[]' | awk -F '/' '{print $NF}'
+
+% aws logs
+@ aws common
+
+# tails the logs for a CloudWatch Logs group
+aws logs tail --follow <log_group_name>
+
+$ log_group_name: aws logs describe-log-groups | jq -r .logGroups[].logGroupName --- --column 1
+
+% aws ssm
+@ aws ec2
+
+# ssh through Session Manager
+ssh <instance_id>
+
+# ssh with proxyjump to a target
+ssh -J <instance_id> <target>
+
+# ssh with proxyjump to a private host
+ssh -J <instance_id> ec2-user@<private_ip>
+
+# ssh dynamic port forwarding
+ssh -N -C -D 1080 <instance_id>
+
+# ssh local port forwarding from local to 5432 port
+ssh <instance_id> -L 8888:<rds_host>:5432
+
+# forward db port with aws system manager
+aws ssm start-session \
+  --target <instance_id> \
+  --document-name AWS-StartPortForwardingSession \
+  --parameters '{"portNumber":["8563"],"localPortNumber":["8563"]}'
+
+% aws sts
+# get the caller identity
+aws sts get-caller-identity

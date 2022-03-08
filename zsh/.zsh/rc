@@ -101,6 +101,10 @@ if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
 fi
 
+if (( $+commands[navi] )); then
+  eval "$(navi widget zsh)"
+fi
+
 # gwt  - create git worktree branch
 function gwt() {
   GIT_CDUP_DIR=`git rev-parse --show-cdup`
