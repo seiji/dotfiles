@@ -1,0 +1,17 @@
+# ~/.config/smug/home.yml
+
+session: test
+root: ~/src
+env:
+  FOO: BAR
+# tmux_options: -2
+
+windows:
+  - name: dot
+    root: ~/src/github.com/seiji/dotfiles
+  - name: pri
+    root: ~/src/github.com/seiji/private
+  - name: vpri
+    root: ~/src/github.com/seiji/private
+    commands:
+      - vi .
