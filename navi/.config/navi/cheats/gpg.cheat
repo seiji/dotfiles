@@ -1,0 +1,17 @@
+% gpg
+
+# list secret keys
+gpg --list-secret-keys --keyid-format LONG
+
+# test signing
+echo 'test'| gpg --clearsign
+
+# kill gpg-agent
+gpgconf --kill gpg-agent
+
+% gpg, keybase
+# import keys from keybase
+keybase pgp export | gpg --import
+
+# import secret keys from keybase
+keybase pgp export --secret | gpg --allow-secret-key --import

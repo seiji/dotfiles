@@ -1,0 +1,7 @@
+% git
+
+# commit bypassing hooks
+git commit -m <commit_message> --no-verify
+
+# show a list of existing remotes
+git remote --verbose

@@ -124,9 +124,8 @@ fi
 # Rust
 if [[ -s $HOME/.cargo ]]; then
   export PATH="$HOME/.cargo/bin:$PATH"
+  . "$HOME/.cargo/env"
 fi
-
-. "$HOME/.cargo/env"
 
 # PHP
 if [[ -s $HOME/.config/composer ]]; then
