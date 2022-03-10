@@ -21,6 +21,7 @@ export PATH=/usr/local/sbin:$HOME/local/bin:$HOME/bin:$PATH
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
+export GPG_TTY=$(tty)
 
 case ${OSTYPE} in
   darwin*)
@@ -38,7 +39,6 @@ case ${OSTYPE} in
     export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
     export PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
 
-    export GPG_TTY=`tty`
     #export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     #export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
@@ -46,7 +46,6 @@ case ${OSTYPE} in
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export NO_AT_BRIDGE=1 # naulitulus
-    export GPG_TTY=$(tty)
 
     if [[ -s /home/linuxbrew/.linuxbrew ]]; then
       export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
