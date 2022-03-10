@@ -1,0 +1,7 @@
+% smug
+
+# list available project configurations
+smug list
+
+# start configuration
+smug start <smug_configuration>
