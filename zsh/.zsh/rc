@@ -101,6 +101,10 @@ if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
 fi
 
+if (( $+commands[navi] )); then
+  eval "$(navi widget zsh)"
+fi
+
 # gwt  - create git worktree branch
 function gwt() {
   GIT_CDUP_DIR=`git rev-parse --show-cdup`
@@ -171,6 +175,24 @@ function fcd () {
 zle -N fcd
 bindkey '^x^f' fcd
 
+# sussh - ssh sudo
+function sussh(){
+  if [ $# -lt 2 ]; then
+    cat <<EOS
+usage: sussh <command> <host>
+Example:
+$ pssh "sudo echo OK" server01
+EOS
+    return 1
+  fi
+  local command="$1"
+  vared -p 'sudo password: ' -c _password
+  local host="$2"
+  echo $_password | ssh $host "sudo -S bash -c \"$command\""
+  unset _password
+}
+zle -N sussh
+
 # fssh - ssh hosts
 function fssh(){
   local selected_host
@@ -189,7 +211,26 @@ function fssh(){
   zle reset-prompt
 }
 zle -N fssh
-bindkey '^x^j' fssh
+bindkey '^x^s' fssh
+
+# fec2 - ssh ec2 hosts
+function fec2(){
+  local selected_host=$(aws ec2 describe-instances \
+    --query 'Reservations[].Instances[].{instanceId:InstanceId,privateIp:PrivateIpAddress,name:Tags[?Key==`Name`].Value}' \
+    --filters Name=instance-state-name,Values=running \
+    | jq -r '.[] | [.name[0], .instanceId, .privateIp] | @tsv' \
+    | sort \
+    | column -t -s $'\t' \
+    | fzf)
+  if [ -n "$selected_host" ]; then
+    read name instance_id internal_ip external_ip<<< $( awk -F@ '{print $1, $2, $3}' <<< $selected_host )
+    BUFFER="ssh $instance_id"
+  fi
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fec2
+bindkey '^x^a' fec2
 
 # fgce - ssh hosts
 function fgce(){
@@ -204,7 +245,7 @@ function fgce(){
   zle reset-prompt
 }
 zle -N fgce
-bindkey '^x^l' fgce
+bindkey '^x^g' fgce
 
 # tag
 if (( $+commands[tag] )); then

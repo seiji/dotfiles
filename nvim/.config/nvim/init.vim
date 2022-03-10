@@ -49,6 +49,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
 
+  Plug 'neovim/nvim-lspconfig'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'Shougo/vimproc.vim',  { 'do': 'make' }
@@ -61,11 +62,14 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'prabirshrestha/vim-lsp'
 
   Plug 'chr4/nginx.vim'
+  Plug 'ekalinin/Dockerfile.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'habamax/vim-asciidoctor'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
-  Plug 'jxnblk/vim-mdx-js'
-  Plug 'sirtaj/vim-openscad'
+  " Plug 'jxnblk/vim-mdx-js'
+  " Plug 'sirtaj/vim-openscad'
+  Plug 'vmchale/dhall-vim'
+  Plug 'tsandall/vim-rego'
 
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -136,7 +140,7 @@ set re=1
 
 syntax enable
 
-augroup ColorScheme
+augroup _ColorScheme
   autocmd!
   autocmd Colorscheme * highlight Normal ctermbg=none
   autocmd Colorscheme * highlight NonText ctermbg=none
@@ -144,7 +148,6 @@ augroup ColorScheme
   autocmd Colorscheme * highlight Folded ctermbg=none
   autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
   autocmd Colorscheme * highlight Search ctermbg=none ctermbg=none
-
 augroup END
 
 "========================================="
@@ -170,6 +173,8 @@ inoremap <C-[> <ESC>
 
 nnoremap <Leader>tt :Ttoggle<CR>
 tnoremap <Leader>tt <C-\><C-n>:Ttoggle<CR>
+silent! map <unique> <Leader>r <Plug>(quickrun)
+
 tnoremap <C-[> <C-\><C-n>
 
 nnoremap <silent> <C-p> :FZFFileList<CR>
@@ -308,30 +313,32 @@ augroup FileTypeDetect
   autocmd FileType terraform setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
-if executable('gopls')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['gopls']},
-        \ 'whitelist': ['go'],
-        \ 'workspace_config': {'gopls': {
-        \     'staticcheck': v:true,
-        \     'completeUnimported': v:true,
-        \     'caseSensitiveCompletion': v:true,
-        \     'usePlaceholders': v:true,
-        \     'completionDocumentation': v:true,
-        \     'watchFileChanges': v:true,
-        \     'hoverKind': 'SingleLine',
-        \   }},
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-    autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-    autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
-    autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
-  augroup END
-endif
+lua require("lsp_config")
 
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(1000)
+"if executable('gopls')
+"  augroup LspGo
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['gopls']},
+"        \ 'whitelist': ['go'],
+"        \ 'workspace_config': {'gopls': {
+"        \     'staticcheck': v:true,
+"        \     'completeUnimported': v:true,
+"        \     'usePlaceholders': v:true,
+"        \     'completionDocumentation': v:true,
+"        \     'hoverKind': 'SingleLine',
+"        \   }},
+"        \ })
+"    autocmd FileType go setlocal omnifunc=lsp#complete
+"    autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+"    autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+"    autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+"  augroup END
+"endif
+"
 ""
 set list listchars=tab:»\ ,
 set background=dark
@@ -511,6 +518,12 @@ let g:quickrun_config.cpp = {
   \ 'cmdopt' : '-std=c++1z -Wall -Wextra -O2',
   \ 'command': 'clang++',
   \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+  \ }
+let g:quickrun_config.dhall = {
+  \ 'cmdopt' : '--file',
+  \ 'command': 'dhall',
+  \ 'exec' : '%c %o %s',
+  \ 'outputter/buffer/split'  : 'vsplit',
   \ }
 let g:quickrun_config.matlab = {
   \ 'cmdopt' : '',

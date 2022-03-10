@@ -24,6 +24,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 case ${OSTYPE} in
   darwin*)
+    [ -x /opt/homebrew/bin/brew ] && eval $(/opt/homebrew/bin/brew shellenv)
     #export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
     # Homebrew Cask
     export HOMEBREW_CASK_PREFIX="$(brew --prefix)/Caskroom"
@@ -37,8 +38,6 @@ case ${OSTYPE} in
     export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
     export PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
 
-    export PATH=/usr/local/opt/llvm/bin:$PATH
-
     export GPG_TTY=`tty`
     #export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
@@ -47,9 +46,11 @@ case ${OSTYPE} in
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export NO_AT_BRIDGE=1 # naulitulus
-    if [[ -s $HOME/.linuxbrew ]]; then
-      export PATH="$HOME/.linuxbrew/bin:$PATH"
-      export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+    export GPG_TTY=$(tty)
+
+    if [[ -s /home/linuxbrew/.linuxbrew ]]; then
+      export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+      export LD_LIBRARY_PATH="/home/liunxbrew/.linuxbrew/lib:$LD_LIBRARY_PATH"
     fi
 
     if [[ -s $HOME/.tfenv ]]; then
@@ -69,22 +70,6 @@ case ${OSTYPE} in
     ;;
 esac
 
-# docker/machine
-# export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-
-# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
-export DOCKER_BUILDKIT=1
-export COMPOSE_DOCKER_CLI_BUILD=1
-
-# FZF; rg
-if (( $+commands[fzf] )) && (( $+commands[rg] )); then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS='--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168 --height 40% --reverse --border'
-fi
-
 # Git
 if (( $+commands[git] )); then
   case ${OSTYPE} in
@@ -99,16 +84,49 @@ if (( $+commands[git] )); then
   esac
 fi
 
+# export VIRTUALBOX_BOOT2DOCKER_URL=https://github.com/boot2docker/boot2docker/releases/download/v1.4.1/boot2docker.iso
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+# export DOCKER_DEFAULT_PLATFORM=linux/arm64/v8
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+###
+if (( $+commands[fzf] )) && (( $+commands[rg] )); then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168 --height 40% --reverse --border'
+fi
+
+if (( $+commands[navi] )); then
+  export NAVI_PATH="$(navi info cheats-path)"
+  export NAVI_PATH="$XDG_CONFIG_HOME/navi/cheats:.cheats:$NAVI_PATH"
+fi
+
+###
+
+# GoogleCloudSDK
+if [[ -s $HOMEBREW_CASK_PREFIX/google-cloud-sdk ]]; then
+  export PATH="$HOMEBREW_CASK_PREFIX/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc:$PATH"
+fi
+
 # Pulumi
 if [[ -s $HOME/.pulumi ]]; then
   export PATH="$HOME/.pulumi/bin:$PATH"
 fi
 
 ### Languages
+# Haskell
+if [[ -s $HOME/.ghcup ]]; then
+  source $HOME/.ghcup/env
+fi
+
 # Rust
 if [[ -s $HOME/.cargo ]]; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+. "$HOME/.cargo/env"
 
 # PHP
 if [[ -s $HOME/.config/composer ]]; then
@@ -116,19 +134,24 @@ if [[ -s $HOME/.config/composer ]]; then
 fi
 
 # Ruby
-export RBENV_ROOT="$HOME/.rbenv"
-#export PATH="$RBENV_ROOT/bin:$PATH"
-export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-export BUNDLER_EDITOR="vim +VimFiler"
+if [[ -s $HOME/.rbenv ]]; then
+  export RBENV_ROOT="$HOME/.rbenv"
+  #export PATH="$RBENV_ROOT/bin:$PATH"
+  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+fi
 
+export BUNDLER_EDITOR="vim +VimFiler"
 #export GEM_HOME=$HOME/.gem
 #export GEM_PATH=$HOME/.gem
 #export PATH="$GEM_HOME/bin:$PATH"
 
 # Python
-if (( $+commands[pyenv] )); then
-  eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
 fi
+
 if [ -d '/usr/local/miniconda3' ]; then
   export MINICONDA_ROOT="/usr/local/miniconda3"
   export PATH="$MINICONDA_ROOT/bin:$PATH"
@@ -150,12 +173,17 @@ if (( $+commands[go] )); then
       ;;
   esac
   export GOPATH=$HOME
-  #export GOBIN=$HOME/bin
+  export GOBIN=$HOME/bin
   export PATH=$HOME/bin:$GOROOT/bin:$PATH
 fi
 export GO111MODULE=on
+export GODEBUG=asyncpreemptoff=1
 
 # Pq
 export PQ_ROOT=$(brew --prefix libpq)
 export PATH=$PQ_ROOT/bin:$PATH
 
+# amplify
+if [[ -s $HOME/.amplify ]]; then
+  export PATH="$HOME/.amplify/bin:$PATH"
+fi

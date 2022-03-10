@@ -3,7 +3,16 @@ use_aws_profile(){
   export $(aws-vault exec $profile -d 12h -- env | grep AWS_ | grep -v AWS_VAULT)
 }
 
+use_aws_profile_ykman(){
+  profile=$1
+  export $(aws-vault exec --prompt ykman $profile -d 12h -- env | grep AWS_ | grep -v AWS_VAULT)
+}
+
 use_aws_profile_nosession(){
   profile=$1
   export $(aws-vault exec $profile --no-session -- env | grep AWS_ | grep -v AWS_VAULT)
+}
+
+use_azure_profile(){
+  az login
 }

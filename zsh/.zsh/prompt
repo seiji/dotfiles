@@ -2,7 +2,7 @@
 # that the point?
 #
 
-PROMPT='%{$fg_bold[yellow]%}%c %{$fg_bold[blue]%}$%{$reset_color%} '
+PROMPT='%{$fg_bold[red]%}${DOCKER_DEFAULT_PLATFORM} %{$fg_bold[yellow]%}%c %{$fg_bold[blue]%}$%{$reset_color%} '
 PROMPT2='\'
 
 RPROMPT="%{${fg_bold[yellow]}%}[%~]%{${reset_color}%}"
