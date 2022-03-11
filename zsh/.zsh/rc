@@ -59,7 +59,6 @@ function gem() {
 }
 #tmux
 #test -f ~/.tmuxrc && . ~/.tmuxrc
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 [[ -s /usr/local/share/zsh/site-functions/_aws ]] && source /usr/local/share/zsh/site-functions/_aws
 #[[ -x "`which aws_zsh_completer.sh 2>&1`" ]] && source aws_zsh_completer.sh
 
