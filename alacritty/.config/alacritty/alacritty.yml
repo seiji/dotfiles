@@ -30,7 +30,7 @@ font:
     style: Italic
     hintstyle: true
     antialias: true
-  size: 18.0
+  size: 19.0
   offset:
     x: 1
     y: 1
