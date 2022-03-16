@@ -115,6 +115,7 @@ set splitright
 set splitbelow
 set suffixesadd+=.rb
 set tabstop=2
+set termguicolors
 set title
 set t_Co=256
 set vb t_vb=
@@ -147,6 +148,7 @@ augroup _ColorScheme
   autocmd Colorscheme * highlight LineNr ctermbg=none ctermbg=none
   autocmd Colorscheme * highlight Folded ctermbg=none
   autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
+  autocmd Colorscheme * highlight Pmenu ctermbg=244 guibg=#1c1c1c
   autocmd Colorscheme * highlight Search ctermbg=none ctermbg=none
 augroup END
 

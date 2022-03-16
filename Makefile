@@ -1,4 +1,5 @@
-pkgs := brew \
+pkgs := alacritty \
+				brew \
 				cvim \
 				dig \
 				direnv \
