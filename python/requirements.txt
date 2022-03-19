@@ -17,7 +17,7 @@ jsonschema==3.2.0
 monty==3.0.2
 msgpack==1.0.0
 neovim==0.3.1
-numpy==1.18.5
+numpy==1.21.0
 opencv-python==4.2.0.32
 pipenv==2022.1.8
 pynvim==0.4.1
