@@ -1,7 +1,13 @@
 % git
 
+# commit empty
+git commit -m <commit-message> --allow-empty
+
 # commit bypassing hooks
-git commit -m <commit_message> --no-verify
+git commit -m <commit-message> --no-verify
+
+# prune remote-tracking branches no longer on remote
+git fetch --prune
 
 # show a list of existing remotes
 git remote --verbose

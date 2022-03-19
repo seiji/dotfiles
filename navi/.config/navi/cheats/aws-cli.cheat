@@ -59,7 +59,7 @@ ssh -J <instance_id> ec2-user@<private_ip>
 ssh -N -C -D 1080 <instance_id>
 
 # ssh local port forwarding from local to 5432 port
-ssh <instance_id> -L 8888:<rds_host>:5432
+ssh <instance_id> -L 8888:<rds-host>:5432
 
 # forward db port with aws system manager
 aws ssm start-session \
