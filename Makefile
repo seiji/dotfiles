@@ -8,6 +8,7 @@ pkgs := \
 	gh \
 	git \
 	gnupg \
+	mpv \
 	navi \
 	nvim \
 	terraform \

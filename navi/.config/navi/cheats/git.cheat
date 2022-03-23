@@ -11,3 +11,6 @@ git fetch --prune
 
 # show a list of existing remotes
 git remote --verbose
+
+# reset only head
+git reset --soft HEAD^

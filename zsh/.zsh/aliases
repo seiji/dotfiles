@@ -3,7 +3,6 @@ darwin*)
   alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
   alias chrome='open "/Applications/Google Chrome.app" --args --renderer-process-limit=3'
   alias date='gdate'
-  alias dayone="/usr/local/bin/dayone -j=~/Library/Group\ Containers/5U8NS4GX82.dayoneapp2/Data/Auto\ Import/Default\ Journal.dayone"
   alias delmacfile="find . -name \".DS_Store\" -exec rm -f {} \;"
   alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
   alias keyboard_link='sudo kextload /System/Library/Extensions/AppleUSBTopCase.kext/Contents/PlugIns/AppleUSBTCKeyboard.kext/'
@@ -143,16 +142,7 @@ alias activate="source $PYENV_ROOT/versions/miniconda3-latest/bin/activate"
 alias rake='noglob rake'
 
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
-#alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))"'
-
-# php
-alias sf='app/console --no-ansi'
-alias sfcl='sf cache:clear'
-alias sfcw='sf cache:warmup'
-alias sfroute='sf router:debug'
-alias sfcontainer='sf container:debug'
-alias sft='bin/phpunit -c app'
 
 # adb
 alias apk='adb shell pm list packages -f'
