@@ -1,0 +1,6 @@
+% aws logs
+
+# tails the logs for a CloudWatch Logs group
+aws logs tail --follow <log_group_name>
+
+$ log_group_name: aws logs describe-log-groups | jq -r .logGroups[].logGroupName --- --column 1

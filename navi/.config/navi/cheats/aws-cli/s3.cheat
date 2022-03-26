@@ -1,0 +1,4 @@
+% aws s3
+
+# list buckets
+aws s3api list-buckets --query 'Buckets[]' | jq -r '.[] |  {name:.Name, creation_date:.CreationDate}'

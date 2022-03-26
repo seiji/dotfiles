@@ -1,0 +1,4 @@
+% aws rds
+
+# describe rds instances
+aws rds describe-db-instances --query 'DBInstances[]'

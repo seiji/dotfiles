@@ -1,0 +1,22 @@
+% aws ecs
+
+# Runs a command remotely on a container within a task
+aws ecs execute-command --cluster <cluster_name> --task <task_id> --container app --interactive  --command "/bin/bash"
+
+# Starts a new task using the specified task definition
+aws ecs run-task \
+    --cluster <cluster_name> \
+    --count 1 \
+    --enable-ecs-managed-tags \
+    --launch-type FARGATE \
+    --group manual \
+    --network-configuration "awsvpcConfiguration={subnets=[<subnets>],securityGroups=[<securityGroups>],assignPublicIp=DISABLED}" \
+    --platform-version 1.4.0 \
+    --propagate-tags TASK_DEFINITION \
+    --task-definition <taskdef_family>
+
+$ cluster_name: aws ecs list-clusters | jq -r '.clusterArns[]' | awk -F '/' '{print $NF}' | sort
+$ service_name: aws ecs list-services --cluster <cluster_name> | jq -r '.serviceArns[]' | awk -F '/' '{print $NF}' | sort
+$ taskdef_family: aws ecs list-task-definition-families | jq -r '.families[]' | sort
+$ task_id: aws ecs list-tasks --cluster <cluster_name> | jq -r '.taskArns[]' | awk -F '/' '{print $NF}'
+
