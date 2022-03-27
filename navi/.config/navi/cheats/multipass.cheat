@@ -1,0 +1,39 @@
+% vm
+
+# list available aliases
+multipass aliases
+
+# delete instances
+multipass delete <multipass-instance>
+
+# run a command on instance
+multipass exec <multipass_instance> <multipass-command>
+
+# display information on instance
+multipass info <multipass_instance>
+
+# create and start an ubuntu instance
+multipass launch --name <multipass-instance-name>
+
+# mount a local directory in the instance
+multipass mount <src-path> <multipass_instance>:<dst-path>
+
+# purge all deleted instances
+multipass purge
+
+# restart instance
+multipass restarce <multipass_instance>
+
+# open a shell on running instance
+multipass shell <multipass_instance>
+
+# start instances
+multipass start <multipass_instance>
+
+# stop running instance
+multipass stop <multipass_instance>
+
+# unmount a directory from an instance
+multipass unmount <multipass_instance>
+
+$ multipass_instance: multipass list --- --header-lines 1 --column 1

@@ -10,6 +10,7 @@ echo 'test'| gpg --clearsign
 gpgconf --kill gpg-agent
 
 % gpg, keybase
+
 # import keys from keybase
 keybase pgp export | gpg --import
 

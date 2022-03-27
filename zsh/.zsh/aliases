@@ -272,18 +272,3 @@ function aws_ecr_logout () {
   url=$(aws sts get-caller-identity --output text --query 'Account').dkr.ecr.$(aws configure get region).amazonaws.com
   docker logout $url
 }
-
-function aws_rds_instances () {
-  aws rds describe-db-instances \
-    --query 'DBInstances[]' \
-    --output json
-}
-
-function aws_sts_get_caller () {
-  aws sts get-caller-identity
-}
-
-function aws_s3_buckets () {
-  aws s3api list-buckets \
-    --query 'Buckets[]' | jq -r '.[] |  {name:.Name, creation_date:.CreationDate}'
-}
