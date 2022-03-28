@@ -1,0 +1,25 @@
+---
+# cloud-config
+repo_update: true
+repo_upgrade: all
+
+package_update: true
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+groups:
+  - docker
+system_info:
+  default_user:
+    groups: ["docker"]
+
+runcmd:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  - add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+  - sudo curl -fsLS -o /usr/libexec/docker/cli-plugins/docker-compose https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)
+  - sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose

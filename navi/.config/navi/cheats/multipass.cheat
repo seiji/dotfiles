@@ -4,16 +4,22 @@
 multipass aliases
 
 # delete instances
-multipass delete <multipass-instance>
+multipass delete <multipass_instance> && multipass purge
 
 # run a command on instance
-multipass exec <multipass_instance> <multipass-command>
+multipass exec <multipass_instance> -- <multipass-command>
 
 # display information on instance
 multipass info <multipass_instance>
 
 # create and start an ubuntu instance
 multipass launch --name <multipass-instance-name>
+
+# create and start an ubuntu instance with cloud-init
+multipass launch --name <multipass-instance-name:primary> --cloud-init ~/.config/multipass/cloud-init.yml
+
+# list all available instances
+multipass list
 
 # mount a local directory in the instance
 multipass mount <src-path> <multipass_instance>:<dst-path>

@@ -9,6 +9,7 @@ pkgs := \
 	git \
 	gnupg \
 	mpv \
+	multipass \
 	navi \
 	nvim \
 	terraform \
