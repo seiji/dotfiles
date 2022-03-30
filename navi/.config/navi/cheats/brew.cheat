@@ -1,0 +1,4 @@
+% brew
+
+# bundle
+brew bundle dump --global --force && brew bundle cleanup --global

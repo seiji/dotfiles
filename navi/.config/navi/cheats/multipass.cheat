@@ -42,4 +42,10 @@ multipass stop <multipass_instance>
 # unmount a directory from an instance
 multipass unmount <multipass_instance>
 
+# create context docker-vm
+docker context create docker-vm --docker "host=tcp://$(multipass info docker-vm --format json | jq -r '.info["docker-vm"].ipv4[0]'):2375"
+
+# update context docker-vm
+docker context update docker-vm --docker "host=tcp://$(multipass info docker-vm --format json | jq -r '.info["docker-vm"].ipv4[0]'):2375"
+
 $ multipass_instance: multipass list --- --header-lines 1 --column 1

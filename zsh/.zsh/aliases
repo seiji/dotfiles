@@ -61,12 +61,7 @@ function get_public_ip () {
 
 # homebrew
 function brew_bundle_dump() {
-  brew_root=$(brew --prefix)
-  if [[ $brew_root = "/opt/homebrew" ]]; then
-    brew bundle dump --force --file=~/.Brewfile.m1
-  else
-    brew bundle dump --global --force $opts
-  fi
+  brew bundle dump --global --force $opts
   brew bundle cleanup --global
 }
 

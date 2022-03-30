@@ -8,6 +8,7 @@ packages:
   - apt-transport-https
   - ca-certificates
   - curl
+  - net-tools
   - gnupg-agent
   - software-properties-common
 groups:
@@ -15,6 +16,19 @@ groups:
 system_info:
   default_user:
     groups: ["docker"]
+write_files:
+  - content: |
+      [Service]
+      Type=notify
+      ExecStart=
+      ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock -H unix:///var/run/docker.sock -H tcp://0.0.0.0:
+        ExecReload=/bin/kill -s HUP $MAINPID
+        TimeoutSec=0
+        RestartSec=2
+        Restart=always
+    path: /lib/systemd/system/docker.service.d/overwrite.conf
+    owner: root:root
+    permissions: '0644'
 
 runcmd:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -

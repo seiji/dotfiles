@@ -1,0 +1,12 @@
+% docker
+
+# list available contexts
+docker context list
+
+# set the default context
+docker context use <docker_context>
+
+# rm a context
+docker context rm <docker_context>
+
+$ docker_context: docker context list --- --header-lines 1 --column 1
