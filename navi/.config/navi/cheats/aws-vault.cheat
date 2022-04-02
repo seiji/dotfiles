@@ -1,0 +1,6 @@
+% aws-vault
+
+$ aws_vault_profile_id: aws-vault list --- --header-lines 2 --column 1
+
+# generate a login link for the AWS Console
+aws-vault login <aws_vault_profile_id>
