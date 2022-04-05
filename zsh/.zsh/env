@@ -42,6 +42,9 @@ case ${OSTYPE} in
     #export DEVELOPER_DIR=$(xcode-select -p)
     # Xcode6 symbolicate
     #export PATH="$DEVELOPER_DIR/../SharedFrameworks/DTDeviceKitBase.framework/Versions/A/Resources:$PATH"
+    # Pq
+    export PQ_ROOT=$(brew --prefix libpq)
+    export PATH=$PQ_ROOT/bin:$PATH
     ;;
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
@@ -121,7 +124,7 @@ if [[ -s $HOME/.ghcup ]]; then
 fi
 
 # Rust
-if [[ -s $HOME/.cargo ]]; then
+if [[ -s $HOME/.cargo/env ]]; then
   export PATH="$HOME/.cargo/bin:$PATH"
   . "$HOME/.cargo/env"
 fi
@@ -177,9 +180,6 @@ fi
 export GO111MODULE=on
 export GODEBUG=asyncpreemptoff=1
 
-# Pq
-export PQ_ROOT=$(brew --prefix libpq)
-export PATH=$PQ_ROOT/bin:$PATH
 
 # amplify
 if [[ -s $HOME/.amplify ]]; then

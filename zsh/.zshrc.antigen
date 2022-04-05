@@ -1,6 +1,13 @@
 #source ~/.zsh/antigen/antigen.zsh
-source `brew --prefix`/share/antigen/antigen.zsh
 
+case ${OSTYPE} in
+  darwin*)
+    source `brew --prefix`/share/antigen/antigen.zsh
+    ;;
+  linux*)
+    source /usr/share/zsh/share/antigen.zsh
+    ;;
+esac
 antigen bundle docker
 #antigen-bundle git
 

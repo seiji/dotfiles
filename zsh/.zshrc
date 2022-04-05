@@ -1,6 +1,13 @@
 # View .inputrc
 . ~/.zsh/rc
-[ -f `brew --prefix`/share/antigen/antigen.zsh ] && source ~/.zshrc.antigen
 
+case ${OSTYPE} in
+  darwin*)
+    [ -f `brew --prefix`/share/antigen/antigen.zsh ] && source ~/.zshrc.antigen
+    ;;
+  linux*)
+    [ -f /usr/share/zsh/share/antigen.zsh ] && source ~/.zshrc.antigen
+    ;;
+esac
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(goenv init -)"
+#eval "$(goenv init -)"
