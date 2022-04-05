@@ -5,3 +5,5 @@ smug list
 
 # start configuration
 smug start <smug_configuration>
+
+$ smug_configuration: smug list
