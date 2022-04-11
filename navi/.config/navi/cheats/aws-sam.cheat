@@ -1,0 +1,6 @@
+% aws sam
+
+$ template_file: ls template*.y*ml
+
+# generate artifacts using container
+sam build --use-container --template <template_file>

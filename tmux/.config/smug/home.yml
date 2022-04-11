@@ -1,6 +1,6 @@
 # ~/.config/smug/home.yml
 
-session: test
+session: home
 root: ~/src
 env:
   FOO: BAR

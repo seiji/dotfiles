@@ -1,0 +1,10 @@
+% python pipenv
+
+# install dev package
+python -m pipenv sync --dev
+
+# get shell
+python -m pipenv shell
+
+# run test
+pipenv run test
