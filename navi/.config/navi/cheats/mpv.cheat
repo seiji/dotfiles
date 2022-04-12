@@ -1,0 +1,7 @@
+% mpv
+
+# watch video
+mpv <url>
+
+# watch video with 2.5speed
+mpv --speed=2.5 --af=rubberband=pitch-scale=0.981818181818181 <url>
