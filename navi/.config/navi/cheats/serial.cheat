@@ -1,0 +1,6 @@
+% serial console
+
+$ tty: ls /dev/tty.*
+
+# connect to tty
+sudo screen <tty>
