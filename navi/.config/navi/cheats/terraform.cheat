@@ -2,3 +2,6 @@
 
 # lock prividers
 terraform providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=linux_arm64
+
+# force unlock
+terraform force-unlock <terraform_lock_id>

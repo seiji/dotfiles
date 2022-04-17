@@ -14,3 +14,6 @@ git remote --verbose
 
 # reset only head
 git reset --soft HEAD^
+
+# force push
+git push --force-with-lease origin HEAD
