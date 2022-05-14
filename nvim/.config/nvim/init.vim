@@ -66,6 +66,7 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'editorconfig/editorconfig-vim'
   Plug 'habamax/vim-asciidoctor'
   Plug 'hashivim/vim-terraform' , { 'for': 'terraform' }
+  Plug 'jjo/vim-cue'
   " Plug 'jxnblk/vim-mdx-js'
   " Plug 'sirtaj/vim-openscad'
   Plug 'vmchale/dhall-vim'
@@ -520,6 +521,11 @@ let g:quickrun_config.cpp = {
   \ 'cmdopt' : '-std=c++1z -Wall -Wextra -O2',
   \ 'command': 'clang++',
   \ 'exec' : ['%c %o %s -o %s:p:r', '%s:p:r %a'],
+  \ }
+let g:quickrun_config.cue = {
+  \ 'cmdopt' : 'eval',
+  \ 'command': 'cue',
+  \ 'exec' : '%c %o %s',
   \ }
 let g:quickrun_config.dhall = {
   \ 'cmdopt' : '--file',
