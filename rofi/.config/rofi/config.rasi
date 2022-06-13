@@ -1,0 +1,6 @@
+configuration {
+  modi: "combi,drun,run,window";
+  combi-modi: "drun,run,window";
+  show-icons: true;
+}
+@theme "~/.config/rofi/slate-mod.rasi"
