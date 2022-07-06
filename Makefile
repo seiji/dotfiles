@@ -9,6 +9,7 @@ pkgs := \
 	mpv \
 	navi \
 	nvim \
+	polybar \
 	terraform \
 	tig \
 	tmux \
