@@ -1,3 +1,19 @@
+pkgs := \
+	alacritty \
+	dig \
+	direnv \
+	gem \
+	gh \
+	git \
+	gnupg \
+	mpv \
+	navi \
+	nvim \
+	terraform \
+	tig \
+	tmux \
+	zsh
+
 mac_pkgs := \
 	alacritty \
 	brew \
@@ -26,8 +42,14 @@ define uninstall
 
 endef
 
+install:
+	$(foreach pkg,$(pkgs),$(call install,$(pkg)))
+
+uninstall:
+	$(foreach pkg,$(pkgs),$(call uninstall,$(pkg)))
+
 mac_install:
-	$(foreach mac_pkg,$(pkgs),$(call install,$(pkg)))
+	$(foreach pkg,$(mac_pkgs),$(call install,$(pkg)))
 
 mac_uninstall:
-	$(foreach mac_pkg,$(pkgs),$(call uninstall,$(pkg)))
+	$(foreach pkg,$(mac_pkgs),$(call uninstall,$(pkg)))
