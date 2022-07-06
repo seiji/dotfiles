@@ -1,13 +1,12 @@
-pkgs := \
+mac_pkgs := \
 	alacritty \
 	brew \
-	cvim \
 	dig \
 	direnv \
 	gem \
 	gh \
 	git \
-	gnupg \
+	gnupg_mac \
 	mpv \
 	multipass \
 	navi \
@@ -27,8 +26,8 @@ define uninstall
 
 endef
 
-install:
-	$(foreach pkg,$(pkgs),$(call install,$(pkg)))
+mac_install:
+	$(foreach mac_pkg,$(pkgs),$(call install,$(pkg)))
 
-uninstall:
-	$(foreach pkg,$(pkgs),$(call uninstall,$(pkg)))
+mac_uninstall:
+	$(foreach mac_pkg,$(pkgs),$(call uninstall,$(pkg)))
