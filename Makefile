@@ -12,6 +12,7 @@ pkgs := \
 	terraform \
 	tig \
 	tmux \
+	xprofile \
 	zsh
 
 mac_pkgs := \
