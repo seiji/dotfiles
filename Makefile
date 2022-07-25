@@ -6,10 +6,12 @@ pkgs := \
 	gh \
 	git \
 	gnupg \
+	i3 \
 	mpv \
 	navi \
 	nvim \
 	polybar \
+	rofi \
 	terraform \
 	tig \
 	tmux \

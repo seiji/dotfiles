@@ -19,6 +19,7 @@ linux*)
   alias keyboard_link="xinput enable 'AT Translated Set 2 keyboard' && xmodmap ~/.Xmodmap"
   alias keyboard_unlink="xinput disable 'AT Translated Set 2 keyboard' && xmodmap ~/.XmodmapHHK"
   alias open='gnome-open'
+  alias pbcopy='xclip -sel clip'
   ;;
 esac
 
