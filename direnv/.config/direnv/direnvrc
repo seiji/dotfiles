@@ -16,3 +16,8 @@ use_aws_profile_nosession(){
 use_azure_profile(){
   az login
 }
+
+use_azure_profile_tenant(){
+  tenant=$1
+  az login -t $tenant --allow-no-subscriptions
+}

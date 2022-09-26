@@ -105,8 +105,6 @@ alias dv='docker image'
 alias dvid='docker volume ls -q'
 alias dvls='docker volume ls'
 alias dvrm='docker volume rm $(docker volume ls -qf dangling=true)'
-
-alias hadolint='docker run --rm -i hadolint/hadolint'
 #
 alias dip='docker inspect -f "{{ .NetworkSettings.IPAddress }}"'
 
