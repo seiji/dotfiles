@@ -30,11 +30,10 @@ font:
     style: Italic
     hintstyle: true
     antialias: true
-  size: 19.0
+  size: 16.0
   offset:
     x: 1
     y: 1
-  use_thin_strokes: true
 draw_bold_text_with_bright_colors: false
 colors: &solarized_dark
   primary:
