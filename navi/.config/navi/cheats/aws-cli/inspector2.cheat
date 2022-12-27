@@ -1,0 +1,7 @@
+% aws inspector2
+
+# Lists aggregated finding data for EC2 instances
+aws inspector2 list-finding-aggregations --aggregation-type AWS_EC2_INSTANCE --query 'responses[].ec2InstanceAggregation' | jq -r '.[] | {Name:.instanceTags.Name,InstanceId:.instanceId,AMI:.ami,OpenNetworkPaths:.networkFindings,Critical:.severityCounts.critical,High:.severityCounts.high,Medium:.severityCounts.medium,All:.severityCounts.all}'
+
+# Lists aggregated finding data for EC2 instances to tsv
+aws inspector2 list-finding-aggregations --aggregation-type AWS_EC2_INSTANCE --query 'responses[].ec2InstanceAggregation' | jq -r '.[] | [.instanceTags.Name,.instanceId,.ami,.networkFindings,.severityCounts.critical,.severityCounts.high,.severityCounts.medium,.severityCounts.all] | @tsv'

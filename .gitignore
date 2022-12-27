@@ -26,6 +26,7 @@ terraform/.terraform.d/plugin-cache/*
 !terraform/.terraform.d/plugin-cache/.keep
 terraform/.terraform.d/plugin-local/*
 !terraform/.terraform.d/plugin-local/.keep
+tmux/.config/tmux/plugins/
 vim/.vim/autoload
 vim/.vim/plugged/*
 weechat/.weechat/*.log

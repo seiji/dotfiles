@@ -1,4 +1,7 @@
 % aws s3
 
 # list buckets
-aws s3api list-buckets --query 'Buckets[]' | jq -r '.[] |  {name:.Name, creation_date:.CreationDate}'
+aws s3api list-buckets --query 'Buckets[]' | jq -r '.[] | {name:.Name, creation_date:.CreationDate}'
+
+# Sync directories and S3 prefixes with dryrun
+aws s3 sync --acl bucket-owner-full-control <src> <dst> --dryrun

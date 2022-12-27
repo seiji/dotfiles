@@ -1,8 +1,22 @@
 % gh
 
+$ pr: gh search prs --state=open --review-requested=@me | column -x -s $'\t' \
+  --- --map "awk -F "\t" '{print $1 $2}'"
+$ prs: gh search prs --state=open --review-requested=@me
+
+$ multi_col: ls -la | awk '{print $1, $9}' --- --column 2 --delimiter '\s' --multi
+
+$ phrases: echo -e "foo bar\nlorem ipsum\ndolor sit" --- --multi --map "navi fn map::expand"
+
 # create draft pr
 gh pr create -d --title <title> --body "t/o"
 
 # open repo in your browser
 gh repo view -w
 
+
+# list PRs where you are a reviewer
+gh search prs --state=open --review-requested=@me
+
+# open PR where you are a reviewer
+open <prs>
