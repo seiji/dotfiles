@@ -1,0 +1,8 @@
+% aws asg
+
+# Start an instance refresh immediately
+aws autoscaling start-instance-refresh \
+    --auto-scaling-group-name <asg_name> \
+    --preferences '{"InstanceWarmup": 0, "MinHealthyPercentage": 0}'
+
+$ asg_name: aws autoscaling describe-auto-scaling-groups | jq -r '.AutoScalingGroups[].AutoScalingGroupName' | sort
