@@ -1,0 +1,4 @@
+% aws ssm
+
+# query inventory information
+aws ssm get-inventory --filters Key="AWS:InstanceInformation.InstanceStatus",Values=Terminated,Type="NotEqual" --output json | jq '.Entities[].Id' | xargs -I {} aws ssm list-inventory-entries --instance-id "{}" --type-name "AWS:Application" --filters Key=Name,Values=<application-name>,Type="BeginWith"
