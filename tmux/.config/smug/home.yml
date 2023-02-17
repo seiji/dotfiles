@@ -10,8 +10,8 @@ windows:
   - name: dot
     root: ~/src/github.com/seiji/dotfiles
   - name: pri
-    root: ~/src/github.com/seiji/private
+    root: ~/src/github.com/seiji/infra
   - name: vpri
-    root: ~/src/github.com/seiji/private
+    root: ~/src/github.com/seiji/infra
     commands:
       - vi .
