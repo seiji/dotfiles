@@ -22,6 +22,7 @@
 	editor = vim
 	excludesfile = ~/.gitignore_global
 	quotepath = false
+	autocrlf = false
 
 [commit]
 	template = ~/.git_commit_msg
