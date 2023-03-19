@@ -29,14 +29,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
       hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=LightYellow
@@ -67,7 +67,7 @@ nvim_lsp.gopls.setup{
   on_attach = on_attach,
 }
 
-function goimports(timeoutms)
+function _goimports(timeoutms)
   local context = { source = { organizeImports = true } }
   vim.validate { context = { context, "t", true } }
 
@@ -94,6 +94,21 @@ function goimports(timeoutms)
     end
   else
     vim.lsp.buf.execute_command(action)
+  end
+end
+
+function goimports(wait_ms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = {only = {"source.organizeImports"}}
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
   end
 end
 

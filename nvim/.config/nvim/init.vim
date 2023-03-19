@@ -319,7 +319,7 @@ augroup END
 
 lua require("lsp_config")
 
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua vim.lsp.buf.format({ async = false })
 autocmd BufWritePre *.go lua goimports(1000)
 "if executable('gopls')
 "  augroup LspGo
