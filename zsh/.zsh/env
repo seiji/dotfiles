@@ -137,9 +137,10 @@ if [[ -s $HOME/.cargo/env ]]; then
   . "$HOME/.cargo/env"
 fi
 
-# PHP
-if [[ -s $HOME/.config/composer ]]; then
-  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+# tfenv
+if [[ -s $HOME/.tfenv ]]; then
+  export TFENV_ROOT="$HOME/.tfenv"
+  export PATH="$TFENV/bin:$PATH"
 fi
 
 # Ruby

@@ -77,9 +77,6 @@ fi
 export GOENV_DISABLE_GOPATH=1
 [[ -d "$HOME/.goenv" ]] && eval "$(goenv init -)"
 
-# phpbrew
-[[ -e $HOME/.phpbrew ]] && source $HOME/.phpbrew/bashrc
-
 #nvm
 [[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
 
