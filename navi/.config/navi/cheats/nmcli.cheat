@@ -1,0 +1,7 @@
+% nmcli
+
+# Show NetworkManager's general status
+nmcli general
+
+# Enable wifi
+nmcli radio wifi on
