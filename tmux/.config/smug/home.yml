@@ -9,9 +9,9 @@ env:
 windows:
   - name: dot
     root: ~/src/github.com/seiji/dotfiles
-  - name: pri
+  - name: ifr
     root: ~/src/github.com/seiji/infra
-  - name: vpri
+  - name: vifr
     root: ~/src/github.com/seiji/infra
     commands:
       - vi .
