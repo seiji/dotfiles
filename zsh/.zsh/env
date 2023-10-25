@@ -98,7 +98,7 @@ fi
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 # export DOCKER_DEFAULT_PLATFORM=linux/arm64/v8
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 ###
 if (( $+commands[fzf] )) && (( $+commands[rg] )); then
