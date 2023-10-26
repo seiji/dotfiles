@@ -8,10 +8,11 @@ case ${OSTYPE} in
     source /usr/share/zsh/share/antigen.zsh
     ;;
 esac
-antigen bundle docker
-#antigen-bundle git
+antigen bundle command-not-found
+#antigen bundle docker
+#antigen bundle git
 
-antigen bundle zsh-users/zsh-completions src
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply

@@ -20,6 +20,8 @@ gh/.config/gh/*
 git-worktrees/*
 gnupg/.gnupg/*
 !gnupg/.gnupg/gpg-agent.conf
+gnupg_mac/.gnupg/*
+!gnupg_mac/.gnupg/gpg-agent.conf
 nvim/.config/nvim/autoload
 nvim/.config/nvim/plugged/*
 terraform/.terraform.d/plugin-cache/*
