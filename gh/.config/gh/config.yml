@@ -17,3 +17,4 @@ aliases:
     igrep: '!gh issue list --label="$1" | grep $2'
     pr-title: pr create --title "$1" --body "t/o"
     status: '!gh issue status && gh pr status'
+version: "1"
