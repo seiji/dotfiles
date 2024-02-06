@@ -3,7 +3,7 @@ argcomplete==1.11.1
 attrs==19.3.0
 boto3==1.12.7
 botocore==1.15.7
-certifi==2019.11.28
+certifi==2022.12.7
 custodian==2019.9.23
 distlib==0.3.0
 docutils==0.15.2
