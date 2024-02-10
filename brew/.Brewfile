@@ -3,6 +3,7 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
+tap "homebrew/services"
 tap "knqyf263/trivy"
 tap "liamg/tfsec"
 tap "seiji/formulas"
@@ -138,6 +139,7 @@ cask "dropbox"
 cask "figma"
 cask "firefox"
 cask "font-ricty-diminished"
+cask "forklift"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "google-drive"
@@ -174,6 +176,7 @@ mas "Keynote", id: 409183694
 mas "LanScan", id: 472226235
 mas "MindNode", id: 1289197285
 mas "Numbers", id: 409203825
+mas "Okta Verify", id: 490179405
 mas "Pages", id: 409201541
 mas "Spark", id: 1176895641
 mas "Type Fu", id: 509818877
