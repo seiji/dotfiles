@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
-  { 
+  {
     'shaunsingh/nord.nvim',
     lazy = false,
     priority = 1000,
@@ -34,7 +34,28 @@ require("lazy").setup {
   {'itchyny/lightline.vim'},
   {'justinmk/vim-dirvish'},
   {'junegunn/fzf', dir = '~/.fzf', build = './install --all' },
-  {'junegunn/fzf.vim'},
+  {
+    'junegunn/fzf.vim',
+    config = function()
+      vim.g.fzf_history_dir = vim.fn.expand '~/.config/local/share/fzf-history'
+      function FzfCd()
+        return vim.fn['fzf#run'] {
+          sink = 'e',
+          source = 'find . -type d -maxdepth 5',
+          down = '50%',
+        }
+      end
+      function FzfFileList()
+        return vim.fn['fzf#run'] {
+          sink = 'e',
+          source = 'find . -type d -name .git -prune -o ! -name .DS_Store',
+          down = '50%',
+        }
+      end
+      vim.keymap.set( { 'n' }, '<C-x><C-p>', FzfFileList, { silent = true })
+      vim.keymap.set( { 'n' }, '<C-x><C-f>', FzfCd, { silent = true })
+    end,
+  },
   {'kassio/neoterm'},
   {'tomtom/tcomment_vim'},
   {'tpope/vim-eunuch'},

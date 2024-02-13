@@ -21,9 +21,6 @@ map('i', '<C-[>', '<ESC>', {})
 map('n', '<Leader>tt', ':Ttoggle<CR>', opts)
 map('t', '<Leader>tt', '<C-\\><C-n>:Ttoggle<CR>', opts)
 
-map('n', '<C-p>', ':FZFFileList<CR>', opts)
-map('n', '<C-x><C-f>', ':FZFCd<CR>', opts)
-
 -- buffer
 map('n', '[b', ':bprevious<CR>', opts)
 map('n', ']b', ':bnext<CR>', opts)
