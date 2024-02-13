@@ -12,7 +12,25 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
-  {'altercation/vim-colors-solarized'},
+  { 
+    'shaunsingh/nord.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd[[colorscheme nord]]
+
+      -- Example config in lua
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = false
+      vim.g.nord_disable_background = true
+      vim.g.nord_italic = false
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_bold = false
+
+      -- Load the colorscheme
+      require('nord').set()
+    end,
+  },
   {'itchyny/lightline.vim'},
   {'justinmk/vim-dirvish'},
   {'junegunn/fzf', dir = '~/.fzf', build = './install --all' },
@@ -22,5 +40,21 @@ require("lazy").setup {
   {'tpope/vim-eunuch'},
   {'tpope/vim-fugitive'},
   {'tpope/vim-repeat'},
-  {'tpope/vim-surround'}
+  {'tpope/vim-surround'},
+  {
+    'github/copilot.vim',
+    lazy=false,
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    opts = {
+      show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
+      debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+      disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
+    },
+    build = function()
+      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+    end,
+    event = "VeryLazy",
+  },
 }

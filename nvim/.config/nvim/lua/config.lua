@@ -1,6 +1,6 @@
 vim.o.autoread       = true
 vim.o.autowrite      = true
-vim.o.backspace      = "indent,eol,start"
+vim.o.backspace      = 'indent,eol,start'
 vim.o.clipboard      = 'unnamed,unnamedplus'
 vim.o.confirm        = true
 vim.o.encoding       = 'utf-8'
@@ -43,6 +43,8 @@ vim.o.title          = true
 vim.o.ttyfast        = true  
 vim.o.wildmenu       = true
 vim.o.wildmode       = 'full'
+vim.o.wildignorecase = true
+vim.o.wildignore     = '*/.hg,*/.git,*/.svn'
 vim.o.wrapscan       = true
 vim.wo.cursorline    = false  
 vim.wo.number        = true  
