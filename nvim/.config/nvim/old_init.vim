@@ -57,8 +57,8 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'osyo-manga/shabadou.vim'
 
   Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/vim-lsp'
 
   Plug 'chr4/nginx.vim'
@@ -72,8 +72,9 @@ call plug#begin($CONFIG . '/nvim/plugged')
   Plug 'vmchale/dhall-vim'
   Plug 'tsandall/vim-rego'
 
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
+  " Plug 'SirVer/ultisnips'
+  " Plug 'honza/vim-snippets'
+  Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -361,7 +362,7 @@ function! InsertTabWrapper()
     return "\<c-x>\<c-o>"
   endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
@@ -433,6 +434,10 @@ augroup dirvish_commands
   endfor
 augroup END
 
+" " copilit
+" let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+
 " snippets
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippetOrJump()
@@ -454,18 +459,18 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
-let g:UltiSnipsExpandTrigger = "<tab>"
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" let g:UltiSnipsExpandTrigger = "<tab>"
+"
+" if !exists("g:UltiSnipsJumpForwardTrigger")
+"     let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" endif
+"
+" if !exists("g:UltiSnipsJumpBackwardTrigger")
+"     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" endif
+"
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 " fzf
 command! FZFCd call fzf#run({
   \ 'down': '50%',
