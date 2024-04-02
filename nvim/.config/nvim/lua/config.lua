@@ -47,7 +47,7 @@ vim.o.wildignorecase = true
 vim.o.wildignore     = '*/.hg,*/.git,*/.svn'
 vim.o.wrapscan       = true
 vim.wo.cursorline    = false
-vim.wo.number        = true
+vim.wo.number        = false
 vim.wo.wrap          = false
 
 vim.cmd('filetype plugin indent on')
