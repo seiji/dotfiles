@@ -53,6 +53,8 @@ case ${OSTYPE} in
     # Pq
     export PQ_ROOT=$(brew --prefix libpq)
     export PATH=$PQ_ROOT/bin:$PATH
+
+    export TFENV_ARCH=amd64
     ;;
   linux*)
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
