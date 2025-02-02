@@ -63,6 +63,10 @@ require("lazy").setup {
   {'tpope/vim-repeat'},
   {'tpope/vim-surround'},
   {
+    "hashivim/vim-terraform",
+    ft = "terraform",
+  },
+  {
     'is0n/jaq-nvim',
     config = function()
       local jaq = require "jaq-nvim"

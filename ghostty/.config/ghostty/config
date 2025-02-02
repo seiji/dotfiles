@@ -6,6 +6,7 @@ font-size = 16
 
 fullscreen = true
 cursor-color = FF88FF
+cursor-style-blink = false
 window-colorspace = display-p3
 window-padding-x = 8
 window-padding-y = 8
