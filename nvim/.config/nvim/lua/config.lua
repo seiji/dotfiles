@@ -46,6 +46,7 @@ vim.o.wildmode       = 'full'
 vim.o.wildignorecase = true
 vim.o.wildignore     = '*/.hg,*/.git,*/.svn'
 vim.o.wrapscan       = true
+vim.g.autoformat     = false
 vim.wo.cursorline    = false
 vim.wo.number        = false
 vim.wo.wrap          = false
@@ -64,3 +65,4 @@ end
 -- autocmd BufEnter * call s:ChangeCurrentDirectory()
 vim.cmd("autocmd BufWritePre * :lua vim.fn.stripTrailingWhitespace()")
 vim.cmd("autocmd InsertLeave * set nopaste")
+vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])

@@ -2,7 +2,7 @@
 #theme = 0x96f
 font-family = Hack Nerd Font
 font-feature = -calt, -liga, -dlig
-font-size = 16
+font-size = 18
 
 fullscreen = true
 cursor-color = FF88FF
