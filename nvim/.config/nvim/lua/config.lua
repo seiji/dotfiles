@@ -66,3 +66,5 @@ end
 vim.cmd("autocmd BufWritePre * :lua vim.fn.stripTrailingWhitespace()")
 vim.cmd("autocmd InsertLeave * set nopaste")
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
+
+vim.api.nvim_create_user_command('RemoveAnsiCodes', [[:%s/\e\[[0-9;]*m/]], { force = true, desc = "Remove all ANSI codes" })
