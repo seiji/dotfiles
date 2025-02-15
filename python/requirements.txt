@@ -18,7 +18,7 @@ monty==3.0.2
 msgpack==1.0.0
 neovim==0.3.1
 numpy==1.22.0
-opencv-python==4.2.0.32
+opencv-python==4.8.1.78
 pipenv==2022.1.8
 pynvim==0.4.1
 pyrsistent==0.15.7
