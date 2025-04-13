@@ -19,6 +19,7 @@ vim.o.ignorecase     = true
 vim.o.incsearch      = true
 vim.o.laststatus     = 2
 vim.o.lazyredraw     = true
+vim.o.linebreak      = true
 vim.o.paste          = false
 vim.o.showmatch      = false
 vim.o.swapfile       = false
