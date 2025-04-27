@@ -30,6 +30,6 @@ s3transfer==0.3.3
 sentry-sdk==0.14.1
 six==1.14.0
 tabulate==0.8.6
-urllib3==1.26.5
+urllib3==1.26.19
 virtualenv==20.0.5
 virtualenv-clone==0.5.3
