@@ -50,7 +50,7 @@ vim.o.wrapscan       = true
 vim.g.autoformat     = false
 vim.wo.cursorline    = false
 vim.wo.number        = false
-vim.wo.wrap          = false
+vim.wo.wrap          = true
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')
