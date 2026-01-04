@@ -25,6 +25,7 @@ mac_pkgs := \
 	direnv \
 	gem \
 	gh \
+	ghostty \
 	git \
 	gnupg_mac \
 	mpv \
