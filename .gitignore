@@ -29,6 +29,7 @@ terraform/.terraform.d/plugin-cache/*
 !terraform/.terraform.d/plugin-cache/.keep
 terraform/.terraform.d/plugin-local/*
 !terraform/.terraform.d/plugin-local/.keep
+terraform/.terraform.d/credentials.tfrc.json
 tmux/.config/tmux/plugins/
 vim/.vim/autoload
 vim/.vim/plugged/*
@@ -38,3 +39,9 @@ weechat/.weechat/script
 
 registry-params.env
 zsh/.zsh/zsh_history
+
+# Claude Code
+.claude/settings.local.json
+claude/.config/claude/*
+!claude/.config/claude/settings.json
+!claude/.config/claude/shell/
