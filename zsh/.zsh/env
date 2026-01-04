@@ -82,6 +82,8 @@ case ${OSTYPE} in
     ;;
 esac
 
+export CLAUDE_CONFIG_DIR=$XDG_CONFIG_HOME/claude
+
 # Git
 if (( $+commands[git] )); then
   case ${OSTYPE} in
@@ -116,6 +118,7 @@ if (( $+commands[navi] )); then
 fi
 
 ###
+
 
 # GoogleCloudSDK
 if [[ -s $HOMEBREW_CASK_PREFIX/google-cloud-sdk ]]; then
