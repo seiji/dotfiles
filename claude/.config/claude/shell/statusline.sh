@@ -1,4 +1,10 @@
 #!/bin/bash
+
+if ! command -v jq &> /dev/null; then
+    echo "[jq not installed]"
+    exit 0
+fi
+
 input=$(cat)
 
 MODEL=$(echo "$input" | jq -r '.model.display_name')
