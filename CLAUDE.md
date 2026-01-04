@@ -49,12 +49,13 @@ Each directory is a stow package containing files that will be symlinked to `$HO
 
 | Package | Description |
 |---------|-------------|
-| `nvim` | Neovim config with lazy.nvim, LSP support |
+| `nvim` | Neovim config with lazy.nvim, LSP, Copilot, Claude Code |
 | `zsh` | Zsh with antigen plugin manager, fzf functions |
-| `tmux` | Tmux config with tmuxinator templates |
+| `tmux` | Tmux config with smug templates |
 | `git` | Git config with aliases, GPG signing, git-secrets |
 | `brew` | Homebrew Brewfile (formulas, casks, mas apps) |
 | `terraform` | Terraform tooling (tfenv, tflint, terragrunt) |
+| `ghostty` | Ghostty terminal config |
 
 ### Platform Variants
 
@@ -66,8 +67,10 @@ Each directory is a stow package containing files that will be symlinked to `$HO
 
 - Entry: `nvim/.config/nvim/init.lua`
 - Plugin manager: lazy.nvim (`lua/plugins.lua`)
-- LSP config: `lua/lsp_config.lua`
+- LSP config: `lua/lsp_config.lua` (gopls configured)
 - Keymaps: `lua/keymaps.lua`
+- Leader key: `,`
+- AI: Copilot (`<Tab>` accept, `<C-j/k>` cycle) + claudecode.nvim (`<leader>ac` toggle)
 
 ### Zsh Setup
 
@@ -84,3 +87,12 @@ Language versions are managed via:
 - nodenv (Node.js)
 - goenv (Go)
 - tfenv (Terraform)
+
+### Git Aliases
+
+Common aliases defined in `git/.gitconfig`:
+- `git st` - status with stash list
+- `git ls` - graph log with colors
+- `git di` / `dc` / `dn` / `ds` - diff variants
+- `git fe` - fetch with prune
+- `git pushf` - force push with lease
