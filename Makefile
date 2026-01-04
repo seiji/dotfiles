@@ -21,6 +21,7 @@ pkgs := \
 mac_pkgs := \
 	alacritty \
 	brew \
+	claude \
 	dig \
 	direnv \
 	gem \
