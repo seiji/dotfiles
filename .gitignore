@@ -46,3 +46,5 @@ claude/.config/claude/*
 !claude/.config/claude/settings.json
 !claude/.config/claude/shell/
 !claude/.config/claude/*.mcp.json
+!claude/.config/claude/CLAUDE.md
+!claude/.config/claude/rules/
