@@ -172,13 +172,6 @@ if [ -d '/usr/local/miniconda3' ]; then
   export PATH="$MINICONDA_ROOT/bin:$PATH"
 fi
 
-# Node
-export NODENV_ROOT="$HOME/.nodenv"
-export PATH="$NODENV_ROOT/bin:$PATH"
-if (( $+commands[nodenv] )); then
-  eval "$(nodenv init -)"
-fi
-
 # Golang
 if (( $+commands[go] )); then
   case ${OSTYPE} in

@@ -45,3 +45,4 @@ zsh/.zsh/zsh_history
 claude/.config/claude/*
 !claude/.config/claude/settings.json
 !claude/.config/claude/shell/
+!claude/.config/claude/*.mcp.json

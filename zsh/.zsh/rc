@@ -77,8 +77,18 @@ fi
 export GOENV_DISABLE_GOPATH=1
 [[ -d "$HOME/.goenv" ]] && eval "$(goenv init -)"
 
-#nvm
-[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
+#nvm (lazy loading, Homebrew)
+export NVM_DIR="$HOME/.nvm"
+if [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+  nvm() {
+    unfunction nvm node npm npx 2>/dev/null
+    source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    nvm "$@"
+  }
+  node() { unfunction node; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; node "$@" }
+  npm() { unfunction npm; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npm "$@" }
+  npx() { unfunction npx; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npx "$@" }
+fi
 
 function mkcd(){mkdir -p $1 && cd $1}
 
