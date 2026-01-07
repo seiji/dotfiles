@@ -85,9 +85,9 @@ if [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
     source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
     nvm "$@"
   }
-  node() { unfunction node; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; node "$@" }
-  npm() { unfunction npm; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npm "$@" }
-  npx() { unfunction npx; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npx "$@" }
+  node() { unfunction nvm node npm npx 2>/dev/null; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; node "$@" }
+  npm() { unfunction nvm node npm npx 2>/dev/null; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npm "$@" }
+  npx() { unfunction nvm node npm npx 2>/dev/null; source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"; npx "$@" }
 fi
 
 function mkcd(){mkdir -p $1 && cd $1}
