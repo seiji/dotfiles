@@ -42,9 +42,13 @@ zsh/.zsh/zsh_history
 
 # Claude Code
 .claude/settings.local.json
+.serena/
 claude/.config/claude/*
-!claude/.config/claude/settings.json
-!claude/.config/claude/shell/
 !claude/.config/claude/*.mcp.json
 !claude/.config/claude/CLAUDE.md
+!claude/.config/claude/agents/
+!claude/.config/claude/commands/
 !claude/.config/claude/rules/
+!claude/.config/claude/settings.json
+!claude/.config/claude/shell/
+!claude/.config/claude/skills/

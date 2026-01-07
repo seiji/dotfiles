@@ -29,7 +29,11 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
+      "Bash(brew --prefix:*)",
       "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(find:*)",
+      "Bash(gh api:*)",
       "Bash(gh pr create:*)",
       "Bash(gh pr view:*)",
       "Bash(git add:*)",
@@ -44,6 +48,11 @@
       "Bash(git status:*)",
       "Bash(ls:*)",
       "Bash(make:*)",
+      "Bash(tree:*)",
+      "mcp__aws-knowledge__aws___read_documentation",
+      "mcp__aws-knowledge__aws___search_documentation",
+      "mcp__gemini__chat",
+      "mcp__gemini__googleSearch",
       "mcp__github__get_file_contents",
       "mcp__github__issue_read",
       "mcp__github__list_commits",
@@ -51,9 +60,11 @@
       "mcp__github__list_pull_requests",
       "mcp__github__pull_request_read",
       "mcp__github__pull_request_review_write",
+      "mcp__github__search_repositories",
       "mcp__github__update_pull_request",
-      "Read(~/.claude/**)",
-      "Read(~/.config/claude/**)"
+      "Read(~/.config/claude/**)",
+      "WebFetch(domain:dev.classmethod.jp)",
+      "WebFetch(domain:zenn.dev)"
     ],
     "defaultMode": "plan",
     "deny": [
