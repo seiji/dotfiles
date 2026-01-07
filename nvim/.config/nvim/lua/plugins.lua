@@ -81,7 +81,7 @@ require("lazy").setup {
             -- javascript = "node --inspect %",
             -- Normal
             javascript = "node %",
-            python = "python $file",
+            python = "uv run $file",
             -- rust = "rustc % && $fileBase",
             -- Competitive Programming
             -- cpp = "g++ -std=c++17 -Wall -DAL -O2 % -o $fileBase && $fileBase<input.txt",
@@ -147,14 +147,17 @@ require("lazy").setup {
     lazy=false,
     config = function()
       vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
 
       local keymap = vim.keymap.set
       -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
       keymap(
-      "i",
-      "<C-g>",
-      'copilot#Accept("<CR>")',
-      { silent = true, expr = true, script = true, replace_keycodes = false }
+        "i",
+        "<Tab>",
+        function()
+          return vim.fn["copilot#Accept"]("")
+        end,
+        { silent = true, expr = true, script = true, replace_keycodes = false }
       )
       keymap("i", "<C-j>", "<Plug>(copilot-next)")
       keymap("i", "<C-k>", "<Plug>(copilot-previous)")
@@ -174,4 +177,21 @@ require("lazy").setup {
     end,
     event = "VeryLazy",
   },
+  {
+    "coder/claudecode.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
+    },
+    config = function()
+      require("claudecode").setup({})
+    end,
+    keys = {
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Claude Codeを切り替え" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Claudeにフォーカス" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "セッションを再開" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", desc = "選択範囲を送信", mode = "v" },
+    },
+  }
 }

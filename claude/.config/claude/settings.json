@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code is waiting for you.\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code completed tasks.\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ]
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(brew --prefix:*)",
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(find:*)",
+      "Bash(gh api:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(git add:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(git stash:*)",
+      "Bash(git status:*)",
+      "Bash(ls:*)",
+      "Bash(make:*)",
+      "Bash(tree:*)",
+      "mcp__aws-knowledge__aws___read_documentation",
+      "mcp__aws-knowledge__aws___search_documentation",
+      "mcp__gemini__chat",
+      "mcp__gemini__googleSearch",
+      "mcp__github__get_file_contents",
+      "mcp__github__issue_read",
+      "mcp__github__list_commits",
+      "mcp__github__list_issues",
+      "mcp__github__list_pull_requests",
+      "mcp__github__pull_request_read",
+      "mcp__github__pull_request_review_write",
+      "mcp__github__search_repositories",
+      "mcp__github__update_pull_request",
+      "Read(~/.config/claude/**)",
+      "WebFetch(domain:dev.classmethod.jp)",
+      "WebFetch(domain:zenn.dev)"
+    ],
+    "defaultMode": "plan",
+    "deny": [
+      "Bash(rm:*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.config/claude/shell/statusline.sh"
+  }
+}

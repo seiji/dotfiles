@@ -19,6 +19,7 @@ vim.o.ignorecase     = true
 vim.o.incsearch      = true
 vim.o.laststatus     = 2
 vim.o.lazyredraw     = true
+vim.o.linebreak      = true
 vim.o.paste          = false
 vim.o.showmatch      = false
 vim.o.swapfile       = false
@@ -49,7 +50,7 @@ vim.o.wrapscan       = true
 vim.g.autoformat     = false
 vim.wo.cursorline    = false
 vim.wo.number        = false
-vim.wo.wrap          = false
+vim.wo.wrap          = true
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')

@@ -21,10 +21,12 @@ pkgs := \
 mac_pkgs := \
 	alacritty \
 	brew \
+	claude \
 	dig \
 	direnv \
 	gem \
 	gh \
+	ghostty \
 	git \
 	gnupg_mac \
 	mpv \

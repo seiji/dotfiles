@@ -266,3 +266,7 @@ function aws_ecr_logout () {
   url=$(aws sts get-caller-identity --output text --query 'Account').dkr.ecr.$(aws configure get region).amazonaws.com
   docker logout $url
 }
+
+# Claude Code
+alias c='claude'
+alias c-dev='claude --strict-mcp-config --mcp-config ~/.config/claude/dev.mcp.json'

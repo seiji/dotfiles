@@ -11,3 +11,5 @@ case ${OSTYPE} in
 esac
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #eval "$(goenv init -)"
+
+. "$HOME/.local/share/../bin/env"

@@ -1,0 +1,10 @@
+% aws eb
+
+# Get application:environment
+aws elasticbeanstalk describe-configuration-settings --environment-name <env_name> --application-name <app_name> | jq -r '.ConfigurationSettings[].OptionSettings[] | select(.Namespace == "aws:elasticbeanstalk:application:environment")' | jq -s
+
+# Update apllication:environment
+aws elasticbeanstalk update-environment --environment-name <env_name> --option-settings file://options.json
+
+$ app_name: aws elasticbeanstalk describe-applications | jq -r '.Applications[].ApplicationName' | sort
+$ env_name: aws elasticbeanstalk  describe-environments | jq -r '.Environments[].EnvironmentName' | sort
