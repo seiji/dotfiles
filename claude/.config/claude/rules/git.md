@@ -4,6 +4,7 @@
 - Always create PRs as draft
 - Split commits by feature or logical unit
 - Use conventional commit messages when appropriate
+- Write commit messages in English
 
 ## Branch Strategy
 - Create feature branches from main
