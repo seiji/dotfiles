@@ -6,12 +6,12 @@
     },
     "codex": {
       "type": "stdio",
-			"command": "codex",
+      "command": "codex",
       "args": [
         "mcp-server"
       ],
       "env": {}
-		},
+    },
     "gemini": {
       "type": "stdio",
       "command": "npx",

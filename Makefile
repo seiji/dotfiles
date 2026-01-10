@@ -22,6 +22,7 @@ mac_pkgs := \
 	alacritty \
 	brew \
 	claude \
+	devcontainer \
 	dig \
 	direnv \
 	gem \
