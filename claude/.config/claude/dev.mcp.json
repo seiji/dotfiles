@@ -11,7 +11,7 @@
         "mcp-server"
       ],
       "env": {}
-		},
+    },
     "gemini": {
       "type": "stdio",
       "command": "npx",
