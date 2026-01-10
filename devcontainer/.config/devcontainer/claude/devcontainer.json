@@ -2,10 +2,12 @@
   "name": "Claude Code",
   "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04",
   "containerEnv": {
-    "DISPLAY": "${localEnv:DISPLAY}",
     "CLAUDE_CONFIG_DIR": "/home/vscode/.config/claude",
-    "PYTHONUNBUFFERED": "1",
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "${localEnv:GITHUB_PERSONAL_ACCESS_TOKEN}",
+    "GH_TOKEN": "${localEnv:GITHUB_PERSONAL_ACCESS_TOKEN}",
     "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1",
     "UV_CACHE_DIR": "${containerWorkspaceFolder}/.cache/uv",
     "UV_COMPILE_BYTECODE": "1",
     "UV_LINK_MODE": "copy",
@@ -27,8 +29,11 @@
     "--init"
   ],
   "mounts": [
+    "type=bind,source=${localEnv:HOME}/.config/claude/dev.mcp.json,target=/home/vscode/.config/claude/dev.mcp.json,readonly",
+    "type=bind,source=${localEnv:HOME}/.config/claude/rules,target=/home/vscode/.config/claude/rules,readonly",
+    "type=bind,source=${localEnv:HOME}/.config/claude/settings.json,target=/home/vscode/.config/claude/settings.json,readonly",
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,readonly",
-    "type=bind,source=${localEnv:HOME}/.config/claude,target=/home/vscode/.config/claude,readonly",
     "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
-  ]
+  ],
+  "postCreateCommand": "sudo chown vscode:vscode /home/vscode/.config /home/vscode/.config/claude"
 }
