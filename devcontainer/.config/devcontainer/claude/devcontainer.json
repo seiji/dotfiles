@@ -24,8 +24,7 @@
     "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
   },
   "runArgs": [
-    "--init",
-    "--rm"
+    "--init"
   ],
   "mounts": [
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,readonly",
