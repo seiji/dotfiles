@@ -1,0 +1,36 @@
+{
+  "name": "Claude Code",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04",
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.config/claude",
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "UV_CACHE_DIR": "${containerWorkspaceFolder}/.cache/uv",
+    "UV_COMPILE_BYTECODE": "1",
+    "UV_LINK_MODE": "copy",
+    "UV_PROJECT_ENVIRONMENT": "/home/vscode/.venv",
+    "UV_SYSTEM_PYTHON": "1"
+  },
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
+    "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
+  },
+  "runArgs": [
+    "--init",
+    "--rm"
+  ],
+  "mounts": [
+    "type=bind,source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,readonly",
+    "type=bind,source=${localEnv:HOME}/.config/claude,target=/home/vscode/.config/claude",
+    "type=bind,source=${localEnv:HOME}/.config/claude/settings.json,target=/home/vscode/.config/claude/settings.json,readonly",
+    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+  ]
+}
