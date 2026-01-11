@@ -5,4 +5,8 @@ if [[ "$(uname)" != "Darwin" ]]; then
 fi
 
 MESSAGE="${1:-Claude Code}"
-osascript -e "display notification \"$MESSAGE\" with title \"Claude Code\""
+osascript - "$MESSAGE" <<'EOF'
+on run argv
+    display notification (item 1 of argv) with title "Claude Code"
+end run
+EOF

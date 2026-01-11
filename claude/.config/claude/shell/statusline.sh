@@ -30,4 +30,6 @@ if [ "$USAGE" != "null" ]; then
 else
     echo "[$MODEL]"
 fi
-echo "$INFO"
+if [ -n "$INFO" ]; then
+    echo "$INFO"
+fi
