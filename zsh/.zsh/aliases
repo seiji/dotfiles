@@ -268,10 +268,10 @@ function aws_ecr_logout () {
 }
 
 # Claude Code
-alias c='claude'
-alias c-dev='claude --strict-mcp-config --mcp-config ~/.config/claude/dev.mcp.json'
+alias cl='claude'
+alias cldev='claude --strict-mcp-config --mcp-config ~/.config/claude/dev.mcp.json'
 
 # DevContainer
 alias devup='devcontainer up --remove-existing-container --workspace-folder . --config ~/.config/devcontainer/claude/devcontainer.json'
-alias devcc='devcontainer exec --workspace-folder . --config ~/.config/devcontainer/claude/devcontainer.json claude --strict-mcp-config --mcp-config /home/vscode/.config/claude/dev.mcp.json'
+alias devcl='devcontainer exec --workspace-folder . --config ~/.config/devcontainer/claude/devcontainer.json claude --strict-mcp-config --mcp-config /home/vscode/.config/claude/dev.mcp.json'
 alias devsh='devcontainer exec --workspace-folder . --config ~/.config/devcontainer/claude/devcontainer.json bash'
