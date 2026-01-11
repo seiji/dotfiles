@@ -23,6 +23,9 @@
       "version": "lts"
     },
     "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
+    "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+      "packages": "git-secrets,pinentry-tty"
+    },
     "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
   },
   "runArgs": [
@@ -32,8 +35,13 @@
     "type=bind,source=${localEnv:HOME}/.config/claude/dev.mcp.json,target=/home/vscode/.config/claude/dev.mcp.json,readonly",
     "type=bind,source=${localEnv:HOME}/.config/claude/rules,target=/home/vscode/.config/claude/rules,readonly",
     "type=bind,source=${localEnv:HOME}/.config/claude/settings.json,target=/home/vscode/.config/claude/settings.json,readonly",
+    "type=bind,source=${localEnv:HOME}/.config/claude/shell,target=/home/vscode/.config/claude/shell,readonly",
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,readonly",
-    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly",
+    "type=bind,source=${localEnv:HOME}/.git-templates,target=/home/vscode/.git-templates,readonly",
+    "type=bind,source=${localEnv:HOME}/.gnupg/pubring.kbx,target=/home/vscode/.gnupg/pubring.kbx,readonly",
+    "type=bind,source=${localEnv:HOME}/.gnupg/trustdb.gpg,target=/home/vscode/.gnupg/trustdb.gpg,readonly",
+    "type=bind,source=${localEnv:HOME}/.gnupg/private-keys-v1.d,target=/home/vscode/.gnupg/private-keys-v1.d,readonly"
   ],
-  "postCreateCommand": "sudo chown vscode:vscode /home/vscode/.config /home/vscode/.config/claude"
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.config /home/vscode/.gnupg && echo 'pinentry-program /usr/bin/pinentry-tty' > /home/vscode/.gnupg/gpg-agent.conf"
 }
