@@ -34,6 +34,7 @@ mac_pkgs := \
 	multipass \
 	navi \
 	nvim \
+	obsidian \
 	terraform \
 	tig \
 	tmux \

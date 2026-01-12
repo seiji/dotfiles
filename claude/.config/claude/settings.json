@@ -1,31 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "enableAllProjectMcpServers": true,
-  "hooks": {
-    "PreToolUse": [],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.config/claude/shell/notify.sh 'Claude Code is waiting for you.'"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.config/claude/shell/notify.sh 'Claude Code completed tasks.'"
-          }
-        ]
-      }
-    ]
-  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -66,9 +40,35 @@
       "WebFetch(domain:dev.classmethod.jp)",
       "WebFetch(domain:zenn.dev)"
     ],
-    "defaultMode": "plan",
     "deny": [
       "Bash(rm:*)"
+    ],
+    "defaultMode": "plan"
+  },
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/shell/notify.sh 'Claude Code is waiting for you.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/shell/notify.sh 'Claude Code completed tasks.'"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {

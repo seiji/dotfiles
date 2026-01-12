@@ -32,6 +32,7 @@
     "--init"
   ],
   "mounts": [
+    "type=volume,source=claude-credentials,target=/home/vscode/.claude-credentials",
     "type=bind,source=${localEnv:HOME}/.config/claude/dev.mcp.json,target=/home/vscode/.config/claude/dev.mcp.json,readonly",
     "type=bind,source=${localEnv:HOME}/.config/claude/rules,target=/home/vscode/.config/claude/rules,readonly",
     "type=bind,source=${localEnv:HOME}/.config/claude/settings.json,target=/home/vscode/.config/claude/settings.json,readonly",
@@ -43,5 +44,5 @@
     "type=bind,source=${localEnv:HOME}/.gnupg/trustdb.gpg,target=/home/vscode/.gnupg/trustdb.gpg,readonly",
     "type=bind,source=${localEnv:HOME}/.gnupg/private-keys-v1.d,target=/home/vscode/.gnupg/private-keys-v1.d,readonly"
   ],
-  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.config /home/vscode/.gnupg && echo 'pinentry-program /usr/bin/pinentry-tty' > /home/vscode/.gnupg/gpg-agent.conf"
+  "postCreateCommand": "sudo chown vscode:vscode /home/vscode/.gnupg /home/vscode/.config/claude /home/vscode/.claude-credentials && chmod 700 /home/vscode/.gnupg && echo 'pinentry-program /usr/bin/pinentry-tty' > /home/vscode/.gnupg/gpg-agent.conf && ln -sf /home/vscode/.claude-credentials/.claude.json /home/vscode/.config/claude/.claude.json"
 }
